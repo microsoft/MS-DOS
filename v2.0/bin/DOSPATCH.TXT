@@ -1,0 +1,62 @@
+There are three locations in the DOS where OEMs may want to
+patch in information specific to their installation.
+
+
+The first is the location of the default switch character.
+This character is one byte at DEBUG location 1E5, and is
+set to '/'. To change it to '-' (XENIX compatible)
+do:
+
+        DEBUG MSDOS.SYS
+
+        >e1e5
+        XXXX:01E5   2F.         <at this point give the desired
+                                 new switch character in HEX and
+                                 hit return>
+        >w
+        Writing YYYY Bytes
+        >q
+
+If the byte at 1E5 is not 2F, look around in the immediate
+vacinity (do d1e0) for it. It is the only 2F in that area.
+
+
+The second is the location of the 24 bit user number and the
+8 bit OEM number. These values are returned by the GET_VERSION
+system call.
+The user number is 3 bytes starting at
+debug location 683, The OEM number is one byte at debug location
+686. The user number is initialized to 0, the OEM number to -1
+and they immediatly follow the Microsoft Copyright message. If these
+bytes are not zero, look for the four bytes following the
+Copyright message which should be in the vacinity of 683.
+OEMs should request an OEM number from Microsoft if they
+want one of their very own, this prevents selecting one someone
+else already has.
+
+
+The third is the location of the editing template definitions.
+This is a table which defines the two byte edit function keys
+for system call 10 and for EDLIN. This table is at debug location
+33EA, and should start with a 1B. If the byte at 33EA is not
+1B, look around in the immediate vacinity. Here is what the
+default table looks like. It is a definition for the Zenith
+Z-19 terminal:
+
+ESCCHAR DB      1BH     ;The Escape character, Nul (0) on IBM
+ESCTAB:
+	DB	"Z"	;5AH Put a ^Z in the template, F6 on IBM
+        DB      "S"     ;53H Copy one char, --> on IBM
+        DB      "V"     ;56H Skip one char, DEL on IBM
+        DB      "T"     ;54H Copy to char, F2 on IBM
+        DB      "W"     ;57H Skip to char, F4 on IBM
+        DB      "U"     ;55H Copy line, F3 on IBM
+        DB      "E"     ;45H Kill line, Not used on IBM
+        DB      "J"     ;4AH Reedit line, F5 on IBM
+        DB      "D"     ;44H Backspace, <-- on IBM
+        DB      "P"     ;50H Toggle insert mode, INS on IBM 
+        DB      "Q"     ;51H Toggle insert mode, INS on IBM 
+        DB      "R"     ;52H Escape char, F7 on IBM
+        DB      "R"     ;52H End of table, must be same as previos character
+
+

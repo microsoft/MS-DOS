@@ -1,0 +1,1657 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                          MS-DOS 2.0
+
+                    System Calls Reference
+
+
+
+
+
+
+
+
+
+
+
+
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|                                                           |
+|     C  A  V  E  A  T     P  R  O  G  R  A  M  M  E  R     |
+|                                                           |
+| Certain structures,  constants  and  system  calls  below |
+| are   private   to   the   DOS    and    are    extremely |
+| version-dependent.  They  may  change  at any time at the |
+| implementors' whim.   As  a  result,  they  must  not  be |
+| documented to  the  general  public.   If an extreme case |
+| arises, they must be documented with this warning.        |
+|                                                           |
+| Those structures and constants that are  subject  to  the |
+| above will be marked and bracketed with the flag:         |
+|                                                           |
+|     C  A  V  E  A  T     P  R  O  G  R  A  M  M  E  R     |
+|                                                           |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                          Section 1
+
+            Extensions to existing call structure
+
+
+    Name:   *   Alloc - allocate memory
+
+    Assembler usage:
+            MOV     BX,size
+            MOV     AH,Alloc
+            INT     21h
+        ; AX:0 is pointer to allocated memory
+        ; if alloc fails, BX is the largest block available
+
+    Description:
+            Alloc returns a pointer to a free block of  memory
+        that has the requested size in paragraphs.
+
+    Error return:
+        AX = error_not_enough_memory
+                The  largest  available  free block is smaller
+                than that requested or there is no free block.
+           = error_arena_trashed
+                The internal consistency of the  memory  arena
+                has  been  destroyed.   This  is due to a user
+                program changing memory that does  not  belong
+                to it.
+
+
+    Name:   *   CharOper - change  incompatible  configuration
+                parameters
+
+    Assembler usage:
+            MOV     AH, CharOper
+            MOV     AL, func
+            MOV     DL, data
+            INT     21h
+        ; on read functions, data is returned in DL
+
+    Description:
+            CharOper   allows   a  program  to  change  system
+        parameters to allow for switch indicators and  whether
+        devices are  available at every level of the directory
+        tree.
+
+            A function code is passed in AL:
+
+        AL  Function
+        --  --------
+         0  DL,  on  return,  will  contain  the  DOS   switch
+            character.   On  most systems this will default to
+            '-'.
+         1  Set the switch character to the character in DL.
+         2  Read the device availability  byte  into  DL.   If
+            this  byte  is 0, then devices must be accessed in
+            file I/O calls by /dev/device.  If  this  byte  is
+            non-zero, then  the devices are available at every
+            node of  the  directory  tree  (i.e.  CON  is  the
+            console  device  not  the file CON).  This byte is
+            generally 0.
+         3  Set  the  device availability byte to the value in
+            DL.
+
+    Error returns:
+        AL = FF
+                The function code specified in AL  is  not  in
+                the range 0:3
+
+
+    Name:   *   CurrentDir - return text of current  directory
+
+    Assembler usage:
+                MOV     AH,CurrentDir
+                LDS     SI,area
+                MOV     DL,drive
+                INT     21h
+            ; DS:SI is a pointer to 64 byte area that contains
+            ; drive current directory.
+
+    Description:
+            CurrentDir returns the  current  directory  for  a
+        particular drive.   The directory is root-relative and
+        does not contain the drive specifier.  The drive  code
+        passed in DL is 0=default, 1=A, 2=B, etc.
+
+    Error returns:
+        AX = error_invalid_drive
+                The drive specified in DL was invalid.
+
+
+    Name:   *   Dealloc - free allocated memory
+
+    Assembler usage:
+            MOV     ES,block
+            MOV     AH,dealloc
+            INT     21h
+
+    Description:
+            Dealloc  returns  a  piece of memory to the system
+        pool that was allocated by alloc.
+
+    Error return:
+        AX = error_invalid_block
+                The block passed in ES is  not  one  allocated
+                via Alloc.
+           = error_arena_trashed
+                The internal consistency of the  memory  arena
+                has  been  destroyed.   This  is due to a user
+                program changing memory that does  not  belong
+                to it.
+
+
+    Name:   *   FileTimes  -  get/set  the  write  times  of a
+                handle
+
+    Assembler usage:
+            MOV AH, FileTimes
+            MOV AL, func
+            MOV BX, handle
+        ; if AL = 1 then then next two are mandatory
+            MOV CX, time
+            MOV DX, date
+            INT 21h
+        ; if AL = 0 then CX/DX has the last write time/date
+        ; for the handle.
+
+    Description:
+            FileTimes returns or sets the last-write time  for
+        a handle.  These times are not recorded until the file
+        is closed.
+
+            A function code is passed in AL:
+
+        AL  Function
+        --  --------
+         0  Return the time/date of the handle in CX/DX
+         1  Set the time/date of the handle to CX/DX
+
+    Error returns:
+        AX = error_invalid_function
+                The function passed in AL was not in the range
+                0:1.
+           = error_invalid_handle
+                The handle passed  in  BX  was  not  currently
+                open.
+
+
+    Name:   *   FindFirst - find matching file
+
+    Assembler usage:
+            MOV AH, FindFirst
+            LDS DX, pathname
+            MOV CX, attr
+            INT 21h
+        ; DMA address has datablock
+
+    Description:
+            FindFirst takes a pathname with wildcards  in  the
+        last component  (passed in DS:DX), a set of attributes
+        (passed in CX) and attempts to  find  all  files  that
+        match  the  pathname and have a subset of the required
+        attributes.  A datablock at the current DMA is written
+        that contains information in the following form:
+
+            find_buf    STRUC
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|     C  A  V  E  A  T     P  R  O  G  R  A  M  M  E  R     |
+|                                                           |
+            find_buf_sattr      DB  ?  ; attribute of search
+            find_buf_drive      DB  ?  ; drive of search
+            find_buf_name       DB  11 DUP (?); search name
+            find_buf_LastEnt    DW  ?  ; LastEnt
+            find_buf_ThisDPB    DD  ?  ; This DPB
+            find_buf_DirStart   DW  ?  ; DirStart
+|                                                           |
+|     C  A  V  E  A  T     P  R  O  G  R  A  M  M  E  R     |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+
+            find_buf_attr       DB  ?  ; attribute found
+            find_buf_time       DW  ?  ; time
+            find_buf_date       DW  ?  ; date
+            find_buf_size_l     DW  ?  ; low(size)
+            find_buf_size_h     DW  ?  ; high(size)
+            find_buf_pname      DB  13 DUP (?) ; packed name
+            find_buf    ENDS
+
+            To obtain  the subsequent matches of the pathname,
+        see the description of FindNext
+
+    Error Returns:
+        AX = error_file_not_found
+                The path specified in  DS:DX  was  an  invalid
+                path.
+           = error_no_more_files
+                There    were    no    files   matching   this
+                specification.
+
+
+    Name:   *   FindNext  -  step through a directory matching
+                files
+
+    Assembler usage:
+        ; DMA points at area returned by find_first
+            MOV AH, findnext
+            INT 21h
+        ; next entry is at dma
+
+    Description:
+            FindNext  finds  the  next  matching  entry  in  a
+        directory.  The current DMA address must  point  at  a
+        block returned by FindFirst (see FindFirst).
+
+    Error Returns:
+        AX = error_no_more_files
+                There are no more files matching this pattern.
+
+
+    Name:   *   GetDMA - get current DMA transfer address
+
+    Assembler usage:
+            MOV     AH,GetDMA
+            INT     21h
+        ; ES:BX has current DMA transfer address
+
+    Description:
+            Return DMA transfer address.
+
+    Error returns:
+            None.
+
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|     C  A  V  E  A  T     P  R  O  G  R  A  M  M  E  R     |
+|                                                           |
+
+    Name:   *   GetDSKPT(DL) - get pointer to drive  parameter
+                block
+
+    Assembler usage:
+            MOV     AH,GetDSKPT
+            INT     21h
+        ; DS:BX has address of drive parameter block
+
+    Description:
+            Return pointer to default drive parameter block.
+
+    Error returns:
+            None.
+
+    Assembler usage:
+            MOV     DL,DrvNUM
+            MOV     AH,GetDSKPTDL
+            INT     21h
+        ; DS:BX has address of drive parameter block
+
+    Description:
+            Return pointer  to drive parameter block for drive
+        designated in DL (0=Default, A=1, B=2 ...)
+
+    Error returns:
+        AL = FF
+                The drive given in DL is invalid.
+|                                                           |
+|     C  A  V  E  A  T     P  R  O  G  R  A  M  M  E  R     |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+
+
+    Name:   *   GetFreespace - get Disk free space
+
+    Assembler usage:
+            MOV     AH,GetFreespace
+            MOV     DL,Drive            ;0 = default, A = 1
+            INT     21h
+        ; BX = Number of free allocation units on drive
+        ; DX = Total number of allocation units on drive
+        ; CX = Bytes per sector
+        ; AX = Sectors per allocation unit
+
+    Description:
+            Return  Free  space  on disk along with additional
+        information about the disk.
+
+    Error returns:
+        AX = FFFF
+                The drive number given in DL was invalid.
+
+    NOTE:  This  call returns the same information in the same
+        registers (except for the FAT pointer) as the get  FAT
+        pointer calls did in previous versions of the DOS.
+
+
+    Name:   *   GetInDOSF - get DOS critical-section flag
+
+    Assembler usage:
+            MOV     AH,GetInDOSF
+            INT     21h
+        ; ES:BX has location of the flag
+            MOV     CritSEG, ES
+            MOV     CritOFF, BX
+            ...
+        IntVec:
+            MOV     AX, DWORD PTR Crit
+            CMP     AX,0
+            JZ      DoFunc
+            IRET
+        DoFunc: ...
+
+    Description:
+            Return location of indos flag.  On return ES:BX is
+        the address of a byte memory cell inside the DOS.   If
+        used  in  an  interrupt  service routine, it indicates
+        whether or not the DOS was interrupted in  a  critical
+        section.   If  the cell was zero, then the DOS was not
+        in a critical section and thus can be  called  by  the
+        interrupt routine.   If the cell was non-zero, the DOS
+        should be considered to be in an uninterruptable state
+        and for reliability, no DOS calls should be given.
+
+    Error returns:
+            None.
+
+
+    Name:   *   GetVector -  get interrupt vector
+
+    Assembler usage:
+            MOV     AH,GetVector
+            MOV     AL,interrupt
+            INT     21h
+        ; ES:BX now has long pointer to interrupt routine
+
+    Description:
+            Return  interrupt  vector   associated   with   an
+        interrupt.
+
+    Error returns:
+            None.
+
+
+    Name:   *   GetVerifyFlag -  return current setting of the
+                verify after write flag.
+
+    Assembler usage:
+            MOV     AH,GetVerifyFlag
+            INT     21h
+        ; AL is the current verify flag value
+
+    Description:
+            The current value of the verify flag  is  returned
+        in AL.
+
+    Error returns:
+            None.
+
+
+    Name:   *   GetVersion - get DOS version number
+
+    Assembler usage:
+            MOV     AH,GetVersion
+            INT     21h
+        ; AL is the major version number
+        ; AH is the minor version number
+        ; BH is the OEM number
+        ; BL:CX is the (24 bit) user number
+
+    Description:
+            Return MS-DOS version  number.   On  return  AL.AH
+        will  be  the  two  part version designation, ie.  for
+        MS-DOS 1.28 AL would be 1 and AH would be 28.  For pre
+        1.28 DOS AL = 0.  Note that version 1.1 is the same as
+        1.10, not the same as 1.01.
+
+    Error returns:
+            None.
+
+
+    Name:   *   International  -  return   country   dependent
+                information
+
+    Assembler usage:
+            LDS     DX, blk
+            MOV     AH, International
+            MOV     AL, func
+            INT     21h
+
+    Description:
+            This call returns in the block of  memory  pointed
+        to  by  DS:DX,  the following information pertinent to
+        international applications:
+
+                +---------------------------+
+                | WORD Date/time format     |
+                +---------------------------+
+                | BYTE ASCIZ string         |
+                | currency symbol           |
+                +---------------------------+
+                | BYTE ASCIZ string         |
+                | thousands separator       |
+                +---------------------------+
+                | BYTE ASCIZ string decimal |
+                | separator                 |
+                +---------------------------+
+
+            The date/time  format has the following values and
+        meanings:
+
+        0 - USA standard    h:m:s m/d/y
+        1 - Europe standard h:m:s d/m/y
+        2 - Japan standard  y/m/d h:m:s
+
+            The value passed in AL is either  0  (for  current
+        country)  or  a  country  code  (to  be defined later.
+        Currently the country code must be zero).
+
+    Error returns:
+        AX = error_invalid_function
+                The   function   passed   in   AL  was  not  0
+                (currently).
+
+
+    Name:   *   KeepProcess -  terminate  process  and  remain
+                resident
+
+    Assembler usage:
+            MOV     AL, exitcode
+            MOV     DX, parasize
+            MOV     AH, KeepProcess
+            INT     21h
+
+    Description:
+            This  call  terminates  the  current  process  and
+        attempts  to  set  the  initial  allocation block to a
+        specific size in paragraphs.  It will not free up  any
+        other  allocation  blocks  belonging  to that process.
+        The exit code passed  in  AX  is  retrievable  by  the
+        parent via Wait.
+
+    Error Returns:
+            None.
+
+
+    Name:   *   Rename - move a directory entry
+
+    Assembler usage:
+            LDS     DX, source
+            LES     DI, dest
+            MOV     AH, Rename
+            INT     21h
+
+    Description:
+            Rename will attempt to rename a file into  another
+        path.  The paths must be on the same device.
+
+    Error returns:
+        AX = error_file_not_found
+                The file name specifed by DS:DX was not found.
+           = error_not_same_device
+                The  source  and  destination are on different
+                drives.
+           = error_access_denied
+                The path specified in DS:DX was a directory or
+                the  file  specified  by  ES:DI  exists or the
+                destination  directory  entry  could  not   be
+                created.
+
+
+    Name:   *   SetBlock - modify allocated blocks
+
+    Assembler usage:
+            MOV     ES,block
+            MOV     BX,newsize
+            MOV     AH,setblock
+            INT     21h
+        ; if setblock  fails  for  growing, BX will have the
+        ; maximum size possible
+
+    Description:
+            Setblock will attempt to grow/shrink an  allocated
+        block of memory.
+
+    Error return:
+        AX = error_invalid_block
+                The block passed in ES is  not  one  allocated
+                via Alloc.
+           = error_arena_trashed
+                The internal consistency of the  memory  arena
+                has  been  destroyed.   This  is due to a user
+                program changing memory that does  not  belong
+                to it.
+           = error_not_enough_memory
+                There was not enough  free  memory  after  the
+                specified block to satisfy the grow request.
+
+
+    Name:   *   SetCtrlCTrapping  -  turn  on/off   broad   ^C
+                checking
+
+    Assembler usage:
+            MOV     DL,val
+            MOV     AH,SetCtrlCTrapping
+            MOV     AL,func
+            INT     21h
+        ; If AL was 0, then DL has the current value of the
+        ; ^C check
+
+    Description:
+            MSDOS  ordinarily  checks  for   a   ^C   on   the
+        controlling  device  only  when  doing a function 1-12
+        operation to that device.  SetCtrlCTrapping allows the
+        user  to  expand  this  checking to include any system
+        call.  For example, with the ^C trapping off, all disk
+        I/O  will  proceed  without interruption while with ^C
+        trapping on, the ^C interrupt is given at  the  system
+        call that initiates the disk operation.
+
+    Error return:
+        AL = FF
+                The function passed in AL was not in the range
+                0:1.
+
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|     C  A  V  E  A  T     P  R  O  G  R  A  M  M  E  R     |
+|                                                           |
+
+    Name:   *   Set_OEM_Handler - set handler for OEM
+                        specific INT 21H calls.
+
+    Assembler usage:
+            LDS     DX,handler_address
+            MOV     AH,Set_OEM_Handler
+            INT     21H
+
+    Description:
+            Set handler address for 0F9H-0FFH INT 21H system
+            calls to DS:DX. To return the 0F9H-0FFH calls to
+            the uninitialized state, give DS=DX=-1.
+
+    Error returns:
+            None.
+
+    Handler entry:
+            All registers as user  set  them  when  INT  21H
+            issued  (including  SS:SP).  INT 21 return is on
+            stack, so the correct method for the OEM handler
+            to  return  to the user is to give an IRET.  The
+            OEM handler is free to make any INT  21H  system
+            call  (including the 0F9H- 0FFH group if the OEM
+            handler is re-entrant).
+
+
+    The  AH  INT  21H  function  codes 0F8H through 0FFH are
+    reserved for OEM  extensions  to  the  INT  21H  calling
+    convention.   These  calls  have two states, initialized
+    and uninitialized.  There will be one handler for all  7
+    (0F9-0FFH)   functions.    When   the   DOS   is   first
+    initialized, these calls are uninitialized.  The AH=0F8H
+    call  is the call which will set the handler address for
+    the  0F9-0FFH  calls.   If  the   0F9-0FFH   calls   are
+    uninitialized,  an  attempt  to call them results in the
+    normal invalid system call number return.
+    OEMs should NOT document the 0F8 call.
+|                                                           |
+|     C  A  V  E  A  T     P  R  O  G  R  A  M  M  E  R     |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                          Section 2
+
+                XENIX-compatible system calls
+
+
+
+        Previous  to  version  2.0,  MSDOS had a simple single
+    directory structure that sufficed for small (160k to 320K)
+    diskettes.   As  the need for hard disk support grows, and
+    as MSDOS 2.0 will support a wide variety  of  hard  disks,
+    the need  for better disk organization also grows.  Merely
+    expanding the directory  is  not  an  effective  solution;
+    doing  a  'DIR'  on  a  directory with 1000 files is not a
+    user-friendly characteristic.
+
+        People,  by  nature,  think  in  hierarchical   terms:
+    organization  charts  and  family  trees, for example.  It
+    would be nice to allow users to organize  their  files  on
+    disk in a similar manner.  Consider the following:
+
+        In  a  particular  business, both sales and accounting
+    share a computer with a  large  disk  and  the  individual
+    employees   use   it   for   preparation  of  reports  and
+    maintaining accounting information.  One  would  naturally
+    view  the  organization  of  files  on  the  disk  in this
+    fashion:
+
+                          +-disk-+
+                         /        \
+                        /          \
+                       /            \
+                    sales         accounting
+                   /    |            |      \
+                  /     |            |       \
+                 /      |            |        \
+            John       Mary         Steve      Sue
+           /  | (A)       |         |   |         \
+          /   |           |         |   |          \
+         /    |           |         |   |           \
+      report accts.     report   accts. report      report
+             receiv.             receiv
+
+        In MSDOS  2.0 the user can arrange his files in such a
+    manner that files that are not part of his current task do
+    not  interfere  with that task.  Pre-2.0 versions of MSDOS
+    has a single directory that contains files.  MSDOS extends
+    this  concept  to  allow a directory to contain both files
+    and  directories  and  to  introduce  the  notion  of  the
+    'current' directory.
+
+        To  specify  a filename, the user could use one of two
+    methods, either specify a path from the root node  to  the
+    file, or specify a path from the current node to the file.
+    A path is a series of directory names separated by '/' and
+    ending  with  a  filename.  A path that starts at the root
+    begins with a '/'.
+
+        There is a special directory entry in each  directory,
+    denoted by '..'  that is the parent of the directory.  The
+    root directory's parent is itself (who created God?).
+
+        Using a directory structure like the hierarchy  above,
+    and  assuming  that the current directory is at point (D),
+    to reference the report under John, the following are  all
+    equivalent:
+
+        report
+        /sales/John/report
+        ../John/report
+
+        To  refer  to the report under Mary, the following are
+    all equivalent:
+
+        ../Mary/report
+        /sales/Mary/report
+
+        To  refer  to  the report under Sue, the following are
+    all equivalent.
+
+        ../../accounting/Sue/report
+        /accounting/Sue/report
+
+        There is no restriction in MSDOS 2.0 on the depth of a
+    tree (the length of the longest path from  root  to  leaf)
+    except  in  the number of allocation units available.  The
+    root directory will have a fixed number of entries, 64 for
+    the  single  sided diskettes to XXX for a large hard disk.
+    For non-root directories, there is no limit to the  number
+    of   files  per  directory  excepting  in  the  number  of
+    allocation units available.
+
+        Old (pre-2.0) disks will appear to MSDOS 2.0 as having
+    only   a   root   directory   with  files  in  it  and  no
+    subdirectories whatever.
+
+        Implementation of the tree-structure is  simple.   The
+    root  directory  is the pre-2.0 directory.  Subdirectories
+    of the root have a special attribute set  indicating  that
+    they  are  directories.  The subdirectories themselves are
+    files, linked through the FAT as  usual.   Their  contents
+    are  identical  in  character  to the contents of the root
+    directory.
+
+        Pre-2.0 programs that use system calls  not  described
+    below  will  not  be  able  to  make use of files in other
+    directories.  They will only be able to  access  files  in
+    the   current   directory.   This  is  no  great  loss  of
+    functionality as users will  aggregate  their  files  into
+    sub-directories on  basis of functionality; the files that
+    are being used will be found  in  the  current  directory.
+    Those that  are not necessary for the current task will be
+    placed in other directories.  Out of sight, out of mind.
+
+        There are also new attributes in 2.0.  These  and  the
+    old attributes apply to the tree structured directories in
+    the following manner:
+
+    Attribute   Meaning/Function        Meaning/Function
+                    for files            for directories
+
+    volume_id   Present at the root.    Meaningless.
+                Only one file may have
+                this set.
+
+    directory   Meaningless.            Indicates that the
+                                        directory entry is a
+                                        directory.  Cannot be
+                                        changed with ChMod.
+
+    read_only   Old fcb-create, new     Meaningless.
+                Creat, new open (for
+                write or read/write)
+                will fail.
+
+    archive     Set when file is        Meaningless.
+                written. Set/reset via
+                ChMod.
+
+    hidden/     Prevents file from      Prevents directory
+    system      being found in search   entry from being
+                first/search next.      found.  ChDir to
+                New open will fail.     directory will still
+                                        work.
+
+
+    Name:   *   ChDir - Change the current directory
+
+    Assembler usage:
+            LDS     DX, name
+            MOV     AH, ChDir
+            INT     21h
+
+    Description:
+            ChDir is given the ASCIZ  name  of  the  directory
+        which  is  to  become  the  current directory.  If any
+        member of the specified pathname does not exist,  then
+        the  current  directory  is unchanged.  Otherwise, the
+        current directory is set to the string.
+
+    Error returns:
+        AX = error_path_not_found
+                The path specified in DS:DX either indicated a
+                file or the path was invalid.
+
+
+    Name:   *   ChMod - change write protection
+
+    Assembler usage:
+            LDS     DX, name
+            MOV     CX, attribute
+            MOV     AL, func
+            MOV     AH, ChMod
+            INT     21h
+
+    Description:
+            Given  an  ASCIZ  name,  ChMod  will  set/get  the
+        attributes of the file to those given in CX.
+
+            A function code is passed in AL:
+
+        AL  Function
+        --  --------
+         0  Return the attributes of the file in CX
+         1  Set the attributes of the file to those in CX
+
+    Error returns:
+        AX = error_path_not_found
+                The path specified was invalid.
+           = error_access_denied
+                The  attributes  specified in CX contained one
+                that could not be changed  (directory,  volume
+                ID).
+           = error_invalid_function
+                The function passed in AL was not in the range
+                0:1.
+
+
+    Name:   *   Close - close a file handle
+
+    Assembler usage:
+            MOV     BX, handle
+            MOV     AH, Close
+            INT     21h
+
+    Description:
+            In BX is passed a file handle (like that  returned
+        by Open,  Creat or Dup); the Close call will close the
+        associated file.  Internal buffers are flushed.
+
+    Error return:
+        AX = error_invalid_handle
+                The handle passed  in  BX  was  not  currently
+                open.
+
+
+    Name:   *   Creat - create a file
+
+    Assembler usage:
+            LDS     DX, name
+            MOV     AH, Creat
+            MOV     CX, attribute
+            INT     21h
+        ; AX now has the handle
+
+    Description:
+            Creat creates a new file or truncates an old  file
+        to  zero  length  in  preparation for writing.  If the
+        file did not exist, then the file is  created  in  the
+        appropriate  directory  and  the  file  is  given  the
+        read/write protection code of access.
+
+            CX contains the default attributes to be  set  for
+        the file.  Currently, the read-only bit must be off.
+
+    Error returns:
+        AX = error_access_denied
+                The attributes specified in CX  contained  one
+                that  could  not be created (directory, volume
+                ID),  a  file  already  existed  with  a  more
+                inclusive  set  of  attributes, or a directory
+                existed with the same name.
+           = error_path_not_found
+                The path specified was invalid.
+           = error_too_many_open_files
+                The  file  was  created  with  the   specified
+                attributes,  but  there  were  no free handles
+                available for the process or that the internal
+                system tables were full.
+
+
+    Name:   *   Dup - duplicate a file handle
+
+    Assembler usage:
+            MOV     BX, fh
+            MOV     AH, Dup
+            INT     21h
+        ; AX has the returned handle
+
+    Description:
+            Dup  takes  an  already  opened  file  handle  and
+        returns  a  new handle that refers to the same file at
+        the same position.
+
+    Error returns:
+        AX = error_invalid_handle
+                The handle passed  in  BX  was  not  currently
+                open.
+           = error_too_many_open_files
+                There were no free handles  available  in  the
+                current process  or the internal system tables
+                were full.
+
+
+    Name:   *   Dup2 - force a duplicate of a handle
+
+    Assembler usage:
+            MOV     BX, fh
+            MOV     CX, newfh
+            MOV     AH, Dup2
+            INT     21h
+
+    Description:
+            Dup2 will cause newfh to refer to the same  stream
+        as fh.  If there was an open file on newfh, then it is
+        closed first.
+
+    Error returns:
+        AX = error_invalid_handle
+                The handle passed  in  BX  was  not  currently
+                open.
+
+
+    Name:   *   Exec - load / execute a program
+
+    Assembler usage:
+            LDS     DX, name
+            LES     BX, blk
+            MOV     AH, Exec
+            MOV     AL, func
+            INT     21h
+
+    Description:
+            This call allows a program to load another program
+        into  memory  and  (default)  begin  execution  of it.
+        DS:DX points to the ASCIZ  name  of  the  file  to  be
+        loaded.   ES:BX  points  to  a parameter block for the
+        load.
+
+            A function code is passed in AL:
+
+        AL  Function
+        --  --------
+         0  Load and execute the program.  A program header is
+            established for  the program and the terminate and
+            ^C addresses are set to the instruction after  the
+            EXEC system call.
+
+            NOTE:   When  control  is  returned,  via  a ^C or
+                terminate, from the program being  EXECed  ALL
+                registers  are  altered  including  the stack.
+                This is because control is returned  from  the
+                EXECed  program,  not  the  system.  To regain
+                your stack, store an SS:SP  value  in  a  data
+                location reachable from your CS.
+
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|     C  A  V  E  A  T     P  R  O  G  R  A  M  M  E  R     |
+|                                                           |
+         1  Load,  create  the program header but do not begin
+            execution.  The CS:IP/SS:SP  of  the  program  are
+            returned in the area provided by the user.
+|                                                           |
+|     C  A  V  E  A  T     P  R  O  G  R  A  M  M  E  R     |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+
+         3  Load, do not create the program header, and do not
+            begin  execution.   This  is  useful  in   loading
+            program overlays.
+
+            For each  value of AL, the block has the following
+        format:
+
+            AL = 0 -> load/execute program
+
+                +---------------------------+
+                | WORD segment address of   |
+                | environment.              |
+                +---------------------------+
+                | DWORD pointer to command  |
+                | line at 80h               |
+                +---------------------------+
+                | DWORD pointer to default  |
+                | FCB to be passed at 5Ch   |
+                +---------------------------+
+                | DWORD pointer to default  |
+                | FCB to be passed at 6Ch   |
+                +---------------------------+
+
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|     C  A  V  E  A  T     P  R  O  G  R  A  M  M  E  R     |
+|                                                           |
+            AL = 1 -> load program
+
+                +---------------------------+
+                | WORD segment address of   |
+                | environment.              |
+                +---------------------------+
+                | DWORD pointer to command  |
+                | line at 80h               |
+                +---------------------------+
+                | DWORD pointer to default  |
+                | FCB to be passed at 5Ch   |
+                +---------------------------+
+                | DWORD pointer to default  |
+                | FCB to be passed at 6Ch   |
+                +---------------------------+
+                | DWORD returned value of   |
+                | SS:SP                     |
+                +---------------------------+
+                | DWORD returned value of   |
+                | CS:IP                     |
+                +---------------------------+
+|                                                           |
+|     C  A  V  E  A  T     P  R  O  G  R  A  M  M  E  R     |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+
+            AL = 3 -> load overlay
+
+                +---------------------------+
+                | WORD segment address where|
+                | file will be loaded.      |
+                +---------------------------+
+                | WORD relocation factor to |
+                | be applied to the image.  |
+                +---------------------------+
+
+            Note  that  all  open  files  of  a  process   are
+        duplicated  in  the child process after an Exec.  This
+        is extremely powerful; the parent process has  control
+        over the meanings of stdin, stdout, stderr, stdaux and
+        stdprn.  The parent could, for example, write a series
+        of records to a file, open the file as standard input,
+        open a listing file as standard output and then Exec a
+        sort  program  that  takes  its  input  from stdin and
+        writes to stdout.
+
+            Also inherited (or passed from the parent)  is  an
+        'environment'.  This  is a block of text strings (less
+        than   32K   bytes   total)   that   convey    various
+        configurations   parameters.    The   format   of  the
+        environment is as follows:
+
+                     (paragraph boundary)
+                +---------------------------+
+                | BYTE asciz string 1       |
+                +---------------------------+
+                | BYTE asciz string 2       |
+                +---------------------------+
+                | ...                       |
+                +---------------------------+
+                | BYTE asciz string n       |
+                +---------------------------+
+                | BYTE of zero              |
+                +---------------------------+
+
+            Typically the environment strings have the form:
+
+            parameter=value
+
+        for  example,  COMMAND.COM always passes its execution
+        search path as:
+
+            PATH=A:/BIN;B:/BASIC/LIB
+
+        A zero value of the environment address will cause the
+        child  process  to  inherit  the  parent's environment
+        unchanged.
+
+            Note that on a successful return  from  EXEC,  all
+        registers, except for CS:IP, are changed.
+
+    Error return:
+        AX = error_invalid_function
+                The function passed in AL was not 0, 1 or 3.
+           = error_bad_environment
+                The environment was larger than 32Kb.
+           = error_bad_format
+                The file pointed to by DS:DX was an EXE format
+                file   and   contained  information  that  was
+                internally inconsistent.
+           = error_not_enough_memory
+                There was not enough memory for the process to
+                be created.
+           = error_file_not_found
+                The path specified was invalid or not found.
+
+
+    Name:   *   Exit - terminate a process
+
+    Assembler usage:
+            MOV     AL, code
+            MOV     AH, Exit
+            INT     21h
+
+    Description:
+            Exit   will   terminate   the   current   process,
+        transferring  control  to  the  invoking  process.  In
+        addition, a return code may be sent.  All  files  open
+        at the time are closed.
+
+    Error returns:
+            None.
+
+
+    Name:   *   Ioctl - I/O control for devices
+
+    Assembler usage:
+            MOV     BX, Handle
+
+        (or MOV     BL, drive   for calls AL=4,5
+                                0=default,A=1...)
+
+            MOV     DX, Data
+
+        (or LDS     DX, buf     and
+            MOV     CX, count   for calls AL=2,3,4,5)
+
+            MOV     AH, Ioctl
+            MOV     AL, func
+            INT     21h
+    ; For calls AL=2,3,4,5 AX is the number of bytes
+    ; transferred (same as READ and WRITE).
+    ; For calls AL=6,7 AL is status returned, AL=0 if
+    ; status is not ready, AL=0FFH otherwise.
+
+    Description:
+            Set or Get device information associated with open
+        Handle,  or  send/receive  control  string  to  device
+        Handle or device.
+
+            The following values are allowed for func:
+
+        Request Function
+        ------  --------
+           0    Get device information (returned in DX)
+           1    Set device information (as determined by DX)
+           2    Read CX number of bytes into DS:DX from device
+                control channel.
+           3    Write CX  number of bytes from DS:DX to device
+                control channel.
+           4    Same   as   2   only   drive   number   in  BL
+                0=default,A=1,B=2,...
+           5    Same   as   3   only   drive   number   in  BL
+                0=default,A=1,B=2,...
+           6    Get input status
+           7    Get output status
+
+            Ioctl can be used to get information about  device
+        channels.   It  is  ok  to make Ioctl calls on regular
+        files but only calls 0,6 and 7  are  defined  in  that
+        case   (AL=0,6,7),   all   other   calls   return   an
+        error_invalid_function error.
+
+    CALLS AL=0 and AL=1
+
+            The bits of DX are defined as  follows  for  calls
+        AL=0 and  AL=1.  Note that the upper byte MUST be zero
+        on a set call.
+
+                                 |
+            15 14 13 12 11 10 9 8|7 6 5 4 3 2 1 0
+           +--+--+--+--+--+--+-+-+-+-+-+-+-+-+-+-+
+           | R| C|               |I|E|R|S|I|I|I|I|
+           | e| T|               |S|O|A|P|S|S|S|S|
+           | s| R|    Reserved   |D|F|W|E|C|N|C|C|
+           |  | L|               |E| | |C|L|U|O|I|
+           |  |  |               |V| | |L|K|L|T|N|
+           +--+--+--+--+--+--+-+-+-+-+-+-+-+-+-+-+
+                                 |
+
+        ISDEV = 1 if this channel is a device
+              = 0 if this channel is a disk file (Bits 8-15  =
+                  0 in this case)
+
+        If ISDEV = 1
+
+            EOF = 0 if End Of File on input
+            RAW = 1 if this device is in Raw mode
+                = 0 if this device is cooked
+            ISCLK = 1 if this device is the clock device
+            ISNUL = 1 if this device is the null device
+            ISCOT = 1 if this device is the console output
+            ISCIN = 1 if this device is the console input
+            SPECL = 1 if this device is special
+
+            CTRL = 0 if this device can NOT do control strings
+                via calls AL=2 and AL=3.
+            CTRL =  1  if  this  device  can  process  control
+                strings via calls AL=2 and AL=3.
+            NOTE that this bit cannot be set.
+
+        If ISDEV = 0
+            EOF = 0 if channel has been written
+            Bits  0-5  are  the  block  device  number for the
+                channel (0 = A, 1 = B, ...)
+
+        Bits 15,8-13,4 are reserved and should not be altered.
+
+    Calls 2..5:
+        These four calls allow arbitrary control strings to be
+        sent or received from a device.  The  Call  syntax  is
+        the same as the READ and WRITE calls, except for 4 and
+        5 which take a drive number in BL instead of a  handle
+        in BX.
+
+        An  error_invalid_function  error  is  returned if the
+        CTRL bit (see above) is 0.
+
+        An error_access_denied is returned by calls AL=4,5  if
+        the drive number is invalid.
+
+    Calls 6,7:
+        These two calls allow the user  to  check  if  a  file
+        handle  is  ready  for  input  or  output.   Status of
+        handles open to a device is the intended use of  these
+        calls,  but  status of a handle open to a disk file is
+        OK and is defined as follows:
+
+            Input:
+                Always  ready  (AL=FF) until EOF reached, then
+                always  not  ready   (AL=0)   unless   current
+                position changed via LSEEK.
+            Output:
+                Always ready (even if disk full).
+
+        IMPORTANT NOTE:
+           The status is defined at the  time  the  system  is
+           CALLED.  On future versions, by the time control is
+           returned to the user from the  system,  the  status
+           returned may NOT correctly reflect the true current
+           state of the device or file.
+
+    Error returns:
+        AX = error_invalid_handle
+                The handle passed  in  BX  was  not  currently
+                open.
+           = error_invalid_function
+                The function passed in AL was not in the range
+                0:7.
+           = error_invalid_data
+           = error_access_denied (calls AL=4..7)
+
+
+    Name:   *   LSeek - move file read/write pointer
+
+    Assembler usage:
+            MOV     DX, offsetlow
+            MOV     CX, offsethigh
+            MOV     AL, method
+            MOV     BX, handle
+            MOV     AH, LSeek
+            INT     21h
+        ; DX:AX has the new location of the pointer
+
+    Description:
+            LSeek  moves  the  read/write pointer according to
+        method:
+
+        Method Function
+        ------ --------
+           0   The pointer is moved to offset bytes  from  the
+               beginning of the file.
+           1   The pointer is moved to  the  current  location
+               plus offset.
+           2   The pointer is moved to the end  of  file  plus
+               offset.
+
+            Offset should be regarded as a 32-bit integer with
+        CX occupying the most significant 16 bits.
+
+    Error returns:
+        AX = error_invalid_handle
+                The handle passed  in  BX  was  not  currently
+                open.
+           = error_invalid_function
+                The function passed in AL was not in the range
+                0:2.
+
+
+    Name:   *   MkDir - Create a directory entry
+
+    Assembler usage:
+            LDS     DX, name
+            MOV     AH, MkDir
+            INT     21h
+
+    Description:
+            Given  a  pointer  to  an ASCIZ name, create a new
+        directory entry at the end.
+
+    Error returns:
+        AX = error_path_not_found
+                The path specified was invalid or not found.
+           = error_access_denied
+                The directory could not be created (no room in
+                parent directory),  the directory/file already
+                existed or a device name was specified.
+
+
+    Name:   *   Open - access a file
+
+    Assembler usage:
+            LDS     DX, name
+            MOV     AH, Open
+            MOV     AL, access
+            INT     21h
+        ; AX has error or file handle
+        ; If successful open
+
+    Description:
+            Open associates a 16-bit file handle with a  file.
+
+            The following values are allowed for access:
+
+        ACCESS Function
+        ------ --------
+           0   file is opened for reading
+           1   file is opened for writing
+           2   file is opened for both reading and writing.
+
+            DS:DX point to an ASCIZ name of  the  file  to  be
+        opened.
+
+            The read/write pointer is set at the first byte of
+        the file and the record size of the file  is  1  byte.
+        The  returned  file handle must be used for subsequent
+        I/O to the file.
+
+            The DOS, on initialization, will  have  a  maximum
+        number of  files.  See the configuration file document
+        for information on changing this default.
+
+    Error returns:
+        AX = error_invalid_access
+                The access specified in  AL  was  not  in  the
+                range 0:2.
+           = error_file_not_found
+                The path specified was invalid or not found.
+           = error_access_denied
+                The  user  attempted  to  open  a directory or
+                volume-id,  or  open  a  read-only  file   for
+                writing.
+           = error_too_many_open_files
+                There were no free handles  available  in  the
+                current process  or the internal system tables
+                were full.
+
+
+    Name:   *   Read - Do file/device I/O
+
+    Assembler usage:
+            LDS     DX, buf
+            MOV     CX, count
+            MOV     BX, handle
+            MOV     AH, Read
+            INT     21h
+        ; AX has number of bytes read
+
+    Description:
+            Read transfers count bytes  from  a  file  into  a
+        buffer location.   It is not guaranteed that all count
+        bytes will be read;  for  example,  reading  from  the
+        keyboard  will  read at most one line of text.  If the
+        returned value is zero, then the program has tried  to
+        read from the end of file.
+
+            All  I/O  is  done  using  normalized pointers; no
+        segment wraparound will occur.
+
+    Error returns:
+        AX = error_invalid_handle
+                The handle passed  in  BX  was  not  currently
+                open.
+           = error_access_denied
+                The handle passed in BX was opened in  a  mode
+                that did not allow reading.
+
+
+    Name:   *   RmDir - Remove a directory entry
+
+    Assembler usage:
+            LDS     DX, name
+            MOV     AH, RmDir
+            INT     21h
+
+    Description:
+            RmDir is given an asciz name of a directory.  That
+        directory is removed from its parent
+
+    Error returns:
+        AX = error_path_not_found
+                The path specified was invalid or not found.
+           = error_access_denied
+                The  path  specified  was  not  empty,  not  a
+                directory, the  root  directory  or  contained
+                invalid information.
+           = error_current_directory
+                The  path  specified was the current directory
+                on a drive.
+
+
+    Name:   *   Unlink - delete a directory entry
+
+    Assembler usage:
+            LDS     DX, name
+            MOV     AH, Unlink
+            INT     21h
+
+    Description:
+            Unlink removes a directory entry associated with a
+        filename.   If  the  file is currently open on another
+        handle, then no removal will take place.
+
+    Error returns:
+        AX = error_file_not_found
+                The path specified was invalid or not found.
+           = error_access_denied
+                The   path   specified   was  a  directory  or
+                read-only.
+
+
+    Name:   *   Wait - retrieve the return code of a child
+
+    Assembler usage:
+            MOV     AH, Wait
+            INT 21h
+        ; AX has the exit code
+
+    Description:
+            Wait  will  return  the  Exit  code specified by a
+        child process.  It will return  this  Exit  code  only
+        once.   The  low byte of this code is that sent by the
+        Exit routine.  The high byte is one of the  following:
+
+            0 - terminate/abort
+            1 - ^C
+            2 - Hard error
+            3 - Terminate and stay resident
+
+    Error returns:
+            None.
+
+
+    Name:   *   Write - write to a file
+
+    Assembler usage:
+            LDS     DX, buf
+            MOV     CX, count
+            MOV     BX, handle
+            MOV     AH, Write
+            INT     21h
+        ; AX has number of bytes written
+
+    Description:
+            Write transfers  count  bytes  from  a buffer into
+        a file.  It should be regarded  as  an  error  if  the
+        number of  bytes written is not the same as the number
+        requested.
+
+            It is  important  to  note  that  the write system
+        call with a count of  zero  (CX  =  0)  will  truncate
+        the file at the current position.
+
+            All I/O  is  done  using  normalized  pointers; no
+        segment wraparound will occur.
+
+    Error Returns:
+        AX = error_invalid_handle
+                The handle passed  in  BX  was  not  currently
+                open.
+           = error_access_denied
+                The handle  was  not  opened  in  a  mode that
+                allowed writing.
+
+
+The following  XENIX  convention  is  followed for the new 2.0
+system calls:
+
+    o   If no error occurred, then  the  carry  flag  will  be
+        reset and  register  AX  will  contain the appropriate
+        information.
+
+    o   If an error occurred, then  the  carry  flag  will  be
+        set and  register  AX  will  contain  the  error code.
+
+The following  code  sample illustrates the recommended method
+of detecting these errors:
+
+        ...
+        MOV     errno,0
+        INT     21h
+        JNC     continue
+        MOV     errno,AX
+continue:
+        ...
+
+The word variable errno will now have the correct  error  code
+for that system call.
+
+The current equates for the error codes are:
+
+no_error_occurred               EQU 0
+
+error_invalid_function          EQU 1
+error_file_not_found            EQU 2
+error_path_not_found            EQU 3
+error_too_many_open_files       EQU 4
+error_access_denied             EQU 5
+error_invalid_handle            EQU 6
+error_arena_trashed             EQU 7
+error_not_enough_memory         EQU 8
+error_invalid_block             EQU 9
+error_bad_environment           EQU 10
+error_bad_format                EQU 11
+error_invalid_access            EQU 12
+error_invalid_data              EQU 13
+error_invalid_drive             EQU 15
+error_current_directory         EQU 16
+error_not_same_device           EQU 17
+error_no_more_files             EQU 18
+
+
+System call assignments:
+
+ABORT                           EQU 0   ;  0      0
+STD_CON_INPUT                   EQU 1   ;  1      1
+STD_CON_OUTPUT                  EQU 2   ;  2      2
+STD_AUX_INPUT                   EQU 3   ;  3      3
+STD_AUX_OUTPUT                  EQU 4   ;  4      4
+STD_PRINTER_OUTPUT              EQU 5   ;  5      5
+RAW_CON_IO                      EQU 6   ;  6      6
+RAW_CON_INPUT                   EQU 7   ;  7      7
+STD_CON_INPUT_NO_ECHO           EQU 8   ;  8      8
+STD_CON_STRING_OUTPUT           EQU 9   ;  9      9
+STD_CON_STRING_INPUT            EQU 10  ; 10      A
+STD_CON_INPUT_STATUS            EQU 11  ; 11      B
+STD_CON_INPUT_FLUSH             EQU 12  ; 12      C
+DISK_RESET                      EQU 13  ; 13      D
+SET_DEFAULT_DRIVE               EQU 14  ; 14      E
+FCB_OPEN                        EQU 15  ; 15      F
+FCB_CLOSE                       EQU 16  ; 16     10
+DIR_SEARCH_FIRST                EQU 17  ; 17     11
+DIR_SEARCH_NEXT                 EQU 18  ; 18     12
+FCB_DELETE                      EQU 19  ; 19     13
+FCB_SEQ_READ                    EQU 20  ; 20     14
+FCB_SEQ_WRITE                   EQU 21  ; 21     15
+FCB_CREATE                      EQU 22  ; 22     16
+FCB_RENAME                      EQU 23  ; 23     17
+GET_DEFAULT_DRIVE               EQU 25  ; 25     19
+SET_DMA                         EQU 26  ; 26     1A
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|     C  A  V  E  A  T     P  R  O  G  R  A  M  M  E  R     |
+|                                                           |
+GET_DEFAULT_DPB                 EQU 31  ; 31     1F
+|                                                           |
+|     C  A  V  E  A  T     P  R  O  G  R  A  M  M  E  R     |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+FCB_RANDOM_READ                 EQU 33  ; 33     21
+FCB_RANDOM_WRITE                EQU 34  ; 34     22
+GET_FCB_FILE_LENGTH             EQU 35  ; 35     23
+GET_FCB_POSITION                EQU 36  ; 36     24
+SET_INTERRUPT_VECTOR            EQU 37  ; 37     25
+CREATE_PROCESS_DATA_BLOCK       EQU 38  ; 38     26
+FCB_RANDOM_READ_BLOCK           EQU 39  ; 39     27
+FCB_RANDOM_WRITE_BLOCK          EQU 40  ; 40     28
+PARSE_FILE_DESCRIPTOR           EQU 41  ; 41     29
+GET_DATE                        EQU 42  ; 42     2A
+SET_DATE                        EQU 43  ; 43     2B
+GET_TIME                        EQU 44  ; 44     2C
+SET_TIME                        EQU 45  ; 45     2D
+SET_VERIFY_ON_WRITE             EQU 46  ; 46     2E
+; Extended functionality group
+GET_DMA                         EQU 47  ; 47     2F
+GET_VERSION                     EQU 48  ; 48     30
+KEEP_PROCESS                    EQU 49  ; 49     31
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|     C  A  V  E  A  T     P  R  O  G  R  A  M  M  E  R     |
+|                                                           |
+GET_DPB                         EQU 50  ; 50     32
+|                                                           |
+|     C  A  V  E  A  T     P  R  O  G  R  A  M  M  E  R     |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+SET_CTRL_C_TRAPPING             EQU 51  ; 51     33
+GET_INDOS_FLAG                  EQU 52  ; 52     34
+GET_INTERRUPT_VECTOR            EQU 53  ; 53     35
+GET_DRIVE_FREESPACE             EQU 54  ; 54     36
+CHAR_OPER                       EQU 55  ; 55     37
+INTERNATIONAL                   EQU 56  ; 56     38
+; XENIX CALLS
+;   Directory Group
+MKDIR                           EQU 57  ; 57     39
+RMDIR                           EQU 58  ; 58     3A
+CHDIR                           EQU 59  ; 59     3B
+;   File Group
+CREAT                           EQU 60  ; 60     3C
+OPEN                            EQU 61  ; 61     3D
+CLOSE                           EQU 62  ; 62     3E
+READ                            EQU 63  ; 63     3F
+WRITE                           EQU 64  ; 64     40
+UNLINK                          EQU 65  ; 65     41
+LSEEK                           EQU 66  ; 66     42
+CHMOD                           EQU 67  ; 67     43
+IOCTL                           EQU 68  ; 68     44
+XDUP                            EQU 69  ; 69     45
+XDUP2                           EQU 70  ; 70     46
+CURRENT_DIR                     EQU 71  ; 71     47
+;    Memory Group
+ALLOC                           EQU 72  ; 72     48
+DEALLOC                         EQU 73  ; 73     49
+SETBLOCK                        EQU 74  ; 74     4A
+;    Process Group
+EXEC                            EQU 75  ; 75     4B
+EXIT                            EQU 76  ; 76     4C
+WAIT                            EQU 77  ; 77     4D
+FIND_FIRST                      EQU 78  ; 78     4E
+;   Special Group
+FIND_NEXT                       EQU 79  ; 79     4F
+; SPECIAL SYSTEM GROUP
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|     C  A  V  E  A  T     P  R  O  G  R  A  M  M  E  R     |
+|                                                           |
+SET_CURRENT_PDB                 EQU 80  ; 80     50
+GET_CURRENT_PDB                 EQU 81  ; 81     51
+GET_IN_VARS                     EQU 82  ; 82     52
+SETDPB                          EQU 83  ; 83     53
+|                                                           |
+|     C  A  V  E  A  T     P  R  O  G  R  A  M  M  E  R     |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+GET_VERIFY_ON_WRITE             EQU 84  ; 84     54
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|     C  A  V  E  A  T     P  R  O  G  R  A  M  M  E  R     |
+|                                                           |
+DUP_PDB                         EQU 85  ; 85     55
+|                                                           |
+|     C  A  V  E  A  T     P  R  O  G  R  A  M  M  E  R     |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+RENAME                          EQU 86  ; 86     56
+FILE_TIMES                      EQU 87  ; 87     57
+                                        

@@ -1,0 +1,802 @@
+                  MS-DOS 2.0 Device Drivers
+
+INTRODUCTION
+
+    In the  past,  DOS-device  driver  (BIOS for those who are
+familiar with  CP/M)  communication  has  been  mediated  with
+registers and   a  fixed-address  jump-table.   This  approach
+has suffered heavily  from  the  following  two  observations:
+
+    o   The old jump-table ideas of  the  past  are  fixed  in
+        scope and allow no extensibility.
+
+    o   The past  device  driver  interfaces have been written
+        without regard for the true  power  of  the  hardware.
+        When   a   multitasking  system  or  interrupt  driven
+        hardware is installed  a  new  BIOS  must  be  written
+        largely from scratch.
+
+    In MSDOS  2.0, the DOS-device driver interface has changed
+from the old jump-table style  to  one  in  which  the  device
+drivers  are  linked  together  in  a  list.   This allows new
+drivers for  optional  hardware  to  be  installed  (and  even
+written) in  the  field  by other vendors or the user himself.
+This flexibility is one of the major new  features  of  MS-DOS
+2.0.
+
+    Each driver  in  the  chain  defines two entry points; the
+strategy routine and  the  interrupt  routine.   The  2.0  DOS
+does not  really make use of two entry points (it simply calls
+strategy, then immediately calls interrupt).  This dual  entry
+point scheme  is  designed  to facilitate future multi-tasking
+versions of MS-DOS.  In multi-tasking  environments  I/O  must
+be asynchronous,  to  accomplish  this  the  strategy  routine
+will be called to queue  (internally)  a  request  and  return
+quickly.  It  is  then  the  responsibility  of  the interrupt
+routine to perform the actual I/O at interrupt time by picking
+requests  off  the  internal  queue  (set  up  by the strategy
+routine), and process  them.   When  a  request  is  complete,
+it is  flagged  as  "done"  by the interrupt routine.  The DOS
+periodically scans the  list  of  requests  looking  for  ones
+flagged as  done,  and  "wakes up" the process waiting for the
+completion of the request.
+
+    In order for requests to be  queued  as  above  it  is  no
+longer sufficient  to pass I/O information in registers, since
+many requests may be  pending  at  any  one  time.   Therefore
+the new  device  interface uses data "packets" to pass request
+information.  A device is called with a pointer to  a  packet,
+this packet  is  linked  into  a  global  chain of all pending
+I/O requests maintained by the DOS.   The  device  then  links
+the packet  into  its  own  local  chain  of requests for this
+particular  device.   The  device  interrupt   routine   picks
+requests of  the  local  chain  for processing.  The DOS scans
+the  global  chain  looking  for  completed  requests.   These
+packets are  composed  of  two  pieces,  a  static piece which
+has the same  format  for  all  requests  (called  the  static
+request header),  which  is  followed  by information specific
+to the request.  Thus packets have a variable size and format.
+
+    At this points it should be  emphasized  that  MS-DOS  2.0
+does not  implement most of these features, as future versions
+will.  There is no global or local queue.   Only  one  request
+is pending at any one time, and the DOS waits for this current
+request to be completed.  For 2.0 it  is  sufficient  for  the
+strategy routine  to  simply  store  the address of the packet
+at a fixed location, and for the  interrupt  routine  to  then
+process  this  packet  by  doing  the  request  and returning.
+Remember:  the DOS just calls the strategy  routine  and  then
+immediately calls  the  interrupt  routine, it is assumed that
+the request is completed when the interrupt  routine  returns.
+This additional  functionality  is  defined  at  this  time so
+that people will be  aware  and  thinking  about  the  future.
+
+
+FORMAT OF A DEVICE DRIVER
+
+    A device  driver  is  simply  a  relocatable  memory image
+with all of the code in  it  to  implement  the  device  (like
+a .COM  file,  but  not ORGed at 100 Hex).  In addition it has
+a special header at the front of it  which  identifies  it  as
+a device,  defines  the  strategy  and interrupt entry points,
+and defines various  attributes.   It  should  also  be  noted
+that there are two basic types of devices.
+
+    The first  is  character devices.  These are devices which
+are designed to do character  I/O  in  a  serial  manner  like
+CON, AUX,  and  PRN.   These devices are named (ie.  CON, AUX,
+CLOCK, etc.), and users may open channels  (FCBs)  to  do  I/O
+to them.
+
+    The second  class  of  devices  is  block  devices.  These
+devices are the "disk drives"  on  the  system,  they  can  do
+random I/O  in  pieces  called  blocks  (usually  the physical
+sector size) and  hence  the  name.   These  devices  are  not
+"named" as  the  character  devices  are, and therefore cannot
+be "opened" directly.   Instead  they  are  "mapped"  via  the
+drive letters (A,B,C, etc.).
+
+    Block devices  also  have  units.  In other words a single
+driver may be responsible for one or more  disk  drives.   For
+instance block device driver ALPHA (please note that we cannot
+actually  refer  to  block  devices  by  a  name!)    may   be
+responsible for  drives  A,B,C  and  D, this simply means that
+it has four units (0-3) defined and therefore  takes  up  four
+drive letters.   Which units correspond to which drive letters
+is determined by the position  of  the  driver  in  the  chain
+of all  drivers:   if  driver  ALPHA is the first block driver
+in the device chain, and it defines 4 units (0-3),  then  they
+will be  A,B,C  and  D.   If  BETA  is the second block driver
+and defines three units (0-2),  then  they  will  be  E,F  and
+G and  so  on.   MS-DOS  2.0 is not limited to 16 block device
+units, as  previous  versions  were.   The  theoretical  limit
+is 63  (2^6  -  1),  but  it should be noted that after 26 the
+drive letters get a little strange (like ] \  and  ^).   NOTE:
+Character devices  cannot  define multiple units (this because
+they have only one name).
+
+
+Here is what that special device header looks like:
+
+           +--------------------------------------+
+           | DWORD Pointer to next device         |
+           | (Must be set to -1)                  |
+           +--------------------------------------+
+           | WORD Attributes                      |
+           |  Bit 15 = 1 if char device 0 if blk  |
+           |  if bit 15 is 1                      |
+           |      Bit 0 = 1 if Current sti device |
+           |      Bit 1 = 1 if Current sto output |
+           |      Bit 2 = 1 if Current NUL device |
+           |      Bit 3 = 1 if Current CLOCK dev  |
+           |      Bit 4 = 1 if SPECIAL            |
+           |  Bit 14 is the IOCTL bit (see below) |
+           |  Bit 13 is the NON IBM FORMAT bit    |
+           +--------------------------------------+
+           | WORD Pointer to Device strategy      |
+           |      entry point                     |
+           +--------------------------------------+
+           | WORD Pointer to Device interrupt     |
+           |      entry point                     |
+           +--------------------------------------+
+           | 8-BYTE character device name field   |
+           | Character devices set a device name  |
+           | For block devices the first byte is  |
+           | The number of units                  |
+           +--------------------------------------+
+
+    Note that the device entry points are  words.   They  must
+be offsets  from  the  same  segment  number  used to point to
+this table.  Ie.  if XXX.YYY  points  to  the  start  of  this
+table, then  XXX.strategy  and  XXX.interrupt  are  the  entry
+points.
+
+    A word about the Attribute  field.   This  field  is  used
+most importantly  to  tell  the  system whether this device is
+a block or character device (bit  15).   Most  of  other  bits
+are used  to  give  selected character devices certain special
+treatment (NOTE: these bits mean nothing on a  block  device).
+Let's say  a  user  has  a new device driver which he wants to
+be the standard input and  output.   Besides  just  installing
+the driver  he  needs  to  tell  SYSINIT (and the DOS) that he
+wishes his new driver to override  the  current  sti  and  sto
+(the "CON"  device).   This  is  accomplished  by  setting the
+attributes to the desired characteristics,  so  he  would  set
+Bits 0  and 1 to 1 (note that they are separate!!).  Similarly
+a  new  CLOCK  device  could  be  installed  by  setting  that
+attribute, see  the  section  at  the end on the CLOCK device.
+NOTE: that although there  is  a  NUL  device  attribute,  the
+NUL device  cannot  be  re-assigned.   This  attribute  exists
+for the DOS so that it can tell if the  NUL  device  is  being
+used.
+
+    The NON  IBM  FORMAT  bit  applies  only  to block devices
+and effects the operation of the  get  BPB  device  call  (see
+below).
+
+    The other  bit  of  interest  is  the  IOCTL bit which has
+meaning on character or block devices.   This  bit  tells  the
+DOS whether  this  device  can handle control strings (via the
+IOCTL system call).
+
+    If a driver cannot  process  control  strings,  it  should
+initially set  this  bit  to  0.  This tells the DOS to return
+an error if an attempt is made  (via  IOCTL  system  call)  to
+send or  receive  control  strings  to  this device.  A device
+which can process control  strings  should  initialize  it  to
+1.  For  drivers  of  this  type,  the  DOS will make calls to
+the IOCTL INPUT  and  OUTPUT  device  functions  to  send  and
+receive   IOCTL   strings   (see  IOCTL  in  the  SYSTEM-CALLS
+document).
+
+    The IOCTL functions allow data to  be  sent  and  received
+by the  device  itself for its own use (to set baud rate, stop
+bits, form length etc., etc.), instead of  passing  data  over
+the  device  channel  as  a  normal  read  or write does.  The
+interpretation of the passed information is up to the  device,
+but it MUST NOT simply be treated as a normal I/O.
+
+    The SPECIAL  bit  applies  only  to  character drivers and
+more particularly to  CON  drivers.   The  new  2.0  interface
+is a  much  more  general  and  consistent  interface than the
+old 1.25 DOS interface.  It allows for a number of  additional
+features of  2.0.   It  is  also slower than 1.25 if old style
+"single byte" system calls are made.  To make  most  efficient
+use of  the  interface  all  applications  should  block their
+I/O as much as possible.  This  means  make  one  XENIX  style
+system call  to  output  X  bytes  rather  than X system calls
+to output one byte each.  Also putting  a  device  channel  in
+RAW   mode  (see  IOCTL)  provides  a  means  of  putting  out
+characters even FASTER  than  1.25.   To  help  alleviate  the
+CON output  speed  problem  for  older  programs which use the
+1 - 12 system calls  to  output  large  amounts  of  data  the
+SPECIAL bit  has  been implemented.  If this bit is 1 it means
+the device is the  CON  output  device,  and  has  implemented
+an interrupt  29  Hex  handler,  where  the  29 Hex handler is
+defined as follows:
+
+        Interrupt 29h handlers
+
+        Input:
+                Character in AL
+
+        Function:
+                output the character in al to the user
+                screen.
+        Output:
+                None
+        Registers:
+                all registers except bx must be preserved.
+                No registers except for al have a known or
+                consistent value.
+
+    If a  character  device  implements  the  SPECIAL  bit, it
+is the responsibility of the  driver  to  install  an  address
+at the  correct  location in the interrupt table for interrupt
+29 Hex as part of  its  INIT  code.   IMPLICATION:  There  can
+be only  one  device  driver  with  the SPECIAL bit set in the
+system.  There is no check to insure this state.
+
+WARNING: THIS FEATURE WILL NOT BE SUPPORTED IN FUTURE VERSIONS
+    OF THE  OPERATING  SYSTEM.   IMPLICATION:  Any application
+    (not device driver)  which  uses  INT  29H  directly  will
+    not work on future versions, YOU HAVE BEEN WARNED.
+
+    In  order  to  "make"  a  device  driver  that SYSINIT can
+install, a memory image or .EXE  (non-IBM  only)  format  file
+must be  created  with  the  above  header  at the start.  The
+link field should be  initialized  to  -1  (SYSINIT  fills  it
+in).   The  attribute  field  and  entry  points  must  be set
+correctly, and if the device is a character device,  the  name
+field must  be  filled  in  with  the  name (if a block device
+SYSINIT will fill in  the  correct  unit  count).   This  name
+can be  any  8  character  "legal" file name.  In fact SYSINIT
+always installs character devices at the start of  the  device
+list, so  if  you  want  to  install  a new CON device all you
+have to do is name it "CON".  The new  one  is  ahead  of  the
+old one  in  the  list  and  thus  preempts the old one as the
+search for devices stops on  the  first  match.   Be  sure  to
+set the sti and sto bits on a new CON device!
+
+NOTE:  Since  SYSINIT  may  install  the  driver anywhere, you
+    must be very careful about  FAR  memory  references.   You
+    should NOT  expect  that  your  driver will go in the same
+    place every time (The default BIOS  drivers  are  exempted
+    from this of course).
+
+
+INSTALLATION OF DEVICE DRIVERS
+
+    Unlike past versions MS-DOS 2.0 allows new device  drivers
+to   be   installed   dynamically   at  boot  time.   This  is
+accomplished by the new SYSINIT module supplied by  Microsoft,
+which reads  and  processes  the CONFIG.SYS file.  This module
+is linked together with the OEM  default  BIOS  in  a  similar
+manner to the way FORMAT is built.
+
+    One of  the  functions  defined  for  each device is INIT.
+This routine is called once  when  the  device  is  installed,
+and never  again.  The only thing returned by the init routine
+is a location (DS:DX) which is a pointer  to  the  first  free
+byte of  memory  after  the  device  driver, (like a terminate
+and stay resident).  This pointer method can be used to "throw
+away" initialization  code  that  is  only needed once, saving
+on space.
+
+    Block devices are installed the same way and  also  return
+a first  free  byte  pointer  as above, additional information
+is also returned:
+
+    o   The number  of  units  is  returned,  this  determines
+        logical device  names.  If the current maximum logical
+        device letter is F at the time of  the  install  call,
+        and the init routine returns 4 as the number of units,
+        then they will have logical  names  G,  H,  I  and  J.
+        This mapping  is  determined  by  by  the  position of
+        the driver in the device list and the number of  units
+        on the  device (stored in the first byte of the device
+        name field).
+
+    o   A pointer to a  BPB  (Bios  Parameter  Block)  pointer
+        array is  also  returned.   This  will  be  similar to
+        the INIT table used in  previous  versions,  but  will
+        have more  information  in  it.   There  is  one table
+        for each unit defined.   These  blocks  will  be  used
+        to build  a  DPB  (Drive  Parameter Block) for each of
+        the units.  The pointer passed to  the  DOS  from  the
+        driver points  to  an array of n word pointers to BPBs
+        where n is the  number  of  units  defined.   In  this
+        way if  all  units  are  the same, all of the pointers
+        can point to the same BPB, saving space.   NOTE:  this
+        array must  be  protected  (below the free pointer set
+        by the return) since the DPB will  be  built  starting
+        at the  byte  pointed  to  by  the  free pointer.  The
+        sector size defined must be  less  than  or  equal  to
+        the maximum  sector  size defined at default BIOS init
+        time.  If it isn't the install  will  fail.   One  new
+        piece of DPB info set from this table will be a "media
+        descriptor byte".  This  byte  means  nothing  to  the
+        DOS, but  is  passed to devices so that they know what
+        form of a  DPB  the  DOS  is  currently  using  for  a
+        particular Drive-Unit.
+
+    Block devices  may  take  several  approaches; they may be
+dumb or smart.   A  dumb  device  would  define  a  unit  (and
+therefore a  DPB)  for  each possible media drive combination.
+Unit 0 = drive 0 single side, unit 1 = drive  0  double  side,
+etc.  For  this  approach  media  descriptor  bytes would mean
+nothing.  A smart device would allow multiple media per  unit,
+in this  case the BPB table returned at init must define space
+large  enough  to  accommodate  the  largest  possible   media
+supported.  Smart  drivers  will  use the "media byte" to pass
+around info about what media is currently in  a  unit.   NOTE:
+If the  DPB  is  a  "hybrid"  made  to get the right sizes, it
+should give an invalid "media byte" back to the DOS.
+
+    The BOOT  (default  BIOS)  drivers  are  installed  pretty
+much as  above.   The preset device list is scanned.  If block
+drivers are encountered they  are  installed  as  above  (with
+the exception  that  the  break is not moved since the drivers
+are already resident in the  BIOS).   Note  that  the  logical
+drive letters  are  assigned  in  list  order, thus the driver
+which is to have logical A must  be  the  first  unit  of  the
+first  block  device  in  the  list.   The  order of character
+devices is also important.  There must be at least 4 character
+devices defined  at  boot which must be the first four devices
+(of either  type),  the  first  will  become  standard  input,
+standard output,  and  standard error output.  The second will
+become standard auxiliary input and  output,  the  third  will
+become standard  list  output,  and  the forth will become the
+date/time (CLOCK) device.  Thus  the  BIOS  device  list  must
+look like this:
+
+->CON->AUX->PRN->CLOCK->any other block or character devices
+
+THE DRIVER
+
+    A device driver will define the following functions:
+
+  Command   Function
+   Code
+
+     0      INIT
+     1      MEDIA CHECK (Block only, NOP for character)
+     2      BUILD BPB      "    "     "    "   "
+     3      IOCTL INPUT (Only called if device has IOCTL)
+     4      INPUT (read)
+     5      NON-DESTRUCTIVE INPUT NO WAIT (Char devs only)
+     6      INPUT STATUS                    "     "    "
+     7      INPUT FLUSH                     "     "    "
+     8      OUTPUT (write)
+     9      OUTPUT (Write) with verify
+    10      OUTPUT STATUS                   "     "    "
+    11      OUTPUT FLUSH                    "     "    "
+    12      IOCTL OUTPUT (Only called if device has IOCTL)
+
+    As mentioned before, the first entry point is the strategy
+routine which  is called with a pointer to a data block.  This
+call does not perform the request, all it  does  is  queue  it
+(save the  data  block  pointer).   The second interrupt entry
+point is called immediately  after  the  strategy  call.   The
+"interrupt" routine  is called with no parameters, its primary
+function is to perform  the  operation  based  on  the  queued
+data block and set up any returns.
+
+    The "BUILD  BPB"  and  "MEDIA  CHECK"  are the interesting
+new ones, these are explained by  examining  the  sequence  of
+events in the DOS which occurs when a drive access call (other
+than read or write) is made:
+
+        I.  Turn drive letter  into  DPB  pointer  by  looking
+            for DPB with correct driver-unit number.
+
+        II. Call device  driver  and  request  media check for
+            Drive-Unit.   DOS   passes   its   current   Media
+            descriptor byte (from DPB).  Call returns:
+
+                Media Not Changed
+                Media Changed
+                Not Sure
+                Error
+
+            Error - If an error occurs the error  code  should
+                be set accordingly.
+
+            Media Not  changed  -  Current  DPB and media byte
+                are OK, done.
+
+            Media Changed - Current DPB and media  are  wrong,
+                invalidate any  buffers  for  this  unit,  and
+                goto III.
+
+            Not Sure - If there are  dirty  buffers  for  this
+                unit, assume  DPB  and  media  byte are OK and
+                done.  If nothing dirty, assume media changed,
+                invalidate any  buffers  for  unit,  and  goto
+                III.
+
+            NOTE:  If a hybrid  DPB  was  built  at  init  and
+                an invalid  Media  byte  was  set,  the driver
+                should return media changed when this  invalid
+                media byte is encountered.
+
+        III. Call device  driver  to build BPB with media byte
+            and buffer.
+
+    What the  driver  must  do  at  step  III is determine the
+correct media that is currently in  the  unit,  and  return  a
+pointer to  a  BPB table (same as for the install call).  This
+table will be used as at init  to  build  a  correct  DPB  for
+the unit  If the determined media descriptor byte in the table
+turns out to be the same as the one passed in,  then  the  DOS
+will not  build  a new table, but rather just use the old one.
+Therefore in this case the driver doesn't  have  to  correctly
+fill in the other entries if desired.
+
+    The build  BPB  call  also  gets a pointer to a one sector
+buffer.  What this buffer contains is determined  by  the  NON
+IBM FORMAT  bit  in  the  attribute field.  If the bit is zero
+(device is IBM format compatible)  then  the  buffer  contains
+the first  sector  of  the  first  FAT,  in particular the FAT
+ID byte is the first byte  of  this  buffer.   NOTE:  It  must
+be true  that  the  BPB is the same, as far as location of the
+FAT is concerned, for all possible  media.   This  is  because
+this first  FAT  sector  must  be  read  BEFORE the actual BPB
+is returned.  If the NON  IBM  FORMAT  bit  is  set  then  the
+pointer points  to  one  sector  of scratch space which may be
+used for anything.
+
+CALL FORMAT
+
+    When the  DOS calls a device driver to perform a finction,
+it passes a  structure  (Drive  Request  Structure)  in  ES:BX
+to perform  operations  and  does  a long call to the driver's
+strategy entry point.  This structure is a fixed length header
+(Static Request  Header)  followed  by  data  pertinent to the
+operation  being  performed.   NOTE:   It   is   the   drivers
+responsibility to preserve machine state.
+
+STATIC REQUEST HEADER ->
+               +-----------------------------+
+               | BYTE length of record       |
+               |  Length in bytes of this    |
+               |  Drive Request Structure    |
+               +-----------------------------+
+               | BYTE unit code              |
+               |  The subunit the operation  |
+               |  is for (minor device)      |
+               |  (no meaning on character   |
+               |   devices)                  |
+               +-----------------------------+
+               | BYTE command code           |
+               +-----------------------------+
+               | WORD Status                 |
+               +-----------------------------+
+               | 8 bytes reserved here for   |
+               | two DWORD links. One will   |
+               | be a link for the DOS queue |
+               | The other for the device    |
+               | queue                       |
+               +-----------------------------+
+
+STATUS WORD
+
+      15  14 13 12 11 10  9   8   7  6  5  4  3  2  1  0
+    +---+---+--+--+--+--+---+---+--+--+--+--+--+--+--+--+
+    | E |               | B | D |                       |
+    | R |   RESERVED    | U | O | ERROR CODE (bit 15 on)|
+    | R |               | I | N |                       |
+    +---+---+--+--+--+--+---+---+--+--+--+--+--+--+--+--+
+
+    The status  word is zero on entry and is set by the driver
+interrupt routine on return.
+
+    Bit 8 is the done bit, it means the operation is complete.
+For the  moment  the Driver just sets it to one when it exits,
+in the future this will be set by  the  interrupt  routine  to
+tell the DOS the operation is complete.
+
+    Bit 15 is the error bit, if it  is  set  then  the  low  8
+bits indicate the error:
+
+           0 Write Protect violation
+    (NEW)  1 Unknown Unit
+           2 Drive not ready
+    (NEW)  3 Unknown command
+           4 CRC error
+    (NEW)  5 Bad Drive Request Structure length
+           6 Seek error
+    (NEW)  7 Unknown media
+           8 Sector not found
+    (NEW)  9 Printer out of paper
+           A Write Fault
+    (NEW)  B Read Fault
+           C General Failure
+
+Bit 9 is the busy bit which is set only by status  calls  (see
+STATUS CALL below).
+
+
+   Here is the data block format for each function:
+
+READ or WRITE - ES:BX (Including IOCTL) ->
+            +------------------------------------+
+            | 13-BYTE  Static Request Header     |
+            +------------------------------------+
+            | BYTE Media descriptor  from DPB    |
+            +------------------------------------+
+            | DWORD transfer address             |
+            +------------------------------------+
+            | WORD byte/sector Count             |
+         ---+------------------------------------+---
+            | WORD starting sector number        |
+            |  (ignored on Char Devs)            |
+            +------------------------------------+
+
+    In addition to setting the status word,  the  driver  must
+set the  Sector  count  to  the  actual  number of sectors (or
+bytes) transferred.  NOTE: No  error  check  is  performed  on
+an IOCTL I/O call, driver MUST correctly set the return sector
+(byte) count  to  the  actual  number  of  bytes  transferred,
+however.
+
+NOTE: THE FOLLOWING APPLIES TO BLOCK DEVICE DRIVERS.
+
+    Under certain  circumstances  the  BIOS  may  be  asked to
+do a write operation of 64K bytes which seems to  be  a  "wrap
+around" of  the transfer address in the BIOS I/O packet.  This
+arises due to an optimization  added  to  the  write  code  in
+MS-DOS.  It will only manifest on user WRITEs which are within
+a sector size of 64K bytes on files which are  "growing"  past
+the current  EOF.   IT  IS  ALLOWABLE  FOR  THE BIOS TO IGNORE
+THE BALANCE OF  THE  WRITE  WHICH  "WRAPS  AROUND"  IF  IT  SO
+CHOOSES.   For  instance  a  WRITE  of  10000H  bytes worth of
+sectors with a transfer address  of  XXX:1  could  ignore  the
+last two bytes (remember that a user program can never request
+an I/O of more than FFFFH bytes and cannot wrap  around  (even
+to 0)  in  his  transfer segment, so in this case the last two
+bytes can be ignored).
+
+
+NON DESRUCTIVE READ NO WAIT - ES:BX ->
+            +------------------------------------+
+            | 13-BYTE Static Request Header      |
+            +------------------------------------+
+            | BYTE read from device              |
+            +------------------------------------+
+
+    This call is analogous to the console  input  status  call
+on MS-DOS  1.25.   If  the  character  device returns Busy bit
+= 0 (characters in  buffer),  then  the  next  character  that
+would be  read  is  returned.   This  character is NOT removed
+from the input buffer (hence the term Non  Destructive  Read).
+In essence  this  call  allows the DOS to look ahead one input
+character.
+
+
+MEDIA CHECK - ES:BX ->
+            +------------------------------------+
+            | 13-BYTE  Static Request Header     |
+            +------------------------------------+
+            | BYTE Media Descriptor from DPB     |
+            +------------------------------------+
+            | BYTE returned                      |
+            +------------------------------------+
+
+    In addition to setting status word, driver  must  set  the
+return byte.
+
+    Return Byte :
+        -1 Media has been changed
+         0 Don't know if media has been changed
+         1 Media has not been changed
+
+    If the driver can return -1 or 1 (by  having  a  door-lock
+or other  interlock  mechanism)  the  performance of MSDOS 2.0
+is enhanced as the DOS  need  not  reread  the  FAT  for  each
+directory access.
+
+
+BUILD BPB - ES:BX ->
+            +------------------------------------+
+            | 13-BYTE Static Request Header      |
+            +------------------------------------+
+            | BYTE Media Descriptor from DPB     |
+            +------------------------------------+
+            | DWORD Transfer Address             |
+            | (points to one sectors worth of    |
+            |  scratch space or first sector     |
+            |  of FAT depending on the value     |
+            |  of the NON IBM FORMAT bit)        |
+            +------------------------------------+
+            | DWORD Pointer to BPB               |
+            +------------------------------------+
+
+    If the NON IBM FORMAT bit  of  the  device  is  set,  then
+the DWORD  Transfer  Address  points  to  a  one sector buffer
+which can be used for any purpose.   If  the  NON  IBM  FORMAT
+bit is  0,  then  this buffer contains the first sector of the
+FAT; in this case the driver must not alter this buffer  (this
+mode is  useful  if  all  that  is  desired is to read the FAT
+ID byte).
+
+    If IBM compatible format  is  used  (NON  IBM  FORMAT  BIT
+= 0),  then it must be true that the first sector of the first
+FAT is located at the  same  sector  on  all  possible  media.
+This is  because  the FAT sector will be read BEFORE the media
+is actually determined.
+
+    In addition to setting status word, driver  must  set  the
+Pointer to the BPB on return.
+
+
+    In order to allow for many different  OEMs  to  read  each
+other's disks,  the  following  standard  is  suggested:   The
+information relating to the BPB  for  a  particular  piece  of
+media   is  kept  in  the  boot  sector  for  the  media.   In
+particular, the format of the boot sector is:
+
+            +------------------------------------+
+            | 3 BYTE near JUMP to boot code      |
+            +------------------------------------+
+            | 8 BYTES OEM name and version       |
+         ---+------------------------------------+---
+         B  | WORD bytes per sector              |
+         P  +------------------------------------+
+         B  | BYTE sectors per allocation unit   |
+            +------------------------------------+
+         |  | WORD reserved sectors              |
+         V  +------------------------------------+
+            | BYTE number of FATs                |
+            +------------------------------------+
+            | WORD number of root dir entries    |
+            +------------------------------------+
+            | WORD number of sectors in logical  |
+         ^  | image                              |
+         |  +------------------------------------+
+         B  | BYTE media descriptor              |
+         P  +------------------------------------+
+         B  | WORD number of FAT sectors         |
+         ---+------------------------------------+---
+            | WORD sectors per track             |
+            +------------------------------------+
+            | WORD number of heads               |
+            +------------------------------------+
+            | WORD number of hidden sectors      |
+            +------------------------------------+
+
+    The three  words  at the end are optional, the DOS doesn't
+care about them (since they are not part of  the  BPB).   They
+are intended  to  help the BIOS understand the media.  Sectors
+per track may be redundant (could be figured  out  from  total
+size of  the  disk).  Number of heads is useful for supporting
+different  multi-head  drives  which  have  the  same  storage
+capacity, but  a  different  number  of  surfaces.   Number of
+hidden sectors is useful  for  supporting  drive  partitioning
+schemes.
+
+
+    Currently, the media  descriptor  byte  has  been  defined
+for a small range of media:
+
+    5 1/4" diskettes:
+
+        Flag bits:
+            01h - on -> 2 double sided
+
+        All other bits must be on.
+
+    8" disks:
+        FEh - IBM  3740 format, singled-sided, single-density,
+            128 bytes per sector,  soft  sectored,  4  sectors
+            per allocation  unit,  1  reserved sector, 2 FATs,
+            68 directory entries, 77*26 sectors
+
+        FDh -   8"    IBM    3740    format,    singled-sided,
+            single-density,   128   bytes   per  sector,  soft
+            sectored,  4  sectors  per  allocation   unit,   4
+            reserved sectors,  2  FATs,  68 directory entries,
+            77*26 sectors
+
+        FEh - 8"  Double-sided,  double-density,  1024   bytes
+            per sector, soft sectored, 1 sector per allocation
+            unit, 1 reserved sector,  2  FATs,  192  directory
+            entries, 77*8*2 sectors
+
+
+STATUS Calls - ES:BX ->
+            +------------------------------------+
+            | 13-BYTE Static Request Header      |
+            +------------------------------------+
+
+    All driver must do is  set  status  word  accordingly  and
+set the busy bit as follows:
+
+    o   For output on  character  devices:   If  it  is  1  on
+        return, a  write  request  (if  made)  would  wait for
+        completion of a current request.  If it  is  0,  there
+        is no  current  request  and a write request (if made)
+        would start immediately.
+
+    o   For input on character devices with a buffer a  return
+        of 1  means,  a  read  request  (if  made) would go to
+        the physical device.  If  it  is  0  on  return,  then
+        there are  characters  in  the  devices  buffer  and a
+        read would return  quickly,  it  also  indicates  that
+        the user  has  typed  something.   The DOS assumes all
+        character devices have an  input  type  ahead  buffer.
+        Devices which  don't  have  them  should always return
+        busy = 0 so  that  the  DOS  won't  hang  waiting  for
+        something to  get  into  a buffer which doesn't exist.
+
+
+FLUSH Calls - ES:BX ->
+            +------------------------------------+
+            | 13-BYTE Static Request Header      |
+            +------------------------------------+
+
+    This  call  tells  the  driver  to  flush  (terminate) all
+pending requests  that  it  has knowledge of.  Its primary use
+is to flush the input queue on character devices.
+
+
+INIT - ES:BX ->
+            +------------------------------------+
+            | 13-BYTE Static Request Header      |
+            +------------------------------------+
+            | BYTE # of units                    |
+            +------------------------------------+
+            | DWORD Break Address                |
+         ---+------------------------------------+---
+            | DWORD Pointer to BPB array         |
+            | (not set by Character devices)     |
+            +------------------------------------+
+
+    The number of units, break address, and  BPB  pointer  are
+set by the driver.
+
+
+FORMAT OF BPB (Bios Parameter Block) -
+
+            +------------------------------------+
+            | WORD Sector size in Bytes          |
+            |    Must be at least 32             |
+            +------------------------------------+
+            | BYTE Sectors/Allocation unit       |
+            |    Must be a power of 2            |
+            +------------------------------------+
+            | WORD Number of reserved sectors    |
+            |        May be zero                 |
+            +------------------------------------+
+            | BYTE Number of FATS                |
+            +------------------------------------+
+            | WORD Number of directory entries   |
+            +------------------------------------+
+            | WORD Total number of sectors       |
+            +------------------------------------+
+            | BYTE Media descriptor              |
+            +------------------------------------+
+            | WORD Number of sectors occupied by |
+            |      FAT                           |
+            +------------------------------------+
+
+
+THE CLOCK DEVICE
+
+    One of  the  most  popular add on boards seems to be "Real
+Time CLOCK Boards".  To allow these boards  to  be  integrated
+into the  system  for TIME and DATE, there is a special device
+(determined by the attribute word) which is the CLOCK  device.
+In all  respects  this  device  defines and performs functions
+like any other character device (most functions will  be  "set
+done bit,  reset  error  bit,  return).   When a read or write
+to this device occurs, exactly 6 bytes are transferred.   This
+I/O can be thought of as transferring 3 words which correspond
+exactly to the values of AX, CX and  DX  which  were  used  in
+the old  1.25  DOS  date  and  time  routines.  Thus the first
+two bytes are a word which is the count of days since  1-1-80.
+The  third  byte  is  minutes,  the  fourth  hours,  the fifth
+hundredths of seconds, and the  sixth  seconds.   Reading  the
+CLOCK device  gets  the  date and time, writing to it sets the
+date and time.
+                                                                       
