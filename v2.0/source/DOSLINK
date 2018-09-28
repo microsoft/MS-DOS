@@ -1,5 +1,0 @@
-msdos mscode dosmes misc getset dircall alloc dev dir +
-disk fat rom stdbuf stdcall stdctrlc stdfcb stdproc +
-stdio time xenix xenix2;
-
-
