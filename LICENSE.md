@@ -1,5 +1,5 @@
 [MS-DOS 1.25 & 2.0 Source]
-Copyright (c) Microsoft Corporation
+Copyright © Microsoft Corporation
 All rights reserved. 
 MIT License
 Permission is hereby granted, freeof charge, to any person obtaining a copy of this software and associateddocumentation files (the Software), to deal in the Software withoutrestriction, including without limitation the rights to use, copy, modify,merge, publish, distribute, sublicense, and/or sell copies of the Software, andto permit persons to whom the Software is furnished to do so, subject to thefollowing conditions:
