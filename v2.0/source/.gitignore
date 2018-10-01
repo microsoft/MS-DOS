@@ -1,0 +1,6 @@
+.DS_Store
+*.plan
+*.swp
+.idea
+~*
+*~
