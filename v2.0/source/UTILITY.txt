@@ -38,7 +38,7 @@
         <object>    indicates a syntactic variable.
 
 
-COMMAND invokation
+COMMAND invocation
 
 COMMAND [[<drive>:]<path>] [<cttydev>] [-D] [-P] [-C <string>]
 
