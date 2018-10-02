@@ -28,8 +28,8 @@ as follows:
      may wish to customize for greater performance.  .OBJ files are also
      included for the FORMAT utility.
 
-4.   Skeltal BIOS and documentation diskette.  This diskette contains
-     the skeltal BIOS source code and the SYSINIT and SYSIMES object
+4.   Skeletal BIOS and documentation diskette.  This diskette contains
+     the skeletal BIOS source code and the SYSINIT and SYSIMES object
      modules which must be linked with your BIOS module.  The proper
      sequence for linking is BIOS - SYSINIT - SYSIMES.
      A profiler utility is also included on the diskette, but this
