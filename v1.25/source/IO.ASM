@@ -1475,11 +1475,11 @@ CURDRV:	DB	-1
 ; disk I/O driver should use.  Since each physical drive may be used for
 ; more than one disk I/O driver, more than one entry in TRKPT may point
 ; to the same entry in TRKTAB.  Drives such as PerSci 277s which use
-; the same head positioner for more than one drive should share entrys
+; the same head positioner for more than one drive should share entries
 ; in TRKTAB.
 ;
 ; INITTAB is the initialization table for 86-DOS as described in the
-; 86-DOS Programer's Manual under "Customizing the I/O System."
+; 86-DOS Programmer's Manual under "Customizing the I/O System."
 ;
 	IF	SCP*COMBIN*FASTSEEK
 ;
@@ -1850,7 +1850,7 @@ SSDRIVE:
 	DB	2		; Sector per allocation unit.
 	DW	54		; Reserved sectors.
 	DB	2		; Number of allocation tables.
-	DW	64		; Number of directory entrys.
+	DW	64		; Number of directory entries.
 	DW	720		; Number of sectors on the disk.
 
 	IF	SMALLDS-1
@@ -1880,7 +1880,7 @@ LSDRIVE:
 	DB	4		; Sectors per allocation unit.
 	DW	1		; Number of reserved sectors.
 	DB	2		; Number of File Allocation Tables.
-	DW	68		; Number of directory entrys.
+	DW	68		; Number of directory entries.
 	DW	77*26		; Number of sectors on the disk.
 
 	IF	CONVERT
@@ -1889,7 +1889,7 @@ OLDLSDRIVE:
 	DB	4
 	DW	52		; Old format had two tracks reserved.
 	DB	2
-	DW	64		; 64 directory entrys.
+	DW	64		; 64 directory entries.
 	DW	77*26
 	ENDIF
 
@@ -1910,7 +1910,7 @@ LDDRIVE:
 	DB	1
 	DW	1
 	DB	2
-	DW	192		; 192 directory entrys in new 8-inch DD/DS format.
+	DW	192		; 192 directory entries in new 8-inch DD/DS format.
 	DW	77*8*2
 
 	IF	CONVERT
@@ -1919,7 +1919,7 @@ OLDLDDRIVE:
 	DB	1
 	DW	1
 	DB	2
-	DW	128		; 128 directory entrys in old 8-inch DD/DS format.
+	DW	128		; 128 directory entries in old 8-inch DD/DS format.
 	DW	77*8*2
 	ENDIF
 	ENDIF
