@@ -2,18 +2,18 @@
 
 
 The 2.0 Release of MSDOS includes five 5 1/4 double density single sided
-diskettes or three 8 iinch CP/M 80 format diskettes.
+diskettes or three 8 inch CP/M 80 format diskettes.
 
 The software/documentation on the five inch diskettes is arranged
 as follows:
 
 1.   DOS distribution diskette.  This diskette contains files which
-     should be distriibuted to all users.  This allows the DOS distri-
+     should be distributed to all users.  This allows the DOS distri-
      bution diskette to meet the requirements of users of high level
      language compilers as well as users running only applications.
      Many compilers marketed independently through the retail channel
      (including those of Microsoft) assume LINK comes with the DOS, as
-     in the case of IBM.  How you choose to distrubute BASIC (contracted
+     in the case of IBM.  How you choose to distribute BASIC (contracted
      for separately) is up to you.
 
 2.   Assembly Language Development System diskette.  This diskette
@@ -32,7 +32,7 @@ as follows:
      the skeltal BIOS source code and the SYSINIT and SYSIMES object
      modules which must be linked with your BIOS module.  The proper
      sequence for linking is BIOS - SYSINIT - SYSIMES.
-     A profiler utiliity is also included on the diskette, but this
+     A profiler utility is also included on the diskette, but this
      is not intended for end-users.  This is distributed for use by
      your development staff only and is not supported by Microsoft
      If you do decide to distribute it, it is at your own risk!
@@ -46,7 +46,7 @@ with IBM's implementation of MS-DOS (PC DOS).  This includes the use
 of "\" instead of "/" as the path separator, and "/" instead of "-"
 as the switch character.  For transporting of batch files across
 machines, Microsoft encourages the use of "\" and "/" respectively
-in the U.S. market.  (See DOSPATCH.TXT for how you can overide this.
+in the U.S. market.  (See DOSPATCH.TXT for how you can override this.
 The user guide explains how the end-user can override this in CONFIG.SYS).
 Both the printer echo keys and insert mode keys have now been made to
 toggle.  The default prompt (this may also be changed by the user
@@ -60,7 +60,7 @@ Here is what you need to do to MSDOS 2.0 to create a shipable product:
 
 1.  BIOS.  If you have developed a BIOS for the Beta Test 2.0 version
     You should link your BIOS module to SYSINIT.OBJ and SYSIMES.OBJ.
-    You must modify your BIOS to accomodate the call back to the BIOS
+    You must modify your BIOS to accommodate the call back to the BIOS
     at the end of SYSINIT.  If you have no need for this call, simply
     find a far RET and label it RE_INIT and declare it public.
     An example of this can be found in the skeletal BIOS.  In addition
@@ -114,7 +114,7 @@ The following problems are known to exist:
     available in several months.
 
 4.  COMMAND.ASM is currently too large to assemble on a micro.  It is
-    being broken down into separate modules so it can be asembled on
+    being broken down into separate modules so it can be assembled on
     a machine.  Source licensees should realize that the resultant
     binaries from the new version will not correspond exactly to the
     old version.
@@ -174,4 +174,3 @@ At all times, the BIOS writer should be careful to preserve the state
 of the DOS - including the flags.  You should be also be cautioned that
 the MSDOS stack is not deep.  You should not count on more than one or
 two pushes of the registers.
-                                                                                   
