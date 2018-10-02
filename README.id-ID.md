@@ -1,4 +1,4 @@
-<img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="https://github.com/Microsoft/MS-DOS/blob/master/msdos-logo.png">   
+<img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="https://github.com/Microsoft/MS-DOS/blob/master/msdos-logo.png">
 
 # Kode Sumber MS-DOS v1.25 dan v2.0
 Repo ini berisi kode sumber asli dan biner terkompilasi untuk MS-DOS v1.25 dan MS-DOS v2.0.
@@ -9,7 +9,7 @@ Ini adalah [file yang sama yang awalnya dibagikan di Museum Sejarah Komputer pad
 Semua file dalam repo ini dirilis di bawah [Lisensi MIT (OSI)](https://en.wikipedia.org/wiki/MIT_License) sesuai [file LISENSI](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) yang disimpan di root repo ini.
 
 # Kontribusi!
-File sumber di repo ini adalah untuk referensi historis dan akan tetap statis, jadi tolong jangan kirimkan PR yang menyarankan modifikasi apa pun ke file sumber, tetapi jangan ragu-ragu untuk membuat repo dan bereksperimen 😊.
+File sumber di repo ini adalah untuk referensi historis dan akan tetap statis, jadi tolong jangan kirimkan PR yang menyarankan modifikasi apa pun ke file sumber, tetapi jangan ragu-ragu untuk membuat repo dan bereksperimen. 😊
 
 Namun, jika Anda ingin mengirimkan konten non-sumber tambahan atau modifikasi ke file non-sumber (misalnya, README ini), kirimkan melalui PR, dan kami akan meninjau dan mempertimbangkan.
 
