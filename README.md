@@ -2,6 +2,8 @@
 
 # MS-DOS v1.25 and v2.0 Source Code
 This repo contains the original source-code and compiled binaries for MS-DOS v1.25 and MS-DOS v2.0.
+Version 1.25 was the basis for non-IBM OEM versions of MS-DOS, including SCP MS-DOS 1.25
+Version 2.0 was first version to support 5.25-inch, 180 KB and 360 KB floppy disks
 
 These are the same files [originally shared at the Computer History Museum on March 25th, 2014]( http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) and are being (re)published in this repo to make them easier to find, reference-to in external writing and works, and to allow exploration and experimentation for those interested in early PC Operating Systems.  
 
