@@ -179,11 +179,11 @@ BIOSSTAT        DB      3 DUP (?)       ;Console input status check
 BIOSIN          DB      3 DUP (?)       ;Get console character
 BIOSOUT         DB      3 DUP (?)       ;Output console character
 BIOSPRINT       DB      3 DUP (?)       ;Output to printer
-BIOSAUXIN       DB      3 DUP (?)       ;Get byte from auxilliary
-BIOSAUXOUT      DB      3 DUP (?)       ;Output byte to auxilliary
+BIOSAUXIN       DB      3 DUP (?)       ;Get byte from auxiliary
+BIOSAUXOUT      DB      3 DUP (?)       ;Output byte to auxiliary
 BIOSREAD        DB      3 DUP (?)       ;Disk read
 BIOSWRITE       DB      3 DUP (?)       ;Disk write
-BIOSDSKCHG      DB      3 DUP (?)       ;Dsik-change status
+BIOSDSKCHG      DB      3 DUP (?)       ;Disk-change status
 BIOSSETDATE     DB      3 DUP (?)       ;Set date
 BIOSSETTIME     DB      3 DUP (?)       ;Set time
 BIOSGETTIME     DB      3 DUP (?)       ;Get time and date
@@ -916,7 +916,7 @@ OPENDEV:
         STOSW
         STOSW                   ;Set current size to zero
         CALL    DATE16
-        STOSW                   ;Date is todays
+        STOSW                   ;Date is today's
         XCHG    AX,DX
         STOSW                   ;Use current time
         MOV     AL,BH           ;Get device number
@@ -1017,7 +1017,7 @@ CLOSE:  ;System call 16
         ADD     DI,7
 NORMFCB3:
         TEST    BYTE PTR [DI.DEVID],0C0H        ;Allow only dirty files
-        JNZ     OKRET1                          ;can't close if I/O device, or not writen
+        JNZ     OKRET1                          ;can't close if I/O device, or not written
         MOV     AL,[DI]                         ;Get physical unit number
         DEC     AL                              ;Make zero = drive A
         MOV     AH,1                            ;Look for dirty buffer
@@ -1493,7 +1493,7 @@ SETUP:
 ;       [DSKERR] = 0 (no errors yet)
 ;       [TRANS] = 0 (No transfers yet)
 ;       [THISDRV] = Physical drive unit number
-; If SETUP detects no records will be transfered, it returns 1 level up 
+; If SETUP detects no records will be transferred, it returns 1 level up 
 ; with CX = 0.
 
         PUSH    AX
@@ -1591,7 +1591,7 @@ BREAKDOWN:
 ;       DS = CS
 ;       CX = Length of disk transfer in bytes
 ;       BP = Base of drive parameters
-;       [BYTSECPOS] = Byte position witin first sector
+;       [BYTSECPOS] = Byte position within first sector
 ;Outputs:
 ;       [BYTCNT1] = Bytes to transfer in first sector
 ;       [SECCNT] = No. of whole sectors to transfer
@@ -1744,7 +1744,7 @@ BUFWRT:
         MOV     [SECPOS],AX
         CMP     AX,[VALSEC]     ;Has sector been written before?
         MOV     AL,1
-        JA      NOREAD          ;Skip preread if SECPOS>VALSEC
+        JA      NOREAD          ;Skip pre read if SECPOS>VALSEC
         MOV     AL,0
 NOREAD:
         CALL    BUFSEC
@@ -1921,7 +1921,7 @@ RDLP:
         CALL DREAD
         POPF                    ;Restore carry flag
         POP     DI              ;Initial transfer address
-        POP     AX              ;First sector transfered
+        POP     AX              ;First sector transferred
         POP     DS
         JC      NOTBUFFED       ;Was one of those sectors in the buffer?
         CMP     BYTE PTR [DIRTYBUF],0   ;Is buffer dirty?
@@ -1956,7 +1956,7 @@ SETFCB:
         MOV     SI,[FCB]
         MOV     AX,[NEXTADD]
         MOV     DI,AX
-        SUB     AX,[DMAADD]     ;Number of bytes transfered
+        SUB     AX,[DMAADD]     ;Number of bytes transferred
         XOR     DX,DX
         MOV     CX,ES:[SI.RECSIZ]
         DIV     CX              ;Number of records
@@ -1964,7 +1964,7 @@ SETFCB:
         JZ      FULLREC
         MOV     BYTE PTR [DSKERR],1
         OR      DX,DX
-        JZ      FULLREC         ;If remainder 0, then full record transfered
+        JZ      FULLREC         ;If remainder 0, then full record transferred
         MOV     BYTE PTR [DSKERR],3     ;Flag partial last record
         SUB     CX,DX           ;Bytes left in last record
         PUSH    ES
@@ -2109,7 +2109,7 @@ NORNDUP:
         MOV     [CLUSNUM],BX
         MOV     [LASTPOS],DX
         SUB     AX,DX           ;Last cluster minus current cluster
-        JZ      DOWRT           ;If we have last clus, we must have first
+        JZ      DOWRT           ;If we have last cluster we must have first
         JCXZ    HAVSTART        ;See if no more data
         PUSH    CX              ;No. of clusters short of first
         MOV     CX,AX
@@ -2144,7 +2144,7 @@ WRTLP:
         CALL    OPTIMIZE
         JC      NOTINBUF        ;Is one of the sectors buffered?
         MOV     [BUFSECNO],0    ;If so, invalidate the buffer since we're
-        MOV     WORD PTR [BUFDRVNO],0FFH        ;       completely rewritting it
+        MOV     WORD PTR [BUFDRVNO],0FFH        ;       completely rewriting it
 NOTINBUF:
         PUSH    DI
         PUSH    AX
@@ -2285,7 +2285,7 @@ FINCLUS:
         POP     DX              ;Starting cluster
         SUB     BX,DX           ;Number of new clusters accessed
         ADD     [LASTPOS],BX
-        POP     BX              ;BL = sector postion within cluster
+        POP     BX              ;BL = sector position within cluster
         CALL    FIGREC
         MOV     BX,SI
 ;Now let's see if any of these sectors are already in the buffer
@@ -2581,7 +2581,7 @@ FILESIZE: ;System call 35
         MOV     CX,128
 RECOK:
         XOR     AX,AX
-        XOR     DX,DX           ;Intialize size to zero
+        XOR     DX,DX           ;Initialize size to zero
         OR      BH,BH           ;Check for named I/O device
         JS      DEVSIZ
         INC     SI
@@ -3197,7 +3197,7 @@ EXTBIT  EQU     8
 DEFDRV:
         INC     DI
         MOV     CX,8
-        TEST    AL,NAMBIT       ;Use current name fiels as defualt?
+        TEST    AL,NAMBIT       ;Use current name fields as default?
         XCHG    AX,BX           ;Save bits in BX
         MOV     AL," "
         JZ      FILLB           ;If not, go fill with blanks
@@ -3695,7 +3695,7 @@ CONTSTK DW      ?
 SECCLUSPOS DB   ?       ;Position of first sector within cluster
 DSKERR  DB      ?
 TRANS   DB      ?
-PREREAD DB      ?       ;0 means preread; 1 means optional
+PREREAD DB      ?       ;0 means pre read; 1 means optional
 READOP  DB      ?
 THISDRV DB      ?
 

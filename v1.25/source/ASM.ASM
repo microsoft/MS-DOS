@@ -105,7 +105,7 @@ L0000:
 	MOV	AH,80H
 NOPRN:
 	MOV	[LSTFCB],AL
-	MOV	[LSTDEV],AH	;Flag device for list ouput
+	MOV	[LSTDEV],AH	;Flag device for list output
 	MOV	SI,EXTEND
 	MOV	DI,FCB+9
 	MOVW
@@ -665,7 +665,7 @@ BXJ:
 PAREN:
 	CALL	GETSYM		;Eat the "("
 	CALL	EXPRESSION
-	CMP	B,[SYM],")"	;Better have closing paren
+  CMP	B,[SYM],")"	;Better have closing parenthesis
 	MOV	CL,20
 	JNZ	ERR30
 	RET
@@ -2389,7 +2389,7 @@ OBJBT:
 	JP	NEXBT
 
 FIXUP:
-;Either a word or byte fixup is needed from a forward reference
+;Either a word or byte fix up is needed from a forward reference
 	LODW			;Get pointer to symbol
 	XCHG	AX,BX
 	LODW			;Get constant part
@@ -2399,7 +2399,7 @@ FIXUP:
 	MOV	B,[ERR],100	;Undefined - flag error
 	XOR	AX,AX
 HAVDEF:
-	OR	CL,CL		;See if word or byte fixup
+	OR	CL,CL		;See if word or byte fix up
 	JS	DEFBYT
 	STOW
 	JP	NEXBT
@@ -2443,7 +2443,7 @@ EMARK:
 	AND	AH,0FEH		;Reset error indicator
 	OR	AL,[ERR]	;See if any errors on this line
 	JZ	NOERR
-	OR	AH,1		;Send line to console if error occured
+	OR	AH,1		;Send line to console if error occurred
 NOERR:
 	MOV	[LSTDEV],AH
 	MOV	CX,DI
@@ -2475,7 +2475,7 @@ NOFIL:
 	CALL	REPERR
 	POP	SI
 	POP	CX
-	MOV	AL,[SPC]	;Any special funtion?
+	MOV	AL,[SPC]	;Any special function?
 	OR	AL,AL
 	JNZ	SPCFUN
 	JMP	FIXLINE
@@ -2509,7 +2509,7 @@ DPUT:
 	JMP	FIXLINE
 
 OUTLIN:
-;Copy the source line to the ouput device. Line will be preceded by
+;Copy the source line to the output device. Line will be preceded by
 ;assembler-generated line number. This routine may be called several times
 ;on one line (once for each line of object code bytes), so it sets a flag
 ;so the line will only be output on the first call.

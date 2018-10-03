@@ -41,7 +41,7 @@ GETOFF:
 GETOFF1:
 	CALL	HEXCHK		;Check for valid hex character
 	JC	HAVOFF		;No offset if not valid
-	XOR	BX,BX		;Intialize offset sum to 0
+	XOR	BX,BX		;Initialize offset sum to 0
 CONVOFF:
 	SHL	BX,CL		;Multiply current sum by 16
 	OR	BL,AL		;Add in current hex digit

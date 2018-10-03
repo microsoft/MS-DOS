@@ -703,7 +703,7 @@ RDPARM:
         JZ      RDBAT
         STOSB           ;To transient segment
         MOV     DL,AL
-        INT     33              ;Display paramters too
+        INT     33              ;Display parameters too
         JMP     SHORT RDPARM
 
 PROMPTBAT:
@@ -866,7 +866,7 @@ FINDCOM:
         CMP     [CHKDRV],0
         JZ      NOCHECK
         MOV     AL,[PARM1]
-        OR      AL,[PARM2]      ;Check if either parm. had invalid drive
+        OR      AL,[PARM2]      ;Check if either parameter had invalid drive
         CMP     AL,-1
         JZ      DRVBAD
 NOCHECK:CALL    DX
@@ -1336,8 +1336,8 @@ SCANNAM:
         JNZ     SCANNAM
 GETDEST:
         MOV     DI,OFFSET TRANGROUP:DEST
-        MOV     BX,BP                   ;Remeber switches so far
-        XOR     BP,BP                   ;Must have dest. swtiches alone
+        MOV     BX,BP                   ;Remember switches so far
+        XOR     BP,BP                   ;Must have destination switches alone
         CALL    PARSNAM
         MOV     [ARG2S],BP              ;Remember switches on destination
         JNZ     HAVDESTNAM              ;File name present?
@@ -1952,7 +1952,7 @@ INLINE:
         LODSB
         CMP     AL,BL
         JZ      NEXT
-        CMP     BL,":"          ;Is it a date seperator?
+        CMP     BL,":"          ;Is it a date separator?
         JNZ     DATESEP
         DEC     SI
         MOV     DL,0
