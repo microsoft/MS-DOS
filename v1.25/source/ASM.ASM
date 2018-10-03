@@ -2976,8 +2976,8 @@ NONE:	DB	0
 
 ; 8086 MNEMONIC TABLE
 
-; This table is actually a sequence of sub tables, each starting with a label.
-; The label signifies which mnemonics the sub table applies to--A3, for example,
+; This table is actually a sequence of subtables, each starting with a label.
+; The label signifies which mnemonics the subtable applies to--A3, for example,
 ; means all 3-letter mnemonics beginning with A.
 
 A3:
