@@ -9,7 +9,7 @@ These are the same files [originally shared at the Computer History Museum on Ma
 All files within this repo are released under the [MIT (OSI) License]( https://en.wikipedia.org/wiki/MIT_License) as per the [LICENSE file](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) stored in the root of this repo.
 
 # Contribute!
-The source files in this repo are for historical reference and will be kept static, so please don’t send Pull Requests suggesting any modifications to the source files, but feel free to fork this repo and experiment 😊.  
+The source files in this repo are for historical reference and will be kept static, so please **don’t send** Pull Requests suggesting any modifications to the source files, but feel free to fork this repo and experiment 😊.  
 
 If, however, you’d like to submit additional non-source content or modifications to non-source files (e.g., this README), please submit via PR, and we’ll review and consider.
 
