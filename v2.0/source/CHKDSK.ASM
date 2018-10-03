@@ -1,7 +1,9 @@
 TITLE   CHKDSK - MS-DOS Disk consistancy checker
 
 ; CHKDSK        Version 2.30
-; Verifies and repairs MS-DOS disk directory.
+
+; Verifies MS-DOS disk directory.
+; Repairs MS-DOS disk directory.
 
 
 ; To build CHKDSK you need three modules:
@@ -898,4 +900,4 @@ GOTNAME:
 
 CODE    ENDS
         END     CHKDSK
-                                                                                                           
+
