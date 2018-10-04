@@ -9,7 +9,7 @@ Estos son los mismos archivos [originalmente compartidos al Museo Histórico de 
 Todos los archivos contenidos en este repositorio fueron liberados bajo la [Licencia MIT (OSI)](https://es.wikipedia.org/wiki/Licencia_MIT) según el [archivo de Licencia](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) almacenado en la raíz de este repositorio.
 
 # ¡Contribuye!
-Los archivos fuente en este repositorio son para referencia histórica y permanecerán estáticos, así que por favor no hagas *pull requests* sugiriendo modificación alguna a los archivos de código fuente, pero sientete libre de bifurcar (fork) y experimentar 😊. 
+Los archivos fuente en este repositorio son para referencia histórica y permanecerán estáticos, así que por favor no envíes peticiones de cambio (pull requests) sugiriendo modificación alguna a los archivos de código fuente, pero sientete libre de bifurcar (fork) y experimentar 😊. 
 
 Sin embargo, si deseas enviar contenido adicional que no sea código o modificaciones a archivos que no sean de código fuente (por ejemplo, este archivo README), envíe una petición (PR) y lo revisaremos y consideraremos.
 
