@@ -13,4 +13,4 @@
 
 तथापि, जर आपण नॉन-स्त्रोत फायलींसाठी अतिरिक्त नॉन-सोर्स सामग्री किंवा सुधारणा सबमिट करू इच्छित असाल (उदा. हे README), कृपया पीआर द्वारे सबमिट करा आणि आम्ही पुनरावलोकन आणि विचार करू.
 
-या प्रकल्पाने [मायक्रोसॉफ्ट ओपन सोर्स आचारसंहिता] स्वीकारली आहे(https://opensource.microsoft.com/codeofconduct/).  अधिक माहितीसाठी [आचारसंहिता वारंवार विचारले जाणारे प्रश्न](https://opensource.microsoft.com/codeofconduct/faq/) किंवा संपर्क [opencode@microsoft.com](mailto:opencode@microsoft.com)कोणत्याही अतिरिक्त प्रश्न किंवा टिप्पण्यांसह.
+या प्रकल्पाने [मायक्रोसॉफ्ट ओपन सोर्स आचारसंहिता] स्वीकारली आहे(https://opensource.microsoft.com/codeofconduct/).  अधिक माहितीसाठी [आचारसंहिता वारंवार विचारले जाणारे प्रश्न] (https://opensource.microsoft.com/codeofconduct/faq/) किंवा संपर्क [opencode@microsoft.com]       (mailto:opencode@microsoft.com) कोणत्याही अतिरिक्त प्रश्न किंवा टिप्पण्यांसह.
