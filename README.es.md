@@ -6,7 +6,7 @@ Este repositorio contiene el código fuente original y binarios compilados para 
 Estos son los mismos archivos [originalmente compartidos al Museo Histórico de Ordenadores en Marzo 25 de 2014]( http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) y están siendo (re)publicados en este repositorio para que puedan ser encontrados mas fácilmente, referenciados en escritos y trabajos externos, y permitir la exploración y experimentación para aquellos interesados en sistemas operativos para PC tempranos.
 
 # Licencia 
-Todos los archivos contenidos en este repositorio fueron liberados bajo la [Licencia MIT (OSI)](https://es.wikipedia.org/wiki/Licencia_MIT) según el [archivo de Licencia](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) almacenado en la raíz de este repositorio.
+Todos los archivos contenidos en este repositorio fueron liberados bajo la [Licencia MIT (OSI)](https://es.wikipedia.org/wiki/Licencia_MIT) según el [archivo de Licencia](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.es.md) almacenado en la raíz de este repositorio.
 
 # ¡Contribuye!
 Los archivos fuente en este repositorio son para referencia histórica y permanecerán estáticos, así que por favor no envíes peticiones de cambio (pull requests) sugiriendo modificación alguna a los archivos de código fuente, pero sientete libre de bifurcar (fork) y experimentar 😊. 
