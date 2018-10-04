@@ -8,9 +8,9 @@ Estos son los mismos archivos [originalmente compartidos al Museo Histórico de 
 # Licencia 
 Todos los archivos contenidos en este repositorio fueron liberados bajo la [Licencia MIT (OSI)](https://es.wikipedia.org/wiki/Licencia_MIT) según el [archivo de Licencia](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) almacenado en la raíz de este repositorio.
 
-# Contribuye!
+# ¡Contribuye!
 Los archivos fuente en este repositorio son para referencia histórica y permanecerán estáticos, así que por favor no hagas *pull requests* sugiriendo modificación alguna a los archivos de código fuente, pero sientete libre de bifurcar (fork) y experimentar 😊. 
 
-Sin embargo, si desea enviar contenido adicional que no sea de origen o modificaciones a archivos que no sean de fuente (por ejemplo, este archivo README), envíe una petición (PR) y lo revisaremos y consideraremos.
+Sin embargo, si deseas enviar contenido adicional que no sea código o modificaciones a archivos que no sean de código fuente (por ejemplo, este archivo README), envíe una petición (PR) y lo revisaremos y consideraremos.
 
-Este proyecto a adaptado el [Código de conducta de Microsoft Open Source](https://opensource.microsoft.com/codeofconduct/). Para mas información ver el [FAQ del Codigo de Conducta](https://opensource.microsoft.com/codeofconduct/faq/) o contacta [opencode@microsoft.com](mailto:opencode@microsoft.com) con cualquier pregunta o comentario adicional.
+Este proyecto a adoptado el [Código de conducta de Microsoft Open Source (en inglés)](https://opensource.microsoft.com/codeofconduct/). Para mas información consulta las [Preguntas frecuentes del Codigo de Conducta (en inglés)](https://opensource.microsoft.com/codeofconduct/faq/) o contacta [opencode@microsoft.com](mailto:opencode@microsoft.com) con cualquier pregunta o comentario adicional.
