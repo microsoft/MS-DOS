@@ -12,4 +12,4 @@ I file di origine in questo repository sono di riferimento storico e verranno ma
 
 Se, tuttavia, desideri inviare ulteriori contenuti non di origine o modifiche a file non di origine (esempio, questo README), si prega di inviare tramite PR, e esamineremo e prenderemo in considerazione.
 
-Questo progetto ha adottato il [Codice di Condotta Microsoft Open Source] (https://opensource.microsoft.com/codeofconduct/).  Per maggiori informazioni vedi il [Codice di condotta FAQ](https://opensource.microsoft.com/codeofconduct/faq/) o contatto [opencode@microsoft.com](mailto:opencode@microsoft.com) con eventuali aggiuntivi domande o commenti .
+Questo progetto ha adottato il [Codice di Condotta Microsoft Open Source] (https://opensource.microsoft.com/codeofconduct/).  Per maggiori informazioni vedi il [Codice di condotta FAQ] (https://opensource.microsoft.com/codeofconduct/faq/) o contatto [opencode@microsoft.com](mailto:opencode@microsoft.com) con eventuali aggiuntivi domande o commenti .
