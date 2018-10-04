@@ -9,8 +9,8 @@ Estos son los mismos archivos [originalmente compartidos en el Museo de la histo
 Todos los archivos dentro de este repo están lanzados bajo la [Licencia MIT (OSI)]( https://es.wikipedia.org/wiki/Licencia_MIT) según el [archivo LICENCIA](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) almacenados en la raíz de este repo.
 
 # Contribuye!
-Los archivos fuentes en este repo son para referencia histórica y se mantendran inactivos, así que **no envies** Pull Requests sugiriendo cualquier modificación a los archivos fuentes, pero siéntete libre de hacer un fork de este repo y experimentar 😊.  
+Los archivos fuentes en este repo son para referencia histórica y se mantendran inactivos, así que **no envíes** Pull Requests sugiriendo cualquier modificación a los archivos fuentes, pero siéntete libre de hacer un fork de este repo y experimentar 😊.  
 
 Si, sin embargo, tu quieres enviar contenido no-fuente adicional o modificaciones a archivos no-fuente (ej., este LÉEME), por favor envíalo via PR, y los revisaremos y consideraremos.
 
-Este proyecto ha adoptado la [Conducta de código abierto de Microsoft](https://opensource.microsoft.com/codeofconduct/).  Para mas información vea [FAQ del Código de Conducta](https://opensource.microsoft.com/codeofconduct/faq/) o contacta a [opencode@microsoft.com](mailto:opencode@microsoft.com) con cualquier pregunta o comentario adicional.
+Este proyecto ha adoptado la [Conducta de Código Abierto de Microsoft](https://opensource.microsoft.com/codeofconduct/).  Para mas información vea [FAQ del Código de Conducta](https://opensource.microsoft.com/codeofconduct/faq/) o contacta a [opencode@microsoft.com](mailto:opencode@microsoft.com) con cualquier pregunta o comentario adicional.
