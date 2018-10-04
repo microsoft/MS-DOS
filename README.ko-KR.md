@@ -1,4 +1,4 @@
-<img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="https://github.com/Microsoft/MS-DOS/blob/master/msdos-logo.png">   
+<img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="https://github.com/Microsoft/MS-DOS/blob/master/msdos-logo.png">
 
 # MS-DOS v1.25 와 v2.0 소스 코드
 이 레포지토리는 MS-DOS v1.25와 v2.0의 원본 소스코드와 컴파일된 바이너리를 포함하고 있습니다.
