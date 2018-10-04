@@ -9,7 +9,7 @@ PAGE
 ;           Chris Peters (BIOS) (ret.)
 
 ; ****************** Revision History *************************
-;          >> EVERY change must noted below!! <<
+;          >> EVERY change must be noted below!! <<
 ;
 ; 0.34 12/29/80 General release, updating all past customers
 ; 0.42 02/25/81 32-byte directory entries added
