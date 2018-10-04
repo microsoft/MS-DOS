@@ -1,6 +1,6 @@
 <img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="https://github.com/Microsoft/MS-DOS/blob/master/msdos-logo.png">   
 
-# Codigo Fuente de MS-DOS v1.25 y v2.0 
+# Código Fuente de MS-DOS v1.25 y v2.0 
 Este repositorio contiene el código fuente original y binarios compilados para MS-DOS v1.25 y MS-DOS v2.0.
 
 Estos son los mismos archivos [originalmente compartidos al Museo Histórico de Ordenadores en Marzo 25 de 2014]( http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) y están siendo (re)publicados en este repositorio para que puedan ser encontrados mas fácilmente, referenciados en escritos y trabajos externos, y permitir la exploración y experimentación para aquellos interesados en sistemas operativos para PC tempranos.
@@ -13,4 +13,4 @@ Los archivos fuente en este repositorio son para referencia histórica y permane
 
 Sin embargo, si deseas enviar contenido adicional que no sea código o modificaciones a archivos que no sean de código fuente (por ejemplo, este archivo README), envíe una petición (PR) y lo revisaremos y consideraremos.
 
-Este proyecto a adoptado el [Código de conducta de Microsoft Open Source (en inglés)](https://opensource.microsoft.com/codeofconduct/). Para mas información consulta las [Preguntas frecuentes del Codigo de Conducta (en inglés)](https://opensource.microsoft.com/codeofconduct/faq/) o contacta [opencode@microsoft.com](mailto:opencode@microsoft.com) con cualquier pregunta o comentario adicional.
+Este proyecto a adoptado el [Código de conducta de Microsoft Open Source (en inglés)](https://opensource.microsoft.com/codeofconduct/). Para mas información consulta las [Preguntas frecuentes del Código de Conducta (en inglés)](https://opensource.microsoft.com/codeofconduct/faq/) o contacta [opencode@microsoft.com](mailto:opencode@microsoft.com) con cualquier pregunta o comentario adicional.
