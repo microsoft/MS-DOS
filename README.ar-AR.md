@@ -1,8 +1,8 @@
-<img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="https://github.com/Microsoft/MS-DOS/blob/master/msdos-logo.png">   
+﻿<img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="https://github.com/Microsoft/MS-DOS/blob/master/msdos-logo.png">   
 
 # بالنسخة ١.٢٥ و ٢.٠ MS-DOS الكود المصدري لـ
 
-MS-DOS هذي المجموعة تحتوي على الكود المصدري الأصلي و الملفات الثنائية التي تم جمعها للنسخة١.٢٥ والنسخة ٢.٠ من
+MS-DOS هذه المجموعة تحتوي على الكود المصدري الأصلي و الملفات الثنائية التي تم جمعها للنسخة١.٢٥ والنسخة ٢.٠ من
 
 
  هذه نفس الملفات [التي تم عرضها في متحف تاريخ الحاسب الألي في ٢٥ مارس، ٢٠١٤](http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/)
