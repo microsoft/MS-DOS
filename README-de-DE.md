@@ -11,6 +11,6 @@ Alle veröffentlichte Dateien innerhalb dieses Repos sind unter der [MIT (OSI) L
 # Beitragen!
 Die Quelldateien in diesem Repo dienen der historischen Referenz und bleiben statisch. Bitte **senden Sie keine** Pull Requests, in denen Änderungen an den Quelldateien vorgeschlagen werden 😊.  
 
-Wenn Sie jedoch zusätzliche Inhalte ohne Quellcode oder Änderungen an Nicht-Quelldateien (z. B. diese README-Datei) einreichen möchten, senden Sie sie bitte einen PR, und wir prüfen diese.
+Wenn Sie jedoch zusätzliche Inhalte ohne Quellcode oder Änderungen an Nicht-Quelldateien (z. B. diese README-Datei) einreichen möchten, senden Sie sie bitte per PR, und wir prüfen diese.
 
 Dieses Projekt hat die [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).  Weitere Informationen finden Sie unter [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) oder Kontaktieren Sie [opencode@microsoft.com](mailto:opencode@microsoft.com) mit allen zusätzlichen Fragen oder Anmerkungen.
