@@ -1,4 +1,4 @@
-<img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="https://github.com/Microsoft/MS-DOS/blob/master/msdos-logo.png">   
+<img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="https://github.com/Microsoft/MS-DOS/blob/master/msdos-logo.png">
 
 # Πηγαίος Κώδικας του MS-DOS v1.25 και v2.0
 Αυτό το ταμείο κώδικα περιέχει τον πρωτότυπο πηγαίο-κώδικα και τα απανθισμένα δυαδικά αρχεία για το MS-DOS v1.25 και το MS-DOS v2.0.

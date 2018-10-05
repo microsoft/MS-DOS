@@ -1,4 +1,4 @@
-<img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="https://github.com/Microsoft/MS-DOS/blob/master/msdos-logo.png">   
+<img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="https://github.com/Microsoft/MS-DOS/blob/master/msdos-logo.png">
 
 # Codice Sorgente di MS-DOS v1.25 e v2.0
 Questo repository contiene il codice sorgente originale e i binari compilati per MS-DOS v1.25 e MS-DOS v2.0.
