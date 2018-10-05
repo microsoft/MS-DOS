@@ -9,7 +9,7 @@ Estes são os mesmos ficheiros [partilhados originalmente no Museu da História 
 Todos os ficheiros deste repositório estão lançados sob a [Licença MIT (OSI)](https://pt.wikipedia.org/wiki/Licen%C3%A7a_MIT) como descrito no [ficheiro LICENSE](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) presente na raiz deste repositório.
 
 # Contribua!
-Os ficheiros de código fonte deste repositório são para referência histórica, logo não serão alterados. Deste modo, pedimos que não envie Pull Requests a sugerir quaisquer tipo de alterações a estes ficheiros, mas sinta-se à vontade de fazer um fork deste repositório e fazer alterações 😊.
+Os ficheiros de código fonte deste repositório são para referência histórica, logo não serão alterados. Deste modo, pedimos que não envie Pull Requests a sugerir quaisquer tipo de alterações a estes ficheiros, mas não hesite em dar fork a este repositório e fazer alterações 😊.
 
 Se, no entanto, quiser submeter ficheiros adicionais ou modificações a ficheiros não relacionados com o código fonte (por exemplo: este README), sinta-se à vontade de as submeter via PR, será revisto e considerado.
 
