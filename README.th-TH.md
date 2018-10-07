@@ -14,4 +14,4 @@
 
 อย่างไรก็ตามหากคุณต้องการส่งเนื้อหาที่ไม่ใช่ซอร์สโค้ด หรือเพิ่มเติมหรือการแก้ไขไฟล์ที่ไม่ใช่ซอร์สโค้ด (เช่น README นี้) โปรดส่งผ่าน คำร้องขอ(PR) เราจะตรวจสอบและพิจารณา
 
-โครงการนี้ได้นำเอา [จรรยาบรรณการการเปิดเผยซอร์สโค้ดของ Microsoft](https://opensource.microsoft.com/codeofconduct/). สำหรับข้อมูลเพิ่มเติมโปรดดูที่ [หลักเกณฑ์ในการปฏิบัติตามข้อกำหนดในการปฏิบัติงาน](https://opensource.microsoft.com/codeofconduct/faq/) หรือ ติดต่อ [opencode@microsoft.com](mailto:opencode@microsoft.com) หากมีคำถามหรือข้อคิดเห็นเพิ่มเติม
+โครงการนี้ได้นำเอา [จรรยาบรรณการเปิดเผยซอร์สโค้ดของ Microsoft](https://opensource.microsoft.com/codeofconduct/). สำหรับข้อมูลเพิ่มเติมโปรดดูที่ [หลักเกณฑ์ในการปฏิบัติตามข้อกำหนดในการปฏิบัติงาน](https://opensource.microsoft.com/codeofconduct/faq/) หรือ ติดต่อ [opencode@microsoft.com](mailto:opencode@microsoft.com) หากมีคำถามหรือข้อคิดเห็นเพิ่มเติม
