@@ -8,7 +8,7 @@ Ang mga ito ay ang kaparehong mga file [na orihinal na ibinahagi sa Computer His
 # Lisensya
 Ang lahat ng mga file sa loob ng repo na ito ay inilabas sa ilalim ng [Lisensya ng MIT (OSI)]( https://en.wikipedia.org/wiki/MIT_License) ayon sa [LICENSE file](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) na nakaimbak sa loob ng repo na ito.
 
-# Contribute!
+# Mag-ambag!
 Ang source files sa repo na ito ay para sa makasaysayang sanggunian at walang pagbabagong gagawin, kaya mangyari sana **huwag magpadala** ng Pull Requests na nagmumungkahi sa pagbabago ng mga source files, ngunit huwag mag-atubiling i-fork ang repo at mageksperimonto 😊.
 
 Kung, gayunpaman, at nais mong magsumite ng karagdagang hindi pinagmulan na nilalaman o mga pagbabago sa mga di-pinagmulang mga file (hal., Ang README na ito), mangyaring isumite sa pamamagitan ng PR, at susuriin namin at isaalang-alang namin.
