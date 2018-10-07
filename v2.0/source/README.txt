@@ -2,7 +2,7 @@
 
 
 The 2.0 Release of MSDOS includes five 5 1/4 double density single sided
-diskettes or three 8 iinch CP/M 80 format diskettes.
+diskettes or three 8 inch CP/M 80 format diskettes.
 
 The software/documentation on the five inch diskettes is arranged
 as follows:
