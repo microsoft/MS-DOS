@@ -1,0 +1,14 @@
+# קוד מקור של MS-DOS v1.25 ו- v2.0
+מאגר זה מכיל את קוד המקור המקורי ואת הקבצים הבינאריים הידור של MS-DOS v1.25 ו- MS-DOS v2.0.
+
+אלה הם אותם קבצים כמו [בתחילה שיתפו במוזיאון לתולדות המחשב 25 במרץ, 2014] (http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) והם (מחדש) שפורסם ביום ההפקדה הזו כדי להפוך אותם לנגישים יותר וקל יותר להפנות בעבודה או מאמרים חיצוניים כדי לאפשר חקרנות עבור אנשים המעוניינים בדורות הראשונים של מערכות הפעלה למחשב.
+
+# רישיון
+כל הקבצים במאגר זה נעשים זמינים על פי [רישיון MIT (OSI)] (https://en.wikipedia.org/wiki/Licence_MIT) בהסכם עם [קובץ הרישיון] (https://github.com /Microsoft/MS-DOS/blob/master/LICENSE.md) מאוחסן השורש של הפקדה זו.
+
+# לתרום!
+קבצי המקור של פיקדון זה זמינים לעיון היסטורי לא שונו, לכן אתה מוזמן לשלוח ** לא ** בקשות Pull הצעת שינויי קבצי המקור, אבל forkez הפיקדון והניסיון הזה 😊 .
+
+עם זאת, אם אתה רוצה להגיש תוכן נוסף או שינויים בקבצים אחרים מאשר המקור, (למשל README), להגיש באמצעות יחסי הציבור, נסקור ולקחת בחשבון.
+
+הפרויקט אימץ את [קוד מקור פתוח מיקרוסופט ההתנהגות] (https://opensource.microsoft.com/codeofconduct/). לקבלת מידע נוסף, ראה [קוד FAQ ההתנהגות] (https://opensource.microsoft.com/codeofconduct/faq/) או מגע [opencode@microsoft.com] (mailto: opencode@microsoft.com) עם כל שאלה נוספת או תגובה.
