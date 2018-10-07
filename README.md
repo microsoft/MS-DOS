@@ -1,16 +1,16 @@
 <img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="https://github.com/Microsoft/MS-DOS/blob/master/msdos-logo.png">   
 
 # MS-DOS v1.25 and v2.0 Source Code
-This repo contains the original source-code and compiled binaries for MS-DOS v1.25 and MS-DOS v2.0.
+このレポには、MS-DOS v1.25およびMS-DOS v2.0用の元のソースコードとコンパイル済みバイナリが含まれています。
 
-These are the same files [originally shared at the Computer History Museum on March 25th, 2014]( http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) and are being (re)published in this repo to make them easier to find, reference-to in external writing and works, and to allow exploration and experimentation for those interested in early PC Operating Systems.  
+これらは、もともとコンピュータ歴史博物館で2014年3月25日に共有された同じファイルで、外部の執筆や作品の参照、検索や実験を容易にするためにこのレポで公開されています。初期のPCオペレーティングシステムに興味のある人。
 
-# License
-All files within this repo are released under the [MIT (OSI) License]( https://en.wikipedia.org/wiki/MIT_License) as per the [LICENSE file](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) stored in the root of this repo.
+ライセンス
+このレポ内のすべてのファイルは、このレポのルートに格納されているLICENSEファイルに従って、MIT（OSI）ライセンスで公開されます。
 
-# Contribute!
-The source files in this repo are for historical reference and will be kept static, so please **don’t send** Pull Requests suggesting any modifications to the source files, but feel free to fork this repo and experiment 😊.  
+寄稿する！
+このレポのソースファイルは履歴参照用のものであり、静的に保たれるため、ソースファイルの変更を提案するプルリクエストを送信しないでください。ただし、このレポをフォークして試してみてください。
 
-If, however, you’d like to submit additional non-source content or modifications to non-source files (e.g., this README), please submit via PR, and we’ll review and consider.
+ただし、ソース以外のコンテンツやソースファイル以外のファイル（例：このREADME）を追加して提出する場合は、PRを通じて提出してください。審査と検討を行います。
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).  For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+このプロジェクトは、Microsoft Open Source Code of Conductを採用しました。詳細については、「行動規範FAQ」を参照するか、その他のご質問やご意見があればopencode@microsoft.comまでお問い合わせください。
