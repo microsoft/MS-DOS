@@ -6,7 +6,7 @@ TITLE   CHKDSK - MS-DOS Disk consistancy checker
 
 ; To build CHKDSK you need three modules:
 ; CHKDSK CHKPROC CHKMES
-; They should be linked the that order as well.
+; They should be linked in that order as well.
 
 
 ; REVISION HISTORY
@@ -898,4 +898,4 @@ GOTNAME:
 
 CODE    ENDS
         END     CHKDSK
-                                                                                                           
+
