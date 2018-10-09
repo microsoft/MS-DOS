@@ -3,7 +3,7 @@
 # Código Fonte do MS-DOS v1.25 e v2.0
 Este repositório contém o código fonte original e os binários compilados do MS-DOS v1.25 e MS-DOS v2.0.
 
-Estes são os mesmos ficheiros [orinalmente partilhados no Museu da História da Computação em 25 de Março de 2014]( http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) e estão a ser (re)publicados neste repositório de forma a serem fáceis de encontrar, referenciar em artigos e trabalhos externos e também para permitir aos interessados nos primordios dos Sistemas Operativos de PC, que explorem e experimentem.
+Estes são os mesmos ficheiros [originalmente partilhados no Museu da História da Computação em 25 de Março de 2014]( http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) e estão a ser (re)publicados neste repositório de forma a serem fáceis de encontrar, referenciar em artigos e trabalhos externos e também para permitir aos interessados nos primordios dos Sistemas Operativos de PC, que explorem e experimentem.
 
 # Licença
 Todos os ficheiros neste repositório estão publicados sob a [Licença do MIT (OSI)]( https://en.wikipedia.org/wiki/MIT_License) bem como o [ficheiros de LICENÇA](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) localizado na raiz deste repositório.
