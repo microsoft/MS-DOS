@@ -11,6 +11,6 @@ Tots els fitxers dintre d'aquest repositori estan alliberats sota la [Llicència
 # Contribueix!
 Els fitxers font en aquest repositori son per referència històrica i es mantindran estàtics, així que, si us plau, no envieu Pull Requests suggerint qualsevol modificació als arxius font, però sé lliure de duplicar aquest repositori i experimentar 😊.  
 
-Però, si dessitges enviar contingut adicional que no sigui d'origen o modificacions a arxius que no siguin de font (per exemple, aquest arxiu README), si us plau envia un PR, i ho revisarem i considerarem.
+Però, si desitges enviar contingut adicional que no sigui d'origen o modificacions a arxius que no siguin de font (per exemple, aquest arxiu README), si us plau envia un PR, i ho revisarem i considerarem.
 
 Aquest projecte ha adoptat el [Codi de conducta de Microsoft Open Source](https://opensource.microsoft.com/codeofconduct/). Per a més informació mira el [FAQ del Codi de Conducta](https://opensource.microsoft.com/codeofconduct/faq/) o contacta [opencode@microsoft.com](mailto:opencode@microsoft.com) amb qualsevol pregunta o comentari addicional.
