@@ -9,7 +9,7 @@ Hae eaedem sunt tabulae quae [commūnicātae sunt orīgināliter in Mūsēō His
 Omnēs tabulae intrā hunc repositōrium mittuntur sub [MIT (OSI) licentiā](https://en.wikipedia.org/wiki/MIT_License) ut per [LICENSE tabulam](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md), quae invenitur huius repositōriī in orīgine.
 
 # Adde! 
-Tabulae orīginālēs ad historicum ūtendum sunt et remanēbant perpetuae, itaque **nōlī committere** contribūtionēs quae mūtātiōnēs in mandāta orīginālia prōpōnunt, aliquis tamen facere exemplar huius repositōriī potest ac rēs nōvas experītur.
+Tabulae orīginālēs ad historicum ūtendum sunt et remanēbant perpetuae, itaque **nōlī committere** contribūtionēs quae mūtātiōnēs in mandāta computanda orīginālia prōpōnunt, aliquis tamen facere exemplar huius repositōriī potest ac rēs nōvas experītur.
 
 Sī tamen, fortasse cupis mittere plūrēs contribūtiōnēs vel mūtātiōnēs tabulīs quae nōn in mandāta sunt (exemplā grātiā, hoc README), mitte per PR et recensēbimus ac cōgitābimus id.
 
