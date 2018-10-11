@@ -1,9 +1,9 @@
 <img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="https://github.com/Microsoft/MS-DOS/blob/master/msdos-logo.png">   
 
 # MS-DOS v1.25 atque v2.0
-Tenet hoc repositōrium mandāta orīginālia et rēs collectās dē MS-DOS v1.25 ac MS-DOS v2.0.
+Tenet hoc repositōrium mandāta computanda orīginālia et rēs collectās dē MS-DOS v1.25 ac MS-DOS v2.0.
 
-Hae eaedem sunt tabulae quae [commūnicātae sunt orīgināliter in Mūsēō Historiae Rērum Computandārum XXV diē mensis Mārtis, MMXIV annō](http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) et recommūnicantur in hōc repositōriō ut invenīrī facilius eae possint, ut opera externa possint scribī facilius dē eīs, utque liceant facilius explōrātiō et experīmentum aliquibus quī cupiant dē PC systēmate operātiōnis antīquō discere.
+Hae eaedem sunt tabulae quae [commūnicātae sunt orīgināliter in Mūsēō Historiae dē Computandōrum XXV diē mensis Mārtis, MMXIV annō](http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) et recommūnicantur in hōc repositōriō ut invenīrī facilius eae possint, ut opera externa possint scribī facilius dē eīs, utque liceant facilius explōrātiō et experīmentum aliquibus quī cupiant dē PC systēmate operātiōnis antīquō discere.
 
 # Licentia
 Omnēs tabulae intrā hunc repositōrium mittuntur sub [MIT (OSI) licentiā](https://en.wikipedia.org/wiki/MIT_License) ut per [LICENSE tabulam](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md), quae invenitur huius repositōriī in orīgine.
