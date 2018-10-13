@@ -9,8 +9,8 @@ Estos son los mismos archivos [originalmente compartidos al Museo Histórico de 
 Todos los archivos contenidos en este repositorio fueron liberados bajo la [Licencia MIT (OSI)](https://es.wikipedia.org/wiki/Licencia_MIT) según el [archivo de Licencia](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) almacenado en la raíz de este repositorio.
 
 # ¡Contribuye!
-Los archivos fuente en este repositorio son para referencia histórica y permanecerán estáticos, así que por favor no envíes peticiones de cambio (pull requests) sugiriendo modificación alguna a los archivos de código fuente, pero sientete libre de bifurcar (fork) y experimentar 😊. 
+Los archivos fuente en este repositorio son para referencia histórica y permanecerán estáticos, así que por favor no envíes peticiones de cambio (pull requests) sugiriendo modificación alguna a los archivos de código fuente, pero siéntete libre de bifurcar (fork) y experimentar 😊. 
 
-Sin embargo, si deseas enviar contenido adicional que no sea código o modificaciones a archivos que no sean de código fuente (por ejemplo, este archivo README), envíe una petición (PR) y lo revisaremos y consideraremos.
+Sin embargo, si deseas enviar contenido adicional que no sea código o modificaciones a archivos que no sean de código fuente (por ejemplo, este archivo README), envía una petición (PR) y lo revisaremos y consideraremos.
 
-Este proyecto a adoptado el [Código de conducta de Microsoft Open Source (en inglés)](https://opensource.microsoft.com/codeofconduct/). Para mas información consulta las [Preguntas frecuentes del Código de Conducta (en inglés)](https://opensource.microsoft.com/codeofconduct/faq/) o contacta [opencode@microsoft.com](mailto:opencode@microsoft.com) con cualquier pregunta o comentario adicional.
+Este proyecto ha adoptado el [Código de conducta de Microsoft Open Source (en inglés)](https://opensource.microsoft.com/codeofconduct/). Para mas información consulta las [Preguntas frecuentes del Código de Conducta (en inglés)](https://opensource.microsoft.com/codeofconduct/faq/) o contacta [opencode@microsoft.com](mailto:opencode@microsoft.com) con cualquier pregunta o comentario adicional.
