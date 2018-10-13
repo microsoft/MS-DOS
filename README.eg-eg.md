@@ -21,6 +21,6 @@ make changes to the source code, but you can explore and experiment freely in yo
 
 If you wish to send any changes that do not affect the source code (such as this file), send an update request to the codec and it will be reviewed and acknowledged.
 
-[Microsoft policy for dealing with open source software] This project works according ](https://opensource.microsoft.com/codeofconduct/).
+[Microsoft policy for dealing with open source software] This project works according (https://opensource.microsoft.com/codeofconduct/).
 [FAQ on dealing Policy] For more information please visit (https://opensource.microsoft.com/codeofconduct/faq/)  or communicate through
 [opencode@microsoft.com](mailto:opencode@microsoft.com)  For any additional questions or comments
