@@ -11,6 +11,6 @@ Alla filer i detta repo är släppta under [MIT (OSI) licensen]( https://en.wiki
 # Hjälp till!
 Källkodsfilerna i detta repo är för historisk referens och kommer att vara statiska, så var vänlig **skicka inte** en pull request för att ändra något i källkoden, men forka gärna repot och experimentera 😊.
 
-Om du däremot vill skicka in eller ändra på andra filer som inte är källkod (t.ex. denna README), så får du gärna skicka in det via en pull request, så kommer vi att kolla på det.
+Om du däremot vill skicka in eller ändra på andra filer som inte är källkod (t.ex. denna README), så får du gärna skicka in det via en pull request, så kommer vi att se över det.
 
 Det här projektet använder sig av [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). För mer information gå in på [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) eller kontakta (på engelska) [opencode@microsoft.com](mailto:opencode@microsoft.com) med andra frågor eller kommentarer.
