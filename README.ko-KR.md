@@ -1,4 +1,4 @@
-<img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="https://github.com/Microsoft/MS-DOS/blob/master/msdos-logo.png">   
+<img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="https://github.com/Microsoft/MS-DOS/blob/master/msdos-logo.png">
 
 # MS-DOS v1.25 와 v2.0 소스 코드
 이 레포지토리는 MS-DOS v1.25와 v2.0의 원본 소스 코드와 컴파일된 바이너리를 포함하고 있습니다.
@@ -9,7 +9,7 @@
 여기에 있는 모든 파일들은 [LICENSE 파일](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md)에 명시된 대로 [MIT (OSI) 라이선스]( https://en.wikipedia.org/wiki/MIT_License)로 배포됩니다.
 
 # 기여하기!
-여기 있는 소스 코드 파일들은 역사적 사료로서 수정되지 않을 것이니, 제발 어떠한 소스 코드 수정을 포함하는 Pull Request도 **보내지 마시되**, 대신 자유롭게 이 저장소를 포크하여 실험하세요.
+여기 있는 소스 코드 파일들은 역사적 사료로서 수정되지 않을 것이니, 제발 어떠한 소스 코드 수정을 포함하는 Pull Request도 **보내지 마시되**, 대신 자유롭게 이 저장소를 포크하여 실험하세요 😊.
 
 그러나, 만약 (README 파일과 같은) 소스 코드에 영향을 미치지 않은 내용의 추가 및 변경은, Pull Request를 보내주시면, 리뷰와 검토를 통해 반영될 수 있습니다.
 
