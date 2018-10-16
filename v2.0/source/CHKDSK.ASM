@@ -1,4 +1,4 @@
-TITLE   CHKDSK - MS-DOS Disk consistancy checker
+TITLE   CHKDSK - MS-DOS Disk consistency checker
 
 ; CHKDSK        Version 2.30
 ; Verifies and repairs MS-DOS disk directory.
@@ -898,4 +898,5 @@ GOTNAME:
 
 CODE    ENDS
         END     CHKDSK
-                                                                                                           
+������������������������������������������������������������������������������������
+�����������������������
