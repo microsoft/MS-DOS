@@ -16,7 +16,7 @@ TITLE   DEBUGger for MS-DOS
 ;       Parity nonsense by zibo
 ;
 ; REV 2.3
-;       Split into seperate modules to allow for
+;       Split into separate modules to allow for
 ;       assembly on an IBM PC
 ;
 
@@ -835,4 +835,4 @@ ENDIF
 
 CODE    ENDS
         END START
-                                   
+�����������������������������������
