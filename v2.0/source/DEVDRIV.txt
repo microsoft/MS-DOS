@@ -558,7 +558,7 @@ to 0)  in  his  transfer segment, so in this case the last two
 bytes can be ignored).
 
 
-NON DESRUCTIVE READ NO WAIT - ES:BX ->
+NON DESTRUCTIVE READ NO WAIT - ES:BX ->
             +------------------------------------+
             | 13-BYTE Static Request Header      |
             +------------------------------------+
@@ -799,4 +799,4 @@ The  third  byte  is  minutes,  the  fourth  hours,  the fifth
 hundredths of seconds, and the  sixth  seconds.   Reading  the
 CLOCK device  gets  the  date and time, writing to it sets the
 date and time.
-                                                                       
+�����������������������������������������������������������������������
