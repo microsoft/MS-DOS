@@ -9,7 +9,7 @@ Ce sont les mêmes fichiers que [ceux partagés initialement au Computer History
 Tous les fichiers de ce dépôt sont mis à disposition selon la [Licence MIT (OSI)]( https://fr.wikipedia.org/wiki/Licence_MIT) en accord avec le [fichier LICENCE](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) stocké à la racine de ce dépôt.
 
 # Contribuez !
-Les fichiers sources de ce dépôt sont mis à disposition pour référence historique et ne seront pas modifiés, donc s'il vous plait **n'envoyer pas** de Pull Requests suggérant des modifications aux fichiers sources, mais forkez ce dépôt et expérimentez 😊.  
+Les fichiers sources de ce dépôt sont mis à disposition pour référence historique et ne seront pas modifiés, donc s'il vous plait **n'envoyez pas** de Pull Requests suggérant des modifications aux fichiers sources, mais forkez ce dépôt et expérimentez 😊.  
 
 Si, toutefois, vous souhaitiez soumettre du contenu additionel ou des modifications à des fichiers autres que les sources, (par exemple ce README), soumettez via une PR, nous ferons une revue et la prendrons en compte.
 
