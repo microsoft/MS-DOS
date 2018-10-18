@@ -1,4 +1,4 @@
-<div style="direction:rtl">
+<div dir="rtl" style="direction:rtl">
 <img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="https://github.com/Microsoft/MS-DOS/blob/master/msdos-logo.png">   
 
 # سورس کد MS-DOS نسخه های ۱.۲۵ و ۲.۰
@@ -15,4 +15,5 @@
 اگر، با این حال، مایلید که محتوای غیر-منبع اضافی و یا تغییراتی در فایل های غیر-منبع (مانند این فایل توضیحات) ثبت کنید، لطفا آن را با استفاده از یک PR ثبت کنید، و ما آن را بازبینی کرده و در نظر می‌گیریم.
 
 این پروژه تحت مصوبه [ضوابط متن-باز مایکروسافت](https://opensource.microsoft.com/codeofconduct/) است.  برای اطلاعات بیشتر [سوالات متداول ضوابط](https://opensource.microsoft.com/codeofconduct/faq/) را ببینید و یا با ایمیل [opencode@microsoft.com](mailto:opencode@microsoft.com) با هر توضیح اضافه و یا نظری در ارتباط باشید.
+
 </div>
