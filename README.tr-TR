@@ -1,0 +1,16 @@
+<img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="https://github.com/Microsoft/MS-DOS/blob/master/msdos-logo.png">
+
+# MS-DOS v1.25 ve v2.0 Kaynak Kodu
+Bu repo MS-DOS v1.25 ve MS-DOS v2.0'ın orjinal kaynak kodunu ve derlenmiş binarylerini içerir.
+
+Bunlar, [25 Mart 2014 tarihinde Bilgisayar Tarihi Müzesi'nde orijinal olarak paylaşılan dosyalarla]( http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) aynıdır. Bilgisayar işletim sistemlerinin ilk zamanlarına ilgi duyanlar için daha kolay bulunabilmeleri, harici yazılara ve eserlere referans verilebilmeleri ve araştırma ve denemeler için bu repoda yeniden paylaşılmıştır.
+
+# Lisans
+Bu repo içindeki tüm dosyalar, bu reponun kaynağında saklanan [LICENSE dosyasına](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) göre [MIT (OSI) Lisansı]( https://en.wikipedia.org/wiki/MIT_License) altında yayınlanır.
+
+# Katkıda Bulunun!
+Bu repodaki kaynak dosyaları tarihsel referans içindir ve sabit tutulacaktır, bu nedenle lütfen kaynak dosyalarında herhangi bir değişiklik yapılmasını öneren Pull Request **göndermeyin**, ama bu repoyu fork etmekten çekinmeyin 😊.
+
+Ancak eğer, kaynak dosyası olmayan içerik göndermek isterseniz veya kaynak dosyası olmayan dosyalarda (bu dosya gibi) değişiklik yapmak isterseniz lütfen PR ile ekleyin, inceleyip değerlendiririz.
+
+Bu proje [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/) benimsemiştir. Daha fazla bilgi için [Code of Conduct FAQ sayfasına](https://opensource.microsoft.com/codeofconduct/faq/) bakınız veya herhangi ek soru veya yorum için [opencode@microsoft.com](mailto:opencode@microsoft.com) ile iletişime geçin.
