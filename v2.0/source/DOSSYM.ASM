@@ -339,19 +339,19 @@ BREAK <File Control Block definition>
 ;----+----+----+----+----+----+----+----+----+----+----+----+----+----+----;
 ;            C  A  V  E  A  T     P  R  O  G  R  A  M  M  E  R             ;
 ;                                                                          ;
-;       | Flags:                    |
-;       |  bit 7=0 file/1 device    |
-;       |  bit 6=0 if dirty         |
-;       |  bits 0-5 deviceid        |
-;       +---------------------------+
-;       |   first cluster in file   |
-;       +---------------------------+
-;       | position of last cluster  |
-;       +---------------------------+
-;       |   last cluster accessed   |   12 bit-+--- packed in 3 bytes
-;       +---------------------------+          |
-;       |     parent directory      |   <------+
-;       +---------------------------+
+;       | Flags:                    |                                      ;
+;       |  bit 7=0 file/1 device    |                                      ;
+;       |  bit 6=0 if dirty         |                                      ;
+;       |  bits 0-5 deviceid        |                                      ;
+;       +---------------------------+                                      ;
+;       |   first cluster in file   |                                      ;
+;       +---------------------------+                                      ;
+;       | position of last cluster  |                                      ;
+;       +---------------------------+                                      ;
+;       |   last cluster accessed   |   12 bit-+--- packed in 3 bytes      ;
+;       +---------------------------+          |                           ;
+;       |     parent directory      |   <------+                           ;
+;       +---------------------------+                                      ;
 ;                                                                          ;
 ;            C  A  V  E  A  T     P  R  O  G  R  A  M  M  E  R             ;
 ;----+----+----+----+----+----+----+----+----+----+----+----+----+----+----;
@@ -901,4 +901,3 @@ OEM_C5                          EQU 253 ; 253    FD
 OEM_C6                          EQU 254 ; 254    FE
 OEM_C7                          EQU 255 ; 255    FF
 SUBTTL
-                               
