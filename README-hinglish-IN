@@ -1,0 +1,18 @@
+<img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" 
+src="https://github.com/Microsoft/MS-DOS/blob/master/msdos-logo.png">   
+
+# MS-DOS v1.25 and v2.0 Source Code
+Iss repo mein asli source-code aur complied binaries MS-DOS v1.25 aur MS-DOS v2.0 ke liye hai
+
+Yeh wahi file hai [jo Computer History Museum mein 25th March, 2014 ko share gai thi]( http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/)  aur iss repo main wapis se publishe ki gai hai, jise se yeh asani se mil sake, jisme external writing, kaam,exploration, aur experimentation log kar sakte hai jinko purane PC Operating Systems main ruchi ho.
+
+# License
+Yeh sabhi files jo repo mein hai woh [MIT (OSI) License] ke tahit release kai gai hai( https://en.wikipedia.org/wiki/MIT_License) as per the [LICENSE file](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) aur iss repo ke root main rakhi gai hai.
+
+
+# Contribute!
+Iss repo main jo source files hai woh historical reference hai aur inko static rakha gaya hai, isliye kripiya kar ke pull requests jo iss source files ko modify kare woh **maat bhejna**, iss ke alawa aap iss repo main kuch bhi experiment kar satke ho 😊.
+
+Toh bhi,agar aapko non-source content ya modifications non-source files ke liye(jaise ki., this README) bhejne hai toh bhej sakte hai via PR, aur hum usko parkhenge aur consider karenge.
+
+Yeh project [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/) ko manta hai. Adhik jankari ke liye yeh [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) athwa samkar kar [opencode@microsoft.com](mailto:opencode@microsoft.com) pe adhik prashna aur comments ke liye.
