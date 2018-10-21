@@ -1,16 +1,16 @@
 <img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="https://github.com/Microsoft/MS-DOS/blob/master/msdos-logo.png">   
 
-# MS-DOS v1.25 and v2.0 Source Code
-This repo contains the original source-code and compiled binaries for MS-DOS v1.25 and MS-DOS v2.0.
+# एमएस-डॉस v1.25 और v2.0 स्रोत कोड
+इस रेपो में मूल स्रोत-कोड और एमएस-डॉस v1.25 और एमएस-डॉस v2.0 के लिए संकलित बाइनरी शामिल हैं।
 
-These are the same files [originally shared at the Computer History Museum on March 25th, 2014]( http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) and are being (re)published in this repo to make them easier to find, reference-to in external writing and works, and to allow exploration and experimentation for those interested in early PC Operating Systems.  
+ये वही फ़ाइलें हैं [मूल रूप से 25 मार्च, 2014 को कंप्यूटर इतिहास संग्रहालय में साझा की गईं] (http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) और हो रही हैं ) इस रेपो में प्रकाशित, उन्हें आसानी से ढूंढने, बाहरी लेखन और कार्यों में संदर्भ, और प्रारंभिक पीसी ऑपरेटिंग सिस्टम में रुचि रखने वालों के लिए अन्वेषण और प्रयोग की अनुमति देने के लिए प्रकाशित किया गया।
 
-# License
-All files within this repo are released under the [MIT (OSI) License]( https://en.wikipedia.org/wiki/MIT_License) as per the [LICENSE file](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) stored in the root of this repo.
+# लाइसेंस
+इस रेपो के भीतर सभी फाइलें [LITENSE फ़ाइल] के अनुसार [एमआईटी (ओएसआई) लाइसेंस] (https://en.wikipedia.org/wiki/MIT_License) के तहत जारी की गई हैं (https://github.com/Microsoft/MS -DOS / blob / master / LICENSE.md) इस रेपो की जड़ में संग्रहीत।
 
-# Contribute!
-The source files in this repo are for historical reference and will be kept static, so please **don’t send** Pull Requests suggesting any modifications to the source files, but feel free to fork this repo and experiment 😊.  
+# योगदान!
+इस रेपो में स्रोत फाइलें ऐतिहासिक संदर्भ के लिए हैं और स्थिर रहेंगी, इसलिए कृपया ** स्रोत फ़ाइलों में किसी भी संशोधन का सुझाव देने के लिए ** पुल अनुरोध न भेजें, लेकिन इस रेपो और प्रयोग को फोर्क करने के लिए स्वतंत्र महसूस करें।
 
-If, however, you’d like to submit additional non-source content or modifications to non-source files (e.g., this README), please submit via PR, and we’ll review and consider.
+यदि, हालांकि, आप गैर-स्रोत फ़ाइलों (उदा।, यह README) में अतिरिक्त गैर-स्रोत सामग्री या संशोधन सबमिट करना चाहते हैं, तो कृपया पीआर के माध्यम से सबमिट करें, और हम समीक्षा करेंगे और विचार करेंगे।
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).  For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+इस परियोजना ने [माइक्रोसॉफ्ट ओपन सोर्स आचार संहिता] (https://opensource.microsoft.com/codeofconduct/) अपनाया है। अधिक जानकारी के लिए [आचार संहिता पूछे जाने वाले प्रश्न] (https://opensource.microsoft.com/codeofconduct/faq/) देखें या किसी भी अतिरिक्त प्रश्न के साथ [opencode@microsoft.com] (mailto: opencode@microsoft.com) से संपर्क करें या टिप्पणियाँ।
