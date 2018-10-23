@@ -149,7 +149,7 @@ DRVGD:
         MOV     [DOSDRV],AL
         MOV     [SYSDRV],AL
         MOV     [COMDRV],AL
-        MOV     SI,DRNUM                ;So we can get our parameters
+        MOV     SI,DRNUM                ;Can find parameters
         LODSB                           ;Fetch drive designation
         OR      AL,AL                   ;See if specified
         JNZ     DRVSPEC                 ;If specfied proceed
