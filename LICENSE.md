@@ -1,4 +1,4 @@
-# MS-DOS v1.25 and v2.0 Source Code    r
+# MS-DOS v1.25 and v2.0 Source Code   r
 
 Copyright (c) Microsoft Corporation.
 All rights reserved.
