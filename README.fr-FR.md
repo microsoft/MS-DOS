@@ -11,6 +11,6 @@ Tous les fichiers de ce dépôt sont mis à disposition selon la [Licence MIT (O
 # Contribuez !
 Les fichiers sources de ce dépôt sont mis à disposition pour référence historique et ne seront pas modifiés, donc s'il-vous-plaît **n'envoyez pas** de Pull Requests suggérant des modifications aux fichiers sources, mais forkez ce dépôt et expérimentez 😊.  
 
-Si, toutefois, vous souhaiteriez soumettre du contenu additionel ou des modifications à des fichiers autres que les sources (par exemple ce README), soumettez vos changements via une PR, nous en ferons une revue et la prendrons en compte.
+Si, toutefois, vous souhaiteriez soumettre du contenu additionnel ou des modifications à des fichiers autres que les sources (par exemple ce README), soumettez vos changements via une PR, nous en ferons une revue et la prendrons en compte.
 
 Ce projet a adopté le [Code de Conduite Open Source de Microsoft](https://opensource.microsoft.com/codeofconduct/).  Pour plus d'informations, consultez [la FAQ du Code de Conduite](https://opensource.microsoft.com/codeofconduct/faq/) ou contactez [opencode@microsoft.com](mailto:opencode@microsoft.com) avec toute question additionnelle ou commentaire.
