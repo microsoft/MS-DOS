@@ -11,6 +11,6 @@ Tutti i file all'interno di questo repository sono rilasciati sotto la [Licenza 
 # Contribuisci!
 I file sorgente in questo repository sono per riferimento storico e saranno mantenuti senza modifiche, quindi per favore **non inviare** Pull Request suggerendo eventuali modifiche al codice sorgente, ma sentiti libero di fare un fork di questo repo e sperimentare 😊.
 
-Se, tuttavia, desideri inviare ulteriori contenuti o modifiche a file non relativi al codice sorgente (ad esempio, questo README), inviali tramite una PR, la verificheremo e la prenderemo in considerazione.
+Se, tuttavia, desideri inviare ulteriori contenuti o modifiche a file non relativi al codice sorgente (ad esempio questo README), inviali tramite una PR, la verificheremo e la prenderemo in considerazione.
 
-Questo progetto ha adottato il [Codice di Condotta Open Source di Microsoft](https://opensource.microsoft.com/codeofconduct/). Per ulteriori informazioni, consultare le [Domande frequenti sul codice di condotta](https://opensource.microsoft.com/codeofconduct/faq/) o contattare [opencode@microsoft.com](mailto:opencode@microsoft.com) per eventuali ulteriori domande o commenti.
+Questo progetto ha adottato il [Codice di Condotta Open Source di Microsoft](https://opensource.microsoft.com/codeofconduct/). Per ulteriori informazioni, consultare le [Domande frequenti sul codice di condotta](https://opensource.microsoft.com/codeofconduct/faq/) o contattare [opencode@microsoft.com](mailto:opencode@microsoft.com) per eventuali domande o commenti.
