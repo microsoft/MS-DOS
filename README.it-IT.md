@@ -6,7 +6,7 @@ Questo repository contiene il codice sorgente originale e i binari compilati per
 Questi sono gli stessi file [condivisi tempo fa al Computer History Museum il 25 marzo 2014](http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) e sono stati (ri)pubblicati in questo repository per renderli più facili da trovare, usarli come riferimento in documenti e lavori esterni e consentirne la consultazione e la sperimentazione per coloro che sono interessati ai primi sistemi operativi per PC.
 
 # Licenza
-Tutti i file all'interno di questo repository sono rilasciati sotto la [Licenza MIT (OSI)]( https://en.wikipedia.org/wiki/MIT_License) come indicato nel file [LICENSE file](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) salvato alla base di questo repo.
+Tutti i file all'interno di questo repository sono rilasciati sotto la [Licenza MIT (OSI)]( https://it.wikipedia.org/wiki/Licenza_MIT) come indicato nel file [LICENSE file](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) salvato alla base di questo repo.
 
 # Contribuisci!
 I file sorgente in questo repository sono per riferimento storico e saranno mantenuti senza modifiche, quindi per favore **non inviare** Pull Request suggerendo eventuali modifiche al codice sorgente, ma sentiti libero di fare un fork di questo repo e sperimentare 😊.
