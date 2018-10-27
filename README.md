@@ -11,6 +11,6 @@ All files within this repo are released under the [MIT (OSI) License]( https://e
 # Contribute!
 The source files in this repo are for historical reference and will be kept static, so please **don’t send** Pull Requests suggesting any modifications to the source files, but feel free to fork this repo and experiment 😊.  
 
-If, however, you’d like to submit additional non-source content or modifications to non-source files (e.g., this README), please submit via PR, and we’ll review and consider.
+If, however, you’d like to submit additional non-source contents or modifications to non-source files (e.g., this README), please submit via PR, and we’ll review and consider.
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).  For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).  For more information see our [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
