@@ -1493,7 +1493,7 @@ SETUP:
 ;       [DSKERR] = 0 (no errors yet)
 ;       [TRANS] = 0 (No transfers yet)
 ;       [THISDRV] = Physical drive unit number
-; If SETUP detects no records will be transfered, it returns 1 level up 
+; If SETUP detects no records will be transferred, it returns 1 level up 
 ; with CX = 0.
 
         PUSH    AX
@@ -1591,7 +1591,7 @@ BREAKDOWN:
 ;       DS = CS
 ;       CX = Length of disk transfer in bytes
 ;       BP = Base of drive parameters
-;       [BYTSECPOS] = Byte position witin first sector
+;       [BYTSECPOS] = Byte position within first sector
 ;Outputs:
 ;       [BYTCNT1] = Bytes to transfer in first sector
 ;       [SECCNT] = No. of whole sectors to transfer
@@ -1921,12 +1921,12 @@ RDLP:
         CALL DREAD
         POPF                    ;Restore carry flag
         POP     DI              ;Initial transfer address
-        POP     AX              ;First sector transfered
+        POP     AX              ;First sector transferred
         POP     DS
         JC      NOTBUFFED       ;Was one of those sectors in the buffer?
         CMP     BYTE PTR [DIRTYBUF],0   ;Is buffer dirty?
         JZ      NOTBUFFED       ;If not no problem
-;We have transfered in a sector from disk when a dirty copy of it is in the buffer.
+;We have transferred in a sector from disk when a dirty copy of it is in the buffer.
 ;We must transfer the sector from the buffer to correct memory address
         SUB     AX,[BUFSECNO]   ;How many sectors into the transfer?
         NEG     AX
@@ -1956,7 +1956,7 @@ SETFCB:
         MOV     SI,[FCB]
         MOV     AX,[NEXTADD]
         MOV     DI,AX
-        SUB     AX,[DMAADD]     ;Number of bytes transfered
+        SUB     AX,[DMAADD]     ;Number of bytes transferred
         XOR     DX,DX
         MOV     CX,ES:[SI.RECSIZ]
         DIV     CX              ;Number of records
@@ -1964,7 +1964,7 @@ SETFCB:
         JZ      FULLREC
         MOV     BYTE PTR [DSKERR],1
         OR      DX,DX
-        JZ      FULLREC         ;If remainder 0, then full record transfered
+        JZ      FULLREC         ;If remainder 0, then full record transferred
         MOV     BYTE PTR [DSKERR],3     ;Flag partial last record
         SUB     CX,DX           ;Bytes left in last record
         PUSH    ES
@@ -2285,7 +2285,7 @@ FINCLUS:
         POP     DX              ;Starting cluster
         SUB     BX,DX           ;Number of new clusters accessed
         ADD     [LASTPOS],BX
-        POP     BX              ;BL = sector postion within cluster
+        POP     BX              ;BL = sector position within cluster
         CALL    FIGREC
         MOV     BX,SI
 ;Now let's see if any of these sectors are already in the buffer
@@ -2316,7 +2316,7 @@ FIGREC:
 
 ;Inputs:
 ;       DX = Physical cluster number
-;       BL = Sector postion within cluster
+;       BL = Sector position within cluster
 ;       BP = Base of drive parameters
 ;Outputs:
 ;       DX = physical sector number

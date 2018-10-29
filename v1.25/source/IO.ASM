@@ -1479,7 +1479,7 @@ CURDRV:	DB	-1
 ; in TRKTAB.
 ;
 ; INITTAB is the initialization table for 86-DOS as described in the
-; 86-DOS Programer's Manual under "Customizing the I/O System."
+; 86-DOS Programmer's Manual under "Customizing the I/O System."
 ;
 	IF	SCP*COMBIN*FASTSEEK
 ;

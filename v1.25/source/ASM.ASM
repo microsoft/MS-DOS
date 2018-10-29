@@ -105,7 +105,7 @@ L0000:
 	MOV	AH,80H
 NOPRN:
 	MOV	[LSTFCB],AL
-	MOV	[LSTDEV],AH	;Flag device for list ouput
+	MOV	[LSTDEV],AH	;Flag device for list output
 	MOV	SI,EXTEND
 	MOV	DI,FCB+9
 	MOVW
@@ -2509,7 +2509,7 @@ DPUT:
 	JMP	FIXLINE
 
 OUTLIN:
-;Copy the source line to the ouput device. Line will be preceded by
+;Copy the source line to the output device. Line will be preceded by
 ;assembler-generated line number. This routine may be called several times
 ;on one line (once for each line of object code bytes), so it sets a flag
 ;so the line will only be output on the first call.

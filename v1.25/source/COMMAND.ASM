@@ -608,7 +608,7 @@ INIT    ENDS
 
 ;This TAIL segment is used to produce a PARA aligned label in the resident
 ; group which is the location where the transient segments will be loaded
-; initialy.
+; initially.
 
 TAIL    SEGMENT PARA
         ORG     0
@@ -678,7 +678,7 @@ ASSUME  DS:TRANGROUP
         INT     21H             ;Get a command
         JMP     DOCOM
 
-;All batch proccessing has DS set to segment of resident portion
+;All batch processing has DS set to segment of resident portion
 ASSUME  DS:RESGROUP
 NEEDPARM:
         CALL    GETBATBYT
