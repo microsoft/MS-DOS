@@ -8,7 +8,7 @@
 ;       V2.00   9/13/82  M.A. Ulloa                                     ;
 ;                  Modified to use Pathnames in command line file       ;
 ;               specification, modified REPLACE to use an empty         ;
-;               string intead of the old replace string when this       ;
+;               string instead of the old replace string when this      ;
 ;               is missing, and search and replace now start from       ;
 ;               first line of buffer (like old version of EDLIN)        ;
 ;               instead than current+1 line. Also added the U and       ;
@@ -44,7 +44,7 @@
 ;                                                                       ;
 ;               10/15/82 Rev. 4         M.A. Ulloa                      ;
 ;                  Param4 if specified must be an absolute number that  ;
-;               reprecents the count.                                   ;
+;               represents the count.                                   ;
 ;                                                                       ;
 ;               10/18/82 Rev. 5         M.A. Ulloa                      ;
 ;                  Fixed problem with trying to edit files with the     ;
@@ -84,7 +84,7 @@
 ;                                                                       ;
 ;                                                                       ;
 ;               7/23/83 Rev. 14         N.Panners                       ;
-;                   Split EDLIN into two seperate modules to            ;
+;                   Split EDLIN into two separate modules to            ;
 ;                   allow assembly of sources on an IBM PC              ;
 ;                   EDLIN and EDLPROC                                   ;
 ;                                                                       ;
@@ -181,7 +181,7 @@ DATA    SEGMENT PUBLIC WORD
         PUBLIC  LSTNUM,SRCHCNT,POINTER,START,ENDTXT,USER_DRIVE
 
 ;-----------------------------------------------------------------------;
-;    Be carefull when adding parameters, they have to follow the
+;    Be careful when adding parameters, they have to follow the
 ; order in which they apperar here. (this is a table, ergo it
 ; is indexed thru a pointer, and random additions will cause the
 ; wrong item to be accessed). Also param4 is known to be the
@@ -820,8 +820,8 @@ COMTAB  DB      "QTCMWASRDLPIE;",13
 NUMCOM  EQU     $-COMTAB
 
 ;-----------------------------------------------------------------------;
-;       Carefull changing the order of the next two tables. They are
-;      linked and chnges should be be to both.
+;       Careful changing the order of the next two tables. They are
+;      linked and changes should be be to both.
 
 TABLE   DW      NOCOM   ;No command--edit line
         DW      NOCOM
@@ -1171,7 +1171,7 @@ DISPLAY:
 ;       SI = Pointer to text buffer
 ;       DI = No. of lines
 ; Function:
-;       Ouputs specified no. of line to terminal, each
+;       Outputs specified no. of line to terminal, each
 ;       with leading line number.
 ; Outputs:
 ;       BX = Last line output.

@@ -65,7 +65,7 @@ PAGE
 ;      04/23/82 Added GETDSKPTDL as call 50, similar to GETFATPT(DL), returns
 ;               address of DPB
 ;      04/29/82 Mod to WRTDEV to look for ^C or ^S at console input when
-;               writting to console device via file I/O.  Added a console
+;               writing to console device via file I/O.  Added a console
 ;               output attribute to devices.
 ;      04/30/82 Call to en/dis able ^C check in dispatcher Call 51
 ;      04/30/82 Code to allow assignment of func 1-12 to disk files as well

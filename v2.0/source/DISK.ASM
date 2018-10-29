@@ -632,7 +632,7 @@ ASSUME  DS:NOTHING,ES:NOTHING
 ;       Call BIOS to perform disk read
 ; Outputs:
 ;       DI = CX on entry
-;       CX = Number of sectors unsuccessfully transfered
+;       CX = Number of sectors unsuccessfully transferred
 ;       AX = Status word as returned by BIOS (error code in AL if error)
 ;       Zero set if OK (from BIOS)
 ;       Zero clear if error
@@ -683,7 +683,7 @@ ASSUME  DS:NOTHING,ES:NOTHING
 ;       Call BIOS to perform disk read
 ; Outputs:
 ;       DI = CX on entry
-;       CX = Number of sectors unsuccessfully transfered
+;       CX = Number of sectors unsuccessfully transferred
 ;       AX = Status word as returned by BIOS (error code in AL if error)
 ;       Zero set if OK (from BIOS)
 ;       Zero clear if error
@@ -848,7 +848,7 @@ ASSUME  DS:DOSGROUP,ES:NOTHING
 ; Inputs:
 ;       CX = Length of disk transfer in bytes
 ;       ES:BP = Base of drive parameters
-;       [BYTSECPOS] = Byte position witin first sector
+;       [BYTSECPOS] = Byte position within first sector
 ; Outputs:
 ;       [BYTCNT1] = Bytes to transfer in first sector
 ;       [SECCNT] = No. of whole sectors to transfer
@@ -1020,7 +1020,7 @@ RDLAST:
         LES     SI,[THISFCB]
         MOV     AX,[NEXTADD]
         MOV     DI,AX
-        SUB     AX,WORD PTR [DMAADD]     ; Number of bytes transfered
+        SUB     AX,WORD PTR [DMAADD]     ; Number of bytes transferred
         XOR     DX,DX
         MOV     CX,ES:[SI.fcb_RECSIZ]
         DIV     CX              ; Number of records
@@ -1028,7 +1028,7 @@ RDLAST:
         JZ      FULLREC
         MOV     BYTE PTR [DSKERR],1
         OR      DX,DX
-        JZ      FULLREC         ; If remainder 0, then full record transfered
+        JZ      FULLREC         ; If remainder 0, then full record transferred
         MOV     BYTE PTR [DSKERR],3      ; Flag partial last record
         SUB     CX,DX           ; Bytes left in last record
         PUSH    ES

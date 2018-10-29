@@ -167,7 +167,7 @@ PAGE
 ASSUME  DS:NOTHING,ES:NOTHING
 
 ; Inputs:
-;       DS:DX Points to openned FCB
+;       DS:DX Points to opened FCB
 ; Function:
 ;       Read next record from file to disk transfer address
 ; Returns:
@@ -184,7 +184,7 @@ ASSUME  DS:NOTHING,ES:NOTHING
 ASSUME  DS:NOTHING,ES:NOTHING
 
 ; Inputs:
-;       DS:DX Points to openned FCB
+;       DS:DX Points to opened FCB
 ; Function:
 ;       Write next record to file from disk transfer address
 ; Returns:
@@ -204,7 +204,7 @@ FINSEQ:
 ASSUME  DS:NOTHING,ES:NOTHING
 
 ; Inputs:
-;       DS:DX Points to openned FCB
+;       DS:DX Points to opened FCB
 ; Function:
 ;       Read record addressed by random record field from file to
 ;         disk transfer address
@@ -222,7 +222,7 @@ ASSUME  DS:NOTHING,ES:NOTHING
 ASSUME  DS:NOTHING,ES:NOTHING
 
 ; Inputs:
-;       DS:DX Points to openned FCB
+;       DS:DX Points to opened FCB
 ; Function:
 ;       Write record addressed by random record field to file from
 ;         disk transfer address
@@ -239,7 +239,7 @@ ASSUME  DS:NOTHING,ES:NOTHING
 ASSUME  DS:NOTHING,ES:NOTHING
 
 ; Inputs:
-;       DS:DX Points to openned FCB
+;       DS:DX Points to opened FCB
 ;       CX = Record count
 ; Function:
 ;       Read CX records starting at random record field from file
@@ -259,7 +259,7 @@ ASSUME  DS:NOTHING,ES:NOTHING
 ASSUME  DS:NOTHING,ES:NOTHING
 
 ; Inputs:
-;       DS:DX Points to openned FCB
+;       DS:DX Points to opened FCB
 ;       CX = Record count
 ; Function:
 ;       Write CX records starting at random record field to file

@@ -41,7 +41,7 @@ AKPORT  EQU     20H             ;Interrupt Acknowledge port
         ENDIF
 
 ;The following values have to do with the ERRCNT variable and the
-;  CNTMES message. The values define levels at wich it is assumed
+;  CNTMES message. The values define levels at which it is assumed
 ;  an off-line error exists. ERRCNT1 defines the value of ERRCNT above
 ;  which the CNTMES message is printed by the transient. ERRCNT2
 ;  defines the value of ERRCNT above which the resident will give up

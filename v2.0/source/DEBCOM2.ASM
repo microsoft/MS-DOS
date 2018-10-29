@@ -471,7 +471,7 @@ CONTC:
 
 ; Re-entry point from breakpoint. Need to decrement instruction
 ; pointer so it points to location where breakpoint actually
-; occured.
+; occurred.
 
 BREAKFIX:
         PUSH    BP

@@ -346,8 +346,8 @@ CMPTRKS:
 BAD100:
 ; BX is the first bad sector #, SECTORS is the number of bad sectors starting
 ; at BX. This needs to be converted to clusters. The start sector number may
-; need to be rounded down to a cluster boundry, the end sector may need to be
-; rounded up to a cluster boundry. Know BX >= STARTSECTOR
+; need to be rounded down to a cluster boundary, the end sector may need to be
+; rounded up to a cluster boundary. Know BX >= STARTSECTOR
         SUB     BX,STARTSECTOR          ; BX is now DATA area relative
         MOV     CX,BX
         ADD     CX,SECTORS
@@ -451,8 +451,8 @@ FATWRT:
         JNC     SYSOK
         MOV     DX,OFFSET NOTSYS        ;Can't transfer a system
         CALL    PRINT
-        MOV     WORD PTR SYSSIZ+2,0     ;No system transfered
-        MOV     WORD PTR SYSSIZ,0       ;No system transfered
+        MOV     WORD PTR SYSSIZ+2,0     ;No system transferred
+        MOV     WORD PTR SYSSIZ,0       ;No system transferred
         JMP     SHORT STATUS
 
 SYSOK:
@@ -549,7 +549,7 @@ UNSCALE:
 
 ;******************************************
 ; Calculate the size in bytes of the system rounded up to sector and
-;   cluster boundries, Answer in SYSSIZ
+;   cluster boundaries, Answer in SYSSIZ
 
 GETSIZE:
         MOV     AX,WORD PTR BIOSSIZB              ;And calculate the system size
@@ -577,7 +577,7 @@ FNDSIZ0:
         SUB     DX,CLUSSIZ
         NEG     DX
         ADD     AX,DX                   ; Round up sector count to cluster
-                                        ;       boundry
+                                        ;       boundary
 ONCLUS:
         MUL     SECSIZ                  ; Turn it back into bytes
         ADD     WORD PTR SYSSIZ,AX

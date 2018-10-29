@@ -130,7 +130,7 @@ FDX_OPER:
         XCHG    AL,AH
         MOV     WORD PTR [ASSEM1],AX
 ;
-;  aad and aam instrucions
+;  aad and aam instructions
 ;
 AA_OPER:INC     BYTE PTR [ASSEM_CNT]
 ;
@@ -404,7 +404,7 @@ ESC_OPER:
         SHL     AL,CL
         JMP     GROUPE
 ;
-; 8087 arithmetic instuctions
+; 8087 arithmetic instructions
 ;
 
 ;

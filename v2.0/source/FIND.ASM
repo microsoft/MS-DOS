@@ -48,7 +48,7 @@ TRUE    equ     NOT FALSE
 KANJI   equ     FALSE                   ;set to true is kanji vers.
 
 ;--------------------------------------------------------------------;
-;       FIND program following the standart UNIX operation.          ;
+;       FIND program following the standard UNIX operation.          ;
 ;                                                                    ;
 ; FORMAT:                                                            ;
 ;       find {option} string {filename {filename} {...}}             ;
@@ -56,7 +56,7 @@ KANJI   equ     FALSE                   ;set to true is kanji vers.
 ; NOTES:                                                             ;
 ;       1) String arguments HAVE to be enclosed                      ;
 ;       in double quotes. (Two double quotes if a                    ;
-;       doble quote is to be included). Only ONE                     ;
+;       double quote is to be included). Only ONE                    ;
 ;       string argument is presently allowed.                        ;
 ;                                                                    ;
 ;       2) Options are available:                                    ;
@@ -76,9 +76,9 @@ KANJI   equ     FALSE                   ;set to true is kanji vers.
 ;       4) The maximum line size is determined by                    ;
 ;       buffer size. Bigger lines will bomb the program.             ;
 ;                                                                    ;
-;       5) If no file name is given then it will asssume             ;
-;       the input is comming from the Standart Input. NO             ;
-;       errors are reported when reading from Standart Input.        ;
+;       5) If no file name is given then it will assume              ;
+;       the input is coming from the Standard Input. NO              ;
+;       errors are reported when reading from Standard Input.        ;
 ;--------------------------------------------------------------------;
 
 code    segment public
@@ -386,7 +386,7 @@ regular:
 ;       - Pointer to the next command in the command line
 ;       - Pointer to the program segment prefix (to be loaded into
 ;         DS to access the command line.
-; if the imput is from the standart input then NONE of it will be
+; if the imput is from the standard input then NONE of it will be
 ; in the stack.
 
 go_match:
@@ -544,7 +544,7 @@ try_again_opt:
 ;Note: at this point the stack contains (top to bottom)
 ;       - Stuff mentioned before
 ;
-; plus, BP points to begginig of the current line, BX has the length
+; plus, BP points to beginning of the current line, BX has the length
 ;of the current line including the CRLF, and DX the adjusted length of
 ;the string argument.
 
@@ -570,8 +570,8 @@ no_n_flg:
 ; The scanning routines have detected that the buffer does not
 ;contain a full line any more. More lines have to be read into the
 ;buffer. But first perform a seek on the file in order to re-read
-;the non-complete line into the begining of the buffer.
-; Uppon entry BP contains points to the begining of the non-complete
+;the non-complete line into the beginning of the buffer.
+; Upon entry BP contains points to the beginning of the non-complete
 ;line, and BX has the number of characters left in the buffer.
 ; The Stack contains (top to bottom):
 ;       - Pointer to the next command in the command line
@@ -781,7 +781,7 @@ prt_file_name:
 
 
 ;--------------------------------------------------------------------;
-;       Print an error message to the Standart error                 ;
+;       Print an error message to the Standard error                 ;
 ;                                                                    ;
 ; entry:                                                             ;
 ;       DX      has the pointer to the message                       ;

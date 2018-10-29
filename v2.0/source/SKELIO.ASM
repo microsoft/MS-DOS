@@ -48,13 +48,13 @@ INIT:   JMP     HWINIT
 
 ;-----------------------------------------------+
 ;     DWORD pointer to next device              | 1 word offset.
-;         (-1,-1 if last device)                | 1 word segement.
+;         (-1,-1 if last device)                | 1 word segment.
 ;-----------------------------------------------+
 ;     Device attribute WORD                     ; 1 word.
-;       Bit 15 = 1 for chacter devices.         ;
+;       Bit 15 = 1 for character devices.       ;
 ;                0 for Block devices.           ;
 ;                                               ;
-;       Charcter devices. (Bit 15=1)            ;
+;       Character devices. (Bit 15=1)           ;
 ;         Bit 0 = 1  current sti device.        ;
 ;         Bit 1 = 1  current sto device.        ;
 ;         Bit 2 = 1  current NUL device.        ;
@@ -231,7 +231,7 @@ CON_INT:
         JMP     SHORT ENTRY
 
 ;
-; Auxilary interrupt routine for processing I/O packets.
+; Auxiliary interrupt routine for processing I/O packets.
 ;
 
 AUX_INT:
@@ -314,7 +314,7 @@ CMDERR: MOV     AL,3            ;Set unknown command error #.
 ;   AL contains actual error code.
 ;
 ;   Error # 0 = Write Protect violation.
-;           1 = Unkown unit.
+;           1 = Unknown unit.
 ;           2 = Drive not ready.
 ;           3 = Unknown command in I/O packet.
 ;           4 = CRC error.
@@ -526,7 +526,7 @@ ST1:    CMP     AL,ESC          ;See if this the first character is ESC.
 ;
 
 ST2:    CMP     AL,'['          ;See if a valide state two.
-        JNZ     OUTCHR          ;No, treat as regular charcter
+        JNZ     OUTCHR          ;No, treat as regular character
         MOV     BX,OFFSET PARMS ;Yes, get parameter pointer.
         MOV     WORD PTR [PRMPNT],BX    ;Setup in pointer index.
         MOV     WORD PTR [BX],0 ;Clear first entry.
@@ -649,7 +649,7 @@ CUP:    CALL    GETONE          ;Get X position.
 
 ED:     CALL    GETPARM         ;Get trinary command type.
         MOV     BL,'b'
-        DEC     AL              ;See if erase from begining of screen.
+        DEC     AL              ;See if erase from beginning of screen.
         JZ      ED1             ;Yes, perform ZDS function.
         MOV     BL,'E'
         DEC     AL              ;See if erase from end of screen.
@@ -663,7 +663,7 @@ ED1:    JMP     OUTESC
 
 EL:     CALL    GETPARM         ;Get trinary command type.
         MOV     BL,'o'
-        DEC     AL              ;See if erase from begining of line.
+        DEC     AL              ;See if erase from beginning of line.
         JZ      EL1             ;Yes, perform ZDS function.
         MOV     BL,'l'
         DEC     AL              ;See if erase whole line.
@@ -725,12 +725,12 @@ PRN_WR1:LODS    BYTE PTR ES:[SI];Get a data byte.
         RET
 
         PAGE
-        SUBTTL  Auxilary I/O routines.
+        SUBTTL  Auxiliary I/O routines.
 
 AUXCHAR DB      0               ;Temporary AUX ahead storage.
 
 ;
-; Status routine for Auxilary port.
+; Status routine for Auxiliary port.
 ;
 
 AISTAT: MOV     AL,[AUXCHAR]
@@ -748,7 +748,7 @@ AISTA9: MOV     [AUXCHAR],AL
         RET
 
 ;
-; Auxilary port read.
+; Auxiliary port read.
 ;
 
 AIN:    CALL    AISTAT          ;Get status and/or char.
@@ -757,7 +757,7 @@ AIN:    CALL    AISTAT          ;Get status and/or char.
         RET
 
 ;
-; Write routine for Auxilary port.
+; Write routine for Auxiliary port.
 ;
 
 AOUT:   MOV     CX,[ACON]
@@ -767,7 +767,7 @@ AOUT:   MOV     CX,[ACON]
         RET
 
 ;
-; Non-Destructive Auxilary read routine.
+; Non-Destructive Auxiliary read routine.
 ;
 
 AUX_RDND:
@@ -778,7 +778,7 @@ AUX_RDN2:
         JMP     BUS_EXIT
 
 ;
-; Destructive Auxilary read routine.
+; Destructive Auxiliary read routine.
 ;
 
 AUX_READ:
@@ -788,7 +788,7 @@ AUX_READ:
         JMP     EXIT
 
 ;
-; Auxilary clear type a head.
+; Auxiliary clear type a head.
 ;
 
 AUX_CLR:
@@ -796,14 +796,14 @@ AUX_CLR:
         JMP     EXIT
 
 ;
-; Auxilary write port status.
+; Auxiliary write port status.
 ;
 
 AUX_WRST:
         JMP     EXIT
 
 ;
-; Auxilary write.
+; Auxiliary write.
 ;
 
 AUX_WRIT:

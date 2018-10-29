@@ -219,7 +219,7 @@ REGCOM:
         REP     MOVSB                   ; Transfer it to the cooked buffer
         JMP     DOCOM
 
-; All batch proccessing has DS set to segment of resident portion
+; All batch processing has DS set to segment of resident portion
 ASSUME  DS:RESGROUP,ES:TRANGROUP
 
 NEEDENV:

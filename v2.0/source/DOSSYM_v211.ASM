@@ -940,7 +940,7 @@ Dup_PDB                         EQU 85  ; 85     55
 Rename                          EQU 86  ; 86     56
 File_Times                      EQU 87  ; 87     57
 AllocOper                       EQU 88  ; 88     58
-; Network extention system calls
+; Network extension system calls
 GetExtendedError                EQU 89  ; 89     59
 CreateTempFile                  EQU 90  ; 90     5A
 CreateNewFile                   EQU 91  ; 91     5B

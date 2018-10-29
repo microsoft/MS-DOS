@@ -135,7 +135,7 @@ NOSTAR:
         IF      KANJI
         CALL    TESTKANJ
         JZ      NOTDUAL3
-        JCXZ    BNDERR                  ; Attempt to straddle boundry
+        JCXZ    BNDERR                  ; Attempt to straddle boundary
         MOVSB                           ; Transfer second byte
         DEC     CX
         JMP     SHORT NOTDUAL3
@@ -372,7 +372,7 @@ STOLET:
         JZ      MOVLP           ;No
         LODSB                   ;Get second byte
         DEC     CX
-        JZ      BOUNDERR        ;Attempt to cross boundry
+        JZ      BOUNDERR        ;Attempt to cross boundary
         STOSB
 MOVLP:
         LOOP    MOVCHK
@@ -391,7 +391,7 @@ STOLET2:
         LODSB                   ;Get second byte
         DEC     CX
         JNZ     DOSTORE
-BOUNDERR:                       ;Attempt to cross boundry
+BOUNDERR:                       ;Attempt to cross boundary
         STC
         return
 

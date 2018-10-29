@@ -141,7 +141,7 @@ LF      equ     0ah
 
 ;-----------------------------------------------------------------------;
 ;       Offsets to buffer structure
-;       For text comparations:
+;       For text comparisons:
 
 fname      equ  0               ;file name ptr
 fname_len  equ  2               ;file name length
@@ -154,7 +154,7 @@ dat_end    equ  14              ;ptr to last char of the buffer
 buf_end    equ  16              ;pointer to the end of the buffer
 buf        equ  18              ;pointer to the buffer
 
-;       For binary comparations:
+;       For binary comparisons:
 
 by_read    equ  6               ;bytes read into buffer
 
@@ -181,7 +181,7 @@ const   segment public word
 make    db      "MAUlloa/Microsoft/V10"
 rev     db      "2"
 
-;----- CAREFULL WITH PRESERVING THE ORDER OF THE TABLE -----
+;----- CAREFUL WITH PRESERVING THE ORDER OF THE TABLE -----
 opt_tbl equ     $                       ;option table
 
 flg_b   db      FALSE
@@ -208,7 +208,7 @@ bend    db      0                       ;binary end of file flag, 0= none yet,
                                         ; 1= file 1 ended, 2= file 2 ended
 
 base    dd      0                       ;base address of files for binary
-                                        ; comparations
+                                        ; comparisons
 
 bhead_flg db    false                   ;true if heading for binary comp.
                                         ; has been printed already.
@@ -786,7 +786,7 @@ go_quit:
         page
 
 ;-----------------------------------------------------------------------;
-;       CAPIALIZES THE CHARACTER IN AL                                  ;
+;       CAPITALIZES THE CHARACTER IN AL                                  ;
 ;                                                                       ;
 ;       entry:                                                          ;
 ;               AL      has the character to Capitalize                 ;
@@ -891,7 +891,7 @@ sc3:
 ;       Print a binary difference                                       ;
 ;                                                                       ;
 ; entry:                                                                ;
-;       AX,BX   file address of diference                               ;
+;       AX,BX   file address of difference                              ;
 ;       SI      pointer to one past byte in buffer1                     ;
 ;       DI      pointer to one past byte in buffer2                     ;
 ;                                                                       ;
