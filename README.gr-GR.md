@@ -13,4 +13,4 @@
 
 Αν θέλετε να προσφέρετε μη-πηγαίο περιεχόμενο ή μετατροπές σε μη-πηγαία αρχεία (π.χ. αυτό το README), παρακαλούμε ρίξτε ενα PR, και εμείς θα το λάβουμε υπ'όψιν.
 
-Αυτό το πρότζεκτ έχει υιοθετήσει τον [Ανοιχτό Κώδικα Δεοντολογίας της Microsoft](https://opensource.microsoft.com/codeofconduct/). Για περισσότερες πληροφορίες δείτε τις [Ερωταπαντήσεις του Κώδικα Δεοντολογίας](https://opensource.microsoft.com/codeofconduct/faq/) ή επικοινωνήστε στο [opencode@microsoft.com](mailto:opencode@microsoft.com) με επιπλέον ερωτήσεις και σχόλια.
+Αυτό το πρότζεκτ έχει υιοθετήσει τον [Ανοιχτό Κώδικα Δεοντολογίας της Microsoft](https://opensource.microsoft.com/codeofconduct/). Για περισσότερες πληροφορίες δείτε τις [Ερωταπαντήσεις του Κώδικα Δεοντολογίας](https://opensource.microsoft.com/codeofconduct/faq/) ή επικοινωνήστε στο [opencode@microsoft.com](mailto:opencode@microsoft.com) με όποιος πρόσθετος ερωτήσεις και σχόλια.
