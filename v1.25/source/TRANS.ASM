@@ -191,7 +191,7 @@ GETCH:
 	CMP	AL,3		; Partial record read?
 	JE	OKRECORD
 	MOV	AL,EOF		; Force end-of-file character in case
-	JP	TESEND		;  there is nothing in the record.
+	JP	TESEND		; there is nothing in the record.
 OKRECORD:
 	MOV	BX,GETBUF	; Reset buffer pointer.
 GETIT:
