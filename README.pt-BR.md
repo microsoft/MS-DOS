@@ -11,6 +11,6 @@ Todos os arquivos neste repositório estão publicados sob a [Licença do MIT (O
 # Contribua!
 Os arquivos neste repositório são referências históricas e continuarão estáticos, por gentileza, não envie Pull Requests sugerindo quaisquer modificações no código fonte, mas sinta-se a vontade para copiar esse repositório e experimentá-lo 😊.
 
-Se, no entanto, você quiser enviar conteúdos adicionais que não sejam conteúdos ou modificações no código fonte (como por exempo este LEIA-ME), por favor, envie via Pull Request e nós iremos revisar e considerar.
+Se, no entanto, você quiser enviar conteúdos adicionais que não sejam conteúdos ou modificações no código fonte (como por exemplo este LEIA-ME), por favor, envie via Pull Request e nós iremos revisar e considerar.
 
 Esse projeto tem adotado o [Código de Conduta para Código Aberto da Microsofit](https://opensource.microsoft.com/codeofconduct/). Para mais informações, veja o [FAQ do Código de Conduta](https://opensource.microsoft.com/codeofconduct/faq/) ou entre em contato com [opencode@microsoft.com](mailto:opencode@microsoft.com) para quaisquer questões ou comentários adicionais.
