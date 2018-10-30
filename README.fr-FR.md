@@ -13,4 +13,4 @@ Les fichiers sources de ce dépôt sont mis à disposition pour référence hist
 
 Si, toutefois, vous souhaitiez soumettre du contenu additionel ou des modifications à des fichiers autres que les sources, (par exemple ce README), soumettez via une PR, nous ferons une revue et la prendrons en compte.
 
-Ce projet a adopté le [Code de Conduite Open Source de Microsoft](https://opensource.microsoft.com/codeofconduct/).  Pour plus d'informations consultez [la FAQ du Code de Conduite](https://opensource.microsoft.com/codeofconduct/faq/) ou contactez [opencode@microsoft.com](mailto:opencode@microsoft.com) avec toute question additionnelle ou commentaire.
+Ce projet a adopté le [Code de Conduite Open Source de Microsoft](https://opensource.microsoft.com/codeofconduct/).  Pour plus d'informations consultez [la FAQ du Code de Conduite](https://opensource.microsoft.com/codeofconduct/faq/) ou contactez [opencode@microsoft.com](mailto:opencode@microsoft.com) pour toute question additionnelle ou commentaire.
