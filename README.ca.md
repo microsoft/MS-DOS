@@ -9,7 +9,7 @@ Aquests són els mateixos fitxers [originalment compartits al Museu Històric de
 Tots els fitxers dintre d'aquest repositori estan alliberats sota la [Llicència MIT (OSI)]( https://en.wikipedia.org/wiki/MIT_License) segons el [fitxer de LLICÈNCIA](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) emmagatzemat en l'arrel d'aquest repositori.
 
 # Contribueix!
-Els fitxers font en aquest repositori son per referència històrica i es mantindran estàtics, així que, si us plau, no envieu Pull Requests suggerint qualsevol modificació als arxius font, però sé lliure de duplicar aquest repositori i experimentar 😊.  
+Els fitxers font en aquest repositori son per referència històrica i es mantindran estàtics, així que, si us plau, **no envieu** Pull Requests suggerint qualsevol modificació als arxius font, però sé lliure de duplicar aquest repositori i experimentar 😊.  
 
 Però, si dessitges enviar contingut adicional que no sigui d'origen o modificacions a arxius que no siguin de font (per exemple, aquest arxiu README), si us plau envia un PR, i ho revisarem i considerarem.
 

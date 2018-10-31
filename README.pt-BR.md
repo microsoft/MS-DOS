@@ -9,7 +9,7 @@ Estes são os mesmos arquivos [orinalmente compartilhados no Museu da História 
 Todos os arquivos neste repositório estão publicados sob a [Licença do MIT (OSI)]( https://en.wikipedia.org/wiki/MIT_License) bem como o [arquivo de LICENÇA](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) armazenado na raiz desse repositório.
 
 # Contribua!
-Os arquivos neste repositório são referências históricas e continuarão estáticos, por gentileza, não envie Pull Requests sugerindo quaisquer modificações no código fonte, mas sinta-se a vontade para copiar esse repositório e experimentá-lo 😊.
+Os arquivos neste repositório são referências históricas e continuarão estáticos, por gentileza, **não envie** Pull Requests sugerindo quaisquer modificações no código fonte, mas sinta-se a vontade para copiar esse repositório e experimentá-lo 😊.
 
 Se, no entanto, você quiser enviar conteúdos adicionais que não sejam conteúdos ou modificações no código fonte (como por exempo este LEIA-ME), por favor, envie via Pull Request e nós iremos revisar e considerar.
 

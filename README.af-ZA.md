@@ -9,7 +9,7 @@ Dit is dieselfde lêers [wat oorspronklik op 25 Maart 2014 by die Computer Histo
 Alle lêers in hierdie repo word vrygestel onder die [MIT (OSI) Lisensie]( https://en.wikipedia.org/wiki/MIT_License) soos per die [LISENSIE-lêer](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) gestoor in die wortel van hierdie repo.
 
 # Dra by!
-Die bron lêers in hierdie repo is vir historiese verwysing en sal staties gehou word. Moet asseblief nie Pull-versoeke stuur wat enige wysigings aan die brondelêers voorstel nie, maar voel vry om hierdie repo te verfyn en eksperimenteer.
+Die bron lêers in hierdie repo is vir historiese verwysing en sal staties gehou word. Moet asseblief  **nie Pull-versoeke stuur** wat enige wysigings aan die brondelêers voorstel nie, maar voel vry om hierdie repo te verfyn en eksperimenteer.
 
 As u egter addisionele nie-broninhoud of wysigings aan nie-bron lêers wil indien (bv. Hierdie README), stuur asseblief via PR, en ons sal dit hersien en oorweeg.
 

@@ -9,7 +9,7 @@ Ini adalah [file yang sama yang awalnya dibagikan di Museum Sejarah Komputer pad
 Semua file dalam repo ini dirilis di bawah [Lisensi MIT (OSI)](https://en.wikipedia.org/wiki/MIT_License) sesuai [file LISENSI](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) yang disimpan di root repo ini.
 
 # Kontribusi!
-File sumber di repo ini adalah untuk referensi historis dan akan tetap statis, jadi tolong jangan kirimkan PR yang menyarankan modifikasi apa pun ke file sumber, tetapi jangan ragu-ragu untuk membuat repo dan bereksperimen 😊.
+File sumber di repo ini adalah untuk referensi historis dan akan tetap statis, jadi tolong **jangan kirimkan** PR yang menyarankan modifikasi apa pun ke file sumber, tetapi jangan ragu-ragu untuk membuat repo dan bereksperimen 😊.
 
 Namun, jika Anda ingin mengirimkan konten non-sumber tambahan atau modifikasi ke file non-sumber (misalnya, README ini), kirimkan melalui PR, dan kami akan meninjau dan mempertimbangkan.
 
