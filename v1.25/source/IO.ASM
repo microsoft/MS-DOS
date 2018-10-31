@@ -152,11 +152,11 @@ INIT:
 ; Initialize time-of-day clock.
 ;
 	MOV	SI,STCTAB
-	MOV	CX,4		;Initialize 4 registers
+	MOV	CX,4		; Initialize 4 registers
 	UP
 INITSTC:
 	LODB
-	OUT	STCCOM		;Select register to initialize
+	OUT	STCCOM		; Select register to initialize
 	LODB
 	OUT	STCDATA
 	LODB
@@ -170,9 +170,9 @@ SERINIT:
 	OUT	SIOBASE+1
 	OUT	SIOBASE+3
 	LOOP	SERINIT
-	LODB			;Baud rate for channel 0
+	LODB			; Baud rate for channel 0
 	OUT	SIOBASE+8
-	LODB			;Baud rate for channel 1
+	LODB			; Baud rate for channel 1
 	OUT	SIOBASE+9
 	ENDIF
 ;
@@ -198,62 +198,62 @@ SERINIT:
 	MOV	W,[BP+38*4],DIRECTWRITE
 
 	MOV	DX,100H
-	MOV	AH,26		;Set DMA address
+	MOV	AH,26		; Set DMA address
 	INT	33
-	MOV	CX,[6]		;Get size of segment
-	MOV	BX,DS		;Save segment for later
+	MOV	CX,[6]		; Get size of segment
+	MOV	BX,DS		; Save segment for later
 ;
 ; DS must be set to CS so we can point to the FCB.
 ;
 	MOV	AX,CS
 	MOV	DS,AX
-	MOV	DX,FCB		;File Control Block for COMMAND.COM
+	MOV	DX,FCB		; File Control Block for COMMAND.COM
 	MOV	AH,15
-	INT	33		;Open COMMAND.COM
+	INT	33		; Open COMMAND.COM
 	OR	AL,AL
-	JNZ	COMERR		;Error if file not found
+	JNZ	COMERR		; Error if file not found
 	XOR	AX,AX
 	MOV	[FCB+33],AX	; Set 4-byte Random Record field to
 	MOV	[FCB+35],AX	;  beginning of file.
 	INC	AX
-	MOV	[FCB+14],AX	;Set record length field
-	MOV	AH,39		;Block read (CX already set)
+	MOV	[FCB+14],AX	; Set record length field
+	MOV	AH,39		; Block read (CX already set)
 	INT	33
-	JCXZ	COMERR		;Error if no records read
+	JCXZ	COMERR		; Error if no records read
 	TEST	AL,1
-	JZ	COMERR		;Error if not end-of-file
+	JZ	COMERR		; Error if not end-of-file
 ;
 ; Make all segment registers the same.
 ;
 	MOV	DS,BX
 	MOV	ES,BX
 	MOV	SS,BX
-	MOV	SP,5CH		;Set stack to standard value
+	MOV	SP,5CH		; Set stack to standard value
 	XOR	AX,AX
-	PUSH	AX		;Put zero on top of stack for return
+	PUSH	AX		; Put zero on top of stack for return
 	MOV	DX,80H
 	MOV	AH,26
-	INT	33		;Set default transfer address (DS:0080)
-	PUSH	BX		;Put segment on stack
+	INT	33		; Set default transfer address (DS:0080)
+	PUSH	BX		; Put segment on stack
 	MOV	AX,100H
-	PUSH	AX		;Put address to execute within segment on stack
-	RET	L		;Jump to COMMAND
+	PUSH	AX		; Put address to execute within segment on stack
+	RET	L		; Jump to COMMAND
 
 COMERR:
 	MOV	DX,BADCOM
-	MOV	AH,9		;Print string
+	MOV	AH,9		; Print string
 	INT	33
 	EI
 STALL:	JP	STALL
 
-STCTAB:	DB	17H		;Select master mode register
-	DW	84F3H		;Enable time-of-day
-	DB	1		;Counter 1 mode register
+STCTAB:	DB	17H		; Select master mode register
+	DW	84F3H		; Enable time-of-day
+	DB	1		; Counter 1 mode register
 	DW	0138H
 	DB	2
 	DW	0038H
 	DB	3
-	DW	0008H		;Set counter 3 to count days
+	DW	0008H		; Set counter 3 to count days
 
 	IF	SERIAL
 	DB	0B7H, 77H, 4EH, 37H, PRNBAUD, AUXBAUD
@@ -266,20 +266,20 @@ FCB:	DB	1,"COMMAND COM"
 ; ************ Time and Date ************
 ;
 GETTIME:
-	MOV	AL,0A7H		;Save counters 1,2,3
+	MOV	AL,0A7H		; Save counters 1,2,3
 	OUT	STCCOM
-	MOV	AL,0E0H		;Enable data pointer sequencing
+	MOV	AL,0E0H		; Enable data pointer sequencing
 	OUT	STCCOM
-	MOV	AL,19H		;Select hold 1 / hold cycle
+	MOV	AL,19H		; Select hold 1 / hold cycle
 	OUT	STCCOM
-	CALL	STCTIME		;Get seconds & 1/100's
+	CALL	STCTIME		; Get seconds & 1/100's
 	XCHG	AX,DX
-	CALL	STCTIME		;Get hours & minutes
+	CALL	STCTIME		; Get hours & minutes
 	XCHG	AX,CX
 	IN	STCDATA
 	MOV	AH,AL
 	IN	STCDATA
-	XCHG	AL,AH		;Count of days
+	XCHG	AL,AH		; Count of days
 	JP	POINTSTAT
 
 STCTIME:
@@ -292,8 +292,8 @@ STCBYTE:
 	SHR	AH
 	SHR	AH
 	SHR	AH
-	AND	AL,0FH		;Unpack BCD digits
-	AAD			;Convert to binary
+	AND	AL,0FH		; Unpack BCD digits
+	AAD			; Convert to binary
 	MOV	AH,AL
 	MOV	AL,CL
 	RET
@@ -301,16 +301,16 @@ STCBYTE:
 SETTIME:
 	PUSH	CX
 	PUSH	DX
-	CALL	LOAD0		;Put 0 into load registers to condition timer
-	MOV	AL,43H		;Load counters 1 & 2
+	CALL	LOAD0		; Put 0 into load registers to condition timer
+	MOV	AL,43H		; Load counters 1 & 2
 	OUT	STCCOM
 	POP	DX
 	POP	CX
 	CALL	LOAD
 	MOV	AL,43H
-	OUT	STCCOM		;Load counters 1&2
+	OUT	STCCOM		; Load counters 1&2
 	CALL	LOAD0
-	MOV	AL,27H		;Arm counters 1,2,3
+	MOV	AL,27H		; Arm counters 1,2,3
 	OUT	STCCOM
 	JP	POINTSTAT
 
@@ -318,39 +318,39 @@ LOAD0:
 	XOR	CX,CX
 	MOV	DX,CX
 LOAD:
-	MOV	AL,09		;Counter 1 load register
+	MOV	AL,09		; Counter 1 load register
 	CALL	OUTDX
-	MOV	AL,0AH		;Counter 2 load register
+	MOV	AL,0AH		; Counter 2 load register
 	MOV	DX,CX
 OUTDX:
-	OUT	STCCOM		;Select a load register
+	OUT	STCCOM		; Select a load register
 	MOV	AL,DL
 	CALL	OUTBCD
 	MOV	AL,DH
 OUTBCD:
-	AAM			;Convert binary to unpacked BCD
+	AAM			; Convert binary to unpacked BCD
 	SHL	AH
 	SHL	AH
 	SHL	AH
 	SHL	AH
-	OR	AL,AH		;Packed BCD
+	OR	AL,AH		; Packed BCD
 	OUT	STCDATA
 	RET
 
 SETDATE:
-	XCHG	AX,DX		;Put date in DX
-	MOV	AL,0BH		;Select Counter 3 load register
+	XCHG	AX,DX		; Put date in DX
+	MOV	AL,0BH		; Select Counter 3 load register
 	OUT	STCCOM
 	XCHG	AX,DX
 	OUT	STCDATA
 	MOV	AL,AH
 	OUT	STCDATA
-	MOV	AL,44H		;Load counter 3
+	MOV	AL,44H		; Load counter 3
 	OUT	STCCOM
 POINTSTAT:
 	PUSH	AX
-	MOV	AL,1FH		;Point to status register
-	OUT	STCCOM		;   so power-off glitches won't hurt
+	MOV	AL,1FH		; Point to status register
+	OUT	STCCOM		;  so power-off glitches won't hurt
 	POP	AX
 	RET	L
 ;
@@ -405,9 +405,9 @@ QUEUE:	DB	-1		; For storing characters from STATUS to INP.
 KBINT:
 	PUSH	AX
 	PUSH	SI
-	MOV	AL,20H		;End of Interrupt command
-	OUT	BASE+2		;Send to slave
-	IN	DATA		;Get the character
+	MOV	AL,20H		; End of Interrupt command
+	OUT	BASE+2		; Send to slave
+	IN	DATA		; Get the character
 	AND	AL,7FH
 	CMP	AL,"C"-"@"
 	JZ	FLSH
@@ -419,15 +419,15 @@ FLSH:
 	CALL	13*3,BIOSSEG	; Call I/O system keyboard buffer flush.
 SAVKY:
 	SEG	CS
-	MOV	SI,[REAR]	;Pointer to rear of queue
+	MOV	SI,[REAR]	; Pointer to rear of queue
 	CALL	INCQ
 	SEG	CS
-	CMP	SI,[FRONT]	;Any room in queue?
+	CMP	SI,[FRONT]	; Any room in queue?
 	JZ	QFULL
 	SEG	CS
-	MOV	[SI],AL		;Put character in queue
+	MOV	[SI],AL		; Put character in queue
 	SEG	CS
-	MOV	[REAR],SI	;Save pointer
+	MOV	[REAR],SI	; Save pointer
 LEAVINT:
 	POP	SI
 	POP	AX
@@ -446,11 +446,11 @@ STATUS:
 	SEG	CS
 	MOV	SI,[PFRONT]
 	SEG	CS
-	CMP	SI,[PREAR]	;Anything in print queue?
+	CMP	SI,[PREAR]	; Anything in print queue?
 	JNZ	SENDPRN
 	SEG	CS
-	CMP	B,[PRNFCB],-1	;Print spooling in progress?
-	JZ	NOPRN		;If not, nothing to print
+	CMP	B,[PRNFCB],-1	; Print spooling in progress?
+	JZ	NOPRN		; If not, nothing to print
 ;Print spooling in progress. Get next buffer
 	PUSH	DS
 	PUSH	CS
@@ -463,15 +463,15 @@ STATUS:
 	PUSH	[DMAADD]
 	PUSH	[DMAADD+2]
 	MOV	DX,PQUEUE
-	MOV	AH,26		;Set DMA address
+	MOV	AH,26		; Set DMA address
 	INT	33
 	MOV	DX,PRNFCB
 	MOV	CX,PBUFSIZ
-	MOV	AH,39		;Read buffer
+	MOV	AH,39		; Read buffer
 	INT	33
 	OR	AL,AL
 	JZ	NOTEOF
-	MOV	B,[PRNFCB],-1	;Turn off print spooling at EOF
+	MOV	B,[PRNFCB],-1	; Turn off print spooling at EOF
 NOTEOF:
 	POP	[DMAADD+2]
 	POP	[DMAADD]
@@ -493,7 +493,7 @@ SENDPRN:
 	SEG	CS
 	MOV	[PFRONT],SI
 	SEG	CS
-	LODSB			;Get character to print
+	LODSB			; Get character to print
 	OUT	PRNDATA
 NOPRN:
 	DI			; Disable interrupts while checking queue.
@@ -504,12 +504,12 @@ NOPRN:
 	JZ	NOCHR		; Jump if nothing in queue.
 	CALL	INCQ
 	SEG	CS
-	LODSB			;Get character (if there is one)
-	OR	SI,SI		;Reset zero flag
+	LODSB			; Get character (if there is one)
+	OR	SI,SI		; Reset zero flag
 NOCHR:
 	EI
 	POP	SI
-	RET	L		;Zero clear if we have a character
+	RET	L		; Zero clear if we have a character
 
 INP:
 	CALL	STATUS,BIOSSEG	; Get I/O system console input status.
@@ -536,14 +536,14 @@ FLUSH:
 
 INCQ:
 	INC	SI
-	CMP	SI,ENDQ		;Exceeded length of queue?
+	CMP	SI,ENDQ		; Exceeded length of queue?
 	JB	RET
 	MOV	SI,QUEUE
 	RET
 
 INCPQ:
 	INC	SI
-	CMP	SI,ENDPQ	;Exceeded length of queue?
+	CMP	SI,ENDPQ	; Exceeded length of queue?
 	JB	RET
 	MOV	SI,PQUEUE
 	RET
@@ -584,7 +584,7 @@ PRINLP:
 	JNZ	PRNCHR
 ;Print queue is full
 	PUSH	AX
-	CALL	STATUS,BIOSSEG	;Poll and maybe print something
+	CALL	STATUS,BIOSSEG	; Poll and maybe print something
 	POP	AX
 	JMPS	PRINLP
 PRNCHR:
@@ -836,16 +836,16 @@ MOTORSON:
 ;	       12 = "disk" (none of the above) error
 ;
 READ:
-	CALL	SEEK		;Position head
+	CALL	SEEK		; Position head
 	JC	ERROR
 	PUSH	ES		; Make ES same as DS.
 	MOV	BX,DS
 	MOV	ES,BX
 RDLP:
-	CALL	READSECT	;Perform sector read
+	CALL	READSECT	; Perform sector read
 	JC	POPESERROR
-	INC	DH		;Next sector number
-	LOOP	RDLP		;Read each sector requested
+	INC	DH		; Next sector number
+	LOOP	RDLP		; Read each sector requested
 	CLC			; No errors.
 	POP	ES		; Restore ES register.
 	RET	L
@@ -854,13 +854,13 @@ RDLP:
 ; Registers same on entry and exit as read above.
 ;
 WRITE:
-	CALL	SEEK		;Position head
+	CALL	SEEK		; Position head
 	JC	ERROR
 WRTLP:
-	CALL	WRITESECT	;Perform sector write
+	CALL	WRITESECT	; Perform sector write
 	JC	ERROR
-	INC	DH		;Bump sector counter
-	LOOP	WRTLP		;Write CX sectors
+	INC	DH		; Bump sector counter
+	LOOP	WRTLP		; Write CX sectors
 	CLC			; No errors.
 WRITERET:
 	RET	L
@@ -884,13 +884,13 @@ GETCOD:
 	RET	L
 
 ERRTAB:
-	DB	40H		;Write protect error
-	DB	80H		;Not ready error
-	DB	8		;CRC error
-	DB	2		;Seek error
-	DB	10H		;Sector not found
-	DB	20H		;Write fault
-	DB	7		;"Disk" error
+	DB	40H		; Write protect error
+	DB	80H		; Not ready error
+	DB	8		; CRC error
+	DB	2		; Seek error
+	DB	10H		; Sector not found
+	DB	20H		; Write fault
+	DB	7		; "Disk" error
 ;
 ; Direct disk read and write from INT 37 and INT 38.  Subroutine GETIODRIVER
 ; calls DSKCHG to convert disk drive number to I/O driver number.
@@ -1357,7 +1357,7 @@ RESTORE:
 
 	IF	FASTSEEK*CROMEMCO4FDC
 RESTORE:
-	MOV	AL,0C4H		;READ ADDRESS command to keep head loaded
+	MOV	AL,0C4H		; READ ADDRESS command to keep head loaded
 	OUT	DISK
 	MOV	AL,77H
 	OUT	4
@@ -1369,13 +1369,13 @@ CHKRES:
 	TEST	AL,DONEBIT
 	JZ	CHKRES
 	IN	DISK
-	JP	RESTORE		;Reload head
+	JP	RESTORE		; Reload head
 RESDONE:
 	MOV	AL,7FH
 	OUT	4
 	CALL	GETSTAT
 	MOV	AL,0
-	OUT	DISK+1		;Tell 1771 we're now on track 0
+	OUT	DISK+1		; Tell 1771 we're now on track 0
 	RET
 	ENDIF
 
@@ -1413,7 +1413,7 @@ MOVHEAD:
 DCOM:
 	OUT	DISK
 	PUSH	AX
-	AAM			;Delay 10 microseconds
+	AAM			; Delay 10 microseconds
 	POP	AX
 GETSTAT:
 	IN	DISK+4
