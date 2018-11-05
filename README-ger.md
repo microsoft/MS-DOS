@@ -1,16 +1,16 @@
 <img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="https://github.com/Microsoft/MS-DOS/blob/master/msdos-logo.png">   
 
 # MS-DOS v1.25 und v2.0 Quellcode
-Diese repo enthält den originalen Quellcode und kompilierte Binärdateien für MS-DOS v1.25 und MS-DOS v2.0.
+Dieses Repository enthält den ursprünglichen Quellcode, sowie die kompilierten Binärdateien für MS-DOS v1.25 und MS-DOS v2.0.
 
-Dies sind die gleichen Datein [wie sie ursprünglich am 25. März 2014 mit dem Computer History Museum geteilt wurden]( http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) und werden in diesem Repo (wieder) veröffentlicht, damit sie leichter zu finden sind, in externen Texten und Werken referenziert werden und erkundungen und Experimentieren für diejenigen ermöglicht wird, die sich für frühe PC-Betriebssysteme interessieren.
+Dabei handelt es sich um die gleichen Dateien, [welche ursprünglich am 25. März 2014 mit dem Computer History Museum geteilt wurden]( http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/). Die Wiederveröffentlichung in diesem Repository macht diese Dateien leichter auffindbar und vereinfacht das Referenzieren in Texten und Arbeiten. Außerdem ermöglicht diese Veröffentlichung denjenigen, welche sich für frühe PC-Betriebssysteme interessieren, die Auseinandersetzung mit dem Programmcode und den Binärdateien zu Untersuchungs- und Experimentierzwecken.
 
 # Lizenz
-Alle veröffentlichte Dateien innerhalb dieses Repos sind unter der [MIT (OSI) License]( https://en.wikipedia.org/wiki/MIT_License) gemäß der [LICENSE file](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) in diesem Repo gespeichert.
+Alle Dateien, welche in diesem Repository veröffentlich sind, fallen unter die [MIT (OSI) Lizenz](https://de.wikipedia.org/wiki/MIT-Lizenz) gemäß der [Lizenzdatei](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md), welche sich im Stammverzeichnis dieses Repositorys befindet.
 
 # Beitragen!
-Die Quelldateien in diesem Repo dienen der historischen Referenz und bleiben statisch. Bitte senden Sie keine Pull Requests, in denen Änderungen an den Quelldateien vorgeschlagen werden 😊.  
+Der Quellcode in diesem Repository dient als geschichtliche Referenz und bleibt deshalb unverändert. Bitte sende **keine Pull Requests**, welche Änderungen des Quellcodes beinhalten. Zögere aber nicht, dieses Repository abzuspalten (engl: to fork) um damit zu experimentieren 😊.  
 
-Wenn Sie jedoch zusätzliche Inhalte ohne Quellcode oder Änderungen an Nicht-Quelldateien (z. B. diese README-Datei) einreichen möchten, senden Sie sie bitte per PR, und wir prüfen diese.
+Vorschläge für zusätzliches Material oder Änderungen an Dateien, welche nicht zum Quellcode gehören (z. B. diese README-Datei), können per Pull Request zur Prüfung eingereicht werden.
 
-Dieses Projekt hat die [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).  Weitere Informationen finden Sie unter [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) oder Kontaktieren Sie [opencode@microsoft.com](mailto:opencode@microsoft.com) mit allen zusätzlichen Fragen oder Anmerkungen.
+Dieses Projekt übernimmt den [Microsoft Open Source Verhaltenskodex](https://opensource.microsoft.com/codeofconduct/).  Weitere Informationen sind im [Verhaltenskodex FAQ](https://opensource.microsoft.com/codeofconduct/faq/) zu finden. Für weitere Fragen oder Kommentare kontaktiere [opencode@microsoft.com](mailto:opencode@microsoft.com).
