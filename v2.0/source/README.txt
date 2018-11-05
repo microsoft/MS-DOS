@@ -1,8 +1,8 @@
                          MSDOS 2.0 RELEASE
 
 
-The 2.0 Release of MSDOS includes five 5 1/4 double density single sided
-diskettes or three 8 iinch CP/M 80 format diskettes.
+The 2.0 Release of MSDOS includes five 5 1/4 inch double density single sided
+diskettes or three 8 inch CP/M 80 format diskettes.
 
 The software/documentation on the five inch diskettes is arranged
 as follows:
@@ -174,4 +174,3 @@ At all times, the BIOS writer should be careful to preserve the state
 of the DOS - including the flags.  You should be also be cautioned that
 the MSDOS stack is not deep.  You should not count on more than one or
 two pushes of the registers.
-                                                                                   
