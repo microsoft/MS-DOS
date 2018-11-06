@@ -1,7 +1,9 @@
 <img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="https://github.com/Microsoft/MS-DOS/blob/master/msdos-logo.png">   
 
 # MS-DOS v1.25 와 v2.0 소스 코드
-이 저장소는 MS-DOS v1.25와 v2.0의 원본 소스코드와 컴파일된 바이너리들을 포함하고 있습니다. 여기에 공개된 파일들은 [2014년 3월 25일 컴퓨터 역사 박물관에 전시된 파일들]( http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/)과 동일 합니다. 하지만, 초기 개인 컴퓨터 운영체제에 관심이 많은 사람들이 더 쉽게 코드를 찾거나, 여러 분야에서 참조하거나, 또한 초기 운영체제 자체를 살펴보고 이런 저런 실험들을 쉽게 할 수 있도록 이곳에 추가로 공개하게 되었습니다. 
+이 저장소는 MS-DOS v1.25와 v2.0의 원본 소스코드와 컴파일된 바이너리들을 포함하고 있습니다. 
+
+여기에 공개된 파일들은 [2014년 3월 25일 컴퓨터 역사 박물관에 전시된 파일들]( http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/)과 동일 합니다. 하지만, 초기 개인 컴퓨터 운영체제에 관심이 많은 사람들이 더 쉽게 코드를 찾거나, 여러 분야에서 참조하거나, 또한 초기 운영체제 자체를 살펴보고 이런 저런 실험들을 쉽게 할 수 있도록 이곳에 추가로 공개하게 되었습니다. 
 
 # 저작권
 여기에 있는 모든 파일들은 [LICENSE 파일](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md)에 명시된 데로 [MIT (OSI) 라이선스](https://en.wikipedia.org/wiki/MIT_License)로 배포됩니다.
