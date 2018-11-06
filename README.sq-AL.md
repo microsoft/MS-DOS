@@ -3,7 +3,7 @@
 # Kodi i Burimit MS-DOS v1.25 dhe v2.0 
 Ky depo përmban kodin origjinal të burimit dhe binarë të përpiluar për MS-DOS v1.25 dhe MS-DOS v2.0.
 
-Këto janë të njëjtat skedarë [të ndara fillimisht në Muzeun Historik të Kompjuterit më 25 Mars 2014] (dhe http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) ) dhe po (ri) botohen në këtë depo për t'i bërë më të lehtë për t'u gjetur, per t`u referuar në shkrimin dhe veprat e jashtme dhe për të lejuar eksplorimin dhe eksperimentimin për ata që janë të interesuar në sistemet operative të hershme të PC.
+Këto janë të njëjtat skedarë [të ndara fillimisht në Muzeun Historik të Kompjuterit më 25 Mars 2014] (dhe https://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) ) dhe po (ri) botohen në këtë depo për t'i bërë më të lehtë për t'u gjetur, per t`u referuar në shkrimin dhe veprat e jashtme dhe për të lejuar eksplorimin dhe eksperimentimin për ata që janë të interesuar në sistemet operative të hershme të PC.
 
 # Liçensë
 Të gjitha dosjet brenda këtij depo janë lëshuar nën [MIT (OSI) License] (https://en.wikipedia.org/wiki/MIT_License) sipas [file LICENSE] (https://github.com/Microsoft/MS -DOS / blob / master / LICENSE.md) ruajtur në rrënjë të këtij depo.
