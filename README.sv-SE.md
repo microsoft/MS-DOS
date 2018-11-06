@@ -3,7 +3,7 @@
 # MS-DOS v1.25 och v2.0 källkod
 Det här repot innehåller orginalkällkoden och kompilerade binär-filer för MS-DOS v1.25 och MS-DOS v2.0.
 
-Det här är samma filer som [delades på Computer History Museum den 25 Mars 2014]( http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) och är publicerade här i detta repot för att göra dem lättare att hitta och referrera till, samt att tillåta utforskning av källkoden och experimentera med för dem som är intresserade av tidiga PC operativsystem.
+Det här är samma filer som [delades på Computer History Museum den 25 Mars 2014]( https://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) och är publicerade här i detta repot för att göra dem lättare att hitta och referrera till, samt att tillåta utforskning av källkoden och experimentera med för dem som är intresserade av tidiga PC operativsystem.
 
 # Licens
 Alla filer i detta repo är släppta under [MIT (OSI) licensen]( https://en.wikipedia.org/wiki/MIT_License) enligt [LICENSE filen](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) som finns i roten av detta repo.

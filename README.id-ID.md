@@ -3,7 +3,7 @@
 # Kode Sumber MS-DOS v1.25 dan v2.0
 Repo ini berisi kode sumber asli dan biner terkompilasi untuk MS-DOS v1.25 dan MS-DOS v2.0.
 
-Ini adalah [file yang sama yang awalnya dibagikan di Museum Sejarah Komputer pada 25 Maret 2014]( http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) dan sedang (diterbitkan ulang) di repo ini agar lebih mudah ditemukan, referensi-ke dalam tulisan dan karya eksternal, dan untuk memungkinkan eksplorasi dan eksperimen untuk mereka yang tertarik pada Sistem Operasi PC awal.
+Ini adalah [file yang sama yang awalnya dibagikan di Museum Sejarah Komputer pada 25 Maret 2014]( https://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) dan sedang (diterbitkan ulang) di repo ini agar lebih mudah ditemukan, referensi-ke dalam tulisan dan karya eksternal, dan untuk memungkinkan eksplorasi dan eksperimen untuk mereka yang tertarik pada Sistem Operasi PC awal.
 
 # Lisensi
 Semua file dalam repo ini dirilis di bawah [Lisensi MIT (OSI)](https://en.wikipedia.org/wiki/MIT_License) sesuai [file LISENSI](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) yang disimpan di root repo ini.

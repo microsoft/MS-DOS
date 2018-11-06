@@ -3,7 +3,7 @@
 # MS-DOS v1.25 ve v2.0 Kaynak Kodu
 Bu depo MS-DOS v1.25 ve MS-DOS v2.0'ın orijinal kaynak kodunu ve derlenmiş çalıştırılabilir dosyalarını içerir.
 
-Bu dosyalar [ilk olarak 25 Mart 2014 tarihinde Bilgisayar Tarihi Müzesinde yayınlananlarla]( http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) aynı dosyalardır ve bu projede, daha kolay bulunabilmesi, dış yazılar ve işlerde atıflanabilmesi ve öncül Kişisel Bilgisayar İşletim Sistemlerine ilgi duyanların keşif ve denemeler yapabilmesi için (yeniden) yayınlanmaktadır.
+Bu dosyalar [ilk olarak 25 Mart 2014 tarihinde Bilgisayar Tarihi Müzesinde yayınlananlarla]( https://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) aynı dosyalardır ve bu projede, daha kolay bulunabilmesi, dış yazılar ve işlerde atıflanabilmesi ve öncül Kişisel Bilgisayar İşletim Sistemlerine ilgi duyanların keşif ve denemeler yapabilmesi için (yeniden) yayınlanmaktadır.
 
 # Lisans
 Bu depodaki tüm dosyalar, deponun kök klasöründeki [LİSANS dosyasında](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) belirtildiği gibi [MIT (OSI) Lisansıyla](https://en.wikipedia.org/wiki/MIT_License) yayınlanmıştır.
