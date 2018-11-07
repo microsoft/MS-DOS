@@ -9,5 +9,5 @@
 
 # 기여하기!
 여기 있는 소스 코드 파일들은 역사적인 사료로서 수정되지 않을것이니, 제발 소스 코드 수정을 포함하는 Pull Request를 보내주시진 마시되, 포크해서 씹고 뜯고 맛보고 즐기세요.
-만약, 그러나, (이 README 파일 수정과 같은) 소스 코드에 영향을 미치지 않은 내용 추가나 변경은, Pull Request를 보내주시면, 우리가 검토하고 반영될 수도 잇습니다.
+만약, 그러나, (이 README 파일 수정과 같은) 소스 코드에 영향을 미치지 않는 내용 추가나 변경은, Pull Request를 보내주시면, 우리가 검토하고 반영될 수도 있습니다.
 이 프로젝트는 [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/)를 따릅니다. 더 많은 정보를 원하시면 [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/)를 참고하거나 [opencode@microsoft.com](mailto:opencode@microsoft.com)으로 연락 주시기 바랍니다.
