@@ -1,7 +1,7 @@
 <img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="https://github.com/Microsoft/MS-DOS/blob/master/msdos-logo.png">   
 
 # Codice Sorgente di MS-DOS v1.25 e v2.0
-Questo repository contiene il codice sorgente originale e i binari compilati per MS-DOS v1.25 e MS-DOS v2.0.
+Questo repository contiene il codice sorgente originale ed i binari compilati per MS-DOS v1.25 e MS-DOS v2.0.
 
 Questi sono gli stessi file [condivisi tempo fa al Computer History Museum il 25 marzo 2014](http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) e sono stati (ri)pubblicati in questo repository per renderli più facili da trovare, usarli come riferimento in documenti e lavori esterni e consentirne la consultazione e la sperimentazione per coloro che sono interessati ai primi sistemi operativi per PC.
 
