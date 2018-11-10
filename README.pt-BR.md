@@ -3,7 +3,7 @@
 # Código Fonte do MS-DOS v1.25 e v2.0
 Esse repositório contém o código fonte original e os binários compilados do MS-DOS v1.25 e MS-DOS v2.0
 
-Estes são os mesmos arquivos [orinalmente compartilhados no Museu da História da Computação em 25 de Março de 2014]( http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) e estão sendo republicados neste repositório para torná-los fáceis de encontrar, referenciá-los em artigos e trabalhos externos, e para permitir também explorações e experiências para os interessados nos primeiros Sistemas Operacionais destinados a PCs.
+Estes são os mesmos arquivos [originalmente compartilhados no Museu da História da Computação em 25 de Março de 2014]( http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) e estão sendo republicados neste repositório para torná-los fáceis de encontrar, referenciá-los em artigos e trabalhos externos, e para permitir também explorações e experiências para os interessados nos primeiros Sistemas Operacionais destinados a PCs.
 
 # Licença
 Todos os arquivos neste repositório estão publicados sob a [Licença do MIT (OSI)]( https://en.wikipedia.org/wiki/MIT_License) bem como o [arquivo de LICENÇA](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) armazenado na raiz desse repositório.
@@ -13,4 +13,4 @@ Os arquivos neste repositório são referências históricas e continuarão est�
 
 Se, no entanto, você quiser enviar conteúdos adicionais que não sejam conteúdos ou modificações no código fonte (como por exempo este LEIA-ME), por favor, envie via Pull Request e nós iremos revisar e considerar.
 
-Esse projeto tem adotado o [Código de Conduta para Código Aberto da Microsofit](https://opensource.microsoft.com/codeofconduct/). Para mais informações, veja o [FAQ do Código de Conduta](https://opensource.microsoft.com/codeofconduct/faq/) ou entre em contato com [opencode@microsoft.com](mailto:opencode@microsoft.com) para quaisquer questões ou comentários adicionais.
+Esse projeto tem adotado o [Código de Conduta para Código Aberto da Microsoft](https://opensource.microsoft.com/codeofconduct/). Para mais informações, veja o [FAQ do Código de Conduta](https://opensource.microsoft.com/codeofconduct/faq/) ou entre em contato com [opencode@microsoft.com](mailto:opencode@microsoft.com) para quaisquer questões ou comentários adicionais.
