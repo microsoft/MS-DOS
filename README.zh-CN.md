@@ -9,7 +9,7 @@
 本 Repo 中的所有文件均按照 [MIT (OSI) License]( https://en.wikipedia.org/wiki/MIT_License) 发布，请参阅 Repo 根目录中的 [LICENSE](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md)文件。
 
 # 贡献指南
-本 Repo 中的源代码部分由于历史原因应保持不变，所以请 **不要** 提交任何有关修改源代码的 PR，但您仍然可以 Fort 并测试它 😊。
+本 Repo 中的源代码部分由于历史原因应保持不变，所以请 **不要** 提交任何有关修改源代码的 PR，但您仍然可以 Fork 并测试它 😊。
 
 当然，如果您向贡献一些与源代码无关的文件（如本 README），欢迎提交 PR，我们会考虑并审核它。
 
