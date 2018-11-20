@@ -13,4 +13,4 @@ File sumber di repo ini adalah untuk referensi historis dan akan tetap statis, j
 
 Namun, jika Anda ingin mengirimkan konten non-sumber tambahan atau modifikasi ke berkas non-sumber (misalnya, README ini), kirimkan melalui PR, dan kami akan meninjau dan mempertimbangkan.
 
-Proyek ini telah mengadopsi [Kode Perilaku Microsoft Open Source](https://opensource.microsoft.com/codeofconduct/). Untuk informasi lebih lanjut, lihat [Pedoman Perilaku FAQ](https://opensource.microsoft.com/codeofconduct/faq/) atau hubungi [opencode@microsoft.com](mailto:opencode@microsoft.com) dengan pertanyaan atau komentar tambahan.
+Proyek ini telah mengadopsi [Kode Perilaku Microsoft Open Source](https://opensource.microsoft.com/codeofconduct/). Untuk informasi lebih lanjut, lihat [TILIL Pedoman Perilaku](https://opensource.microsoft.com/codeofconduct/faq/) atau hubungi [opencode@microsoft.com](mailto:opencode@microsoft.com) dengan pertanyaan atau komentar tambahan.
