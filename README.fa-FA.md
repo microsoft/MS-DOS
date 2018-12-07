@@ -1,4 +1,4 @@
-<p style="direction:rtl" align="right">
+<div dir="rtl" style="direction:rtl" align="right">
 <img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="https://github.com/Microsoft/MS-DOS/blob/master/msdos-logo.png">
 
 # سورس کد MS-DOS نسخه‌های ۱.۲۵ و ۲.۰
@@ -17,4 +17,4 @@ MS-DOS می‌باشد.< /br>
 هرچند در صورت تمایل برای ثبت هرگونه تغییر در فایل های غیر اصلی (مثل این README) یا ایجاد آنها، با پول ریکوئست اقدام کنید، و ما بررسی و اقدام خواهیم کرد.
 
 برای اطلاعات بیشتر به [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) سر بزنید و یا با [opencode@microsoft.com](mailto:opencode@microsoft.com) در ارتباط باشید.
-</p>
+</div>
