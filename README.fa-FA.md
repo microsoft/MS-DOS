@@ -9,7 +9,7 @@ MS-DOS می‌باشد.
 این ها همان فایل هایی هستند که [در اصل در موزه تاریخ کامپیوتر در 25 مارس 2014]( http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) به اشتراک گذاشته شدند و به منظور راحتی در پیدا کردن، ارجاع دادن در نوشته ها و عملکرد های بیرونی، و اکتشاف و آزمایش برای آن دسته از افراد که علاقه مند به سیستم عامل های قدیمی کامپیوتری هستند بازنشر داده می‌شود.
 
 # گواهی‌نامه
-همه ی فایل های موجود در این ریپازیتوری تحت گواهی‌نامه [MIT (OSI)]( https://en.wikipedia.org/wiki/MIT_License) هستند به همین دلیل فایل [LICENSE](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) در دایرکتوری اصلی این ریپازیتوری دخیره شده است.
+همه ی فایل های موجود در این ریپازیتوری تحت گواهی‌نامه [)MIT (OSI]( https://en.wikipedia.org/wiki/MIT_License) هستند به همین دلیل فایل [LICENSE](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) در دایرکتوری اصلی این ریپازیتوری دخیره شده است.
 
 
 # مشارکت کنید!
