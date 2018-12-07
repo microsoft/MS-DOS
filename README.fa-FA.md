@@ -17,5 +17,8 @@ MS-DOS می‌باشد.
 
 هرچند در صورت تمایل برای ثبت هرگونه تغییر در فایل های غیر اصلی (مثل این README) یا ایجاد آنها، با پول ریکوئست اقدام کنید، و ما بررسی و اقدام خواهیم کرد.
 
-برای اطلاعات بیشتر به [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) سر بزنید و یا با [opencode@microsoft.com](mailto:opencode@microsoft.com) در ارتباط باشید.
+این پروژه از [اصول متن-باز مایکروسافت](https://opensource.microsoft.com/codeofconduct/)
+پیروی می‌کند.
+ برای اطلاعات بیشتر به [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) سر بزنید و یا با [opencode@microsoft.com](mailto:opencode@microsoft.com) در ارتباط باشید.
+
 </div>
