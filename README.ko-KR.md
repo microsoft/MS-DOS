@@ -3,7 +3,7 @@
 # MS-DOS v1.25와 v2.0 소스 코드
 이 저장소는 MS-DOS v1.25와 MS-DOS v2.0의 원본 소스 코드 및 컴파일된 바이너리를 모두 포함하고 있습니다.
 
-이 파일들은 [원래 2014년 3월 25일 컴퓨터 역사 박물관에서 공유되었으며]( http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) 사람들이 찾기 쉽게 하고, 문헌 등에 인용할 수 있게 하고, 초창기 PC 운영 체제에 관심이 있는 사람들의 분석과 실험을 위하여 이 저장소에 (재)배포 되었습니다.
+이 파일들은 [원래 2014년 3월 25일 컴퓨터 역사 박물관에서 공유되었으며]( http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) 찾기 쉽고, 외부 문헌이나 작업물에 인용하고, 초창기 PC 운영 체제에 관심이 있는 사람들이 분석과 실험을 할 수 있도록 허용하기 위해 이 저장소에 (재)배포 되었습니다.
 
 # 라이선스
 여기에 있는 모든 파일들은 [LICENSE 파일에](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) 명시된 바와 같이 [MIT (OSI) 라이선스](https://en.wikipedia.org/wiki/MIT_License)로 배포됩니다.
