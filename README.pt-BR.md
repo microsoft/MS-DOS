@@ -9,8 +9,8 @@ Estes são os mesmos arquivos [originalmente compartilhados no Museu da Históri
 Todos os arquivos neste repositório estão publicados sob a [Licença do MIT (OSI)]( https://en.wikipedia.org/wiki/MIT_License) bem como o [arquivo de LICENÇA](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) armazenado na raiz desse repositório.
 
 # Contribua!
-Os arquivos neste repositório são referências históricas e continuarão estáticos, por gentileza, não envie Pull Requests sugerindo quaisquer modificações no código fonte, mas sinta-se a vontade para copiar esse repositório e experimentá-lo 😊.
+Os arquivos neste repositório são referências históricas e continuarão estáticos, por gentileza, não envie Pull Requests sugerindo quaisquer modificações no código fonte, mas sinta-se a vontade para criar um fork deste repositório e fazer experimentos 😊.
 
-Se, no entanto, você quiser enviar conteúdos adicionais que não sejam conteúdos ou modificações no código fonte (como por exempo este LEIA-ME), por favor, envie via Pull Request e nós iremos revisar e considerar.
+Se, no entanto, você quiser enviar conteúdos adicionais que não sejam conteúdos ou modificações no código fonte (como por exempo este LEIA-ME), por favor, submeta via Pull Request e nós iremos revisar e considerar.
 
 Esse projeto tem adotado o [Código de Conduta para Código Aberto da Microsoft](https://opensource.microsoft.com/codeofconduct/). Para mais informações, veja o [FAQ do Código de Conduta](https://opensource.microsoft.com/codeofconduct/faq/) ou entre em contato com [opencode@microsoft.com](mailto:opencode@microsoft.com) para quaisquer questões ou comentários adicionais.
