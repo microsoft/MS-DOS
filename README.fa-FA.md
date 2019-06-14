@@ -1,6 +1,6 @@
 <img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="https://github.com/Microsoft/MS-DOS/blob/master/msdos-logo.png">   
 
-# مایکروسافت-داس نسخه های 1.25 و 2.0
+# ام‌اس-داس نسخه های 1.25 و 2.0
 این مخزن شامل کد های اصلی و باینری های کامپایل شده مایکروسافت-داس نسخه های 1.25 و 2.0 می باشد.
 
 که همان فایل های [originally shared at the Computer History Museum on March 25th, 2014]( http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) هستند که مجدد در اینجا منتشر شده است تا استفاده به عنوان مرجع یا مستقل را ساده تر کند و به افراد علاقه مند اجازه اکتشاف و بررسی سیستم عامل های اولیه را بدهد.
