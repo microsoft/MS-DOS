@@ -13,4 +13,4 @@
 
 اگر، با این حال، می خواهید محتوای اضافی غیر منبع یا تغییرات در فایلهای غیر منبع (مثلا این README) را ارسال کنید، لطفا از طریق PR ارسال کنید، و ما بررسی خواهیم کرد.
  
-این پروژه [Microsoft Code Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/) را اتخاذ کرده است.   برای اطلاعات بیشتر، به [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/)  مراجعه کنید یا با ارسال ایمیل به [opencode@microsoft.com](mailto: opencode@microsoft.com) سوالات اضافه و نظرات خود را اعلام کنید.
+این پروژه [Microsoft Code Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/) را اتخاذ کرده است.   برای اطلاعات بیشتر، به [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/)  مراجعه کنید یا با ارسال ایمیل به [opencode@microsoft.com](mailto:opencode@microsoft.com) سوالات اضافه و نظرات خود را اعلام کنید.
