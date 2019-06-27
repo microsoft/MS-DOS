@@ -13,11 +13,7 @@
 <div dir="rtl" style="direction:rtl;text-align:right;">
 <h1>لایسنس</h1>
 
-تمام فایل های این مخزن تحت مجوز
-[MIT (OSI) License](https://en.wikipedia.org/wiki/MIT_License)
-منتشر شد است که در فایل
-[LICENSE file](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md)
-نیز در شاخه اصلی پروه وجود دارد.
+تمام فایل های این مخزن تحت مجوز [MIT (OSI) License](https://en.wikipedia.org/wiki/MIT_License) منتشر شد است که در فایل [LICENSE file](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) نیز در شاخه اصلی پروه وجود دارد.
 
 </div>
 
