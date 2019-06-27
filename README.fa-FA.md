@@ -1,12 +1,21 @@
+<div dir="rtl" style="direction:rtl;text-align:right;">
 <img width="150" height="150" align="left" style="float: right; margin: 0 10px 0 0;" alt="MS-DOS logo" src="https://github.com/Microsoft/MS-DOS/blob/master/msdos-logo.png">   
 
-# ام‌اس-داس نسخه های 1.25 و 2.0
+<h1>ام‌اس-داس نسخه های 1.25 و 2.0</h1>
+<p>
 این مخزن شامل کد های اصلی و باینری های کامپایل شده مایکروسافت-داس نسخه های 1.25 و 2.0 می باشد.
 
-که همان فایل های [originally shared at the Computer History Museum on March 25th, 2014]( http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) هستند که مجدد در اینجا منتشر شده است تا استفاده به عنوان مرجع یا مستقل را ساده تر کند و به افراد علاقه مند اجازه اکتشاف و بررسی سیستم عامل های اولیه را بدهد.
+که همان فایل های [originally shared at the Computer History Museum on March 25th, 2014]( http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) هستند که مجدد در اینجا منتشر شده است تا استفاده به عنوان مرجع یا مستقل را ساده تر کند و به افراد علاقه مند اجازه اکتشاف و بررسی سیستم عامل های اولیه را بدهد
+.
+</p>
+</div>
 
-# لایسنس
+<div dir="rtl" style="direction:rtl;text-align:right;">
+<h1>لایسنس</h1>
+<p>
 تمام فایل های این مخزن تحت مجوز [MIT (OSI) License](https://en.wikipedia.org/wiki/MIT_License) منتشر شد است که در فایل [LICENSE file](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) نیز در شاخه اصلی پروه وجود دارد.
+</p>
+</div>
 
 <div dir="rtl" style="direction:rtl;text-align:right;">
 <h1>مشارکت!</h1>
