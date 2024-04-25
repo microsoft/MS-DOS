@@ -1,0 +1,12 @@
+JOIN.OBJ+
+..\..\inc\ERRTST.OBJ+
+..\..\inc\SYSVAR.OBJ+
+..\..\inc\CDS.OBJ+
+..\..\inc\DPB.OBJ+
+_MSGRET.OBJ+
+_PARSE.OBJ
+JOIN
+NUL
+..\..\inc\comsubs.lib+
+..\..\mapper\mapper.lib;
+

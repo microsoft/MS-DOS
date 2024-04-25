@@ -1,0 +1,47 @@
+PAGE	,132
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
+;; DOS - GRAPHICS Command
+;; (C) Copyright 1988 Microsoft
+;;										;AN000;
+;; File Name:  GRCTRL.EXT							;AN000;
+;; ----------									;AN000;
+;;										;AN000;
+;; Description: 								;AN000;
+;; ------------ 								;AN000;
+;;	 Include file containing external declarations for			;AN000;
+;;	 the code and data defined in GRCTRL.ASM				;AN000;
+;;										;AN000;
+;; Change History:								;AN000;
+;; ---------------								;AN000;
+;;										;AN000;
+;;										;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
+				       ;;					;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
+EXTRN  DET_HW_CONFIG:NEAR							;AN000;
+EXTRN  RGB:BYTE 								;AN000;
+EXTRN  BIOS_INT_5H:WORD 							;AN000;
+EXTRN  PRT_SCR:NEAR								;AN000;
+EXTRN  PRINT_SCREEN_ALLOWED:BYTE						;AN000;
+EXTRN  XLT_TAB:BYTE								;AN000;
+EXTRN  MODE_TYPE:BYTE								;AN000;
+EXTRN  CUR_MODE_PTR:WORD							;AN000;
+EXTRN  CUR_MODE:BYTE								;AN000;
+EXTRN  MODE_TYPE:BYTE								;AN000;
+EXTRN  NB_COLORS:WORD								;AN000;
+EXTRN  SCREEN_HEIGHT:WORD							;AN000;
+EXTRN  SCREEN_WIDTH:WORD							;AN000;
+EXTRN  NB_CHAR_COLUMNS:BYTE							;AN000;
+EXTRN  CUR_PAGE:BYTE								;AN000;
+EXTRN  CUR_COLUMN:WORD								;AN000;
+EXTRN  CUR_ROW:WORD								;AN000;
+EXTRN  NB_SCAN_LINES:WORD							;AN000;
+EXTRN  SCAN_LINE_MAX_LENGTH:WORD						;AN000;
+EXTRN  CUR_SCAN_LNE_LENGTH:WORD 						;AN000;
+EXTRN  PRT_BUF:BYTE								;AN000;
+EXTRN  NB_BOXES_PER_PRT_BUF:BYTE						;AN000;
+EXTRN  CUR_BOX:BYTE								;AN000;
+EXTRN  BOX_H:BYTE								;AN000;
+EXTRN  BOX_W:BYTE								;AN000;
+EXTRN  ERROR_CODE:BYTE								;AN000;
+EXTRN  ROTATE_SW:BYTE								;AN000;

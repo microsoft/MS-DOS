@@ -1,0 +1,615 @@
+
+.*
+.pm 5
+:gdoc sec=''
+:frontm
+:titlep
+:title.FASTOPEN UTILITY HIGH LEVEL DESIGN
+:date.
+:author.J. K.
+:ETITLEP
+:toc
+:body
+.DH NUM
+.*.pa
+&SYSDATE.
+.*:H1.INTRODUCTION
+.*:H1.ARCHITECTURE OVERVIEW
+
+:H1.FASTOPEN DESIGN
+:H2.FASTOPEN UTILITY
+:H3.FASTOPEN Overview
+FASTOPEN is a utility that allows DOS to maintain the information about
+files that have been opened.  The purpose is to reduce the number of times DOS
+has to look into the directory area of the disk for information on the file once
+the information is stored by FASTOPEN.	In real life, many application
+programs, especially current database systems on the market, tend to open the
+same file repeatedly and every open operation needs an access to the disk if the
+information does not exist in the DOS buffer.  The FASTOPEN utility will
+eliminate these disk accesses, and hence will increase the efficiency of DOS
+performance.
+
+
+:H3.FASTOPEN Operational Description
+Conceptually FASTOPEN itself is a database maintained by DOS.  The data will
+be stored and maintained in the system RAM.
+
+FASTOPEN is a user-installable, stay resident utility loaded by entering a
+command
+.fo off
+	1). FASTOPEN D:{=L} ...
+
+where	"..." means a possible repetition.
+
+	"D:" is a drive letter for a non_removable media.
+
+	"L" is the maxium number of files and subdirectories that can be
+	stored in the drive cache. The default value is 34, minimum
+	value, 10.  The total number for all the drives is less
+	than 1000.
+
+.fo on
+
+:H4.Name Caching
+FASTOPEN will keep the history of the accessed subdirectory and file
+information in LRU fashion.  The data are stored in a partial tree
+structure that represents all the recently accessed files and
+subdirectories of that drive.  The number of entries entered by the
+user, or the default number of 34, represents the maximum number of
+nodes and leaves of the tree.	As it suggests, the bigger the
+number is, the more the efficient it will be.  Currently each additional
+increase of the entry will take 36 bytes, which is the fixed length of
+a node.
+
+The number entered by the user should be bigger than the deepest nesting
+of path entries in the drive.
+
+The operation on this name cache is similar to the operation on the
+physical drive.
+With the look up request, FASTOPEN will traverse the name cache tree from the
+root to the bottom to find the requested path, filename.  If found, then the
+pointer to the file or subdirectory information packet will be returned, else FASTOPEN
+will return the string pointer that points up to the matching subdirectory name.
+In this case, if DOS wants to insert the rest of the subdirectory/file information
+an insert operation should be requested for every subdirectory/file.  FASTOPEN
+will use the information from the previous Look_up operation for a sequence of Insert operations.
+
+At this moment, if there are any free entries left, then it will be used.
+Otherwise, FASTOPEN will delete the least recently used leaf.  Any node cannot
+be deleted until the node becomes an empty leaf, i.e., without children.
+If a file or a directory has been removed, then DOS will update the name
+cache tree with the Delete request.  The path, file will be looked up
+first, and if found, then the corresponding entries will be free to the
+free entry chain.  If not found, then still it is O.K. since the matching file
+entries had been removed by the LRU scheme.
+
+
+:H3.Fastopen Interface
+When installed, by the nature of the functionality, FASTOPEN becomes
+a part of DOS and a private communication mechanism will be
+established.
+Inside DOS, vector pointers are established for FASTOPEN and will be
+initialized by the call "CALLinstall" macro by the FASTOPEN initialization.
+The structure of the FASTOPEN entry will look like;
+
+.fo off
+FASTOPEN_ENTRY	struc
+FASTOPEN_ENTRY_SIZE		dw	4    ;size of the following
+FASTOPEN_NAME_CACHING		dd	?
+;FASTOPEN_FATCHAIN_CACHING	 dd	 ?     ;not for DOS 3.3
+;NUMBER_OF_SFTS 		 dw	 ?     ;# of files - 3
+FASTOPEN_ENTRY	ends
+.fo on
+
+The initial vector pointer for FASTOPEN_NAME_CACHING
+points to a dummy routine in DOS which simply set the carry flag and set AX to 0FFFFh.
+
+When FASTOPEN is installed, then this vectors table will be established to
+point to the matching procedures in FASTOPEN module.
+
+The register AL will contain subfunction value on entry to FASTOPEN.
+
+.fo off
+;FASTOPEN NAME CACHING	Subfunctions
+fastopen_name_look_up	equ	1
+fastopen_name_insert	equ	2
+fastopen_name_delete	equ	3
+;fastopen_name_purge	equ	4	;Not for DOS 3.3
+
+.fo off
+1. Name Caching
+
+ a. Look up
+   IN)	DS:SI -> d:path
+	ES:DI -> DIR_INFO buffer in DOS to be filled by FASTOPEN
+	ES:CX -> Extended_Info buffer in DOS to be filled by FASTOPEN
+   OUT)
+	if found, DS:SI -> the last character of the path, i.e., 0.
+		  ES:DI -> DIR INFO
+		  ES:CX -> Extended INFO (explained in the data structure)
+   else if there exist the name cache for the drive, but could not
+	completely find the matching path,
+		  DS:SI -> "\" following the directory that FASTOPEN can
+			   find the match,
+			   Will points to "\" after "d:" if no matching
+			   root directory is found.
+		  ES:DI -> Compct_Dir_Info of the subdirectory FASTOPEN
+			   can find the match.
+		  ES:CX -> the matching directory's Extended INFO
+		  If cannot find the matching root directory entry, then
+		  ES:DI, ES:CX are undetermined.
+   else carry flag set and AX = 0FFFFh.
+
+ b. Insert
+   IN)	DS:DI -> DIR info
+	ES:BX -> Extended info
+
+   OUT)
+	If failed, then carry flag set and AX = 0FFFFh.
+	Insert operation handles only one file or subdirectory at a time.
+	So, usually insert operations are performed in a sequential manner.
+	A look up operation should be performed before any new sequential
+	insert operation.
+	FASTOPEN will keep the information of the pervious look up
+	operation in CURRENT_NODE.  The CURRENT_NODE points to the matching
+	directory node of the previous Look up operation.  The next insert
+	operation will use this CURRENT_NODE information to insert the
+	directory or file information.	So, DOS will call only one Look_
+	up operation and possibly several Insert operation to insert the
+	path.
+
+	For example, suppose DOS wants to look up C:\DIR1\DIR2\FILE1 and
+	FASTOPEN only has the inforamtion up to C:DIR1.  After the
+	look up operation, FASTOPEN will return with DS:SI points "\"
+	following C:\DIR1.
+	At this moment, if DOS decides to insert this information,then
+	it sets DS:DI to DIR_INFO, and ES:BX to EXTENDED_INFO of the
+	subdirectory DIR2, and will request an insert operation.
+	When control returned back to DOS, then it will set this time
+	DS:DI and ES:BX to those of FILE1, and will call an another
+	insert operation.
+	At the first insert operation, FASTOPEN automatically knows
+	that those informaton given by DOS belong to the child of
+	C:\DIR1, and will install it as a child.  In the second operation,
+	again FASTOPEN knows that it is for the child of C:\DIR1\DIR2
+	and will accordingly install the information for FILE1.
+
+ c. Delete
+   IN)	DS:SI -> d:path
+
+   OUT)
+	If failed, then carry flag set and AX = 0FFFFh.
+
+.fo on
+
+:H3.FASTOPEN Special Considerations
+FASTOPEN uses the following DOS function calls in its initialization
+rouitine.  No DOS or BIOS function calls are allowed inside the
+main routine that is resident once installed.
+:ul
+:li.AH = 40h, Int 21h; Write to device for the messages,
+:li.AH = 31h, Int 21h; Terminate Process and Remain Resident,
+:li.AH = 48h, AH = 49h, AH = 4Ah, Int 21h;  Allocate, free and
+modify memory block.
+:eul
+:p.
+
+To prevent the corruption of any DOS operation, once FASTOPEN is
+loaded it cannot be reloaded.
+
+
+:H4.FASTOPEN Top Level Design
+
+:H5.Data Structure
+
+The structures of the records in FASTOPEN are:
+
+.fo off
+NAME_record struc
+	LRU_pointer	dw	-1
+	Child_pointer	dw	-1
+	Sibling_pointer dw	-1
+	MRU_pointer	dw	-1
+	Compct_Dir_info db	22 dup (?)
+	Extended_Info	db	 5 dup (?)
+NAME_record ends
+
+Extended_Info	struc
+dirpos	db	0
+dirsec	dw	0
+clusnum dw	0
+Extended_Info	ends
+
+Drive_cache_header	struc
+LRU_ROOT	dw	0	 ;Start of LRU chain for this Name cache
+Child_ptr	dw     -1	 ;points to the name cache
+Sibling_ptr	dw     -1	 ;points to the next drive header
+MRU_ROOT	dw	0	 ;set to the end of LRU chain
+Drive_letter	db     'C'
+Num_Entries	dw	0
+Name_Cache_start dw	0	 ;Start of name cache for this drive
+Drive_cache_header	ends
+
+Cmpct_Dir_Info	struc
+CD_File_name		db	11 dup (0)
+CD_File_attr		db	?
+CD_time 		dw	?
+CD_date 		dw	?
+CD_cluster		dw	?
+CD_Filesize		dd	?
+Cmpct_Dir_Info	ends
+
+Dir_Info	struc		;= full directory entry information.
+DI_head 		db	12 dup (?)
+DI_skip 		db	10 dup (0) ;reserved area. All the time 0.
+DI_tail 		db	10 dup (?)
+Dir_Info	ends
+
+.fo
+
+
+:H5.FASTOPEN Hierarch
+:H6.FASTOPEN Components
+
+.fo off
+
+		      ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+		      ³  FASTOPEN    ³
+		      ÀÄÄÄÄÄÄÂÄÄÄÄÄÄÄÙ
+			     ³
+			     ³
+	  ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+	  ³					³
+	  V					V
+ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿			 ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+³  INIT	³			 ³  MAIN	³
+ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ			 ÀÄÄÄÄÄÄÂÄÄÄÄÄÄÄÙ
+						³
+						V
+			    ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+			    ³					   ³
+			    ³	LOOK_UP, INSERT, DELETE, INIT_TREE ³
+			    ³					   ³
+			    ³  (SUPPORTING MODULES)		   ³
+			    ³					   ³
+			    ³	GET_FREE_NODE, PRE_LRU_STACK,	   ³
+			    ³	SET_LRU,  MAKE_NAME_RECORD,	   ³
+			    ³	UNFOLD_NAME_RECORD, PACK_DIR_NAME, ³
+			    ³	REMOVEFROMLRUCHAIN		   ³
+			    ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+.fo
+
+:H6.FASTOPEN Memory Structure
+
+.fo off
+  Lo_memory   ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿ ÄÂÄ
+	       ³     LOOK_UP,		   ³  ³
+	       ³     INSERT,		   ³  M
+	       ³     DELETE,		   ³  A
+	       ³   & Supporting Routines   ³  I
+	       ³			   ³  N
+	       ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´  ³
+	       ³      INIT_TREE 	   ³  ³
+	       ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´ ÄÅÄ
+	       ³    DRIVE_CACHE_HEADER	   ³  I
+	       ³    (After Init, this	   ³  N
+	       ³     area will be used	   ³  I
+	       ³     for name caches.)	   ³  T
+	       ³    SHOW_ERR_MESSAGE	   ³  ³
+	       ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ ÄÁÄ
+
+  High_memory
+.fo
+
+.pa
+:H5.FASTOPEN Component Interfaces
+
+.fo off
+;*************************************************************************
+;
+;SUBROUTINE: INIT
+;
+;INPUT:
+;
+;OUTPUT:
+;
+;DESCRIPTION:
+;
+;      1:(Installation check)
+;	{ Get the entry pointer of FASTOPEN from DOS.
+;	  Check the signature ($FASTOPEN01$)
+;	  If already installed,
+;	   then Show 'FASTOPEN already installed'; Exit
+;	}
+;
+;      2:(Parse the command line)
+;	 Input: User input
+;
+;	 Output: Total_Entry_Num.
+;		 Drive_Cache_Headers set.
+;		 End_Cache_Header.
+;
+;	{ For every drive entered
+;	  { Drive sanity check;
+;	    Get_Num;
+;	    if success and Total_Entry_Num < 1000, then
+;	       Set Drive_Cache_Header;
+;	  }
+;	 }
+;
+;	3:(Check the system memory) - Check if the system has enough
+;				      memory for the Name caches.
+;				      Name cache will start from the
+;				      End_Cache_Header.
+;
+;	 Input: Total_Entry_Num, End_Cache_Header, End_Init,
+;	 Output: End_Caches
+;	{
+;	  Needed_space = size of (Name_Record) * Total_Entry_Num;
+;	  Needed_space = Needed_space - (End_Init - End_Cache_Header);
+;	  Free allocated memory from End_Init (AH = 4Ah);
+;	  Set memory block from End_Init to Needed_Space (AH = 48h);
+;	  if fail, Show 'Insufficient memory for FASTOPEN cache';
+;	  Set End_Caches;
+;	}
+;
+;	4: jmp to INIT_TREE
+;
+;*************************************************************************
+
+
+.pa
+.fo off
+;*************************************************************************
+;
+;SUBROUTINE: INIT_TREE
+;
+;INPUT: Drive_cache_header, End_Caches
+;
+;OUTPUT:Name_cache entries installed for every drive requested.
+;	LRU chain established for every drive.
+;	FASTOPEN entry pointer set in DOS.
+;	Terminate & stay resident. (Up to End_Caches)
+;
+;DESCRIPTION:
+;
+;	1:(Install_Name_Cache)
+;	 Input: Drive cache header, End_cache_header (= Name cache start)
+;	 Output:According to the information in the header,
+;		the name cache entries will be established.
+;		Also, LRU chain, MRU_pointer are established.
+;
+;	{ Buffer_start = End_cache_header;
+;	  For every drive header
+;	  { LRU_ROOT = Buffer_start;
+;	    For (i=1;i=Num_Entries;i++)
+;	    { MRU_pointer = Buffer_start;
+;	      Buffer_start= Buffer_start + size_of (Name_record);
+;	      if i = Num_Entries then LRU_pointer = -1
+;				 else LRU_pointer = Buffer_start;
+;	    }
+;	  }
+;	}
+;
+;	2:(Set FASTOPEN entry pointer in DOS)
+;	 Use CALL INSTALL macro.
+;
+;	3: Terminate and stay resident up to Buffer_start;
+;
+;*************************************************************************
+
+
+.pa
+.fo off
+;*************************************************************************
+;
+;SUBROUTINE: MAIN
+;
+;INPUT: Called by DOS throught Look_up, Insert, Delete requests.
+;
+;OUTPUT:Request performed based on LRU scheme.
+;	CX, DX, DS, ES, BP value saved.  Other register are destroyed.
+;
+;DESCRIPTION:
+;	Call Pack_Dir_Name		;get the drive letter in BL
+;	Call Get_Drive_Cache_Header	;find the matching drive header
+;	if not found, then AX = 0ffffh, Carry set
+;  else if AL = Look_up then Call Look_up
+;  else if AL = Insert	then Call Insert
+;  else if AL = Delete	then Call Delete
+;  else AX = 0ffffh, Carry set.
+;
+;	MAJOR SUBROUTINES:
+;	(Look_up) - Refer to Look_up subroutine.
+;	(Delete)  - Refer to Delete subroutine.
+;	(Insert)  - Refer to Insert subroutine.
+;
+;	SUPPORTING SUBROUTINES:
+;	1:(Get_Free_Node) - Get the entry from the LRU_ROOT,
+;			    Set LRU_ROOT to the next entry of the
+;			    LRU chain
+;	 Input: none
+;	 Output:Entry address. LRU_ROOT updated to the next entry.
+;
+;	2:(Pre_LRU_Stack) - This is needed to implement LRU scheme in
+;	  a tree structure.  Since the order of traversing a tree is
+;	  from the root to bottom and from left to right, the direct
+;	  implementation of LRU will result the parent the least mostly
+;	  used one instead of the child.  This is exactly in the reverse
+;	  order to what had been expected.  This procedure will
+;	  solve this problem without loss of any efficiency.  In the
+;	  Look_up operation and found the match, the found entris will
+;	  be saved with each of its LRU, MRU pointer modified to reflect
+;	  the desired LRU order.
+;	  These created mini LRU chain will be attached to the
+;	  LRU chain again by SET_LRU.  SET_LRU and PRE_LRU_STACK
+;	  should work in a synchronized fashion.  SET_LRU routine
+;	  will be called in the beginning of every Look_up, Insert
+;	  operation.  PRE_LRU_Stack will be called whenever a matching
+;	  entry is found in a Look_up operation, or whenever a new
+;	  entry is inserted by the Insert operation.
+;	 Input: Current_Drive,Target node.
+;	 Output:Depth, Top, Bottom set
+;
+;	3:(SET_LRU)
+;	 Input: Depth, Top, Bottom, Current_Drive
+;	 Output:Mini LRU chain created by Pre_LRU_Stack will be
+;		placed at the end of LRU chain.
+;
+;	4:(MAKE_NAME_RECORD) - At Insert time, BOS will give
+;	 two types of information. DS:DI -> Dir_Info, ES:BX -> Extended_
+;	 Info.	The Name_Record is composed of Cmpct_Dir_Info and
+;	 Extend_Info.  MAKE_NAME_RECORD will simply make a Name_Record
+;	 from the informations from DOS.
+;	 Input: Dir_Info, Extended_Info
+;	 Output:Name_Record
+;
+;	5:(UNFOLD_NAME_RECORD) - Inverse function of above. When Look_up
+;	 operation finishes,  then unfold the Name_Record of the current_
+;	 node for DOS.  If the Current_Node is a drive_cache_header,
+;	 then will just return.
+;	 Input: CS:Current_Node, ES, DI, BX set for the buffer
+;	 Output:ES:DI->Dir_Info, ES:BX->Extended_Info buffer in DOS.
+;
+;	6:(PACK_DIR_NAME) - At Look_up or Delete operation, DS:SI points
+;	 to the requested full path, for ex., "C:\DIR1.EXT\DIR2\FILE.EXT",
+;	 0.  This routine is smart enough to recognize ":","\" and 0 as
+;	 a delimeter and will parse until the next delimeter and leave
+;	 SI to the next delimeter found.  Also, if it is a drive name
+;	 it will  set SI to the "\" after ":" for consistency and
+;	 it will set BL to the drive letter.
+;	 The main function of this routine is "pack" the given directory
+;	 name into 11 bytes format.  PACKED_NAME will be filled with
+;	 the result.  For example, when it is called the first time,
+;	 DL =  "C" and SI will point to "\" before DIR1.EXT.
+;	 The second time, PACKED_NAME will be filled with
+;	"DIR1     EXT" and SI will points to "\" before "DIR2".
+;	 Likewize, if this routine is called the fourth time,
+;	 FILE.EXT has been parsed and DS:SI will points to 0.
+;	 When this routine is called again, then it will return
+;	 with carry signaling that it has reached the end.
+;	 The user is required to call this routine consequtively
+;	 until it returns with carry.
+;	 Input:
+;	 Output:
+;
+;*************************************************************************
+
+
+.pa
+.fo off
+;*************************************************************************
+;
+;SUBROUTINE: LOOK_UP
+;
+;INPUT: DS:SI -> path
+;	ES:DI -> DIR_INFO buffer in DOS to be filled by FASTOPEN
+;	ES:CX -> Extended_Info buffer in DOS to be filled by FASTOPEN
+;	CS:BP -> Matching Drive_cache_header
+;
+;OUTPUT:if found, DS:SI -> the last character of the path, i.e., 0.
+;		  ES:DI -> DIR_INFO
+;		  ES:CX -> Extended_INFO (explained in the data structure)
+;  else if there exist the name cache for the drive, but could not
+;	completely find the matching path,
+;		  DS:SI -> "\" following the directory that FASTOPEN can
+;			   find the match,
+;			   Will points to "\" after "d:" if no matching
+;			   root directory is found.
+;		  ES:DI -> Dir_Info of the subdirectory FASTOPEN
+;			   can find the match.
+;		  ES:CX -> the matching directory's Extended INFO
+;		  If cannot find the matching root directory entry, then
+;		  ES:DI, ES:BX are undetermined.
+;		  If the requested path is "D:\,0" then FASTOPEN will
+;		  return with carry flag set and, AX = 0ffffh.
+;  else carry flag set and AX = 0FFFFh.
+;
+;GLOBAL VARIABLES:
+;	CURRENT_NODE,
+;	CURRENT_SIBLING,
+;
+;DESCRIPTION:
+;	   Save Dir_Info, Extended_Info buffer address in DOS.
+;	   Set ES to Name_Cache_Seg
+;	   SET_LRU;
+;      1:
+;	   Current_Node = BP
+;	   Current_Sibling = 0
+;	   PACK_DIR_NAME (from the path);
+;	   if CX = 0, then jmp to 3 /*Found*/;
+;	   Find_child (from the current_node);
+;	   if not found then jmp to 3
+;      2:  Compare Packed_name with Child_pointer.CD_filename
+;	   if yes, then PRE_LRU_STACK; JMP to 1
+;	   else Find_Sibling;Current_sibling=Sibling_pointer
+;		if found a sibling, then Current_Node = Current_Sibling
+;					 jmp to 2
+;		   else jmp to 3;
+;      3:  UNFOLD_NAME_RECORD	/*for the info packet to DOS */
+;	   Exit
+;
+;*************************************************************************
+
+
+.pa
+.fo off
+;*************************************************************************
+;
+;SUBROUTINE: INSERT
+;
+;INPUT: DS:DI -> DIR info
+;	ES:BX -> Extended info
+;
+;OUTPUT:Automatic insertion based on CURRENT_NODE, CURRENT_SIBLING
+;	If failed, then carry flag set and AX = 0FFFFh.
+;	Insert operation handles only one file or subdirectory at a time.
+;	So, usually insert operations are performed in a sequential manner.
+;	A look up operation should be performed before any new sequential
+;	insert operation.
+;
+;GLOBAL VARIABLES:
+;	CURRENT_NODE,
+;	CURRENT_SIBLING,
+;
+;DESCRIPTION:
+;
+;	Make_Name_Record	;Make Name Record from the input
+;	Get_Free_Node
+;	Set_LRU 		;(from TEMP_LRU_STACK)
+;	if current_sibling <> 0 (or current_sibling=0FFh)
+;		then Install as a sibling of Current_Node
+;	   else Install as a child under Current_Node;
+;	Pre_LRU_stack		;(pre operation for LRU)
+;	Exit
+;
+;*************************************************************************
+
+
+.pa
+.fo off
+;*************************************************************************
+;
+;SUBROUTINE: Delete
+;
+;INPUT: DS:SI -> d:path
+;
+;OUTPUT: If found, then remove the item from the Tree and from the
+;	 LRU chain.  Move that slot to the Top of the LRU chain.
+;
+;GLOBAL VARIABLES:
+;
+;DESCRIPTION:
+;	Look_Up
+;	If ds:si -> 0, then Remove that entry from Tree, LRU chain,
+;			    Put that entry to the top of LRU chain
+;	else AX = 0FFFFh, Carry set,
+;	Exit
+;
+;*************************************************************************
+
+
+.fo
+:egdoc.
+

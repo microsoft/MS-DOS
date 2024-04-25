@@ -1,0 +1,21 @@
+:util TREE		 ;							;AN000;
+:class A		 ;							;AN000;
+
+:use 1 COMMON1		 ;MSG 1 is always "Incorrect DOS version"               ;AN000;
+
+:def 2 "Directory PATH listing for Volume %1",CR,LF  ;define message            ;AN000;
+
+:def 3 "Directory PATH listing",CR,LF ;                                         ;AN000;
+
+:def 4 "No sub-directories exist",CR,LF,LF ;                                    ;AN000;
+
+:use 5 COMMON25 	 ;"Invalid path"                                        ;AN000;
+
+:use 6 COMMON36 	 ;"Volume Serial Number is %1-%2",CR,LF                 ;AN001;
+
+:def 7 "юдцЁ"            ;"elbo","dash","tee","bar"                             ;AN002;
+;	1. NONE OF THE FOUR CAN BE BLANK
+;	2. EACH OF THE FOUR MUST BE UNIQUE
+;	3. EACH CHAR MUST BE A SINGLE BYTE (NO DBCS)
+:end			 ;							;AN000;
+

@@ -1,0 +1,31 @@
+PAGE	,132									;AN000;
+.XLIST										;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
+;; DOS - GRAPHICS Command
+;; (C) Copyright 1988 Microsoft
+;;										;AN000;
+;; File Name:  GRPATTRN.EXT							;AN000;
+;; ----------									;AN000;
+;;										;AN000;
+;; Description: 								;AN000;
+;; ------------ 								;AN000;
+;;	 Include file containing external declarations for			;AN000;
+;;	 the data defined in GRPATTRN.ASM					;AN000;
+;;										;AN000;
+;; Change History:								;AN000;
+;; ---------------								;AN000;
+;;										;AN000;
+;;										;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
+				       ;;					;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
+.LIST										;AN000;
+EXTRN PAT_4X2:BYTE								;AN000;
+EXTRN PAT_4X4:BYTE								;AN000;
+EXTRN PAT_6X2:BYTE								;AN000;
+EXTRN PAT_8X2:BYTE								;AN000;
+EXTRN PAT_6X4:BYTE								;AN000;
+EXTRN PAT_8X4:BYTE								;AN000;
+EXTRN PAT_8X6:BYTE								;AN000;
+EXTRN TAB_DIRECTORY:NEAR							;AN000;
+EXTRN TAB_DIR_NB_ENTRIES:BYTE							;AN000;

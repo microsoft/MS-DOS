@@ -1,0 +1,1185 @@
+.TOPICLEN. 53
+.MAXNUMHLP. 57
+.HELPID. 1
+.TOPICTEXT.Key Assignments Help
+.HELPTEXT.       Key Assignments Help&
+&
+Enter    Places into memory the information&
+         you select or type.&
+&
+Esc      Cancels the current screen and returns&
+         you to the previous screen.  Information&
+         on the current screen is not saved.&
+&
+Tab      Moves the selection cursor to the next&
+         choice or entry on a screen.&
+&
+       Moves the cursor in the direction of the&
+         arrow.&
+&
+F1       Displays help information.&
+&
+F3       Exits the SELECT program.  The information&
+         you selected or typed is not saved.&
+
+&
+F9       Displays the key assignments and their&
+         functions.&
+.HELPTEND.
+
+
+.HELPID. 2
+.TOPICTEXT.Help Facility Help
+.HELPTEXT. @             Help Facility Help
+&
+Help is available whenever F1=Help appears on a screen.
+To get help for an item, highlight the item and press F1.&
+&
+From a help panel you can press the F9 key to view the
+key assignments.@
+.HELPTEND.
+
+
+.HELPID. 3
+.TOPICTEXT.Minimum DOS Function Help
+.HELPTEXT. @            Minimum DOS Function Help
+&
+Select this option to allocate more memory for
+running programs than for using DOS
+functions.  This option is useful if you
+use a large number of files or you calculate large
+amounts of data.  Database and spreadsheet programs,
+for example, require large amounts of memory.
+Select this option if your system has 256K of memory
+installed.@
+.HELPTEND.
+
+
+.HELPID. 4
+.TOPICTEXT.Balance DOS Function Help
+.HELPTEXT. @            Balance DOS Function Help
+&
+Select this option to balance the memory between the
+DOS functions and the programs you use.
+This option provides sufficient memory for programs
+such as word processors or text editors.
+Select this option if your system has 512K of memory installed.@
+.HELPTEND.
+
+
+.HELPID.  5
+.TOPICTEXT.Maximum DOS Function Help
+.HELPTEXT. @            Maximum DOS Function Help
+&
+Select this option if you want to allocate the
+maximum amount of memory for DOS functions.&
+Select this option if your system has more than
+512K of memory installed.@
+.HELPTEND.
+
+
+.HELPID. 6
+.TOPICTEXT.Accept Country and Keyboard Help
+.HELPTEXT. @         Accept Country and Keyboard Help
+&
+Select this option to accept the country and
+keyboard shown.  The SELECT program assigns
+the appropriate monetary symbol, decimal
+separator, date and time format, and keyboard
+layout.@
+.HELPTEND.
+
+
+.HELPID. 7
+.TOPICTEXT.Specify Country and Keyboard Help
+.HELPTEXT. @        Specify Country and Keyboard Help
+&
+Select this option to choose a different country
+and keyboard layout.@
+.HELPTEND.
+
+
+.HELPID. 8
+.TOPICTEXT.Country Help
+.HELPTEXT. @               Country Help
+&
+Use the Up or Down arrow keys to select a country,
+then press Enter.  The SELECT program assigns the
+appropriate monetary symbol, decimal separator,
+and date and time format for the country.@
+.HELPTEND.
+
+
+.HELPID. 9
+.TOPICTEXT.Keyboard Help
+.HELPTEXT. @          Keyboard Help
+&
+Use the Up or Down arrow keys to select a keyboard,
+then press Enter.&
+&
+Select "None" if you do not want to change the
+keyboard layout.&
+&
+The SELECT program assigns the appropriate keyboard
+layout.@
+.HELPTEND.
+
+
+.HELPID. 10
+.TOPICTEXT.Keyboard Layout Help
+.HELPTEXT. @                Keyboard Layout Help
+&
+The keyboard you selected has two versions.&
+&
+Use the Up or Down arrow key to select the
+keyboard version you want, then press Enter.@
+.HELPTEND.
+
+
+.HELPID. 11
+.TOPICTEXT.Installation Drive Help
+.HELPTEXT.                Installation Drive Help
+&
+Use the Up or Down arrow key to select&
+the drive you want to install DOS on,&
+then press Enter.&
+&
+Option 1 installs DOS on a fixed disk,&
+drive C.&
+&
+Option 2 installs DOS on a diskette.&
+.HELPTEND.
+
+
+.HELPID. 12
+.TOPICTEXT.DOS Location Help
+.HELPTEXT. @                 DOS Location Help
+&
+Accept or change the directory name shown.&
+&
+If you accept the directory name, DOS utilities
+are placed in the DOS directory.&
+&
+If you change the directory name, DOS utilities
+are placed in the directory you specify.
+The directory name can have up to eight characters.
+A backslash (\) must precede the directory name.&
+&
+Example :  C:\MINE&
+&
+           C:  specifies the drive and \MINE is&
+               the new directory name.&
+&
+You can specify a directory path.  The directory path can
+have up to 40 characters.  Use the backslash (\) to separate
+the directory names in a path.
+&
+Example:  C:\DOS\DIR1\DIR2&
+&
+          C:  specifies the drive and&
+          \DOS\DIR1\DIR2 is the directory path.@
+.HELPTEND.
+
+
+.HELPID. 13
+.TOPICTEXT.Printer Selection Help
+.HELPTEXT. @                 Printer Selection Help
+&
+Type in a number from 0 through 7 to show the number of
+printers attached to your system.@
+.HELPTEND.
+
+
+.HELPID. 14
+.TOPICTEXT.Printer Type Help
+.HELPTEXT. @                 Printer Type Help
+&
+Use the Up or Down arrow keys to select the name of your
+printer, then press Enter.  If the printer attached to your
+system is not listed, select "Other" to identify the type
+of printer you are using.  When more than one printer is
+attached, this list reappears for each printer.
+If you do not know the name or type of printer you have,
+check the printer label or the manual that came with the
+printer.@
+.HELPTEND.
+
+
+
+.HELPID. 15
+.TOPICTEXT.Parallel Printer Port Help
+.HELPTEXT. @            Parallel Printer Port Help
+&
+If you have one printer, press Enter to accept LPT1.&
+&
+If you have two printers, select LPT1 for your primary
+printer and LPT2 for your secondary printer. If you
+have three printers, select LPT3 for the third one.&
+&
+You can assign only one printer to each port.@
+.HELPTEND.
+
+
+.HELPID. 16
+.TOPICTEXT.Serial Printer Port Help
+.HELPTEXT. @            Serial Printer Port Help
+&
+If you have one printer, press Enter to accept COM1.&
+&
+If you have two printers, select COM1 for your primary
+printer and COM2 for you secondary printer.  If you
+have three printers, select COM3 for the third one.
+If you have four printers, select COM4 for the fourth
+printer.&
+&
+You can assign only one printer to each port.&
+&
+Note: Other devices, such as modems, lightpens, or a
+mouse, attach to serial ports.  If you have one of these
+devices, refer to the manual that came with the device
+to determine which serial port to use.&
+&
+If you refer to your serial printer by a parallel port
+name, press the Tab key to move to the options at the
+bottom of the screen.@
+.HELPTEND.
+
+
+.HELPID. 17
+.TOPICTEXT.Serial Printer/Parallel Port Help
+.HELPTEXT. @       Serial Printer/Parallel Port Help
+&
+This option allows you to refer to your serial printer
+as a parallel printer.  This option is useful if your
+programs require that printer output be sent to a
+parallel port.&
+&
+Select "None" if you use your printer only as a serial
+printer.&
+&
+If you have one serial printer that you use as a
+parallel printer select LPT1.&
+&
+If you have more than one serial printer that you
+use as a parallel printer, select LPT 1 for your
+primary printer, LPT2 for your secondary printer,
+and LPT3 for your third printer.&
+&
+Do not select a parallel port for a serial printer if
+that port has a parallel printer attached.@
+.HELPTEND.
+
+
+.HELPID. 18
+.TOPICTEXT.Update DOS Files Help
+.HELPTEXT. @            Update DOS Files Help
+&
+Select this option to replace previous DOS files.  This
+option replaces previous DOS files in the directory specified, 
+and installs the read-only system files in the root directory. &
+&
+This option does not replace DOS files in subdirectories
+other than that specified.@
+.HELPTEND.
+
+
+.HELPID. 19
+.TOPICTEXT.Update DOS Help
+.HELPTEXT. @              Update DOS Help
+&
+Select this option to replace previous DOS files in the directory
+you specify on drive C.  This option is useful if you want
+DOS 4.0 to co-exist with a previous version of DOS or
+another operating system, or when your system is a
+network server.&
+&
+This option does not replace system files on an existing
+system or DOS files in subdirectories across multiple
+logical drives.&
+&
+For further information on replacing system files, refer to
+the "MS-DOS 4.0 Users Guide" book.@
+.HELPTEND.
+
+
+
+.HELPID. 20
+.TOPICTEXT.Continue Installation Help
+.HELPTEXT. @            Continue Installation Help
+&
+Select this option to continue installing DOS without
+reviewing the selections you made for your CONFIG.SYS
+and AUTOEXEC.BAT files.@
+.HELPTEND.
+
+
+.HELPID. 21
+.TOPICTEXT.Change Options Help
+.HELPTEXT. @           Change Options Help
+&
+Select this option to review, change, or add values to
+your CONFIG.SYS and AUTOEXEC.BAT files.&
+&
+Depending on the hardware installed on your system, you
+can change or add options, such as expanded memory
+support, FASTOPEN, and SHARE.&
+&
+When you change a selection from NO to YES, it increases
+the amount of memory DOS uses.&
+&
+Refer to the "MS-DOS 4.0 Users Guide" book for additional
+information.@
+.HELPTEND.
+
+
+.HELPID. 22
+.TOPICTEXT.Code Page Switching Help
+.HELPTEXT. @             Code Page Switching Help
+&
+Accept or change the choice shown.&
+&
+If you selected Denmark, Portugal, Norway,
+or French-speaking Canada on a previous
+display, set this choice to Yes.
+&
+Code Page Switching allows you
+to change from one character set to
+another so you can display or
+print characters in different
+languages.@
+.HELPTEND.
+
+
+.HELPID. 23
+.TOPICTEXT.Expanded Memory Support Help
+.HELPTEXT. @             Expanded Memory Support Help
+&
+Accept or change the choice shown.&
+&
+DOS uses expanded memory to hold part
+of the operating system.  This provides
+more memory for running programs that
+require expanded memory support.&
+&
+Expanded Memory is available on the IBM
+Personal System/2 (registered trademark of International
+Business Machines) and on other IBM
+PC/AT family and compatible computers with expanded 
+memory cards.@
+.HELPTEND.
+
+
+.HELPID. 24
+.TOPICTEXT.Extended Display Support Help
+.HELPTEXT. @             Extended Display Support Help
+&
+Accept or change the choice shown.&
+&
+Extended display support (ANSI.SYS)
+replaces the standard
+input and output support on your
+system.  ANSI.SYS provides extended
+features, such as redefining keys,
+manipulating the cursor, and displaying
+color attributes.@
+.HELPTEND.
+
+
+.HELPID. 25
+.TOPICTEXT.FASTOPEN Support Help
+.HELPTEXT. @                  FASTOPEN Support Help
+&
+Accept or change the choice shown.&
+&
+FASTOPEN allows quick access to
+recently opened files.@
+.HELPTEND.
+
+
+.HELPID. 26
+.TOPICTEXT.GRAFTABL Display Support Help
+.HELPTEXT. @             GRAFTABL Display Support Help
+&
+Accept or change the choice shown.&
+&
+GRAFTABL (Graphics Table) allows you
+to display additional characters from
+the National Language Code Page when
+you use a color/graphics display adapter in
+graphics mode.@
+.HELPTEND.
+
+
+
+.HELPID. 27
+.TOPICTEXT.GRAPHICS Support Help
+.HELPTEXT. @             GRAPHICS PrtSc Support Help
+&
+Accept or change the choice shown.&
+&
+GRAPHICS allows you to print the
+contents of a graphics display.
+This option prints graphics, such as
+drawings, graphs, or charts.
+Without GRAPHICS, you can print
+text characters only.@
+.HELPTEND.
+
+.HELPID. 28
+.TOPICTEXT.SHARE Support Help
+.HELPTEXT. @             DOS SHARE Support Help
+&
+Accept or change the choice shown.&
+&
+SHARE provides support for file sharing and
+diskette change protection.@
+.HELPTEND.
+
+
+.HELPID. 29
+.TOPICTEXT.SHELL Support Help
+.HELPTEXT. @             DOS SHELL Support Help
+&
+Accept or change the choice shown.&
+&
+The Shell program allows you to make selections
+from menus instead of typing DOS commands.&
+&
+For additional information on the Shell program,
+refer to the "MS-DOS 4.0 Users Guide"
+book.@
+.HELPTEND.
+
+
+.HELPID. 30
+.TOPICTEXT.Virtual Disk (RAMDRIVE) Support Help
+.HELPTEXT. @             Virtual Disk Support Help
+&
+Accept or change the choice shown.&
+&
+RAMDRIVE allows you to use part of your
+system memory to simulate a fixed disk
+drive.  A virtual drive permits quick
+access to files, but it is temporary,
+and data stored on the virtual drive
+is lost when you turn off the system.@
+.HELPTEND.
+
+
+.HELPID. 31
+.TOPICTEXT.DOS PATH Help
+.HELPTEXT. @                 DOS PATH Help
+&
+Accept or change the choice shown.&
+&
+DOS uses a path to search for files that
+are not located in the current directory.&
+DOS PATH searches only for files with the extensions
+.COM, .EXE, or .BAT.  The (;) separates the pathnames.&
+&
+You can type up to 120 characters in this field.
+If your typing scrolls out of view, use the right
+or left arrow keys to see it.&
+&
+Example:  C:\DOS;C:\DIR1;C:\DIR2&
+&
+          PATH searches and locates files&
+          in the DOS, DIR1, and DIR2&
+          directories on drive C.@
+.HELPTEND.
+
+
+.HELPID. 32
+.TOPICTEXT.APPEND Path Help
+.HELPTEXT. @                 APPEND Path Help
+&
+Accept or change the choice shown.&
+&
+DOS uses a path to search for files that are
+not in the current directory. APPEND searches
+only for data files with extensions other than .COM,
+.EXE, or .BAT.  The (;) separates the pathnames.&
+&
+You can type up to 120 characters in this field.
+If your typing scrolls out of view, use the right
+or left arrow keys to see it.&
+&
+Example:  C:\DOS;C:\DIR1;C:\DIR2&
+&
+          APPEND searches and locates files&
+          in the DOS, DIR1, and DIR2&
+          directories on drive C.@
+.HELPTEND.
+
+
+.HELPID. 33
+.TOPICTEXT.PROMPT Help
+.HELPTEXT. @                PROMPT Help
+&
+Accept or change the choice shown.&
+&
+Use the following list as a guide.  You can type
+up to 120 characters in this field.  If your
+typing scrolls out of view, use the right or
+left arrow keys to see it.&
+&
+The default DOS prompt is C:\>.&
+&
+PROMPT entries :&
+&
+$B for the : character&
+&
+$D for the current date&
+&
+$E for the Esc character&
+&
+$G for the > character&
+&
+$H for backspace; the previous&
+   character is erased&
+&
+$N for the current drive&
+&
+$P for the current directory&
+&
+$Q for the = character&
+&
+$T for the current time&
+&
+$V for the DOS version&
+&
+$1 for the < character&
+&
+$$ for the $ character&
+&
+$_ for advance a line&
+&
+Example:   C>prompt HELLO&
+&
+           Sets the DOS prompt to&
+           the message HELLO.@
+.HELPTEND.
+
+
+.HELPID. 34
+.TOPICTEXT.SHELL Parameters Help
+.HELPTEXT. @           SHELL Parameters Help
+&
+Accept or change the choices shown.&
+&
+Use the following list as a guide.  You can type up
+to 115 characters in this field.  If your typing
+scrolls out of view, use the right or left arrow
+keys to see it.&
+&
+The Shell program uses menus that allow you to make
+selections instead of typing DOS commands.&
+&
+SHELL entries:&
+&
+ /B:xxx  Specifies a buffer size&
+&
+ /CLR:SHELL.CLR&
+         Identifies the filename for the Shell&
+         color setup.  SHELL.CLR is the default.&
+&
+ /CO1&
+         Displays the Shell in 16-color,&
+         high-resolution 640 x 350 graphics&
+&
+ /CO2&
+         Displays the Shell in 2-color,&
+         high resolution graphics&
+&
+ /CO3&
+         Displays the Shell in 16-color,&
+         high-resolution 640 x 480 graphics&
+&
+ /COLOR&
+         Activates the "Change colors" option&
+&
+ /COM2&
+        Identifies a serial mouse installed on the&
+        second serial port (installation default&
+        is COM1)&
+&
+ /DATE&
+         Displays the date and time&
+&
+ /DOS&
+         Activates the File System in the Shell&
+&
+ /EXIT&
+         Activates the "Exit Shell" option&
+&
+ /LF&
+         Enables a mouse for left-handed use&
+&
+ /MAINT&
+         Activates the ability to do&
+         maintenance in Start Programs&
+&
+ /MENU&
+         Activates the Start Programs in the&
+         Shell&
+&
+ /MEU:SHELL.MEU&
+         Identifies the filename of the Main Group&
+         structure for the Start Programs&
+&
+ /MOS:PCIBMDRV.MOS&
+        Identifies the filename of the IBM mouse&
+        driver&
+&
+ /MOS:PCMSDRV.MOS&
+        Identifies the filename of the Microsoft&
+        serial mouse driver&
+&
+ /MOS:PCMSPDRV.MOS&
+        Identifies the filename of the Microsoft&
+        parallel mouse driver&
+&
+ /MUL&
+        Provides multiple directory and file&
+        buffers in the File System&
+&
+ /PROMPT&
+        Activates the Shell command prompt&
+&
+ /SND&
+        Enables the speaker for sound&
+&
+ /SWAP&
+        Activates saving (swapping) files and&
+        directories to a disk file while&
+        performing tasks at the Shell command&
+        prompt&
+&
+ /TEXT&
+        Displays the Shell in text mode&
+&
+ /TRAN&
+        Operates the Shell in transient mode@
+.HELPTEND.
+
+
+.HELPID. 35
+.TOPICTEXT.FASTOPEN Parameters Help
+.HELPTEXT. @            FASTOPEN Parameters Help
+&
+Accept or change the choice shown.&
+&
+Use the following list as a guide.  You can type
+up to 60 characters in this field.  If your typing
+scrolls out of view, use the left or right arrow
+keys to see it.&
+&
+FASTOPEN allows quick access to recently
+opened files.&
+&
+FASTOPEN entries:&
+&
+C:&
+           Specifies the drive&
+&
+N = 10 to 999&
+           Specifies the number of directories or&
+           file entry buffers allocated in memory&
+&
+M = 1 to 999&
+           Specifies the number of continuous&
+           space buffers allocated in memory&
+&
+/X&
+           Used when expanded memory support is&
+           available.  When using the /X option&
+           the value of "N" or "M" should not&
+           exceed 150.&
+&
+Example:  C:=(50,25)&
+&
+          Specifies FASTOPEN on drive C with&
+          50 file and directory entry buffers and&
+          25 continuous space buffers.@
+.HELPTEND.
+
+
+.HELPID. 36
+.TOPICTEXT.SHARE Parameters Help
+.HELPTEXT. @             SHARE Parameters Help
+&
+Accept or change the choice shown.&&
+Use the following list as a guide.&
+&
+SHARE provides support for file sharing and
+diskette change protection.&
+&
+SHARE Parameters:&
+&
+ /F:     Allocates file space in bytes for the&
+         area used to record information for file&
+         sharing&
+&
+ /L:     Allocates space for the number of locks&
+         you want.  Lock denies read/write access&
+         to regions of a file.&
+&
+Example: /F:2048 /L:20&
+&
+         Specifies a filespace of 2048 bytes and&
+         20 locks.@
+.HELPTEND.
+
+
+.HELPID. 37
+.TOPICTEXT.GRAPHICS Parameters Help
+.HELPTEXT. @           GRAPHICS Parameters Help
+&
+Accept or change the choice shown.&
+&
+Use the following list as a guide.  You can type
+up to 80 characters in this field.  If your typing
+scrolls out of view, use the left or right arrow
+keys to see it.&
+&
+GRAPHICS prints the contents of a graphics display.
+This is useful, if you print charts, tables, or
+drawings.&
+&
+GRAPHICS Parameters:&
+&
+ COLOR1&
+          IBM 5182 Color Printer with black ribbon&
+&
+ COLOR4&
+          IBM 5182 Color Printer with red, green,&
+          blue, and black ribbon&
+&
+ COLOR8&
+          IBM 5182 Color Printer with black, cyan,&
+          magenta, and yellow ribbon&
+&
+ GRAPHICS&
+          IBM 5152 Graphics Printer&
+          IBM Proprinters&
+          IBM 3812 Pageprinter&
+          IBM 5202 Quietwriter (registered&
+          trademark of International Business&
+          Machines) III Printer&
+          IBM 5204 Quickwriter (trademark of&
+          International Business Machines) Printer&
+&
+ GRAPHICSWIDE&
+          IBM 5152 Graphics Printer&
+          IBM Proprinters (both are set for wide&
+          paper)&
+&
+ THERMAL&
+         IBM 5140 Convertible Printer&
+&
+ /B&
+         Specifies background color printing for&
+         COLOR4 and COLOR8 printers&
+&
+ /LCD&
+         Prints data as it appears on a liquid&
+         crystal display&
+&
+ /R&
+         Prints black and white as it appears on&
+         the display&
+&
+Example: COLOR8 /B/R&
+&
+         Specifies black, white, and background&
+         color printing for the 5182 Color Printer.&
+&
+ /PB:ID&
+         Prints data using the print box size&
+         specified by the ID.  The ID should match&
+         the first operand of a Printbox statement&
+         in the printer profile.  You may use&
+         /PRINTBOX:ID in place of /PB:ID.&
+&
+Supported IDS:&
+&
+LCD&
+         Specifies the LCD printbox.  When used&
+         with an LCD display, the data is printed&
+         as it appears on the LCD display.&
+         This entry has the same effect as /LCD.&
+&
+STD&
+         Specifies standard printbox, which is the&
+         default value.@
+.HELPTEND.
+
+
+.HELPID. 38
+.TOPICTEXT.XMAEM Parameters Help
+.HELPTEXT. @            XMAEM Parameters Help
+&
+Accept or change the choice shown.  Type, in 16KB
+increments, the amount of memory you want to allocate.
+If you do not specify an amount, the system allocates
+all memory above 1MB.&
+&
+XMAEM enables your system to access the extended memory
+available as expanded memory.&
+&
+Example:  DEVICE=XMAEM.SYS 64&
+&
+          Allocates 1 megabyte of extended memory.&
+&
+For additional information, refer
+to the "MS-DOS 4.0 Users Guide" book.@
+.HELPTEND.
+
+
+.HELPID. 39
+.TOPICTEXT.XMA2EMS Parameters Help
+.HELPTEXT. @            XMA2EMS Parameters Help
+&
+Accept or change the choice shown.  If you change
+the segment address values, you must
+define unused 64KB contiguous space for the FRAME and
+unused 16KB contiguous space for the Pxxx pages.&
+&
+Example:  FRAME=D000 P254=C000 P255=C400&
+&
+Note:  These values are sample defaults only and&
+       may not reflect actual free segments in your&
+       system.&
+&
+For additional information, refer to the "MS-DOS 4.0
+Users Guide" book.@
+.HELPTEND.
+
+
+.HELPID. 40
+.TOPICTEXT.RAMDRIVE Parameters Help
+.HELPTEXT. @         RAMDRIVE Parameters Help
+&
+Accept or change the choice shown.  Use the
+following list as a guide.&
+&
+RAMDRIVE allows you to use part of the system
+memory to simulate a fixed disk drive.  A
+virtual drive permits quick access to files,
+but it is temporary, and data stored on a
+virtual drive is lost when you turn off
+the system.&
+&
+RAMDRIVE Parameters:&
+&
+ Buffer:&
+       Buffer size in kilobytes;&
+       16KB is the minimum buffer size&
+&
+ Sector:&
+       Sector size in bytes;&
+       128, 256, 512, or 1024 bytes&
+&
+ Directory entries:&
+       Number of root directory entries;&
+       3 to 1024&
+&
+ /E&
+       Used when extended memory support&
+       is available&
+&
+ /A&
+       Used when expanded memory support&
+       is available&
+&
+Example:  160 512 64&
+&
+          Specifies the size of the buffers,&
+          sectors, and the number of directories.@
+.HELPTEND.
+
+
+.HELPID. 41
+.TOPICTEXT.BREAK Help
+.HELPTEXT.             BREAK (Control Break) Help
+&
+Accept or change the choice shown.&
+&
+ON:   DOS always checks for a Ctrl+Break key&
+      sequence and permits input or output to&
+      a device to be canceled.&
+&
+OFF:  DOS checks for a Ctrl+Break key sequence only&
+      during standard input, output, print, and&
+      auxiliary device operations.&
+.HELPTEND.
+
+
+.HELPID. 42
+.TOPICTEXT.BUFFERS Help
+.HELPTEXT. @                BUFFERS Help
+&
+Accept or change the choice shown.  Use the
+following list as a guide.&
+&
+The value shown specifies the number of disk buffers
+DOS allocates in memory.  If a second value is shown,
+this value specifies the number of sectors the system
+can read or write when processing an input or output
+operation.&
+&
+If you do not specify a buffer, DOS sets a value
+based on the amount of system memory.&
+&
+BUFFERS Values:&
+&
+1 to 99       Number of buffers the system uses&
+&
+1 to 8        Number of sectors the system can&
+              read or write in processing an input&
+              or output operation@
+.HELPTEND.
+
+
+.HELPID. 43
+.TOPICTEXT.APPEND Parameter Help
+.HELPTEXT. @            APPEND Parameter Help
+&
+Accept or change the choice shown.  Use the
+following list as a guide.&
+&
+APPEND locates data files outside of the current
+directory that have extensions other then .COM,
+.EXE, or .BAT.&
+&
+APPEND Parameters:&
+&
+/X:ON or /X&
+         Tells APPEND to search and process&
+         executable files&
+&
+ /X:OFF (default value)&
+         Tells APPEND not to search and&
+         process executable files.&
+&
+/PATH:ON (default value)&
+         Tells APPEND to search for files that have&
+         a drive or a path specified&
+&
+/PATH:OFF&
+         Tells APPEND not to search for files that&
+         have a drive or a path specified&
+&
+/E&
+         Keeps the APPEND paths in the DOS&
+         environment.  APPEND searches the&
+         environment on each call to find the path.&
+&
+;&
+         Separates the APPEND paths, or cancels the&
+         APPEND paths if the semi-colon is the only&
+         parameter used.&
+&
+Example: /E /X&
+         APPEND is in the DOS environment&
+         where it searches and processes&
+         executable files with extensions of&
+         .COM, .EXE, or .BAT.@
+.HELPTEND.
+
+
+.HELPID. 44
+.TOPICTEXT.FCBS Help
+.HELPTEXT. @                 FCBS Help
+&
+Accept or change the choice shown.  Use the
+following list as a guide.&
+&
+FCBS allows you to specify the number of file
+control blocks that DOS can open concurrently.&
+&
+FCBS Values:&
+&
+ 1 to 255   Number of file control blocks&
+&
+ 0 to 255   Number of protected file control blocks&
+&
+Example:  20,10&
+&
+          Specifies 20 FCBS open and 10 protected&
+          from being automatically closed by DOS.@
+.HELPTEND.
+
+
+.HELPID. 45
+.TOPICTEXT.FILES Help
+.HELPTEXT. @                 FILES Help
+&
+Accept or change the choice shown.&
+&
+If you do not specify a value, DOS uses a value of 8.&
+&
+The value specifies the number of files that&
+can be open at any one time.  The value can be&
+from 8 through 255.@
+.HELPTEND.
+
+
+.HELPID. 46
+.TOPICTEXT.LASTDRIVE Help
+.HELPTEXT. @                 LASTDRIVE Help
+&
+Accept or change the choice shown.&
+&
+If you do not specify a value, DOS uses a value of E.&
+&
+This value identifies the last drive installed on
+your system.  The value can be a letter from A through
+Z, and it must represent the last valid drive letter
+that DOS can accept.@
+.HELPTEND.
+
+
+.HELPID. 47
+.TOPICTEXT.STACKS Help
+.HELPTEXT. @                 STACKS Help
+&
+Accept or change the choice shown.&
+&
+This value (if any) specifies stack resources.
+Use the following list as a guide.  You must
+specify a number for each frame and a size,
+in bytes, for each frame.&
+&
+STACKS Values:&
+&
+8  to 64    Number of stack frames&
+&
+32 to 512   Size of each stack frame&
+&
+Example:  8 128&
+&
+          Specifies 8 stack frames of 128 bytes&
+          each.@
+.HELPTEND.
+
+
+.HELPID. 48
+.TOPICTEXT.VERIFY Help
+.HELPTEXT. @                VERIFY Help
+&
+Accept or change the choice shown.&
+&
+VERIFY confirms that data is correctly
+written to a disk.&
+&
+ON:   DOS confirms the data can be read&
+      without error.&
+&
+OFF:  DOS does not verify the data.@
+.HELPTEND.
+
+
+.HELPID. 49
+.TOPICTEXT.Use SELECT Partition Sizes Help
+.HELPTEXT. @           Use SELECT Partition Sizes Help
+&
+Select this option to partition your fixed
+disk into one partition.&
+&
+Note:  If you have a Personal System/2 with a&
+       partition greater than 32MB and want to&
+       install a keyboard password, refer to the&
+       "MS-DOS 4.0 Users Guide" book for&
+       additional information.@
+.HELPTEND.
+
+
+.HELPID. 50
+.TOPICTEXT.Define Your Own Partitions Sizes Help
+.HELPTEXT. @      Define Your Own Partitions Sizes Help
+&
+Select this option if you want to use FDISK to partition
+your fixed disk.&
+&
+Note:  If you have a Personal System/2 with a&
+       partition greater than 32MB and want to&
+       install a keyboard password, refer to the&
+       "MS-DOS 4.0 Users Guide" book for&
+       additional information.@
+.HELPTEND.
+
+
+.HELPID. 51
+.TOPICTEXT.Leave Disk Unchanged Help
+.HELPTEXT. @          Leave Disk Unchanged Help
+&
+Select this option if you do not want to change
+the non-allocated partition space on your fixed disk.@
+.HELPTEND.
+
+
+.HELPID. 52
+.TOPICTEXT.Define Your Own Sizes Help
+.HELPTEXT. @           Define Your Own Sizes Help
+&
+Select this option if you want to partition the non-allocated
+space on your fixed disk.  Refer to the "MS-DOS 4.0 Users
+Guide" book for information on using FDISK.@
+.HELPTEND.
+
+.HELPID. 53
+.TOPICTEXT.Date and Time Help
+.HELPTEXT. @                 Date and Time Help
+&
+Type the date and time in the fields provided.  The system clock
+keeps an accurate record of the date and time.@
+.HELPTEND.
+
+
+.HELPID. 54
+.TOPICTEXT.Format Fixed Disk Help
+.HELPTEXT. @           Format Fixed Disk Help
+&
+Select this option to format your fixed disk.
+A partition must be formatted before data can
+be placed on it.&
+&
+Warning :
+If your fixed disk is already formatted, this option will
+reformat the disk and destroy all information on
+the disk.  Refer to the "MS-DOS 4.0 Users Guide"
+book for additional information.@
+.HELPTEND.
+
+
+.HELPID. 55
+.TOPICTEXT.Do Not Format Fixed Disk Help
+.HELPTEXT. @       Do Not Format Fixed Disk Help
+&
+Select this option if you do not want to format
+your fixed disk.@
+.HELPTEND.
+
+
+.HELPID. 56
+.TOPICTEXT.Install the MS-DOS Shell Help
+.HELPTEXT. @           Install the MS-DOS Shell Help
+&
+Select this option if you want the MS-DOS Shell
+to be installed by SELECT onto the target system.&
+&
+The MS-DOS Shell lets you choose options from
+menus instead of typing DOS commands.@
+.HELPTEND.
+
+
+.HELPID. 57
+.TOPICTEXT.Do not install the MS-DOS Shell Help
+.HELPTEXT. @       Do not install the MS-DOS Shell Help
+&
+Select this option if you do not want the MS-DOS 
+Shell to be installed by SELECT onto the target 
+system.@
+.HELPTEND.
+

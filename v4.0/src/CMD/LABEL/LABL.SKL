@@ -1,0 +1,26 @@
+;LABEL Utility
+;Message Service Routine
+
+:util  LABL                             ;BEGIN UTIL                     ;AN000;
+
+:class 1                                ;EXTENDED ERRORS                ;AN000;
+;-------                                 ---------------
+;:use  EXTEND4                          ;Too many files open
+;:use  EXTEND15                         ;Invalid drive specification
+;:use  EXTEND82                         ;Can not make directory entry
+
+:class A                                ;COMMON & DEFINED MSGS          ;AN000;
+;-------                                 ------------
+:use 01 COMMON1                         ;Incorrect DOS version
+:use 02 COMMON14                        ;Cannot %1 a SUBSTed or ASSIGNed drive
+:use 03 COMMON21                        ;Invalid characters in volume label
+:use 04 COMMON33                        ;Volume in drive %1 has no label
+:use 05 COMMON34                        ;Volume in drive %1 is %2
+:use 06 COMMON35                        ;Vol label (11 chars, ENTER for none)?
+:use 07 COMMON36                        ;Volume Serial Number is %1-%2
+:use 08 COMMON12                        ;Cannot %1 a network drive
+:def 09 CR,LF,"Delete current volume label (Y/N)?"                      ;AN001;
+:use 10 COMMON38                        ;CR,LF                          ;AN001;
+
+:end                                    ;END UTIL                       ;AN000;
+

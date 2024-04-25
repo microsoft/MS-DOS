@@ -1,0 +1,369 @@
+mINT13.SYS is an MS-DOS device driver which implements a memory cache
+for data referenced on IBM-PC XT/AT Hard disks. It caches at the
+"INT 13H" level and caches tracks.
+
+NOTE WARNING: There is a "re-boot" bug in RAMDrive version 1.16. When
+		INT13 and RAMDrive are both installed, it is possible
+		that Ctrl-Alt-Del will not work. This problem is "fixed"
+		by updating your RAMDrive to version 1.17 or later.
+
+IN CONFIG.SYS:
+
+    device = [d:][path]int13.sys [bbbb] [/e | /a] [/d] [/wt:on] [/wc:off]
+				 [/t:nnnnn] [/r:on] [/c:on]
+
+	bbbb  First numeric argument, if present, is cache size
+		in K bytes. Default value is 256. Min is 128. Max
+		is 4096 (4 Meg).
+
+	/e    Specifies that PC AT Extended Memory is to be used.
+		It is an error if /E is specified on a machine other
+		than an IBM PC AT. /E is the default.
+
+	      NOTE: There is 1k of INT13 overhead. That is to say,
+		if there are 512k bytes of extended memory, there
+		will be 511k bytes available for assignment to INT13.
+
+	/a    Specifies that Above Board memory is to be used. It
+		is an error if the above board device driver is not
+		present.
+
+	Neither /A or /E Specifies /E
+
+	NOTE: THESE ARE THE ONLY CONFIGURATIONS. You must either have an
+		Above Board (or compatible), or you must have extended memory
+		on an IBM PC-AT (or compatible).
+
+	/d    Disable caching. Causes INT13 to come up with caching
+		disabled (default is enabled).
+
+	/wt:on Enable write through. When INT13 is
+		caching write information, it is a good idea to imply
+		a flush of the cache on some operations so that in
+		case of a crash or power failure the information in
+		the cache which is not on the disk will not be lost.
+		/wt:on enables write through on full track INT 13s which
+		are to tracks not currently in the cache. /wt:off
+		disables it. INT13 is faster with write through
+		disabled, at the expense of there being a bigger risk of
+		loosing data. /wt:on IS NOT a substitute for flushing
+		before a re-boot!!!! The write through mechanism is far
+		from perfect, all it is is a risk REDUCER, not a risk
+		eliminator. Write through is off by default.
+
+	/wc:off - Disable write caching. There is risk when
+		caching "dirty" information that the system will crash,
+		or be re-booted, or be turned off before this
+		information can be written to the disk. This may
+		corrupt the disk. This risk can be ELIMINATED, at the
+		expense of cache performance, by NOT caching any dirty
+		information. /wc:off disables the caching of dirty
+		information, eliminating the risk. Write caching is
+		on by default.
+
+	/t:nnnnn - Set the auto flush interval. INT13 listens on the
+		system timer to note the passage of time and "age" the
+		dirty information in the cache. Every nnnnn ticks,
+		the cache is flushed. The timer ticks 18.2 times a
+		second.
+
+		 nnnnn	 |
+		===========================================
+		    18	 |     Flush every second
+		  1092	 |     Flush every minute
+		  5460	 |     Flush every 5 minutes
+		 10920	 |     Flush every 10 minutes
+		 21840	 |     Flush every 20 minutes
+		 32760	 |     Flush every 30 minutes
+		 65520	 |     Flush every hour
+
+		The default setting of nnnnn is 1092 or every minute.
+		nnnnn = 0 causes a wait for 65536 ticks which is a
+		little over an hour. The max value for nnnnn is 65535.
+
+	/r:on - Enable re-boot flush.
+		This enables the flush on re-boot logic. The default
+		is /r:off. This enables a flush in the Ctrl-Alt-Del
+		keyboard re-boot logic. NOTE WARNING DANGER!!!!!!!!
+		Enabling this feature can cause strange system behavior.
+		You will have to type Ctrl-Alt-Del twice at least. This
+		can adversly effect other software in the system.
+		The result of this can be very unpredictable.
+
+	/c:on - Enable all cache on reads.
+		Normally INT13 does not cache EVERY I/O. Whenever
+		it sees a full track I/O which is not currently in
+		the cache, it DOES NOT cache that track. This is
+		an optimization for "typical" operation, and actually
+		increases performance. This is the default setting
+		(/c:off). There may be some cases where it is desirable
+		that ALL reads be cached. One example is that you are
+		"loading" the cache prior to locking it with FLUSH13 /l.
+		With /c:off, some pieces of what you're trying to load
+		may not get into the cache. Another example is that
+		you continually access in a sequential manner (like
+		program load) some large file which happens to be
+		contiguous on the disk. Again, there may be some "piece"
+		of the file which does not get into the cache with
+		/c:off. /c:on enables the caching of ALL reads.
+		NOTE: The same "don't bother caching operations which
+		      are full track and not in the cache" applies
+		      to writes as well. /c has NO EFFECT on this
+		      behavior however. /c only effects read operations.
+
+
+
+MESSAGES:
+
+
+     INT13: Above Board Memory Manager not present
+
+The /A switch was given but INT13 could not detect the presence of the
+Above Board memory manager. You need to have a
+
+	device = EMM.SYS
+
+line in your CONFIG.SYS file before you have any device = int13.sys
+lines. INT13 will install a driver, but it will be non-functional.
+
+
+     INT13: Above Board Memory Status shows error
+
+During the process of trying to set up the cache in Above Board memory
+an error was detected. Run the Above Board Confidence test to test
+your Above Board memory. INT13 will install a driver, but it will be
+non-functional.
+
+
+     INT13: Computer must be PC-AT, or PC-AT compatible
+
+The /E switch can only be given on an IBM PC AT or an IBM PC AT
+compatible computer that has the FCH model byte (byte at FFFF:000E).
+INT13 will install a driver, but it will be non-functional.
+
+
+     INT13: No extended memory available
+
+Your system has NO memory for RAMDrive drives.
+INT13 will install a driver, but it will be non-functional.
+
+
+     INT13: Insufficient memory
+
+Your system has some memory available for INT13 cache, but not enough
+to set up a driver. INT13 will install a driver, but it will be non-functional.
+
+
+     INT13: Invalid parameter
+
+You specified too many parameters, your numeric parameter is not
+valid, you specified conflicting or too many switches. Edit your CONFIG.SYS
+file and fix the INT13 line. INT13 will install a driver, but it will
+be non-functional.
+
+
+     INT13: Incorrect DOS version
+
+INT13 only runs on 2.X and 3.X versions of DOS.
+INT13 will install a driver, but it will be non-functional.
+
+
+     INT13: I/O error accessing cache memory
+
+During the set up of the INT13 cache, an error was detected trying to
+access the cache memory. Run any memory tests you have that will
+exercise your extended or expanded memory.
+INT13 will install a driver, but it will be non-functional.
+
+
+     INT13: No hardfiles on system
+
+INT13 could not find any hardfiles on your system. Only hardfiles
+which are compatible with IBM hardfiles at the ROM BIOS INT 13H
+level can be supported. INT13 will install a driver, but it will
+be non-functional.
+
+
+     INT13: Too many bytes per track on hardfile
+
+One of the hardfiles on your system defined a very large track.
+This track is too large for INT13 to be able to cache it.
+INT13 will install a driver, but it will be non-functional.
+
+
+     Microsoft INT13 Cache version Y.YY
+
+INT13 Header message, Y.YY is the version of INT13.
+
+
+    Cache size: nnnnk in UUUUUU Memory
+    Room for tttt tracks of ssss sectors each
+
+This is an informational message from INT13 telling you how many Kilo Bytes
+of memory were assigned to the cache and what type of memory it is, how many
+tracks this allows to be buffered and how many sectors there are per track.
+
+NOTE: There is nothing to "prevent" you from having two device = INT13.SYS
+      lines in your CONFIG.SYS file, but you should not do this. Very
+      unpredictable behavior will occur, and FLUSH13 will only "talk" to
+      one of them.
+
+INT13 has several behavior aspects that can be changed. This is done
+with the FLUSH13 utility.
+
+  FLUSH13 [/s|/sx|/sr] [/d|/e] [/l|/u] [/i] [/f] [/wt:on|/wt:off]
+	  [/wc:on|/wc:off] [/t:nnnnn] [/r:on|/r:off] [/c:on|/c:off]
+
+	No arguments - This causes FLUSH13 to flush out any "dirty"
+		tracks in the INT13 cache. A "dirty" track is one
+		which has been written into the cache, but not yet
+		written to the disk. This invokation causes all dirty tracks
+		to be written out to the disk so that the system can
+		be re-booted or turned off. NOTE: FAILURE TO FLUSH
+		THE CACHE BEFORE A RE-BOOT OR POWER OFF CAN CAUSE THE
+		INFORMATION ON THE HARDFILE TO BE CORRUPTED.
+
+	/f	- Flush. Same as the no arguments case, but allows you to
+		perform the flush and do something else (like /s).
+
+	/i	- Flush and invalidate. This is the same as the no argument
+		case except that all of the information in the cache
+		is also discarded. This makes the cache EMPTY.
+
+	/d	- Disable caching. This causes all dirty cache information
+		to be flushed and all caching to stop.
+
+	/e	- Enable caching. This causes caching to be enabled after
+		a previous /d disable. When INT13 is started it is enabled.
+
+	/l	- Lock the cache. This causes all dirty information to be
+		flushed, and the cache contents to be locked in the cache.
+		When in this mode the locked elements will not be discarded
+		to make room for new tracks. This can be used
+		to "load" the cache with desired things. For instance if
+		you use the "foobar" program a lot, you can run foobar,
+		causing it to be loaded into the cache, then lock the cache.
+		This causes the foobar program to always be in the cache.
+		You may lock the cache as many times as you want. Each lock
+		causes the current information (including any previously
+		locked information) to be locked.
+		NOTE: Information in a locked cache is READ ONLY!! Any write
+		operation on information in a locked cache causes the
+		information to be unlocked.
+
+	/u	- Unlock the cache. This undoes a previous /l and returns
+		the cache to normal operation.
+
+	/s	- Print status. This displays the settings of the setable
+		device parameters.
+	/sx	- Print extended status. Same as /s, only additional
+		Statistical information is also given.
+	/sr	- Reset statistics. Same as /sx, only the additional
+		Statistical information is reset to 0.
+
+	/wt:on off - Enable or Disable write through. When INT13 is caching
+		write information, it is a good idea to imply a flush of
+		the cache on some operations so that in case of a crash or
+		power failure the information in the cache which is not on
+		the disk will not be lost. /wt:on enables write through on full
+		track INT 13s which are to tracks not currently in the cache.
+		/wt:off disables it. INT13 is faster with write through
+		off, at the expense of there being a bigger risk of
+		loosing data. /wt:on IS NOT a substitute for flushing before
+		a re-boot!!!! This write through mechanism is far from perfect,
+		all it is is a risk REDUCER, not a risk eliminator. /wt:off
+		is the setting when INT13 is started.
+
+	/wc:on off - Enable or Disable write caching. There is risk when
+		caching "dirty" information that the system will crash,
+		or be re-booted, or be turned off before this information
+		can be written to the disk. This may corrupt the disk.
+		This risk can be ELIMINATED, at the expense of cache
+		performance, by NOT caching any dirty information.
+		/wc:off disables the caching of dirty information,
+		eliminating the risk. /wc:on enables the caching of dirty
+		information. /wc:on is the default when INT13 is started.
+
+		WARNING: You must be careful to flush the cache before
+		  re-booting the system, or turning it off if /wc:on is selected.
+		  You should also be careful to disable the cache (/d), or do
+		  /wc:off before running any program under development which
+		  has a chance of crashing due to bugs.
+
+		NOTE: When /wc:off is selected, write info CAN get into
+		  the cache (when the write is to a track which is currently
+		  in the cache). The difference is that this "dirty" information
+		  is IMMEDIATELY written out to the disk instead of being
+		  held in the cache in the "dirty" state. When the write is
+		  to a track that is not in the cache, it will be passed
+		  through to the disk without being cached.
+
+	/t:nnnnn - Set the auto flush interval. INT13 listens on the system
+		timer to note the passage of time and "age" the dirty
+		information in the cache. Every nnnnn ticks, the cache is
+		flushed. The timer ticks 18.2 times a second.
+
+		 nnnnn	 |
+		===========================================
+		    18	 |     Flush every second
+		  1092	 |     Flush every minute
+		  5460	 |     Flush every 5 minutes
+		 10920	 |     Flush every 10 minutes
+		 21840	 |     Flush every 20 minutes
+		 32760	 |     Flush every 30 minutes
+		 65520	 |     Flush every hour
+
+		The default setting of nnnnn is 1092 or every minute.
+		NOTE: There is no way to "disable" this tick aging. Setting
+		      nnnnn = 0 causes a wait for 65536 ticks which is a
+		      little over an hour. The max value for nnnnn is 65535.
+		      Disabling the cache (/d), or turning write caching
+		      off (/wc:off) effectively prevents the aging from
+		      doing anything as there is never anything to flush
+		      in these cases. Setting very low values of nnnnn
+		      should be avoided as it places a lot of overhead into
+		      the timer interrupt service. Rather than set low values,
+		      it is better to just turn off write caching (/wc:off).
+		NOTE: As stated above, the max value for nnnnn is 65535. It
+		      should be noted however that FLUSH13 DOES NOT object if
+		      you specify a number larger than this! It will simply
+		      use only the low 16 bits of the number.
+
+	/r:on off - En/Disable reboot flush.
+		INT13 has a provision for detecting Ctrl-Alt-Del user
+		reboots. /r:on enables a flush of the cache at this time
+		to prevent the disks from being corrupted. The default
+		setting is /r:off. NOTE WARNING DANGER!!!!! Enabling
+		this feature can prevent disks from being damaged BUT
+		the mechanism has flaws. For one, you will have to hit
+		Ctrl-Alt-Del a second time to get the system to reboot.
+		YOU MUST NOT POUND ON THE KEY. You will crash the system if
+		you do. Hit the key ONCE, if the system re-boots, fine. If
+		there is info to flush out of the cache, the drive light
+		will come on and the system will probably NOT reboot. WAIT
+		until the drive light is OFF before hitting Ctrl-Alt-Del
+		again. This feature of INT13 MAY NOT WORK with other
+		software in the system. USER BEWARE!!!!!!!!!!!!!!!!!!!
+
+	/c:on off - En/Disable all cache on reads.
+		Normally INT13 does not cache EVERY I/O. Whenever
+		it sees a full track I/O which is not currently in
+		the cache, it DOES NOT cache that track. This is
+		an optimization for "typical" operation, and actually
+		increases performance. This is the default setting
+		(/c:off). There may be some cases where it is desirable
+		that ALL reads be cached. One example is that you are
+		"loading" the cache prior to locking it with FLUSH13 /l.
+		With /c:off, some pieces of what you're trying to load
+		may not get into the cache. Another example is that
+		you continually access in a sequential manner (like
+		program load) some large file which happens to be
+		contiguous on the disk. Again, there may be some "piece"
+		of the file which does not get into the cache with
+		/c:off. /c:on enables the caching of ALL reads.
+		NOTE: The same "don't bother caching operations which
+		      are full track and not in the cache" applies
+		      to writes as well. /c has NO EFFECT on this
+		      behavior however. /c only effects read operations.
+
+If invalid or conflicting arguments are given, FLUSH13 prints a usage line.

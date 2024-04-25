@@ -1,0 +1,12 @@
+chkdisk+
+chkdisp+
+CHKDSK1+
+CHKDSK2+
+chkfat+
+CHKINIT+
+CHKPRMT+
+CHKPROC2+
+CHKPROC
+CHKDSK.EXE,CHKDSK.MAP ;
+;chkexec+									;an038;bgb
+

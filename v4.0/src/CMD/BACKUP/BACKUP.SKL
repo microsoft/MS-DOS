@@ -1,0 +1,52 @@
+;==========================================================
+
+:util	BACKUP						;AN000;
+
+;---------
+:class	A
+;---------
+:use 1	 COMMON1					;AN000; ;For "Incorrect DOS version
+:def 2	 CR,LF,"Insufficient memory",CR,LF              ;AN000;
+:def 6	 CR,LF,"Invalid drive specification",CR,LF      ;AN000;
+:use 7	 COMMON23					;AN000; ;For  "Invalid date
+:use 8	 COMMON24					;AN000; ;For  "Invalid time
+
+
+:use 11  COMMON25					;AN000; ;For  "Invalid path
+
+:use 12  COMMON26					;AN000; ;For  "No source drive specified
+:use 13  COMMON27					;AN000; ;For  "No target drive specified
+:def 14  CR,LF,"Source and target drives are the same",CR,LF ;AN000;
+:def 15  CR,LF,"Error executing FORMAT",CR,LF           ;AN000;d178
+:def 16  CR,LF,"Cannot find FORMAT.COM",CR,LF           ;AN000;d178
+:def 17  CR,LF,"Error opening logfile",CR,LF            ;AN000;
+:def 18  CR,LF,"Logging to file %1",CR,LF               ;AN000;
+:def 19  CR,LF,"Last backup diskette not inserted",CR,LF ;AN000;
+
+:def 20  CR,LF,"Warning! Files in the target drive",CR,LF ;AN000;
+	 "%1:\ root directory will be erased",CR,LF       ;AN000;
+
+:def 21  CR,LF,"Warning! Files in the target drive",CR,LF ;AN000;
+	 "%1:\BACKUP directory will be erased",CR,LF      ;AN000;
+
+:def 22  CR,LF,"*** Backing up files to drive %1: ***",CR,LF  ;AN000;
+:def 23  "Diskette Number: %1",CR,LF                          ;AN000;
+:def 24  CR,LF,"Warning! No files were found to back up",CR,LF ;AN000;
+:def 25  CR,LF,"Insert backup source diskette in drive %1:",CR,LF ;AN000;
+
+:def 26  CR,LF,"Insert backup diskette %1 in drive %2:",CR,LF     ;AN000;
+:def 27  CR,LF,"*** Not able to backup file ***",CR,LF            ;AN000;
+:def 28  CR,LF,"Insert last backup diskette in drive %1:",CR,LF   ;AN000;
+
+:def 29  CR,LF,"Target can not be used for backup",CR,LF          ;AN000;
+:def 30  CR,LF,"*** Last file not backed up ***",CR,LF            ;AN000;
+:def 31  CR,LF,"Fixed backup device %1: is full",CR,LF            ;AN000;
+
+:def 32  CR,LF,"Disk full error writing to BACKUP Log File",CR,LF ;AN000;
+								  ;AN000;
+:use 33  COMMON28					;AN000; ;For  "Press any key to continue . . .
+:def 34  CR,LF							  ;AN000;
+:def 35  CR,LF,"Cannot FORMAT nonremovable drive %1:",CR,LF       ;AN000;
+
+:end								  ;AN000;
+;==========================================================

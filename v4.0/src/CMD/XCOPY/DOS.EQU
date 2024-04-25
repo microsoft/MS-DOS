@@ -1,0 +1,365 @@
+
+;
+;******************************************************************************
+; DOS Interrupts
+;
+; REVISION HISTORY:
+;
+;	   PTM P00 - WAIT & LOCK to WAITP & LOCKF for MASM errors. DRM 4/23/87
+;
+;		    A000 Version 4.00: add PARSER, System Message Handler,
+;			 Remove the BELL char.,turn off APPEND during TREE
+;			 search,Extended Attribute processing, Uppercasing
+;			 and "Out Of Space" during write to standard out.
+;		    A005 DCR0201 9/11/87 Incorperate new format for EXTENDED
+;			 ATTRIBUTES.
+;
+;******************************************************************************
+;
+
+Terminate		equ	20h
+DOS_Function		equ	21h
+Terminate_Address	equ	22h
+CNTRL_BREAK		equ	23h
+Critical_Error		equ	24h
+Disk_Read		equ	25h
+Disk_Write		equ	26h
+Terminate_Stay_Resident equ	27h
+Printer 		equ	2Fh
+CHK_APPEND		EQU	0B700H	;AN000; CHECK IF APPEND ACTIVE INT 2FH
+GET_APPEND		EQU	0B706H	;AN000; Read /X status with INT 2FH
+					;   BX = 0 if /X is not active
+					;   BX = 1 if /X is active
+SET_APPEND		EQU    0B707H	;AN000; Set /X status with INT 2FH
+VER_APPEND		EQU    0B702H	;AN019; ASK IF DOS VERSION OF APPEND
+EXT_OPEN		EQU    6C00H	;AN000; Extended Open function code
+  CREATE_FLAG		EQU    0112H	;AN005;FUNCTION CONTROL
+  CREATE_ATTR		EQU    0	;AN000;SEARCH/CREATE ATTRIBUTE
+  CREATE_MODE		EQU    0002H	;AC021;CREATE MODE
+  OPN_FLAG		EQU    0101H	;AN000;OPEN FUNCTION CONTROL
+  OPN_ATTR		EQU    0	;AN000;OPEN ATTRIBUTE
+  OPN_MODE		EQU    0000H	;AN000;OPEN MODE (READ)
+  NUL_LIST		EQU    -1	;AN005;JUST TO OPEN
+
+GET_ATTRIB		EQU    05702H	;AN000; Get ext. attribute by handle
+  INT_ORDINAL		EQU    0	;AN000;ATTRIBUTE LIST ORDINAL = 0
+  ALL_ATTR		EQU    -1	;AN005;TO SELECT ALL THE ATTRIBUTES
+SET_ATTRIB		EQU    05704H	;AN012; Set ext. attribute by handle
+;
+;******************************************************************************
+; DOS Function Calls
+;******************************************************************************
+;
+
+Program_Terminate	equ	00h
+Keyboard_Input		equ	01h
+Display_Output		equ	02h
+Auxiliary_Input 	equ	03h
+Auxiliary_Output	equ	04h
+Printer_Output		equ	05h
+Direct_Console_IO	equ	06h
+Direct_Input_No_Echo	equ	07h
+Console_Input_No_Echo	equ	08h
+Print_String		equ	09h
+Buffered_Keyboard_Input equ	0Ah
+Check_Std_Input_Status	equ	0Bh
+Clear_Keyboard_Buffer	equ	0Ch
+Disk_Reset		equ	0Dh
+Select_Disk		equ	0Eh
+FCB_Open		equ	0Fh
+FCB_Close		equ	10h
+Search_First		equ	11h
+Search_Next		equ	12h
+FCB_Delete		equ	13h
+Sequential_Read 	equ	14h
+Sequential_Write	equ	15h
+FCB_Create		equ	16h
+FCB_Rename		equ	17h
+Current_Disk		equ	19h
+Set_DTA 		equ	1Ah
+Allocation_Info 	equ	1Bh
+Allocation_Info_Device	equ	1Ch
+Random_Read		equ	21h
+Random_Write		equ	22h
+File_Size		equ	23h
+Set_Relative_Record	equ	24h
+Set_Interrupt_Vector	equ	25h
+Create_New_PSP		equ	26h
+Random_Block_Read	equ	27h
+Random_Block_Write	equ	28h
+Parse_Filename		equ	29h
+Get_Date		equ	2Ah
+Set_Date		equ	2Bh
+Get_Time		equ	2Ch
+Set_Time		equ	2Dh
+Verify			equ	2Eh
+  Verify_Off		equ	02h
+  Verify_On		equ	01h
+Set_Verify_On		equ	2E01h
+Get_DTA 		equ	2Fh
+DOS_Version		equ	30h
+Terminate_Resident	equ	31h
+Get_Interrupt_Vector	equ	35h
+Get_Disk_Free_Space	equ	36h
+Country_Code		equ	38h
+Mkdir			equ	39h
+Rmdir			equ	3Ah
+Chdir			equ	3Bh
+Create			equ	3Ch
+Open			equ	3Dh
+  Read_Only		equ	00h
+  Write_Only		equ	01h
+  Read_Write		equ	02h
+  Read_Only_Exclusive	equ	10h
+  Write_Only_Exclusive	equ	11h
+  Read_Write_Exclusive	equ	12h
+  Read_Only_Deny_Write	equ	20h
+  Write_Only_Deny_Write equ	21h
+  Read_Write_Deny_Write equ	22h
+  Read_Only_Deny_Read	equ	30h
+  Write_Only_Deny_Read	equ	31h
+  Read_Write_Deny_Read	equ	32h
+  Read_Only_Deny_None	equ	40h
+  Write_Only_Deny_None	equ	41h
+  Read_Write_Deny_None	equ	42h
+Close			equ	3Eh
+Read			equ	3Fh
+Write			equ	40h
+Delete			equ	41h
+Lseek			equ	42h
+ Lseek_Offset		equ	00h
+ Lseek_Plus_Offset	equ	01h
+ Lseek_End_Offset	equ	02h
+Chmod			equ	43h
+IOCTL			equ	44h
+  Get_Device_Info	equ	00h
+  Set_Device_Info	equ	01h
+  Read_Channel		equ	02h
+  Write_Channel 	equ	03h
+  Read_Drive_Channel	equ	04h
+  Write_Drive_Channel	equ	05h
+  Get_Input_Status	equ	06h
+  Get_Output_Status	equ	07h
+  Is_Removable		equ	08h
+  Is_Block_Redirected	equ	09h
+  Is_Handle_Redirected	equ	0Ah
+  Set_Retry_Count	equ	0Bh
+Dup_Handle		equ	45h
+Force_Dup_Handle	equ	46h
+Get_Current_Directory	equ	47h
+Allocate_Memory 	equ	48h
+Free_Memory		equ	49h
+Setblock		equ	4Ah
+Exec			equ	4Bh
+Exit			equ	4Ch
+Waitp			equ	4Dh
+Find_First		equ	4Eh
+  norm_attr		equ	00h
+  incl_read_attr	equ	01h
+  incl_h_attr		equ	02h
+  incl_h_s_attr 	equ	06h
+  incl_h_s_dir_attr	equ	16h
+Find_Next		equ	4Fh
+Get_Verify_Setting	equ	54h
+Rename			equ	56h
+File_Date_Time		equ	57h
+  Get_File_Time 	equ	00h
+  Set_File_Time 	equ	01h
+Get_Extended_Error	equ	59h
+Create_Temp		equ	5Ah
+Create_New		equ	5Bh
+File_Access		equ	5Ch
+  Lockf 		equ	00h
+  Unlock		equ	01h
+Get_PSP 		equ	62h
+Upper_Case_String	equ	6521h	;AN000;GET EXTENDED COUNTRY INFORMATION
+;
+;******************************************************************************
+; DOS File Handles
+;******************************************************************************
+;
+
+STDIN			equ	00h
+STDOUT			equ	01h
+STDERR			equ	02h
+STDAUX			equ	03h
+STDPRN			equ	04h
+
+
+;
+;******************************************************************************
+; File's attributes in a Directory entry
+;******************************************************************************
+;
+read_only_file		equ	01h
+hidden_file		equ	02h
+system_file		equ	04h
+has_volume_label	equ	08h
+is_subdirectory 	equ	10h
+archive_on		equ	20h
+
+;
+;******************************************************************************
+; Return Codes
+;******************************************************************************
+;
+
+Errorlevel_0		equ	0
+Errorlevel_1		equ	1
+Errorlevel_2		equ	2
+Errorlevel_3		equ	3
+Errorlevel_4		equ	4
+Errorlevel_5		equ	5
+Errorlevel_6		equ	6
+Errorlevel_7		equ	7
+Errorlevel_8		equ	8
+
+;
+;******************************************************************************
+; Extended Error Codes
+;******************************************************************************
+;
+
+Error_No_Error		      equ     00
+Error_Invalid_Function	      equ     01
+Error_File_Not_Found	      equ     02
+Error_Path_Not_Found	      equ     03
+Error_No_Handles_Left	      equ     04
+Error_Access_Denied	      equ     05
+Error_Invalid_Handle	      equ     06
+Error_Memory_Blocks_Bad       equ     07
+Error_Insufficient_Memory     equ     08
+Error_Inv_Address	      equ     09
+Error_Inv_Environment	      equ     10
+Error_Inv_Format	      equ     11
+Error_Inv_Access_Code	      equ     12
+Error_Inv_Data		      equ     13
+Error_Inv_Drive 	      equ     15
+Error_Rmdir_Current_Dir       equ     16
+Error_Not_Same_Device	      equ     17
+Error_No_More_Files	      equ     18
+Error_Write_Protect	      equ     19
+Error_Unknown_Unit	      equ     20
+Error_Drive_Not_Ready	      equ     21
+Error_Unknown_Command	      equ     22
+Error_Data_Error	      equ     23
+Error_Bad_Request_Len	      equ     24
+Error_Seek_Error	      equ     25
+Error_Unknown_Media_Type      equ     26
+Error_Sector_Not_Found	      equ     27
+Error_Out_Of_Paper	      equ     28
+Error_Write_Fault	      equ     29
+Error_Read_Fault	      equ     30
+Error_Gerneral_Failure	      equ     31
+Error_Sharing_Violation       equ     32
+Error_Lock_Violation	      equ     33
+Error_Inv_Disk_Change	      equ     34
+Error_FCB_Unavailable	      equ     35
+Error_File_Exists	      equ     80
+Error_Cannot_Make	      equ     82
+Error_Fail_On_Int24	      equ     83
+
+;
+;******************************************************************************
+; Extended Error Classes
+;******************************************************************************
+;
+
+Out_Of_Resource 	equ	1
+Temporary		equ	2
+Authorization		equ	3
+Internal		equ	4
+Hardware_Failure	equ	5
+System_Failure		equ	6
+Program_Error		equ	7
+Not_Found		equ	8
+Bad_Format		equ	9
+Locked			equ	10
+Media			equ	11
+Already_Exists		equ	12
+Unknown 		equ	13
+
+;
+;*****************************************************************************
+; Extended Error Actions
+;*****************************************************************************
+;
+
+Retry			equ	1
+Delay_Retry		equ	2
+User			equ	3
+Abort			equ	4
+Immediate_Exit		equ	5
+Ignore			equ	6
+Retry_After_User	equ	7
+
+;
+;******************************************************************************
+; Extended Error Locus
+;******************************************************************************
+;
+
+Non_Specific		equ	1
+Block_Device		equ	2
+Serial_Device		equ	4
+Memory			equ	5
+
+;
+;******************************************************************************
+; Internal Program Initialization Errors
+;******************************************************************************
+;
+
+Init_Err_DOS_Ver_1	equ	1	;Bad DOS version prior to 2.0
+Init_Err_DOS_Ver_2	equ	2	;Bad DOS version 2.0 or above
+Init_Err_Inv_Drive	equ	3	;Invalid drive specification
+Init_Err_Inv_Parm	equ	4	;Invalid parameter
+Init_Err_Inv_Num_Parm	equ	5	;Invalid number of parameters
+Init_Err_Inv_Path	equ	6	;Invalid path
+Init_Err_Insuff_Mem	equ	7	;Insufficient memory
+Init_Err_Inv_Date	equ	8	;Invalid date
+Init_Err_Inv_Time	equ	9	;Invalid time
+Init_Err_Inv_Device	equ	10	;Invalid device name
+Init_Err_Ill_Device	equ	11	;Illegal device name
+Init_Err_Inv_Filename	equ	12	;Invalid filename
+
+;
+;******************************************************************************
+; FCB Structure
+;******************************************************************************
+;
+
+FCB		STRUC
+Drive_Number		db	0
+Filename_FCB		db	8 dup(0)
+Extension		db	3 dup(0)
+Current_Block		dw	0
+Record_Size		dw	0
+File_Size_Low_FCB	dw	0
+File_Size_High_FCB	dw	0
+File_Date_Time_FCB	dw	0
+Reserved_FCB		db	10 dup(0)
+Current_Record		db	0
+Relative_Record_Low	dw	0
+Relative_Record_High	dw	0
+FCB		ENDS
+
+
+;
+;******************************************************************************
+; Find First/Next DTA area
+;******************************************************************************
+;
+
+Find_DTA	STRUC
+DTA_Reserved		    db	    21 dup(0)
+DTA_Attribute		    db	    0
+DTA_File_Time		    dw	    0
+DTA_File_Date		    dw	    0
+DTA_File_Size_Low	    dw	    0
+DTA_File_Size_High	    dw	    0
+DTA_Filename		    db	    13 dup(0)
+Find_DTA	ENDS
+
+
+

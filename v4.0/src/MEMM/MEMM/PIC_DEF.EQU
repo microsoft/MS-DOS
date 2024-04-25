@@ -1,0 +1,78 @@
+
+
+;******************************************************************************
+;
+;   (C) Copyright MICROSOFT Corp. 1986
+;
+;   Title:    MEMM - MICROSOFT Expanded Memory Manager 386
+;
+;   Module:   PIC_DEF.EQU - 8259 programmable interrupt controllers
+;
+;   Version:  0.02
+;
+;   Date:     January 31, 1986
+;
+;   Author:
+;
+;******************************************************************************
+;
+;   Change log:
+;
+;     DATE    REVISION			DESCRIPTION
+;   --------  --------	-------------------------------------------------------
+;   01/31/86  Original
+;   05/12/86  B	Cleanup and segment reorganization
+;   06/28/86  0.02	Name change from MEMM386 to MEMM
+;
+;******************************************************************************
+ifndef INC_LIST
+.xlist
+endif
+;
+;	Master interrupt controller parameters
+;
+PIC1_CMD	=	20H		; 8259A command register.
+PIC1_INIT	=	21H		; 8259A initialization register.
+PIC1_STAT	=	20H		; 8259A status (who interrupted)
+PIC1_MASK	=	21H		; 8259A operation control word #1.
+;
+PIC1_ICW1_VAL	=	11H		; Edge trig, 8 interval, cascade, ICW4.
+PIC1_ICW2_VAL	=	08H		; Interrupt vector address.
+PIC1_ICW3_VAL	=	04H		; Slave id.
+PIC1_ICW4_VAL	=	01H		; 8088 mode, norm EOI, non-buf, no nest.
+;
+;	Slave interrupt controller parameters
+;
+PIC2_CMD	=	0A0H		; 8259A command register.
+PIC2_INIT	=	0A1H		; 8259A initialization register.
+PIC2_STAT	=	0A0H		; 8259A status (who interrupted)
+PIC2_MASK	=	0A1H		; 8259A operation control word #1.
+;
+PIC2_ICW1_VAL	=	11H		; Edge trig, 8 interval, cascade, ICW4.
+PIC2_ICW2_VAL	=	70H		; Interrupt vector address.
+PIC2_ICW3_VAL	=	02H		; Master id.
+PIC2_ICW4_VAL	=	01H		; 8088 mode, norm EOI, non-buf, no nest.
+;
+MASK_DISABLE	=	0FFH		; Mask register, no levels allowed.
+READ_ISR	=	0BH		; Command to read PIC In-Service-Reg.
+EOI		=	20H		; End-Of-Interrupt (non-specific).
+;
+IRQ0_ENABLE	=	11111110B	; Mask to enable IRQ0.
+IRQ1_ENABLE	=	11111101B	; Mask to enable IRQ1.
+IRQ2_ENABLE	=	11111011B	; Mask to enable IRQ2.
+IRQ3_ENABLE	=	11110111B	; Mask to enable IRQ3.
+IRQ4_ENABLE	=	11101111B	; Mask to enable IRQ4.
+IRQ5_ENABLE	=	11011111B	; Mask to enable IRQ5.
+IRQ6_ENABLE	=	10111111B	; Mask to enable IRQ6.
+IRQ7_ENABLE	=	01111110B	; Mask to enable IRQ7.
+;
+IRQ8_ENABLE	=	11111110B	; Mask to enable IRQ8.
+IRQ9_ENABLE	=	11111101B	; Mask to enable IRQ9.
+IRQ10_ENABLE	=	11111011B	; Mask to enable IRQ10.
+IRQ11_ENABLE	=	11110111B	; Mask to enable IRQ11.
+IRQ12_ENABLE	=	11101111B	; Mask to enable IRQ12.
+IRQ13_ENABLE	=	11011111B	; Mask to enable IRQ13.
+IRQ14_ENABLE	=	10111111B	; Mask to enable IRQ14.
+IRQ15_ENABLE	=	01111111B	; Mask to enable IRQ15.
+;
+.list	; end of PIC_DEF.EQU

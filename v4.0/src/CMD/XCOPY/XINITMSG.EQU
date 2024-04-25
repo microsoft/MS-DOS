@@ -1,0 +1,150 @@
+;*****************************************************************************
+; Message equates
+;*****************************************************************************
+CR		  equ	  13
+LF		  equ	  10
+BELL		  equ	   7
+END_OF_MESSAGE	  equ	   0
+ALPHA_D 	  equ	  'D'
+ALPHA_F 	  equ	  'F'
+NO_SUBST	  EQU	  00H	       ;AN000;MSG PARAMETER SUBSTITUTION = 0
+PARM_SUBST_ONE	  EQU	  01H	       ;AN000;MSG PARAMETER SUBSTITUTION = 1
+MSG_SER_CLASS	  EQU	  00H	       ;AN000;MESSAGE SERVICE CLASS (RESERVED)
+EXT_ERR_CLASS	  EQU	  01H	       ;AN000;DOS EXTENDED ERROR CLASS
+PARSE_ERR_CLASS   EQU	  02H	       ;AN000;PARSE ERROR CLASS
+UTILITY_MSG_CLASS EQU	  0FFH	       ;AN000;UTILITY MESSAGE CLASS
+NO_INPUT	  EQU	  00H	       ;AN000;NO INPUT CHARACTERS
+DOS_KEYB_INP	  EQU	  01H	       ;AN000;KEYBOARD INPUT EXPECTED
+;******************************************************************************
+; The initialization messages
+;******************************************************************************
+;Init prompts for parameters
+
+MSG_CREATE_DIR	  EQU	  4	       ;AC000;FILE NAME OR DIRECTORY?
+
+MSG_TO_BEGIN	  EQU	  5	       ;AC000;PRESS ANY KEY TO BEGIN COPY
+
+MSG_F_D 	  EQU	  29	       ;AN000;IS IT A FILE OR DIR NAME ?
+
+MSG_CR_LF_STR	  EQU	  26	       ;AN000;FOR CR,LF ONLY
+
+;Init error messages
+
+MSG_INCORRECT_DOS EQU	  1	       ;AC000;INCORRECT DOS VERSION
+
+MSG_INVALID_DRV   EQU	  11	       ;AC000;INVALID DRIVE SPECIFICATION
+
+MSG_LONG_PATH	  EQU	  6	       ;AC000;PATH TOO LONG
+
+MSG_INVALID_PARM  EQU	  3	       ;AC000;INVALID PARAMETER
+
+MSG_INV_NUM_PARM  EQU	  21	       ;AC000;INVALID NUMBER OF PARAMETERS
+
+MSG_CYCLIC_COPY   EQU	  8	       ;AC000;CANNOT PERFORM CYCLIC COPY
+
+MSG_INVALID_PATH  EQU	  7	       ;AC000;INVALID PATH
+
+MSG_NOT_CREATE_DIR  EQU   10	       ;AC000;UNABLE TO CREATE DIRECTORY
+
+MSG_INVALID_DATE  EQU	  9	       ;AC000;INVALID DATE
+
+MSG_RES_S_NAME	  EQU	  12	       ;AC000;CANNOT XCOPY FROM RESERVED DEVICE
+
+MSG_INSUF_MEMORY  EQU	  2	       ;AC000;INSUFFICIENT MEMORY
+
+MSG_INV_SW	  EQU	  35	       ;AN004;DUPLICATE / INVALID SW FROM PARSE
+
+;******************************************************************************
+;Prompts for parameters -------------------------------------------------------
+;MSG_CREATE_DIR 	 LABEL	 BYTE
+;			 DB	 CR, LF
+;			 DB	 'Does %s specify a file name', CR,LF
+;			 DB	 'or directory name on the target', CR,LF
+;			 DB	 '(F = file, D = directory)? '
+;			;DB
+;			 DB	 END_OF_MESSAGE
+;
+;------------------------------------------------------------------------------
+;MSG_TO_BEGIN		 LABEL	 BYTE
+;			 DB	 CR, LF
+;			 DB	 'Press any key to begin copying file(s) '
+;			;DB
+;			 DB	 END_OF_MESSAGE
+;
+;------------------------------------------------------------------------------
+;MSG_F_D		 LABEL	 BYTE
+;			 DB	 'FD '
+;			;DB
+;			 DB	 END_OF_MESSAGE
+;
+;Init error  ------------------------------------------------------------------
+;MSG_INCORRECT_DOS	 LABEL	 BYTE
+;			 DB	 CR, LF
+;			 DB	 'Incorrect DOS version'
+;			;DB
+;			 DB	 CR, LF, BELL, '$'
+;-----------------------------------------------------------------------------
+;MSG_INVALID_DRV	 LABEL	 BYTE
+;			 DB	 CR, LF
+;			 DB	 'Invalid drive specification'
+;			;DB
+;			 DB	 CR, LF, BELL, END_OF_MESSAGE
+;-----------------------------------------------------------------------------
+;MSG_LONG_PATH		 LABEL	 BYTE
+;			 DB	 CR, LF
+;			 DB	 'Path too long'
+;			;DB
+;			 DB	 CR, LF, BELL, END_OF_MESSAGE
+;------------------------------------------------------------------------------
+;MSG_INVALID_PARM	 LABEL	 BYTE
+;			 DB	 CR, LF
+;			 DB	 'Invalid parameter'
+;			;DB
+;			 DB	 CR, LF, BELL, END_OF_MESSAGE
+;------------------------------------------------------------------------------
+;MSG_INV_NUM_PARM	 LABEL	 BYTE
+;			 DB	 CR, LF
+;			 DB	 'Invalid number of parameters'
+;			;DB
+;			 DB	 CR, LF, BELL, END_OF_MESSAGE
+;------------------------------------------------------------------------------
+;MSG_CYCLIC_COPY	 LABEL	 BYTE
+;			 DB	 CR, LF
+;			 DB	 'Cannot perform a cyclic copy'
+;			;DB
+;			 DB	 CR, LF, BELL, END_OF_MESSAGE
+;------------------------------------------------------------------------------
+;MSG_INVALID_PATH	 LABEL	 BYTE
+;			 DB	 CR, LF
+;			 DB	 'Invalid path'
+;			;DB
+;			 DB	 CR, LF, BELL, END_OF_MESSAGE
+;------------------------------------------------------------------------------
+;MSG_NOT_CREATE_DIR	 LABEL	 BYTE
+;			 DB	 CR, LF
+;			 DB	 'Unable to create directory'
+;			;DB
+;			 DB	 CR, LF, BELL, END_OF_MESSAGE
+;------------------------------------------------------------------------------
+;MSG_INVALID_DATE	 LABEL	 BYTE
+;			 DB	 CR, LF
+;			 DB	 'Invalid date'
+;			;DB
+;			 DB	 CR, LF, BELL, END_OF_MESSAGE
+;------------------------------------------------------------------------------
+;MSG_RES_S_NAME 	 LABEL	 BYTE
+;			 DB	 CR, LF
+;			 DB	 'Cannot XCOPY from a reserved device'
+;			;DB
+;			 DB	 CR, LF, BELL, END_OF_MESSAGE
+;------------------------------------------------------------------------------
+;MSG_INSUF_MEMORY	 LABEL	 BYTE
+;			 DB	 CR, LF
+;			 DB	 'Insufficient memory'
+;			;DB
+;			 DB	 CR, LF, BELL, END_OF_MESSAGE
+;------------------------------------------------------------------------------
+;******************* COPY RIGHT STATEMENT *************************************
+include copyrigh.inc
+;------------------------------------------------------------------------------
+;XCPYINIT_MSG_END	 LABEL	 BYTE

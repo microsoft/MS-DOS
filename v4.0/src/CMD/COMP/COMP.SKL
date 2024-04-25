@@ -1,0 +1,30 @@
+:util COMP		   ;utility name				 ;AN000;
+
+:class A		   ;system messages				 ;AN000;
+
+:use 1 COMMON1		   ;"Incorrect DOS version"                      ;AN000;
+:use 2 EXTEND8		   ;"Insufficient memory"                        ;AN000;
+:use 3 PARSE10		   ;"Invalid parameter"                          ;AN000;
+
+:def 4 "10 Mismatches - ending compare",CR,LF                            ;AN000;
+:use 5 EXTEND15 	   ;"Invalid drive specification"                ;AN000;
+:def 6 "Compare error at OFFSET %1",CR,LF                                ;AN000;
+:def 7 "File 1 = %1",CR,LF                                               ;AN000;
+:def 8 "File 2 = %1",CR,LF                                               ;AN000;
+:def 9 "Eof mark not found",CR,LF                                        ;AN000;
+:def 10 "Files compare ok",CR,LF                                         ;AN000;
+:use 11 EXTEND2 	   ;"File not found"                             ;AN000;
+:use 12 COMMON25	   ;"Invalid path"                               ;AN000;
+:use 13 EXTEND32	   ;"Sharing violation"                          ;AN000;
+:use 14 EXTEND4 	   ;"Too many open files"                        ;AN000;
+:def 15 CR,LF,CR,LF,"Enter primary filename",CR,LF                       ;AN000;
+:def 16 CR,LF,CR,LF,"Enter 2nd filename or drive id",CR,LF               ;AN000;
+:def 17 "Files are different sizes",CR,LF                                ;AN000;
+:def 18 "Compare more files (Y/N) ?"                                     ;AN000;
+:def 19 "%1 and %2",CR,LF                                                ;AN000;
+:def 20 CR,LF								 ;AN000;
+:use 21 EXTEND5 	   ;"Access Denied"                              ;AN000;
+:use 22 EXTEND37	   ;"Code page mismatch"                         ;AN000;
+:DEF 23 "Files compare ok",CR,LF                                         ;AN000;
+:end									 ;AN000;
+

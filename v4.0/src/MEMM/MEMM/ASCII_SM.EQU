@@ -1,0 +1,41 @@
+
+
+;******************************************************************************
+;
+;   (C) Copyright MICROSOFT Corp. 1986
+;
+;   Title:    MEMM - MICROSOFT Expanded Memory Manager 386
+;
+;   Module:   ASCII_SM.EQU - ASCII (1968) control characters  (small version)
+;
+;   Version:  0.02
+;
+;   Date:     June 25,1986
+;
+;   Author:
+;
+;******************************************************************************
+;
+;   Change log:
+;
+;     DATE    REVISION			DESCRIPTION
+;   --------  --------	-------------------------------------------------------
+;   06/25/86  Original
+;   06/28/86  0.02	Name change from MEMM386 to MEMM
+;
+;******************************************************************************
+ifndef INC_LIST
+.xlist
+endif
+NUL		equ	0		; 00   ^@   Null
+BEL		equ	7		; 07   ^G   Bell
+BS		equ	8		; 08   ^H   Backspace
+TAB		equ	9		; 09   ^I   (Horizontal) Tab
+LF		equ	10		; 0A   ^J   Line Feed
+FF		equ	12		; 0C   ^L   Form Feed
+CR		equ	13		; 0D   ^M   Carriage Return
+ASCII_ESC	equ	27		; 1B   ^[   Escape
+SPACE		equ	32		; 20        Space
+DEL		equ	127		; 7F        Delete/Rubout
+
+.list	; end of ASCII_SM.EQU

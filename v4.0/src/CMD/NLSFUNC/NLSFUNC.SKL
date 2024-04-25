@@ -1,0 +1,15 @@
+:util	NLSFUNC 	 ;AN000;
+:class 2		 ;AN000;
+:use PARSE1		 ;AN000;
+:use PARSE2		 ;AN000;
+:use PARSE3		 ;AN000;
+:use PARSE4		 ;AN000;
+:use PARSE6		 ;AN000;
+:use PARSE7		 ;AN000;
+:use PARSE8		 ;AN000;
+:use PARSE10		 ;AN003;
+:class A		 ;AN000;
+:use 1 COMMON1		   ;AN000;;MSG 1 is always "Incorrect DOS version"
+:use 2 COMMON2		   ;AN000;;MSG 2 is always "%1 already installed"
+:use 3 EXTEND2		   ;AN000;;MSG 3 is always  "File not found - %1"
+:end			   ;AN000;

@@ -1,0 +1,15 @@
+:class 1
+;
+;********   messages for the Fixed Disk Boot Record ******
+;
+;m1: db    "Invalid partition table",0        ;23
+:use 1114 fdisk m1:
+;
+;m2: db    "Error loading operating system",0 ;30
+:use 1115 fdisk m2:
+;
+;m3: db    "Missing operating system",0       ;24
+:use 1116 fdisk m3:
+;
+:end
+

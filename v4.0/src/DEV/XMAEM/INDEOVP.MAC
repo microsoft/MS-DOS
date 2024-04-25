@@ -1,0 +1,111 @@
+COMMENT #
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+*                                                                             *
+* MODULE NAME     : INDEOVP                                                   *
+*                                                                             *
+*                    5669-196 (C) COPYRIGHT 1988 Microsoft Corp.              *
+*                                                                             *
+* DESCRIPTIVE NAME: Override prefix macros                                    *
+*                                                                             *
+* STATUS (LEVEL)  : Version (0) Level (1.0)                                   *
+*                                                                             *
+* FUNCTION        : DATAOV - Creates a prefix so that the next instruction    *
+*                            accesses data twice as wide as it normally would.*
+*                            Bytes go to words, and words go to double words. *
+*                   ADDROV - Creates a prefix so that the next instruction    *
+*                            uses 32 bit addresses instead of 16 bit.         *
+*                   SEGOV  - Creates a segment override prefix for the next   *
+*                            instruction.                                     *
+*                                                                             *
+* MODULE TYPE     : MAC                                                       *
+*                                                                             *
+* REGISTER USAGE  : 80286 Standard                                            *
+*                                                                             *
+* CHANGE ACTIVITY :                                                           *
+*                                                                             *
+* $MAC(INDEOVP) COMP(LOAD) PROD(3270PC) :                                     *
+*                                                                             *
+* $D0=D0004700 410 870604 D : NEW FOR RELEASE 1.1                             *
+* $P1=P0000311 410 870804 D : RENAME MODULE'S LIBRARY FILE TYPE TO "MAC"      *
+*                                                                             *
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+#
+
+PAGE
+; DATAOV - Create a prefix for an instruction so that it accesses data twice
+;          as wide as it normally would have.  If the instruction was to access
+;          bytes then it will access words.  If it was to access words then it
+;          will access double words (32 bits).
+
+DATAOV  MACRO
+         DB      066H
+        ENDM
+
+PAGE
+; ADDROV - Create a prefix for an instruction so that it uses 32 bit addresses
+;          instead of 16 bit addresses.
+
+ADDROV  MACRO
+         DB      067H
+        ENDM
+
+PAGE
+; SEGOV - Segment Prefix Overrides
+; This macro will create segment prefix overrides for all the segment registers
+; on the 80386.  It will also create prefixes for the data override and address
+; override as listed in the DATOV and ADDROV macros above.
+;
+; Syntax:  SEGOV   ES | CS | SS | DS | FS | GS | DATA | ADDRESS
+;
+
+SEGOV   MACRO   SR
+        IFIDN   <&SR>,<ES>
+         DB      026H
+        ENDIF
+        IFIDN   <&SR>,<es>
+         DB      026H
+        ENDIF
+        IFIDN   <&SR>,<CS>
+         DB      02EH
+        ENDIF
+        IFIDN   <&SR>,<cs>
+         DB      02EH
+        ENDIF
+        IFIDN   <&SR>,<SS>
+         DB      036H
+        ENDIF
+        IFIDN   <&SR>,<ss>
+         DB      036H
+        ENDIF
+        IFIDN   <&SR>,<DS>
+         DB      03EH
+        ENDIF
+        IFIDN   <&SR>,<ds>
+         DB      03EH
+        ENDIF
+        IFIDN   <&SR>,<FS>
+         DB      064H
+        ENDIF
+        IFIDN   <&SR>,<fs>
+         DB      064H
+        ENDIF
+        IFIDN   <&SR>,<GS>
+         DB      065H
+        ENDIF
+        IFIDN   <&SR>,<gs>
+         DB      065H
+        ENDIF
+        IFIDN   <&SR>,<DATA>
+         DB      066H
+        ENDIF
+        IFIDN   <&SR>,<data>
+         DB      066H
+        ENDIF
+        IFIDN   <&SR>,<ADDRESS>
+         DB      067H
+        ENDIF
+        IFIDN   <&SR>,<address>
+         DB      067H
+        ENDIF
+        ENDM
+

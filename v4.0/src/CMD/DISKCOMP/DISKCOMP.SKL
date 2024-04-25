@@ -1,0 +1,56 @@
+:util DISKCOMP             ;AN000;utility name
+:class A                   ;AN000;system messages
+;
+:use 1 COMMON1             ;AN000;"Incorrect DOS version"
+;
+:use 2 EXTEND8             ;AN000;"Insufficient memory"
+;
+:use 3 PARSE10             ;AN000;"Invalid parameter"
+;
+:def 4 "Do not specify filename(s)",CR,LF                                       ;AN000;
+"Command format: DISKCOMP d: d: [/1][/8]",LF,CR                                 ;AN000;
+;
+:def 5 CR,LF,"Invalid drive specification",CR,LF                                ;AN000;
+"Specified drive does not exist",CR,LF                                          ;AN000;
+"or is non-removable",CR,LF                                                     ;AN000;
+;
+:def 6 CR,LF,"Cannot DISKCOMP to or from",CR,LF                                 ;AN000;
+"a network drive",CR,LF                                                         ;AN000;
+;
+:def 7 CR,LF,"Insert FIRST diskette in drive %1:",CR,LF                         ;AN000;
+
+:def 8 CR,LF,"Insert SECOND diskette in drive %1:",CR,LF                        ;AN000;
+
+:def 9 CR,LF,"FIRST diskette bad or incompatible",CR,LF                         ;AN000;
+
+:def 10 CR,LF,"SECOND diskette bad or incompatible",CR,LF                       ;AN000;
+;
+:use 11 EXTEND21             ;AN000;"Drive not ready"            NOTE CHANGE %1 TO %0
+;
+:use 12 COMMON28             ;AN000;"Press any key to continue . . ."
+;
+:use 13 EXTEND19  ;AN000;CR,LF,"Attempt to write to write-protected diskette",CR,LF
+;
+:def 14 CR,LF,"Compare another diskette (Y/N) ?"                                ;AN000;
+;
+:def 15 CR,LF,"Comparing %1 tracks",CR,LF                                       ;AN000;
+"%2 sectors per track, %3 side(s)",CR,LF                                        ;AN000;
+;
+:def 16 CR,LF,"Drive types or diskette types",CR,LF                             ;AN000;
+"not compatible",CR,LF                                                          ;AN000;
+;
+:def 17 CR,LF,"Unrecoverable read error on drive %2",CR,LF                      ;AN000;
+"side %3, track %4",CR,LF                                                       ;AN000;
+;
+:def 18 CR,LF,"Compare error on",CR,LF,"side %3, track %4",CR,LF                ;AN000;
+;
+:def 19 "Make sure a diskette is inserted into",CR,LF                           ;AN004;
+"the drive and the door is closed",CR,LF                                        ;AN004;
+;
+:def 20 CR,LF,"Compare process ended",CR,LF                                     ;AN000;
+;
+:def 21 CR,LF,"Compare OK",CR,LF                                                ;AN000;
+;
+:def 22 CR,LF                                                                   ;AC007;
+:end                                                                            ;AN000;
+              

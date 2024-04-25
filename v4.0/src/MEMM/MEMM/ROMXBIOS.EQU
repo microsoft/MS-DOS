@@ -1,0 +1,45 @@
+
+
+;******************************************************************************
+;
+;   (C) Copyright MICROSOFT Corp. 1986
+;
+;   Title:    MEMM - MICROSOFT Expanded Memory Manager 386
+;
+;   Module:   ROMXBIOS.EQU - ROM Extra BIOS function calls
+;
+;   Version:  0.02
+;
+;   Date:     June 25,1986
+;
+;   Author:
+;
+;******************************************************************************
+;
+;   Change log:
+;
+;     DATE    REVISION			DESCRIPTION
+;   --------  --------	-------------------------------------------------------
+;   06/25/86  Original
+;   06/28/86  0.02	Name change from MEMM386 to MEMM
+;
+;******************************************************************************
+ifndef INC_LIST
+.xlist
+endif
+
+XBIOS			equ	15h	; Extra BIOS functions
+    DEV_OPEN		equ	80h	;   - device open dummy call
+    DEV_CLOSE		equ	81h	;   - device close dummy call
+    PROG_TERM		equ	82h	;   - program terminate
+    EVENT_WAIT		equ	83h	;   - Event Wait
+    JOYSTICK		equ	84h	;   - joystick
+    SYS_REQ		equ	85h	;   - sys request key routine
+    UNCOND_WAIT		equ	86h	;   - unconditional Wait
+    MOVE_BLK		equ	87h	;   - move block
+    EXT_MEM		equ	88h	;   - extended memory size
+    ENTER_PROT		equ	89h	;   - enter protected mode
+    DEV_WAIT		equ	90h	;   - Device Wait
+    DEV_POST		equ	91h	;   - Device Post
+
+.list		; end of ROMXBIOS.EQU

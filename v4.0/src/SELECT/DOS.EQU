@@ -1,0 +1,359 @@
+;
+;******************************************************************************
+; DOS Interrupts
+;
+; REVISION HISTORY:
+;
+;	   PTM P00 - WAIT & LOCK to WAITP & LOCKF for MASM errors. DRM 4/23/87
+;
+;		    A005 DCR0201 10/9/87 Incorperate new format for EXTENDED
+;			 ATTRIBUTES.
+;
+;******************************************************************************
+;
+
+Terminate		equ	20h	;AN000;
+DOS_Function		equ	21h	;AN000;
+Terminate_Address	equ	22h	;AN000;
+CNTRL_BREAK		equ	23h	;AN000;
+Critical_Error		equ	24h	;AN000;
+Disk_Read		equ	25h	;AN000;
+Disk_Write		equ	26h	;AN000;
+Terminate_Stay_Resident equ	27h	;AN000;
+Printer 		equ	2Fh	;AN000;
+CHK_APPEND		EQU	0B700H	;AN000; CHECK IF APPEND ACTIVE INT 2FH
+GET_APPEND		EQU	0B706H	;AN000; Read /X status with INT 2FH
+					;   BX = 0 if /X is not active
+					;   BX = 1 if /X is active
+SET_APPEND		EQU    0B707H	;AN000; Set /X status with INT 2FH
+EXT_OPEN		EQU    6C00H	;AN000; Extended Open function code
+  CREATE_FLAG		EQU    0112H	;AN005;FUNCTION CONTROL
+  CREATE_ATTR		EQU    0	;AN000;SEARCH/CREATE ATTRIBUTE
+  CREATE_MODE		EQU    0011H	;AN000;CREATE MODE
+  OPN_FLAG		EQU    0101H	;AN000;OPEN FUNCTION CONTROL
+  OPN_ATTR		EQU    0	;AN000;OPEN ATTRIBUTE
+  OPN_MODE		EQU    0002H	;AN000;OPEN MODE
+  NUL_LIST		EQU    -1	;AN005;JUST TO OPEN
+
+GET_ATTRIB		EQU    05702H	;AN000; Get ext. attribute by handle
+QUY_ATTRIB		EQU    05703H	;AN000; QUERY EXT. ATTRIBUTES BY HANDLE
+  INT_ORDINAL		EQU    0	;AN000;ATTRIBUTE LIST ORDINAL = 0
+  ALL_ATTR		EQU    -1	;AN005;TO SELECT ALL THE ATTRIBUTES
+;
+;******************************************************************************
+; DOS Function Calls
+;******************************************************************************
+;
+
+Program_Terminate	equ	00h	 ;AN000;
+Keyboard_Input		equ	01h	 ;AN000;
+Display_Output		equ	02h	 ;AN000;
+Auxiliary_Input 	equ	03h	 ;AN000;
+Auxiliary_Output	equ	04h	 ;AN000;
+Printer_Output		equ	05h	 ;AN000;
+Direct_Console_IO	equ	06h	 ;AN000;
+Direct_Input_No_Echo	equ	07h	 ;AN000;
+Console_Input_No_Echo	equ	08h	 ;AN000;
+Print_String		equ	09h	 ;AN000;
+Buffered_Keyboard_Input equ	0Ah	 ;AN000;
+Check_Std_Input_Status	equ	0Bh	 ;AN000;
+Clear_Keyboard_Buffer	equ	0Ch	 ;AN000;
+Disk_Reset		equ	0Dh	 ;AN000;
+Select_Disk		equ	0Eh	 ;AN000;
+FCB_Open		equ	0Fh	 ;AN000;
+FCB_Close		equ	10h	 ;AN000;
+Search_First		equ	11h	 ;AN000;
+Search_Next		equ	12h	 ;AN000;
+FCB_Delete		equ	13h	 ;AN000;
+Sequential_Read 	equ	14h	 ;AN000;
+Sequential_Write	equ	15h	 ;AN000;
+FCB_Create		equ	16h	 ;AN000;
+FCB_Rename		equ	17h	 ;AN000;
+Current_Disk		equ	19h	 ;AN000;
+Set_DTA 		equ	1Ah	 ;AN000;
+Allocation_Info 	equ	1Bh	 ;AN000;
+Allocation_Info_Device	equ	1Ch	 ;AN000;
+Random_Read		equ	21h	 ;AN000;
+Random_Write		equ	22h	 ;AN000;
+File_Size		equ	23h	 ;AN000;
+Set_Relative_Record	equ	24h	 ;AN000;
+Set_Interrupt_Vector	equ	25h	 ;AN000;
+Create_New_PSP		equ	26h	 ;AN000;
+Random_Block_Read	equ	27h	 ;AN000;
+Random_Block_Write	equ	28h	 ;AN000;
+Parse_Filename		equ	29h	 ;AN000;
+Get_Date		equ	2Ah	 ;AN000;
+Set_Date		equ	2Bh	 ;AN000;
+Get_Time		equ	2Ch	 ;AN000;
+Set_Time		equ	2Dh	 ;AN000;
+Verify			equ	2Eh	 ;AN000;
+  Verify_Off		equ	02h	 ;AN000;
+  Verify_On		equ	01h	 ;AN000;
+Set_Verify_On		equ	2E01h	 ;AN000;
+Get_DTA 		equ	2Fh	 ;AN000;
+DOS_Version		equ	30h	 ;AN000;
+Terminate_Resident	equ	31h	 ;AN000;
+Get_Interrupt_Vector	equ	35h	 ;AN000;
+Get_Disk_Free_Space	equ	36h	 ;AN000;
+Country_Code		equ	38h	 ;AN000;
+Mkdir			equ	39h	 ;AN000;
+Rmdir			equ	3Ah	 ;AN000;
+Chdir			equ	3Bh	 ;AN000;
+Create			equ	3Ch	 ;AN000;
+Open			equ	3Dh	 ;AN000;
+  Read_Only		equ	00h	 ;AN000;
+  Write_Only		equ	01h	 ;AN000;
+  Read_Write		equ	02h	 ;AN000;
+  Read_Only_Exclusive	equ	10h	 ;AN000;
+  Write_Only_Exclusive	equ	11h	 ;AN000;
+  Read_Write_Exclusive	equ	12h	 ;AN000;
+  Read_Only_Deny_Write	equ	20h	 ;AN000;
+  Write_Only_Deny_Write equ	21h	 ;AN000;
+  Read_Write_Deny_Write equ	22h	 ;AN000;
+  Read_Only_Deny_Read	equ	30h	 ;AN000;
+  Write_Only_Deny_Read	equ	31h	 ;AN000;
+  Read_Write_Deny_Read	equ	32h	 ;AN000;
+  Read_Only_Deny_None	equ	40h	 ;AN000;
+  Write_Only_Deny_None	equ	41h	 ;AN000;
+  Read_Write_Deny_None	equ	42h	 ;AN000;
+Close			equ	3Eh	 ;AN000;
+Read			equ	3Fh	 ;AN000;
+Write			equ	40h	 ;AN000;
+Delete			equ	41h	 ;AN000;
+Lseek			equ	42h	 ;AN000;
+ Lseek_Offset		equ	00h	 ;AN000;
+ Lseek_Plus_Offset	equ	01h	 ;AN000;
+ Lseek_End_Offset	equ	02h	 ;AN000;
+Chmod			equ	43h	 ;AN000;
+IOCTL			equ	44h	 ;AN000;
+  Get_Device_Info	equ	00h	 ;AN000;
+  Set_Device_Info	equ	01h	 ;AN000;
+  Read_Channel		equ	02h	 ;AN000;
+  Write_Channel 	equ	03h	 ;AN000;
+  Read_Drive_Channel	equ	04h	 ;AN000;
+  Write_Drive_Channel	equ	05h	 ;AN000;
+  Get_Input_Status	equ	06h	 ;AN000;
+  Get_Output_Status	equ	07h	 ;AN000;
+  Is_Removable		equ	08h	 ;AN000;
+  Is_Block_Redirected	equ	09h	 ;AN000;
+  Is_Handle_Redirected	equ	0Ah	 ;AN000;
+  Set_Retry_Count	equ	0Bh	 ;AN000;
+Dup_Handle		equ	45h	 ;AN000;
+Force_Dup_Handle	equ	46h	 ;AN000;
+Get_Current_Directory	equ	47h	 ;AN000;
+Free_Memory		equ	49h	 ;AN000;
+Setblock		equ	4Ah	 ;AN000;
+Exec			equ	4Bh	 ;AN000;
+Exit			equ	4Ch	 ;AN000;
+Waitp			equ	4Dh	 ;AN000;
+Find_First		equ	4Eh	 ;AN000;
+  norm_attr		equ	00h	 ;AN000;
+  incl_read_attr	equ	01h	 ;AN000;
+  incl_h_attr		equ	02h	 ;AN000;
+  incl_h_s_attr 	equ	06h	 ;AN000;
+  incl_h_s_dir_attr	equ	16h	 ;AN000;
+Find_Next		equ	4Fh	 ;AN000;
+Get_Verify_Setting	equ	54h	 ;AN000;
+Rename			equ	56h	 ;AN000;
+File_Date_Time		equ	57h	 ;AN000;
+  Get_File_Time 	equ	00h	 ;AN000;
+  Set_File_Time 	equ	01h	 ;AN000;
+Get_Extended_Error	equ	59h	 ;AN000;
+Create_Temp		equ	5Ah	 ;AN000;
+Create_New		equ	5Bh	 ;AN000;
+File_Access		equ	5Ch	 ;AN000;
+  Lockf 		equ	00h	 ;AN000;
+  Unlock		equ	01h	 ;AN000;
+Get_PSP 		equ	62h	 ;AN000;
+Upper_Case_String	equ	6521h	 ;AN000;GET EXTENDED COUNTRY INFORMATION
+;
+;******************************************************************************
+; DOS File Handles
+;******************************************************************************
+;
+
+STDIN			equ	00h	;AN000;
+STDOUT			equ	01h	;AN000;
+STDERR			equ	02h	;AN000;
+STDAUX			equ	03h	;AN000;
+STDPRN			equ	04h	;AN000;
+
+
+;
+;******************************************************************************
+; File's attributes in a Directory entry
+;******************************************************************************
+;
+read_only_file		equ	01h	;AN000;
+hidden_file		equ	02h	;AN000;
+system_file		equ	04h	;AN000;
+has_volume_label	equ	08h	;AN000;
+is_subdirectory 	equ	10h	;AN000;
+archive_on		equ	20h	;AN000;
+
+;
+;******************************************************************************
+; Return Codes
+;******************************************************************************
+;
+
+Errorlevel_0		equ	0	;AN000;
+Errorlevel_1		equ	1	;AN000;
+Errorlevel_2		equ	2	;AN000;
+Errorlevel_3		equ	3	;AN000;
+Errorlevel_4		equ	4	;AN000;
+Errorlevel_5		equ	5	;AN000;
+Errorlevel_6		equ	6	;AN000;
+Errorlevel_7		equ	7	;AN000;
+Errorlevel_8		equ	8	;AN000;
+
+;
+;******************************************************************************
+; Extended Error Codes
+;******************************************************************************
+;
+
+Error_No_Error		      equ     00	;AN000;
+Error_Invalid_Function	      equ     01	;AN000;
+Error_File_Not_Found	      equ     02	;AN000;
+Error_Path_Not_Found	      equ     03	;AN000;
+Error_No_Handles_Left	      equ     04	;AN000;
+Error_Access_Denied	      equ     05	;AN000;
+Error_Invalid_Handle	      equ     06	;AN000;
+Error_Memory_Blocks_Bad       equ     07	;AN000;
+Error_Insufficient_Memory     equ     08	;AN000;
+Error_Inv_Address	      equ     09	;AN000;
+Error_Inv_Environment	      equ     10	;AN000;
+Error_Inv_Format	      equ     11	;AN000;
+Error_Inv_Access_Code	      equ     12	;AN000;
+Error_Inv_Data		      equ     13	;AN000;
+Error_Inv_Drive 	      equ     15	;AN000;
+Error_Rmdir_Current_Dir       equ     16	;AN000;
+Error_Not_Same_Device	      equ     17	;AN000;
+Error_No_More_Files	      equ     18	;AN000;
+Error_Write_Protect	      equ     19	;AN000;
+Error_Unknown_Unit	      equ     20	;AN000;
+Error_Drive_Not_Ready	      equ     21	;AN000;
+Error_Unknown_Command	      equ     22	;AN000;
+Error_Data_Error	      equ     23	;AN000;
+Error_Bad_Request_Len	      equ     24	;AN000;
+Error_Seek_Error	      equ     25	;AN000;
+Error_Unknown_Media_Type      equ     26	;AN000;
+Error_Sector_Not_Found	      equ     27	;AN000;
+Error_Out_Of_Paper	      equ     28	;AN000;
+Error_Write_Fault	      equ     29	;AN000;
+Error_Read_Fault	      equ     30	;AN000;
+Error_Gerneral_Failure	      equ     31	;AN000;
+Error_Sharing_Violation       equ     32	;AN000;
+Error_Lock_Violation	      equ     33	;AN000;
+Error_Inv_Disk_Change	      equ     34	;AN000;
+Error_FCB_Unavailable	      equ     35	;AN000;
+Error_File_Exists	      equ     80	;AN000;
+Error_Cannot_Make	      equ     82	;AN000;
+Error_Fail_On_Int24	      equ     83	;AN000;
+
+;
+;******************************************************************************
+; Extended Error Classes
+;******************************************************************************
+;
+
+Out_Of_Resource 	equ	1	;AN000;
+Temporary		equ	2	;AN000;
+Authorization		equ	3	;AN000;
+Internal		equ	4	;AN000;
+Hardware_Failure	equ	5	;AN000;
+System_Failure		equ	6	;AN000;
+Program_Error		equ	7	;AN000;
+Not_Found		equ	8	;AN000;
+Bad_Format		equ	9	;AN000;
+Locked			equ	10	;AN000;
+Media			equ	11	;AN000;
+Already_Exists		equ	12	;AN000;
+Unknown 		equ	13	;AN000;
+
+;
+;*****************************************************************************
+; Extended Error Actions
+;*****************************************************************************
+;
+
+Retry			equ	1	;AN000;
+Delay_Retry		equ	2	;AN000;
+User			equ	3	;AN000;
+Abort			equ	4	;AN000;
+Immediate_Exit		equ	5	;AN000;
+Ignore			equ	6	;AN000;
+Retry_After_User	equ	7	;AN000;
+
+;
+;******************************************************************************
+; Extended Error Locus
+;******************************************************************************
+;
+
+Non_Specific		equ	1	;AN000;
+Block_Device		equ	2	;AN000;
+Serial_Device		equ	4	;AN000;
+Memory			equ	5	;AN000;
+
+;
+;******************************************************************************
+; Internal Program Initialization Errors
+;******************************************************************************
+;
+
+Init_Err_DOS_Ver_1	equ	1	;AN000;Bad DOS version prior to 2.0
+Init_Err_DOS_Ver_2	equ	2	;AN000;Bad DOS version 2.0 or above
+Init_Err_Inv_Drive	equ	3	;AN000;Invalid drive specification
+Init_Err_Inv_Parm	equ	4	;AN000;Invalid parameter
+Init_Err_Inv_Num_Parm	equ	5	;AN000;Invalid number of parameters
+Init_Err_Inv_Path	equ	6	;AN000;Invalid path
+Init_Err_Insuff_Mem	equ	7	;AN000;Insufficient memory
+Init_Err_Inv_Date	equ	8	;AN000;Invalid date
+Init_Err_Inv_Time	equ	9	;AN000;Invalid time
+Init_Err_Inv_Device	equ	10	;AN000;Invalid device name
+Init_Err_Ill_Device	equ	11	;AN000;Illegal device name
+Init_Err_Inv_Filename	equ	12	;AN000;Invalid filename
+
+;
+;******************************************************************************
+; FCB Structure
+;******************************************************************************
+;
+
+FCB		STRUC				;AN000;
+Drive_Number		db	0		;AN000;
+Filename_FCB		db	8 dup(0)	;AN000;
+Extension		db	3 dup(0)	;AN000;
+Current_Block		dw	0		;AN000;
+Record_Size		dw	0		;AN000;
+File_Size_Low_FCB	dw	0		;AN000;
+File_Size_High_FCB	dw	0		;AN000;
+File_Date_Time_FCB	dw	0		;AN000;
+Reserved_FCB		db	10 dup(0)	;AN000;
+Current_Record		db	0		;AN000;
+Relative_Record_Low	dw	0		;AN000;
+Relative_Record_High	dw	0		;AN000;
+FCB		ENDS				;AN000;
+
+
+;
+;******************************************************************************
+; Find First/Next DTA area
+;******************************************************************************
+;
+
+Find_DTA	STRUC				;AN000;
+DTA_Reserved		    db	    21 dup(0)	;AN000;
+DTA_Attribute		    db	    0		;AN000;
+DTA_File_Time		    dw	    0		;AN000;
+DTA_File_Date		    dw	    0		;AN000;
+DTA_File_Size_Low	    dw	    0		;AN000;
+DTA_File_Size_High	    dw	    0		;AN000;
+DTA_Filename		    db	    13 dup(0)	;AN000;
+Find_DTA	ENDS				;AN000;
+
+
+
+

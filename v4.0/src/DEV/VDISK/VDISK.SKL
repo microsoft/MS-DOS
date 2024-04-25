@@ -1,0 +1,36 @@
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;	VDISK Message Skeleton file
+; - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+:util	VDISK				 ;AN000;
+
+:class	2				 ;AN000;
+:use	PARSE1				 ;AN000;
+:use	PARSE2				 ;AN000;
+:use	PARSE3				 ;AN000;
+:use	PARSE4				 ;AN000;
+:use	PARSE6				 ;AN000;
+:use	PARSE7				 ;AN000;
+:use	PARSE8				 ;AN000;
+
+:class	A				 ;AN000;
+:use 1 COMMON1				 ;AN000; "Incorrect DOS version"
+:def 2 "Insufficient memory",CR,LF       ;AN000; "Insufficient memory"
+
+:def 3	 "VDISK Version 4.00 virtual disk %1",CR,LF     ;AN000;
+:def 4	 "   Buffer size adjusted",CR,LF                ;AN000;
+:def 5	 "   Sector size adjusted",CR,LF                ;AN000;
+:def 6	 "   Directory entries adjusted",CR,LF          ;AN000;
+:def 7	 "   Invalid switch character",CR,LF            ;AN000;
+:def 8	 "   Transfer size adjusted",CR,LF              ;AN000;
+:def 9	 "   Buffer size:       %1 KB",CR,LF            ;AN000;
+:def 10  "   Sector size:       %1",CR,LF               ;AN000;
+:def 11  "   Directory entries: %1",CR,LF               ;AN000;
+:def 12  "   Transfer size: %1",CR,LF                   ;AN000;
+:def 13  "VDISK not installed - "                       ;AN000;
+:def 14  "   Extender Card switches",CR,LF              ;AN000;
+	 "do not match system memory size",CR,LF,CR,LF  ;AN000;
+
+:end					 ;AN000;
+
+

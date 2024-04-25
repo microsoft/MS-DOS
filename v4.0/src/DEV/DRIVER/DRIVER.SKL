@@ -1,0 +1,21 @@
+;================================================
+; DRIVER.SYS Message Skeleton File
+;================================================
+
+:util	DRIVER
+:class 2
+:use PARSE1
+:use PARSE2
+:use PARSE3
+:use PARSE4
+:use PARSE6
+:use PARSE7
+:use PARSE8
+
+:class A
+:use 1 COMMON1			;"Incorrect DOS version"
+:def 2	"No Drive Specified",CR,LF,"$"
+:def 3	"Loaded External Disk Driver for Drive %1",CR,LF,"$"
+
+:end
+

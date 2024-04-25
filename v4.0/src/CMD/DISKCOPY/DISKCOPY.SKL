@@ -1,0 +1,65 @@
+:util DISKCOPY             ;AN000;utility name
+:class A                   ;AN000;system messages
+:use 1 COMMON1             ;AN000;MSG 1 is always "Incorrect DOS version"
+
+:def 2 CR,LF                                                                    ;AN000;
+
+:use 3 PARSE10             ;AN000;CR,LF,"Invalid parameter",CR,LF
+
+:def 4 "Do not specify filename(s)",CR,LF                                       ;AN000;
+"Command Format: DISKCOPY d: d: [/1]",CR,LF                                     ;AN000;
+
+:def 5 CR,LF,"Invalid drive specification",CR,LF                                ;AN000;
+"Specified drive does not exist",CR,LF                                          ;AN000;
+"or is non-removable",CR,LF                                                     ;AN000;
+
+:def 6 CR,LF,"Cannot DISKCOPY to or from",CR,LF                                 ;AN000;
+"a network drive",CR,LF                                                         ;AN000;
+
+:def 7 CR,LF,"Formatting while copying",CR,LF                                   ;AN000;
+
+:def 8 CR,LF,"Insert SOURCE diskette in drive %1:",CR,LF                        ;AN000;
+
+:def 9 CR,LF,"Insert TARGET diskette in drive %1:",CR,LF                        ;AN000;
+
+:def 10 "Make sure a diskette is inserted into",CR,LF                           ;AN004;
+"the drive and the door is closed",CR,LF                                        ;AN004;
+
+:def 11 CR,LF,"Target diskette may be unusable",CR,LF                           ;AN000;
+
+:def 12 CR,LF,"Target diskette unusable",CR,LF                                  ;AN000;
+
+:use 13 EXTEND21           ;AN000;CR,LF,Drive not ready",CR,LF
+
+:use 14 EXTEND19  ;AN000;CR,LF,"Attempt to write to write-protected diskette",CR,LF
+
+:use 15 COMMON28           ;AN000;CR,LF,"Press any key to continue . . .",CR,LF
+
+:def 16 CR,LF,"Copy another diskette (Y/N)? "                                   ;AN000;
+
+:def 17 CR,LF,"Copying %1 tracks",CR,LF                                         ;AN000;
+"%2 Sectors/Track, %3 Side(s)",CR,LF                                            ;AN000;
+
+:def 18 CR,LF,"Drive types or diskette types",CR,LF                             ;AN000;
+"not compatible",CR,LF                                                          ;AN000;
+
+:def 19 CR,LF,"Unrecoverable read error on drive %1",CR,LF                      ;AN000;
+"Side %2, track %3",CR,LF                                                       ;AN000;
+
+:def 20 CR,LF,"Unrecoverable write error on drive %1",CR,LF                     ;AN000;
+"Side %2, track %3",CR,LF                                                       ;AN000;
+
+:def 21 CR,LF,"Copy process ended",CR,LF                                        ;AN000;
+
+:def 22 CR,LF,"SOURCE diskette bad or incompatible",CR,LF                       ;AC008;
+
+:def 23 CR,LF,"TARGET diskette bad or incompatible",CR,LF                       ;AC008;
+
+:use 25 EXTEND8            ;AN000;"Insufficient memory",CR,LF
+
+:use 26 COMMON36           ;AN001;"Volume Serial Number is %1-%2",CR,LF
+
+:end                                                                            ;AN000;
+lume Serial Number is %1-%2",CR,LF
+
+:end        

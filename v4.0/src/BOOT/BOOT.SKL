@@ -1,0 +1,8 @@
+:class 1
+; MESSAGES FOR THE IBM BOOT SECTOR. NUL Terminated.
+; At this time, for DOS 4.00, we only have maximum 11 bytes left
+; for translation.!!!!!!!!!!!!!!!!!!!!!
+
+:use 001 BOOT SYSMSG
+
+:end

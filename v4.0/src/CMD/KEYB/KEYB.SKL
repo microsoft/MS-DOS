@@ -1,0 +1,37 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;  Message Skeleton file for KEYB.COM
+;
+;   Author: WGR
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+:util KEYB			     ;AN000;ty name
+:class 2
+:use PARSE1		 ;AN000;
+:use PARSE2		 ;AN000;
+:use PARSE3		 ;AN000;
+:use PARSE4		 ;AN000;
+:use PARSE6		 ;AN000;
+:use PARSE7		 ;AN000;
+:use PARSE10		 ;AN003;
+:class A
+:use 1	COMMON1 		     ;AN000;rrect DOS version'
+:def 2	"Current keyboard code: %1"  ;AN000;
+:def 3	"Current keyboard ID: %1"    ;AN000;
+:def 4	"  code page: %1",CR,LF      ;AN000;
+:def 5	"Current CON code page: %1",CR,LF                 ;AN000;
+:def 6	"Invalid keyboard code specified",CR,LF           ;AN000;
+:def 7	"Invalid keyboard ID specified",CR,LF             ;AN000;
+:def 8	"Invalid code page specified",CR,LF               ;AN000;
+:def 9	"Bad or missing Keyboard Definition File",CR,LF   ;AN000;
+:def 10 "KEYB has not been installed",CR,LF               ;AN000;
+:def 11 "Active code page not available from CON device",CR,LF     ;AN000;
+:def 12 "Code page specified has not been prepared",CR,LF          ;AN000;
+:def 13 "One or more CON code pages invalid for given keyboard code",CR,LF    ;AN000;
+:def 14 "Code page requested (%1) is not valid for given keyboard code",CR,LF ;AN000;
+:def 15 "Code page specified is inconsistent with the selected code page",CR,LF       ;AN000;
+:def 16 "ID code specified is inconsistent with the selected keyboard code",CR,LF     ;AN000;
+:def 17 "Unable to create KEYB table in resident memory",CR,LF                        ;AN000;
+:use 18 PARSE8			     ; 'Parameter format not correct'                 ;AN000;
+:end						    ;AN000;

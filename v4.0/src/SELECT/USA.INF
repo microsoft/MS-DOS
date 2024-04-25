@@ -1,0 +1,2381 @@
+false = 0
+IF SCROLL				;A000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	SCROLL TEXT INFORMATION FILE
+;
+;	RULES:	There are a number of rules and regulations that
+;		MUST be followed in order to translated properly.
+;		For each entry there are detailed instructions to
+;		help facilitate any changes.
+;
+;		The information in this file is destined for the
+;		'SELECT.DAT' file.  The panels and scrollable lists
+;		are contained in this file.
+;		There are two sections to this file, one for the
+;		SCROLL fields and one for the PANELS.
+;
+;		Each rules is marked by '<R#>' and a brief description.
+;		The detailed description is contained in the header of
+;		this file (just below).  In order to successfully
+;		translate SELECT, all of these rules have to be obeyed.
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;		���������������������������������������������Ŀ
+;		� The quotation marks (') tell SELECT where   �
+;		� to start wrapping the text onto the next    �
+;		� line.  The assembler line immediately after �
+;		� the first text line automatically calculates�
+;		� the length of this field.  The right border �
+;		� of the text can be adjusted freely - a ruler�
+;		� is drawn for each entry to help in centering�
+;		� text. 				      �
+;		�����������������������������������������������
+;
+;	<R2>	The '[' and ']' input field markers cannot be moved
+;		���������������������������������������������Ŀ
+;		� These characters must remain in the same    �
+;		� position.  They define the boundries of     �
+;		� input fields. 			      �
+;		�����������������������������������������������
+;
+;	<R3>	The panel will be centered in an 80 column screen
+;		���������������������������������������������Ŀ
+;		� This panel will be centered on the screen   �
+;		� when it is displayed.  Please translate     �
+;		� accordingly.				      �
+;		�����������������������������������������������
+;
+;	<R4>	The number of lines for the entry MUST be maintained
+;		���������������������������������������������Ŀ
+;		� The number of lines (from top to bottom)    �
+;		� must not change.  Translated text must      �
+;		� conform to the existing number of lines.    �
+;		�����������������������������������������������
+;
+;	<R5>	The width of the entry must not exceed the RULER provided.
+;		���������������������������������������������Ŀ
+;		� Translated text should remain the same      �
+;		� width (do not exceed the ruler).  Otherwise �
+;		� the text will not fit within the panel.     �
+;		�����������������������������������������������
+;
+;	<R9>	DO NOT TRANSLATE OR CHANGE!!!!
+;		���������������������������������������������Ŀ
+;		� The information contained in the quotations �
+;		� should NEVER be changed.  These fields are  �
+;		� established for the size of the help text   �
+;		� or error panels.			      �
+;		�����������������������������������������������
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R4>	The number of lines for the entry MUST be maintained
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	  |---------1---------2---------3---------4---------5---------6---------7---------8
+
+SCB_LIST1	DB  ' 1. Minimum DOS function; maximum program workspace ';AN000;
+SCB_LIST1_W	EQU ($-SCB_LIST1)					  ;AN000;
+		DB  '                                                    ';AN000;
+		DB  ' 2. Balance DOS function with program workspace     ';AN000;
+		DB  '                                                    ';AN000;
+		DB  ' 3. Maximum DOS function; minimum program workspace ';AN000;
+SCB_LIST1_N	EQU ($-SCB_LIST1)/SCB_LIST1_W				  ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R4>	The number of lines for the entry MUST be maintained
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	  |---------1---------2---------3---------4---------5---------6---------7---------8
+
+SCB_LIST2	DB  ' 1. Accept predefined country and keyboard   ';AN000;
+SCB_LIST2_W	EQU ($-SCB_LIST2)				   ;AN000;
+		DB  '                                             ';AN000;
+		DB  ' 2. Specify a different country and keyboard ';AN000;
+SCB_LIST2_N	EQU ($-SCB_LIST2)/SCB_LIST2_W			   ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R4>	The number of lines for the entry MUST be maintained
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	  |---------1---------2---------3---------4---------5---------6---------7---------8
+
+SCB_LIST23	LABEL	BYTE			       ;AN000;
+SCB_LIST3	DB  ' United States             (001) ';AN000;
+SCB_LIST3_W	EQU ($-SCB_LIST3)		       ;AN000;
+SCB_LIST23_W	EQU ($-SCB_LIST23)		       ;AN000;
+		DB  ' Canada (French Speaking)  (002) ';AN000;
+		DB  ' Latin America             (003) ';AN000;
+		DB  ' Netherlands               (031) ';AN000;
+		DB  ' Belgium                   (032) ';AN000;
+		DB  ' France                    (033) ';AN000;
+		DB  ' Spain                     (034) ';AN000;
+		DB  ' Italy                     (039) ';AN000;
+		DB  ' Switzerland               (041) ';AN000;
+		DB  ' United Kingdom            (044) ';AN000;
+		DB  ' Denmark                   (045) ';AN000;
+		DB  ' Sweden                    (046) ';AN000;
+SCB_LIST3_N	EQU ($-SCB_LIST3)/SCB_LIST3_W	       ;AN000;
+SCB_LIST4	DB  ' Norway                    (047) ';AN000;
+SCB_LIST4_W	EQU ($-SCB_LIST4)		       ;AN000;
+		DB  ' Germany                   (049) ';AN000;
+		DB  ' Australia                 (061) ';AN000;
+		DB  ' Japan                     (081) ';AN000;
+		DB  ' Korea                     (082) ';AN000;
+		DB  ' Peoples Republic of China (086) ';AN000;
+		DB  ' Taiwan                    (088) ';AN000;
+		DB  ' Portugal                  (351) ';AN000;
+		DB  ' Finland                   (358) ';AN000;
+		DB  ' Arabic Speaking           (785) ';AN000;
+		DB  ' Hebrew Speaking           (972) ';AN000;
+SCB_LIST4_N	EQU ($-SCB_LIST4)/SCB_LIST4_W	       ;AN000;
+SCB_LIST23_N	EQU ($-SCB_LIST23)/SCB_LIST23_W        ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R4>	The number of lines for the entry MUST be maintained
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	  |---------1---------2---------3---------4---------5---------6---------7---------8
+
+SCB_LIST24	LABEL	BYTE			       ;AN000;
+SCB_LIST5	DB  ' Belgian                    (BE) ';AN000;
+SCB_LIST5_W	EQU ($-SCB_LIST5)		       ;AN000;
+SCB_LIST24_W	EQU ($-SCB_LIST24)		       ;AN000;
+		DB  ' Canadian French            (CF) ';AN000;
+		DB  ' Danish                     (DK) ';AN000;
+		DB  ' French                     (FR) ';AN000;
+		DB  ' German                     (GR) ';AN000;
+		DB  ' Italian                    (IT) ';AN000;
+		DB  ' Latin American Speaking    (LA) ';AN000;
+		DB  ' Dutch                      (NE) ';AN000;
+		DB  ' Norwegian                  (NO) ';AN000;
+SCB_LIST5_N	EQU ($-SCB_LIST5)/SCB_LIST5_W	       ;AN000;
+SCB_LIST6	DB  ' Portuguese                 (PO) ';AN000;
+SCB_LIST6_W	EQU ($-SCB_LIST6)		       ;AN000;
+		DB  ' Swiss (French)             (SF) ';AN000;
+		DB  ' Swiss (German)             (SG) ';AN000;
+		DB  ' Spanish                    (SP) ';AN000;
+		DB  ' Finnish                    (SU) ';AN000;
+		DB  ' Swedish                    (SV) ';AN000;
+		DB  ' UK English                 (UK) ';AN000;
+		DB  ' US English                 (US) ';AN000;
+		DB  ' None                            ';AN000;
+SCB_LIST6_N	EQU ($-SCB_LIST6)/SCB_LIST6_W	       ;AN000;
+		DB  ' French 120                (120) ';AN000;
+		DB  ' French                     (FR) ';AN000;
+		DB  ' Italian 142               (142) ';AC090;
+		DB  ' Italian                    (IT) ';AN000;
+		DB  ' UK English 168            (168) ';AN000;
+		DB  ' UK English                 (UK) ';AN000;
+SCB_LIST24_N	EQU ($-SCB_LIST24)/SCB_LIST24_W        ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R4>	The number of lines for the entry MUST be maintained
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	  |---------1---------2---------3---------4---------5---------6---------7---------8
+
+SCB_LIST7	DB  ' 1. French 120       (120) ';AN000;
+SCB_LIST7_W	EQU ($-SCB_LIST7)		 ;AN000;
+		DB  '                           ';AN000;
+		DB  ' 2. French            (FR) ';AN000;
+SCB_LIST7_N	EQU ($-SCB_LIST7)/SCB_LIST7_W	 ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R4>	The number of lines for the entry MUST be maintained
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	  |---------1---------2---------3---------4---------5---------6---------7---------8
+
+SCB_LIST8	DB  ' 1. Italian 142      (142) ';AC090;
+SCB_LIST8_W	EQU ($-SCB_LIST8)		 ;AN000;
+		DB  '                           ';AN000;
+		DB  ' 2. Italian           (IT) ';AN000;
+SCB_LIST8_N	EQU ($-SCB_LIST8)/SCB_LIST8_W	 ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R4>	The number of lines for the entry MUST be maintained
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	  |---------1---------2---------3---------4---------5---------6---------7---------8
+
+SCB_LIST9	DB  ' 1. UK English 168   (168) ';AN000;
+SCB_LIST9_W	EQU ($-SCB_LIST9)		 ;AN000;
+		DB  '                           ';AN000;
+		DB  ' 2. UK English        (UK) ';AN000;
+SCB_LIST9_N	EQU ($-SCB_LIST9)/SCB_LIST9_W	 ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R4>	The number of lines for the entry MUST be maintained
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	  |---------1---------2---------3---------4---------5---------6---------7---------8
+
+SCB_LIST10	DB  ' 1. C '                     ;AN000;
+SCB_LIST10_W	EQU ($-SCB_LIST10)		 ;AN000;
+		DB  '      '                     ;AN000;
+		DB  ' 2. B '                     ;AN000;
+SCB_LIST10_N	EQU ($-SCB_LIST10)/SCB_LIST10_W  ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R4>	The number of lines for the entry MUST be maintained
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	  |---------1---------2---------3---------4---------5---------6---------7---------8
+
+SCB_LIST11	DB  ' '                         ;AN000;
+SCB_LIST11_W	EQU ($-SCB_LIST11)		;AN000;
+SCB_LIST11_N	EQU ($-SCB_LIST11)/SCB_LIST11_W ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R4>	The number of lines for the entry MUST be maintained
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	  |---------1---------2---------3---------4---------5---------6---------7---------8
+
+SCB_LIST12	DB  ' 1. LPT1 - First port  '    ;AN000;
+SCB_LIST12_W	EQU ($-SCB_LIST12)		 ;AN000;
+		DB  '                       '    ;AN000;
+		DB  ' 2. LPT2 - Second port '    ;AN000;
+		DB  '                       '    ;AN000;
+		DB  ' 3. LPT3 - Third port  '    ;AN000;
+SCB_LIST12_N	EQU ($-SCB_LIST12)/SCB_LIST12_W  ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R4>	The number of lines for the entry MUST be maintained
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	  |---------1---------2---------3---------4---------5---------6---------7---------8
+
+SCB_LIST13	DB  ' 1. COM1 - First port  '    ;AN000;
+SCB_LIST13_W	EQU ($-SCB_LIST13)		 ;AN000;
+		DB  ' 2. COM2 - Second port '    ;AN000;
+		DB  ' 3. COM3 - Third port  '    ;AN000;
+		DB  ' 4. COM4 - Fourth port '    ;AN000;
+SCB_LIST13_N	EQU ($-SCB_LIST13)/SCB_LIST13_W  ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R4>	The number of lines for the entry MUST be maintained
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	  |---------1---------2---------3---------4---------5---------6---------7---------8
+
+SCB_LIST14	DB  ' 1. None               '    ;AN000;
+SCB_LIST14_W	EQU ($-SCB_LIST14)		 ;AN000;
+		DB  ' 2. LPT1 - First port  '    ;AN000;
+		DB  ' 3. LPT2 - Second port '    ;AN000;
+		DB  ' 4. LPT3 - Third port  '    ;AN000;
+SCB_LIST14_N	EQU ($-SCB_LIST14)/SCB_LIST14_W  ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R4>	The number of lines for the entry MUST be maintained
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	  |---------1---------2---------3---------4---------5---------6---------7---------8
+
+SCB_LIST15	DB  ' 1. Accept configuration and continue with installation ';AC079;SEH ;AN000;
+SCB_LIST15_W	EQU ($-SCB_LIST15)					      ;AN000;
+		DB  '                                                        ';AN000;
+		DB  ' 2. Review, change, or add installation choices         ';AC079;SEH ;AN000;
+SCB_LIST15_N	EQU ($-SCB_LIST15)/SCB_LIST15_W 			      ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R4>	The number of lines for the entry MUST be maintained
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	  |---------1---------2---------3---------4---------5---------6---------7---------8
+
+SCB_LIST16	DB  ' Code Page Switching                      ';AN000;
+SCB_LIST16_W	EQU ($-SCB_LIST16)				;AN000;
+		DB  ' Expanded Memory support                  ';AN000;
+		DB  ' Extended display support (ANSI.SYS)      ';AN000;
+		DB  ' File performance enhancements (FASTOPEN) ';AN000;
+		DB  ' GRAFTABL display support                 ';AN000;
+		DB  ' GRAPHICS PrtSc support                   ';AN000;
+		DB  ' DOS SHARE support                        ';AN000;
+		DB  ' DOS SHELL                                ';AN000;
+		DB  ' Virtual Disk support (RAMDRIVE.SYS)      ';AN000;
+SCB_LIST16_N	EQU ($-SCB_LIST16)/SCB_LIST16_W 		;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R4>	The number of lines for the entry MUST be maintained
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	  |---------1---------2---------3---------4---------5---------6---------7---------8
+
+SCB_LIST17	DB  ' Code Page Switching                 ';AN000;
+SCB_LIST17_W	EQU ($-SCB_LIST17)			   ;AN000;
+		DB  ' Extended display support (ANSI.SYS) ';AN000;
+		DB  ' GRAFTABL display support            ';AN000;
+		DB  ' GRAPHICS PrtSc support              ';AN000;
+		DB  ' DOS SHELL                           ';AN000;
+		DB  ' Virtual Disk support (RAMDRIVE.SYS) ';AN000;
+SCB_LIST17_N	EQU ($-SCB_LIST17)/SCB_LIST17_W 	   ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R4>	The number of lines for the entry MUST be maintained
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	  |---------1---------2---------3---------4---------5---------6---------7---------8
+
+SCB_LIST18	DB  ' 1. Let SELECT define partition sizes ';AN000;
+SCB_LIST18_W	EQU ($-SCB_LIST18)			    ;AN000;
+		DB  '                                      ';AN000;
+		DB  ' 2. Define your own partition sizes   ';AN000;
+SCB_LIST18_N	EQU ($-SCB_LIST18)/SCB_LIST18_W 	    ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R4>	The number of lines for the entry MUST be maintained
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	  |---------1---------2---------3---------4---------5---------6---------7---------8
+
+SCB_LIST19	DB  ' 1. Leave disk unchanged            ';AN000;
+SCB_LIST19_W	EQU ($-SCB_LIST19)			  ;AN000;
+		DB  '                                    ';AN000;
+		DB  ' 2. Define your own partition sizes ';AN000;
+SCB_LIST19_N	EQU ($-SCB_LIST19)/SCB_LIST19_W 	  ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R4>	The number of lines for the entry MUST be maintained
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	  |---------1---------2---------3---------4---------5---------6---------7---------8
+
+SCB_LIST20	DB  ' 1. Format fixed disk partition        ';AN000;
+SCB_LIST20_W	EQU ($-SCB_LIST20)			     ;AN000;
+		DB  '                                       ';AN000;
+		DB  ' 2. Do not format fixed disk partition ';AN000;
+SCB_LIST20_N	EQU ($-SCB_LIST20)/SCB_LIST20_W 	     ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;						      ;AN000;JW
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified			      ;AN000;JW
+;	<R4>	The number of lines for the entry MUST be maintained			      ;AN000;JW
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;						      ;AN000;JW
+;	  |---------1---------2---------3---------4---------5---------6---------7---------8   ;AN000;JW
+
+SCB_LIST26	DB  ' 1. Install all DOS files on fixed disk               '                      ;AC000;JW
+SCB_LIST26_W	EQU ($-SCB_LIST26)							     ;AN000;JW
+		DB  '                                                      '                      ;AN000;JW
+		DB  ' 2. Copy only non-system files to directory specified '                      ;AC038;SEH Let user know hidden files not copied ;AC000;JW
+SCB_LIST26_N	EQU ($-SCB_LIST26)/SCB_LIST26_W 					     ;AN000;JW
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;						      ;AN111;JW
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified			      ;AN111;JW
+;	<R4>	The number of lines for the entry MUST be maintained			      ;AN111;JW
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;						      ;AN111;JW
+;	  |---------1---------2---------3---------4---------5---------6---------7---------8   ;AN111;JW
+
+SCB_LIST27	DB  ' 1. C '                                                                   ;AN111;JW
+SCB_LIST27_W	EQU ($-SCB_LIST27)							      ;AN111;JW
+		DB  '      '                                                                   ;AN111;JW
+		DB  ' 2. A '                                                                   ;AN111;JW
+SCB_LIST27_N	EQU ($-SCB_LIST27)/SCB_LIST27_W 					      ;AN111;JW
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R4>	The number of lines for the entry MUST be maintained
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	  |---------1---------2---------3---------4---------5---------6---------7---------8
+
+SCB_LIST28	DB  ' 1. Install the MS-DOS Shell        '
+SCB_LIST28_W	EQU ($-SCB_LIST28)					      ;AN000;
+		DB  '                                    '
+		DB  ' 2. Do not install the MS-DOS Shell '
+SCB_LIST28_N	EQU ($-SCB_LIST28)/SCB_LIST28_W 			      ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;						      ;AN111;JW
+;
+;	<R*> Translate text inside ' '
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;						      ;AN111;JW
+
+WR_NOIND      DB   'No'                      ;AN000;selection pointer indicator buff
+WR_NOINDLEN   EQU  ($-WR_NOIND) 	     ;AN000;
+
+WR_YESIND	DB   'Yes'                   ;AN000;check mark string indicator buff
+WR_YESINDLEN   EQU  ($-WR_YESIND)	     ;AN000;
+
+
+ENDIF
+
+
+
+IF PANEL
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R3>	The panel will be centered in an 80 column screen
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+PANEL1	LABEL	BYTE									      ;AN000;
+	DB   '                     Welcome                        '                          ;AN000;
+PANEL1_W	EQU	($-PANEL1)							       ;AN000;
+	DB   '                                                    '                          ;AN000;
+	DB   'Welcome to DOS 4.0 and the SELECT program.  SELECT  '                          ;AN000;
+	DB   'will install DOS 4.0 on your fixed disk or diskette.'                          ;AN000;
+	DB   'If you install DOS 4.0 on a diskette, the number of '                          ;AN000;
+	DB   'blank diskettes you need depends on the type and    '                          ;AN000;
+	DB   'capacity of your diskette drive:                    '                          ;AN000;
+	DB   '                                                    '                          ;AN000;
+	DB   '   Drive Type (Capacity)     Number of Diskettes    '                          ;AN000;
+	DB   '                                                    '                          ;AN000;
+	DB   '   5.25-Inch Drive (360KB)   five  5.25 (360KB)     '  ;AC050;SEH              ;AN000;
+	DB   '   5.25-Inch Drive (1.2MB)   five  5.25 (360KB)     '  ;AC050;SEH              ;AN000;
+	DB   '   3.5-Inch Drive (720KB)    three 3.5  (720KB)     '  ;AC050;SEH;AC000;JW
+	DB   '   3.5-Inch Drive (1.44MB)   three 3.5  (720KB)     '  ;AC050;SEH;AC000;JW
+	DB   '                                                    '  ;AN000;
+	DB   'If you install DOS 4.0 onto a fixed disk, you need  '  ;AN000;
+	DB   'one blank diskette:                                 '  ;AN000;
+	DB   '                                                    '  ;AN000;
+	DB   '   5.25-Inch Drive           one   5.25 (360KB)     '  ;AC050;SEH ;AN000;
+	DB   '   3.5-Inch Drive            one   3.5  (1 or 2MB)  '  ;AC050;SEH ;AC022;SEH ;AC000;JW
+PANEL1_L	EQU	($-PANEL1)/PANEL1_W			     ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL2	LABEL	BYTE								    ;AN000;
+	DB   '                         Introduction                                ';AN000;
+PANEL2_W	EQU	($-PANEL2)						    ;AN000;
+	DB   '                                                                     ';AN000;
+	DB   '                                                                     ';AN000;
+	DB   'As you view the SELECT displays, you will be asked to make a choice  ';AN000;
+	DB   'or type an entry.  If you are uncertain about what to choose or type,';AN000;
+	DB   'you can accept the predefined choice or press the F1 help key for    ';AN000;
+	DB   'more information about an item.                                      ';AN000;
+	DB   '                                                                     ';AN000;
+	DB   'You will be using these keys in the SELECT program:                  ';AN000;
+	DB   '                                                                     ';AN000;
+	DB   '     Enter             To proceed to the next step.                  ';AN000;
+	DB   '     Esc               To cancel the current display.                ';AN000;
+	DB   '     Tab               To move to the next entry field.              ';AN000;
+	DB   '     PgUp/PgDn         To scroll information one page at a time.     ';AN000;
+	DB   '     Up/Down Arrow     To move the highlight bar to the next item.   ';AN000;
+	DB   '     F1                To view the help information.                 ';AN000;
+	DB   '     F3                To exit SELECT.                               ';AN000;
+	DB   '     F9                To view key assignments while viewing help.   ';AN000;
+	DB   '     Left/Right Arrow  To scroll data fields horizontally            ';AN000;
+	DB   '                         to the left or right.                       ';AN000;
+	DB   '                                                                     ';AN000;
+	DB   'You can press Enter, Esc and F1 keys when they appear on the display.';AN000;
+PANEL2_L	EQU	($-PANEL2)/PANEL2_W					    ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R3>	The panel will be centered in an 80 column screen
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+PANEL3	LABEL	BYTE						      ;AN000;
+	DB   '                     Exit                    '          ;AN000;
+PANEL3_W	EQU	($-PANEL3)				      ;AN000;
+	DB   '                                             '          ;AN000;
+	DB   '                                             '          ;AN000;
+	DB   '                                             '          ;AN000;
+	DB   '                                             '          ;AN000;
+	DB   '                                             '          ;AN000;
+	DB   '                                             '          ;AN000;
+	DB   'You have chosen to end SELECT.               '          ;AN000;
+	DB   '                                             '          ;AN000;
+	DB   '                                             '          ;AN000;
+	DB   'If you are sure you want to end DOS          '          ;AN000;
+	DB   'installation, press F3.                      '          ;AN000;
+	DB   '                                             '          ;AN000;
+	DB   '                                             '          ;AN000;
+	DB   'If not, press Enter to continue installation.'          ;AN000;
+PANEL3_L	EQU	($-PANEL3)/PANEL3_W			      ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL4	LABEL	BYTE							;AN000;
+	DB   '                 Specify Function and Workspace          ';AN000;
+PANEL4_W	EQU	($-PANEL4)					;AN000;
+	DB   '                                                         ';AN000;
+	DB   'SELECT sets up your computer to run DOS and your programs';AN000;
+	DB   'most efficiently based on the option you choose.         ';AN000;
+	DB   '                                                         ';AN000;
+	DB   'Note:  You can review the results of your choice later   ';AN000;
+	DB   'in this program.                                         ';AN000;
+	DB   '                                                         ';AN000;
+	DB   'Choose an option:                                        ';AN000;
+PANEL4_L	EQU	($-PANEL4)/PANEL4_W				;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL5	LABEL	BYTE						      ;AN000;
+	DB   '                   Select Country and Keyboard'         ;AN000;
+PANEL5_W	EQU	($-PANEL5)				      ;AN000;
+	DB   '                                              '         ;AN000;
+	DB   '                                              '         ;AN000;
+	DB   'Predefined country . . . . .:                 '         ;AN000;
+	DB   'Predefined keyboard. . . . .:                 '         ;AN000;
+	DB   '                                              '         ;AN000;
+	DB   '                                              '         ;AN000;
+	DB   '                                              '         ;AN000;
+	DB   '                                              '         ;AN000;
+	DB   '                                              '         ;AN000;
+	DB   'Choose an option:                             '         ;AN000;
+PANEL5_L	EQU	($-PANEL5)/PANEL5_W			      ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL6	LABEL	BYTE						    ;AN000;
+	DB   '                         Country Selection'           ;AN000;
+PANEL6_W	EQU		($-PANEL6)			    ;AN000;
+	DB   '                                          '           ;AN000;
+	DB   '                                          '           ;AN000;
+	DB   'Choose a country:                         '           ;AN000;
+PANEL6_L	EQU		($-PANEL6)/PANEL6_W		    ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL7	LABEL	BYTE						    ;AN000;
+	DB   '                        Keyboard Selection'           ;AN000;
+PANEL7_W	EQU	($-PANEL7)				    ;AN000;
+	DB   '                                          '           ;AN000;
+	DB   '                                          '           ;AN000;
+	DB   'Choose a keyboard:                        '           ;AN000;
+PANEL7_L	EQU	($-PANEL7)/PANEL7_W			    ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL8	LABEL	BYTE								;AN000;
+	DB   '                    Keyboard Layout Selection                    ';AN000;
+PANEL8_W	EQU	($-PANEL8)						;AN000;
+	DB   '                                                                 ';AN000;
+	DB   '                                                                 ';AN000;
+	DB   'If your keyboard has a number in the top left corner that matches';AN000;
+	DB   'the one shown in option 1, choose option 1; otherwise choose     ';AN000;
+	DB   'option 2.                                                        ';AN000;
+	DB   '                                                                 ';AN000;
+	DB   'Choose a keyboard:                                               ';AN000;
+PANEL8_L	EQU	($-PANEL8)/PANEL8_W					;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL9  LABEL	 BYTE					      ;AN000;
+	DB   '                      Select Installation Drive';AN000;
+PANEL9_W	EQU	($-PANEL9)			      ;AN000;
+	DB   '                                               ';AN000;
+	DB   '                                               ';AN000;
+	DB   '                                               ';AN000;
+	DB   '                                               ';AN000;
+	DB   'Choose the drive to install DOS on:            ';AN000;
+PANEL9_L	EQU	($-PANEL9)/PANEL9_W		      ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL10  LABEL	 BYTE							;AN000;
+	DB   '                      Specify DOS Location               ';AN000;
+PANEL10_W	EQU	($-PANEL10)					;AN000;
+	DB   '                                                         ';AN000;
+	DB   '                                                         ';AN000;
+	DB   'You can accept the DOS directory name shown or type a new';AC053;SEH ;AN000;
+	DB   'directory name.                                          ';AC053;SEH ;AN000;
+	DB   '                                                         ';AN000;
+	DB   '                                                         ';AN000;
+	DB   'DOS Directory . . . .C:\                                 ';AN000;
+	DB   '                                                         '
+	DB   '                                                         '
+	DB   '                                                         '
+	DB   'To select option 1 below, press Enter.  To change your   ';AN053;SEH
+	DB   'option, press the tab key, highlight your choice and then';AN053;SEH
+	DB   'press Enter.                                             ';AN053;SEH
+	DB   '                                                         ';AN053;SEH
+	DB   '                                                         ';AN053;SEH
+PANEL10_L	EQU	($-PANEL10)/PANEL10_W				;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL11  LABEL	 BYTE						 ;AN000;
+	DB   '                        Number of Printers        ';AN000;
+PANEL11_W	EQU	($-PANEL11)				 ;AN000;
+	DB   '                                                  ';AN000;
+	DB   '                                                  ';AN000;
+	DB   '                                                  ';AN000;
+	DB   '                                                  ';AN000;
+	DB   'How many printers do you have?  . . . .      (0-7)';AN000;
+PANEL11_L	EQU	($-PANEL11)/PANEL11_W			 ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL12  LABEL	 BYTE						      ;AN000;
+	DB   '                        Printer Selection              ';AN000;
+PANEL12_W	EQU	($-PANEL12)				      ;AN000;
+	DB   '                                                       ';AN000;
+	DB   '                                                       ';AN000;
+	DB   '                                                       ';AN000;
+	DB   '                                                       ';AN000;
+	DB   '                                                       ';AN000;
+	DB   '                                                       ';AN000;
+	DB   'Choose a printer:                                      ';AN000;
+	DB   '                                                  More:';AN000;
+PANEL12_L	EQU	($-PANEL12)/PANEL12_W			      ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL13  LABEL	 BYTE					  ;AN000;
+	DB   '                      Parallel Printer Port';AN000;
+PANEL13_W	EQU	($-PANEL13)			  ;AN000;
+	DB   '                                           ';AN000;
+	DB   '                                           ';AN000;
+	DB   '                                           ';AN000;
+	DB   '                                           ';AN000;
+	DB   '                                           ';AN000;
+	DB   'Choose a parallel printer port:            ';AN000;
+PANEL13_L	EQU	($-PANEL13)/PANEL13_W		  ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL14  LABEL	 BYTE						     ;AN000;
+	DB   '                        Serial Printer Port           ';AN000;
+PANEL14_W	EQU	($-PANEL14)				     ;AN000;
+	DB   '                                                      ';AN000;
+	DB   '                                                      ';AN000;
+	DB   '                                                      ';AN000;
+	DB   '                                                      ';AN000;
+	DB   'Choose a serial printer port:                         ';AN000;
+	DB   '                                                      ';AN000;
+	DB   '                                                      ';AN000;
+	DB   '                                                      ';AN000;
+	DB   '                                                      ';AN000;
+	DB   '                                                      ';AN000;
+	DB   '                                                      ';AN000;
+	DB   '                                                      ';AN000;
+	DB   'To refer to this serial printer as a parallel printer,';AN000;
+	DB   'choose a parallel port. If not, choose None.          ';AN000;
+PANEL14_L	EQU	($-PANEL14)/PANEL14_W			     ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL15  LABEL	 BYTE						  ;AN000;
+	DB   '                     Installation Options          ';AN000;
+PANEL15_W	EQU	($-PANEL15)				  ;AN000;
+	DB   '                                                   ';AN000;
+	DB   '                                                   ';AN000;
+	DB   'SELECT defined a configuration based on the options';AC079;SEH ;AN000;
+	DB   'you chose for DOS functions and program workspace. ';AC079;SEH ;AN000;
+	DB   '                                                   ';AC079;SEH ;AN000;
+	DB   '                                                   ';AC079;SEH ;AN000;
+	DB   'Choose an option:                                  ';AN000;
+PANEL15_L	EQU	($-PANEL15)/PANEL15_W			  ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL16  LABEL	 BYTE							 ;AN000;
+	DB   '                      Review Selections                   ';AN000;
+PANEL16_W	EQU	($-PANEL16)					 ;AN000;
+	DB   '                                                          ';AN000;
+	DB   'SELECT made these selections for you.  You can accept     ';AN000;
+	DB   'these selections or change any of them.  If you change    ';AN000;
+	DB   'an item from No to Yes, it will increase the amount of    ';AN000;
+	DB   'memory DOS uses.                                          ';AN000;
+	DB   '                                                          ';AN000;
+	DB   'To change a selection, use the up and down arrow keys to  ';AN000;
+	DB   'highlight your choice, then press the spacebar.  To accept';AN000;
+	DB   'all the selections, press the Enter key.                  ';AN000;
+	DB   '                                                  Choice: ';AN000;
+PANEL16_L	EQU	($-PANEL16)/PANEL16_W				 ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL17 LABEL BYTE					     ;AN028;
+	DB   'The printer you chose is not supported.       ';AN028;
+PANEL17_W	EQU	($-PANEL17)			     ;AN028;
+	DB   '                                              ';AN028;
+	DB   'Press Enter to return to the Printer Selection';AN028;
+	DB   'screen and choose another printer, or Press F3';AN028;
+	DB   'to exit the SELECT program.                   ';AN028;
+PANEL17_L	EQU	($-PANEL17)/PANEL17_W		     ;AN028;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL18  LABEL	 BYTE						     ;AN000;
+	DB   '                        DOS Parameters              '  ;AN000;
+PANEL18_W	EQU	($-PANEL18)				     ;AN000;
+	DB   '                                                    '  ;AN000;
+	DB   '                                                    '  ;AN000;
+	DB   'SELECT has set these values for you (if any).  Press'  ;AC000;JW
+	DB   'Enter to accept these values or type in new values. '  ;AC000;JW
+	DB   '                                                    '  ;AN000;
+	DB   '                                                    '  ;AN000;
+	DB   'DOS PATH . . . . . .                                '  ;AN000;
+	DB   '                                                    '  ;AN000;
+	DB   '                                                    '  ;AN000;
+	DB   'APPEND PARAMETERS  .                                '  ;AN000;JW
+	DB   'APPEND PATH  . . . .                                '  ;AN000;
+	DB   '                                                    '  ;AN000;
+	DB   '                                                    '  ;AN000;
+	DB   'PROMPT . . . . . . .                                '  ;AN000;
+PANEL18_L	EQU	($-PANEL18)/PANEL18_W			     ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL19  LABEL	 BYTE						     ;AN000;
+	DB   '                     DOS SHELL Parameters           '  ;AN000;
+PANEL19_W	EQU	($-PANEL19)				     ;AN000;
+	DB   '                                                    '  ;AN000;
+	DB   '                                                    '  ;AN000;
+	DB   'SELECT has set these values for you (if any).  Press'  ;AC000;JW
+	DB   'Enter to accept these values or type in new values. '  ;AC000;JW
+	DB   '                                                    '  ;AN000;
+	DB   '                                                    '  ;AN000;
+	DB   'SHELL parameters . .                                '  ;AN000;
+PANEL19_L	EQU	($-PANEL19)/PANEL19_W			     ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL20  LABEL	 BYTE						   ;AN000;
+	DB   'An unrecoverable error occurred while installing'    ;AN000;
+PANEL20_W	EQU	($-PANEL20)				   ;AN000;
+	DB   'DOS.  Press F3 to exit SELECT.                  '    ;AN000;
+PANEL20_L	EQU	($-PANEL20)/PANEL20_W			   ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL21  LABEL	 BYTE						     ;AN000;
+	DB   '                      FASTOPEN Parameters           '  ;AN000;
+PANEL21_W	EQU	($-PANEL21)				     ;AN000;
+	DB   '                                                    '  ;AN000;
+	DB   '                                                    '  ;AN000;
+	DB   'SELECT has set these values for you (if any).  Press'  ;AC000;JW
+	DB   'Enter to accept these values or type in new values. '  ;AC000;JW
+	DB   '                                                    '  ;AN000;
+	DB   '                                                    '  ;AN000;
+	DB   'FASTOPEN parameters  . . .                          '  ;AN000;
+PANEL21_L	EQU	($-PANEL21)/PANEL21_W			     ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL22  LABEL	 BYTE						     ;AN000;
+	DB   '                         SHARE Parameters           '  ;AN000;
+PANEL22_W	EQU	($-PANEL22)				     ;AN000;
+	DB   '                                                    '  ;AN000;
+	DB   '                                                    '  ;AN000;
+	DB   'SELECT has set these values for you (if any).  Press'  ;AC000;JW
+	DB   'Enter to accept these values or type in new values. '  ;AC000;JW
+	DB   '                                                    '  ;AN000;
+	DB   '                                                    '  ;AN000;
+	DB   'SHARE parameters . . . .                            '  ;AN000;
+PANEL22_L	EQU	($-PANEL22)/PANEL22_W			     ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL23  LABEL	 BYTE						     ;AN000;
+	DB   '                       GRAPHICS Parameters          '  ;AN000;
+PANEL23_W	EQU	($-PANEL23)				     ;AN000;
+	DB   '                                                    '  ;AN000;
+	DB   '                                                    '  ;AN000;
+	DB   'SELECT has set these values for you (if any).  Press'  ;AC000;JW
+	DB   'Enter to accept these values or type in new values. '  ;AC000;JW
+	DB   '                                                    '  ;AN000;
+	DB   '                                                    '  ;AN000;
+	DB   'GRAPHICS parameters  . .                            '  ;AN000;
+PANEL23_L	EQU	($-PANEL23)/PANEL23_W			     ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL24  LABEL	 BYTE						     ;AN000;
+	DB   '                    Expanded Memory Parameters      '  ;AN000;
+PANEL24_W	EQU	($-PANEL24)				     ;AN000;
+	DB   '                                                    '  ;AN000;
+	DB   '                                                    '  ;AN000;
+	DB   'SELECT has set these values for you (if any).  Press'  ;AC000;JW
+	DB   'Enter to accept these values or type in new values. '  ;AC000;JW
+	DB   '                                                    '  ;AN000;
+	DB   '                                                    '  ;AN000;
+	DB   'XMAEM parameters . . . .                            '  ;AN000;
+	DB   '                                                    '  ;AN000;
+	DB   '                                                    '  ;AN000;
+	DB   'XMA2EMS parameters . . .                            '  ;AN000;
+PANEL24_L	EQU	($-PANEL24)/PANEL24_W			     ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL25  LABEL	 BYTE						     ;AN000;
+	DB   '                    RAMDRIVE Parameters             '  ;AN000;
+PANEL25_W	EQU	($-PANEL25)				     ;AN000;
+	DB   '                                                    '  ;AN000;
+	DB   '                                                    '  ;AN000;
+	DB   'SELECT has set these values for you (if any).  Press'  ;AC000;JW
+	DB   'Enter to accept these values or type in new values. '  ;AC000;JW
+	DB   '                                                    '  ;AN000;
+	DB   '                                                    '  ;AN000;
+	DB   'RAMDRIVE parameters . . . .                         '  ;AN000;
+PANEL25_L	EQU	($-PANEL25)/PANEL25_W			     ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL26  LABEL	 BYTE						     ;AN000;
+	DB   '                      Configuration Parameters'        ;AN000;
+PANEL26_W	EQU	($-PANEL26)				     ;AN000;
+	DB   '                                              '        ;AN000;
+	DB   'SELECT has set these values for you.  Press   '        ;AN000;
+	DB   'Enter to accept the values shown or type in   '        ;AN000;
+	DB   'new values.                                   '        ;AN000;
+	DB   '                                              '        ;AN000;
+	DB   '                                              '        ;AN000;
+	DB   'BREAK. . . . . .            (ON/OFF)          '        ;AN000;
+	DB   'BUFFERS  . . . .            (1-99,1-8)        '        ;AN000;
+	DB   'FCBS . . . . . .            (1-255,0-255)     '        ;AN000;
+	DB   'FILES  . . . . .            (8-255)           '        ;AN000;
+	DB   'LASTDRIVE  . . .            (A-Z)             '        ;AN000;
+	DB   'STACKS . . . . .            (8-64,32-512)     '        ;AN000;
+	DB   'VERIFY . . . . .            (ON/OFF)          '        ;AN000;
+PANEL26_L	EQU	($-PANEL26)/PANEL26_W			     ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL27  LABEL	 BYTE								 ;AN000;
+	DB   '                       Partition Fixed Disk                       ';AN000;
+PANEL27_W	EQU	($-PANEL27)						 ;AN000;
+	DB   '                                                                  ';AN000;
+	DB   '                                                                  ';AN000;
+	DB   '                                                                  ';AN000;
+	DB   '                                                                  ';AN000;
+	DB   '                                                                  ';AN000;
+	DB   'This fixed disk must be set up before you can use it.  Setting up ';AN000;
+	DB   'involves separating the disk into areas called partitions.  SELECT';AN000;
+	DB   'can define the partition sizes for you, or you can define your    ';AN000;
+	DB   'own partition sizes.                                              ';AN000;
+	DB   '                                                                  ';AN000;
+	DB   '                                                                  ';AN000;
+	DB   'Choose an option:                                                 ';AN000;
+PANEL27_L	EQU	($-PANEL27)/PANEL27_W					 ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL28  LABEL	 BYTE								 ;AN000;
+	DB   '                       Partition Fixed Disk                       ';AN000;
+PANEL28_W	EQU	($-PANEL28)						 ;AN000;
+	DB   '                                                                  ';AN000;
+	DB   '                                                                  ';AN000;
+	DB   '                                                                  ';AN000;
+	DB   '                                                                  ';AN000;
+	DB   '                                                                  ';AN000;
+	DB   'This fixed disk is not completely set up. The fixed disk has space';AN000;
+	DB   'that needs to be divided into areas called partitions.  You can   ';AN000;
+	DB   'leave the fixed disk as it is, or you can define your own         ';AN000;
+	DB   'partition sizes.                                                  ';AN000;
+	DB   '                                                                  ';AN000;
+	DB   '                                                                  ';AN000;
+	DB   'Choose an option:                                                 ';AN000;
+PANEL28_L	EQU	($-PANEL28)/PANEL28_W					 ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL29  LABEL	 BYTE						     ;AN000;
+	DB   'You must restart your computer to continue.'           ;AN000;
+PANEL29_W	EQU	($-PANEL29)				     ;AN000;
+PANEL29_L	EQU	($-PANEL29)/PANEL29_W			     ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL30  LABEL	 BYTE							  ;AN000;
+	DB   '                          Date and Time'                    ;AN000;
+PANEL30_W	EQU	($-PANEL30)					  ;AN000;
+	DB   '                                       '                    ;AN000;
+	DB   '                                       '                    ;AN000;
+	DB   'Current date:                          '                    ;AN000;
+	DB   '                                       '                    ;AN000;
+	DB   '  Year . . . .         (1980-2079)     '                    ;AN000;
+	DB   '                                       '                    ;AN000;
+	DB   '  Month  . . .         (1-12)          '                    ;AN000;
+	DB   '                                       '                    ;AN000;
+	DB   '  Day  . . . .         (1-31)          '                    ;AN000;
+	DB   '                                       '                    ;AN000;
+	DB   '                                       '                    ;AN000;
+	DB   '                                       '                    ;AN000;
+	DB   'Current time:                          '                    ;AN000;
+	DB   '                                       '                    ;AN000;
+	DB   '  Hour . . . .         (00-23)         '                    ;AN000;
+	DB   '                                       '                    ;AN000;
+	DB   '  Minute . . .         (00-59)         '                    ;AN000;
+	DB   '                                       '                    ;AN000;
+	DB   '  Second . . .         (00-59)         '                    ;AN000;
+PANEL30_L	EQU	($-PANEL30)/PANEL30_W				  ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL31  LABEL	 BYTE						       ;AN000;
+	DB   '                    Format Fixed Disk Drive'             ;AN000;
+PANEL31_W	EQU	($-PANEL31)				       ;AN000;
+	DB   '                                           '             ;AN000;
+	DB   '                                           '             ;AN000;
+	DB   '                                           '             ;AN000;
+	DB   '                                           '             ;AN000;JW added line
+	DB   '                                           '             ;AN000;
+	DB   'Choose an option:                          '             ;AN000;
+PANEL31_L	EQU	($-PANEL31)/PANEL31_W			       ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL32  LABEL	 BYTE					    ;AN000;
+	DB   '         Continuing Installation'             ;AN000;
+PANEL32_W	EQU	($-PANEL32)			    ;AN000;
+PANEL32_L	EQU	($-PANEL32)/PANEL32_W		    ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	**************
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL33  LABEL	 BYTE					      ;AN028;
+	DB   'System does not support selected keyboard.     ';AN028;
+PANEL33_W	EQU	($-PANEL33)			      ;AN028;
+	DB   '                                               ';AN028;
+	DB   'Press Enter to return to the Keyboard Selection';AN028;
+	DB   'screen and choose another keyboard, or Press F3';AN028;
+	DB   'to exit the SELECT program.                    ';AN028;
+PANEL33_L	EQU	($-PANEL33)/PANEL33_W		      ;AN028;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL34  LABEL	 BYTE					    ;AN000;
+	DB   '        Installation Complete'                ;AN000;
+PANEL34_W	EQU	($-PANEL34)			    ;AN000;
+PANEL34_L	EQU	($-PANEL34)/PANEL34_W		    ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL35  LABEL	 BYTE					     ;AN028;
+	DB 'Installation of MS-DOS 4.0 is complete.         ';AN028;
+PANEL35_W	EQU	($-PANEL35)			     ;AN028;
+	DB '                                                ';AN028;
+	DB '                                                ';AN028;
+	DB 'Place the new STARTUP diskette in drive A and   ';AC028;
+	DB 'press Ctrl+Alt+Del to start DOS.                ';AC028;
+	DB '                                                ';AN028;
+	DB 'FOR INFORMATION ON USING THE DOS SHELL, REFER TO';AC076;SEH ;AN028;
+	DB 'THE "MS-DOS 4.0 USERS GUIDE" BOOK.              ';AC076;SEH ;AN028; ;AC049;SEH
+PANEL35_L	EQU	($-PANEL35)/PANEL35_W		     ;AN028;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R9>	DO NOT TRANSLATE OR CHANGE!!!!
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	      |---------1---------2---------3---------4---------5----|
+
+PANEL36  LABEL	 BYTE					      ;AN000;
+	DB   '������������������������������������������������������Ŀ';AN000;
+PANEL36_W	EQU	($-PANEL36)			      ;AN000;
+	DB   '�                                                      �';AN000;
+	DB   '�                                                      �';AN000;
+	DB   '�                                                      �';AN000;
+	DB   '�                                                      �';AN000;
+	DB   '�                                                      �';AN000;
+	DB   '�                                                      �';AN000;
+	DB   '�                                                      �';AN000;
+	DB   '�                                                      �';AN000;
+	DB   '�                                                      �';AN000;
+	DB   '������������������������������������������������������Ĵ';AN000;
+	DB   '�                                                      �';AN000;
+	DB   '��������������������������������������������������������';AN000;
+PANEL36_L	EQU	($-PANEL36)/PANEL36_W		      ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R9>	DO NOT TRANSLATE OR CHANGE!!!!
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+PANEL37  LABEL	 BYTE					      ;AN000;
+	DB '��������������������������������������������������������������������������������';AN000;
+PANEL37_W	EQU	($-PANEL37)			      ;AN000;
+PANEL37_L	EQU	($-PANEL37)/PANEL37_W		      ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R3>	The panel will be centered in an 80 column screen
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL38  LABEL	 BYTE					      ;AN000;
+	DB 'Press Enter (��) to continue or Esc to Cancel'   ;AN000;
+PANEL38_W	EQU	($-PANEL38)			      ;AN000;
+PANEL38_L	EQU	($-PANEL38)/PANEL38_W		      ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL39  LABEL	 BYTE					      ;AN000;
+	DB 'Printer...........  '                             ;AN000;
+PANEL39_W	EQU	($-PANEL39)			      ;AN000;
+PANEL39_L	EQU	($-PANEL39)/PANEL39_W		      ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL40  LABEL	 BYTE					      ;AN000;
+	DB   ' F3=Exit '                                      ;AN000;
+PANEL40_W	EQU	($-PANEL40)			      ;AN000;
+PANEL40_L	EQU	($-PANEL40)/PANEL40_W		      ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL41  LABEL	 BYTE					      ;AN000;
+	DB 'Fixed Disk........  '                             ;AC000;JW
+PANEL41_W	EQU	($-PANEL41)			      ;AN000;
+PANEL41_L	EQU	($-PANEL41)/PANEL41_W		      ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL42  LABEL	 BYTE				 ;AN000;
+	DB 'Logical Drive.....  :'               ;AC000;JW
+PANEL42_W	EQU	($-PANEL42)		 ;AN000;
+PANEL42_L	EQU	($-PANEL42)/PANEL42_W	 ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL43  LABEL	 BYTE				 ;AN000;
+	DB 'Press Ctrl+Alt+Del to continue with DOS installation.';AN000;
+PANEL43_W	EQU	($-PANEL43)		 ;AN000;
+PANEL43_L	EQU	($-PANEL43)/PANEL43_W	 ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL44  LABEL	 BYTE				  ;AN000;
+	DB 'Copying from OPERATING diskette . . .';AN000;
+PANEL44_W	EQU	($-PANEL44)		  ;AN000;
+PANEL44_L	EQU	($-PANEL44)/PANEL44_W	  ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL45  LABEL	 BYTE				 ;AN000;
+	DB 'Copying from INSTALL diskette . . .' ;AN000;
+PANEL45_W	EQU	($-PANEL45)		 ;AN000;
+PANEL45_L	EQU	($-PANEL45)/PANEL45_W	 ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL46  LABEL	 BYTE					      ;AN000;
+	DB 'Installation of MS-DOS 4.0 is complete.   ';AN000;
+PANEL46_W	EQU	($-PANEL46)			      ;AN000;
+	DB '                                          ';AN076;SEH
+	DB '                                          ';AN076;SEH
+	DB 'REFER TO THE "MS-DOS 4.0 USERS GUIDE" BOOK';AC076;SEH ;AC049;SEH ;AN028;
+	DB 'FOR INFORMATION ON USING THE DOS SHELL.   ';AC076;SEH ;AN028;
+PANEL46_L	EQU	($-PANEL46)/PANEL46_W		      ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL47  LABEL	 BYTE				 ;AN000;
+	DB 'Remove all diskettes.  Press Ctrl+Alt+Del to start DOS.';AN000;
+PANEL47_W	EQU	($-PANEL47)		 ;AN000;
+PANEL47_L	EQU	($-PANEL47)/PANEL47_W	 ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL48  LABEL	 BYTE						;AN000;
+	DB 'Installation of MS-DOS 4.0 is complete.            ';AN000;
+PANEL48_W	EQU	($-PANEL48)				;AN000;
+	DB '                                                   ';AN000;
+	DB '                                                   ';AN000;
+	DB 'To start DOS, place the STARTUP diskette in drive A';AC064;SEH;AC056;SEH ;AC000;JW
+	DB 'and press Ctrl+Alt+Del.                            ';AC064;SEH;AC056;SEH ;AC000;JW
+	DB '                                                   ';AN000;
+	DB 'or                                                 ';AN064;SEH;AN000;
+	DB '                                                   ';AN000;
+	DB 'To start the DOS Shell, place the SHELL diskette   ';AC064;SEH;AC056;SEH ;AC028;
+	DB 'in drive A, and press Ctrl+Alt+Del.                ';AC064;SEH;AC056;SEH ;AC028;
+	DB '                                                   ';AN064;SEH
+	DB 'FOR INFORMATION ON USING THE DOS SHELL, REFER TO   ';AC076;SEH ;AC064;SEH;AC056;SEH ;AN028;
+	DB 'THE "MS-DOS 4.0 USERS GUIDE" BOOK.                 ';AC076;SEH ;AC056;SEH ;AC049;SEH ;AN028;
+PANEL48_L	EQU	($-PANEL48)/PANEL48_W			;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL49  LABEL	 BYTE					      ;AN000;
+	DB   ' F1=Help '                                      ;AN000;
+PANEL49_W	EQU	($-PANEL49)			      ;AN000;
+PANEL49_L	EQU	($-PANEL49)/PANEL49_W		      ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL50  LABEL	 BYTE					      ;AN000;
+	DB   ' F9=Keys '                                      ;AN000;
+PANEL50_W	EQU	($-PANEL50)			      ;AN000;
+PANEL50_L	EQU	($-PANEL50)/PANEL50_W		      ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL51  LABEL	 BYTE					      ;AN000;
+	DB   ' Esc=Cancel '                                   ;AN000;
+PANEL51_W	EQU	($-PANEL51)			      ;AN000;
+PANEL51_L	EQU	($-PANEL51)/PANEL51_W		      ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL52  LABEL	 BYTE					      ;AN000;
+	DB   ' Enter '                                        ;AN000;
+PANEL52_W	EQU	($-PANEL52)			      ;AN000;
+PANEL52_L	EQU	($-PANEL52)/PANEL52_W		      ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	************
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+PANEL53  LABEL	 BYTE						 ;AN000;
+	DB 'Installation of MS-DOS 4.0 is complete.          ';AN000;
+PANEL53_W	EQU	($-PANEL53)				 ;AN000;
+	DB '                                                 ';AN000;
+	DB 'The files AUTOEXEC.400 and CONFIG.400 have been  ';AC057;SEH ;AN000;
+	DB 'copied to your fixed disk.  The files contain the';AC057;SEH ;AN000;
+	DB 'options selected for DOS 4.0.  To get the options';AC057;SEH ;AN000;
+	DB 'selected, update your AUTOEXEC.BAT and CONFIG.SYS';AC057;SEH ;AN000;
+	DB 'files.  Refer to the "MS-DOS 4.0 Users Guide"    ';AC057;SEH ;AN000;
+	DB 'book for information on updating these files.    ';AC057;SEH ;AN000;
+	DB '                                                 ';AC057;SEH ;AC049;SEH ;AN000;
+	DB 'FOR INFORMATION ON USING THE DOS SHELL, REFER TO ';AC076;SEH ;AC057;SEH ;AC028;
+	DB 'THE "MS-DOS 4.0 USERS GUIDE" BOOK.               ';AC076;SEH ;AC057;SEH ;AN028;
+PANEL53_L	EQU	($-PANEL53)/PANEL53_W			 ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R5>	The width of the entry must not exceed the RULER provided.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	      |---------1---------2---------3---------4---------5-|
+
+PANEL54  LABEL	 BYTE					      ;AN028;
+	DB   'Disk write-protected                  '         ;AN028;
+PANEL54_W	EQU	($-PANEL54)			      ;AN028;
+	DB   '                                      '         ;AN028;
+	DB   'Use a non-protected diskette or remove'         ;AN028;
+	DB   'the write-protection on the diskette. '         ;AN028;
+PANEL54_L	EQU	($-PANEL54)/PANEL54_W		      ;AN028;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R5>	The width of the entry must not exceed the RULER provided.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	      |---------1---------2---------3---------4---------5-|
+
+PANEL55  LABEL	 BYTE					      ;AN028;
+	DB   'Drive not ready                                ';AN028;
+PANEL55_W	EQU	($-PANEL55)			      ;AN028;
+	DB   '                                               ';AN028;
+	DB   'Reinsert the diskette and close the drive door.';AN028;
+	DB   'Press Enter to continue.                       ';AN028;
+PANEL55_L	EQU	($-PANEL55)/PANEL55_W		      ;AN028;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R5>	The width of the entry must not exceed the RULER provided.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	      |---------1---------2---------3---------4---------5-|
+
+PANEL56  LABEL	 BYTE						;AN000;
+	DB   'Defective diskette                               ';AN000;
+PANEL56_W	EQU	($-PANEL56)				;AN000;
+	DB   '                                                 ';AN028;
+	DB   'Press Enter to retry, or Press F3 to exit SELECT.';AN000;
+PANEL56_L	EQU	($-PANEL56)/PANEL56_W			;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R5>	The width of the entry must not exceed the RULER provided.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	      |---------1---------2---------3---------4---------5-|
+
+PANEL57  LABEL	 BYTE					     ;AN000;
+	DB   'An error occurred while installing DOS.       ';AN000;
+PANEL57_W	EQU	($-PANEL57)			     ;AN000;
+	DB   'Press Enter to continue, or F3 to exit SELECT.';AN000;
+PANEL57_L	EQU	($-PANEL57)/PANEL57_W		     ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL58  LABEL	 BYTE				   ;AN000;
+	DB   'Insert STARTUP diskette in drive B'  ;AC000;JW
+PANEL58_W	EQU	($-PANEL58)		   ;AN000;
+PANEL58_L	EQU	($-PANEL58)/PANEL58_W	   ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL59  LABEL	 BYTE				    ;AN000;
+	DB   'Insert OPERATING diskette in drive A' ;AC000;JW
+PANEL59_W	EQU	($-PANEL59)		    ;AN000;
+PANEL59_L	EQU	($-PANEL59)/PANEL59_W	    ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL60  LABEL	 BYTE				  ;AN000;
+	DB   'Insert SHELL diskette in drive B'   ;AC000;JW
+PANEL60_W	EQU	($-PANEL60)		  ;AN000;
+PANEL60_L	EQU	($-PANEL60)/PANEL60_W	  ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL61  LABEL	 BYTE				   ;AN000;
+	DB   'Insert INSTALL diskette in drive A'  ;AC000;JW
+PANEL61_W	EQU	($-PANEL61)		   ;AN000;
+PANEL61_L	EQU	($-PANEL61)/PANEL61_W	   ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R5>	The width of the entry must not exceed the RULER provided.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	      |---------1---------2---------3---------4---------5-|
+
+PANEL62 LABEL BYTE				      ;AN000;
+	DB   'Incorrect path                         ';AN000;
+PANEL62_W	EQU	($-PANEL62)		      ;AN000;
+	DB   '                                       ';AN028;
+	DB   'The path specified cannot be found.    ';AN000;
+	DB   '                                       ';AN000;
+	DB   'Correct the path and retry the command.';AN000;
+PANEL62_L	EQU	($-PANEL62)/PANEL62_W	      ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R5>	The width of the entry must not exceed the RULER provided.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	      |---------1---------2---------3---------4---------5-|
+
+PANEL63 LABEL BYTE					     ;AN028;
+	DB   'Missing or unreadable SELECT.PRT file         ';AN028;
+PANEL63_W	EQU	($-PANEL63)			     ;AN028;
+	DB   '                                              ';AN028;
+	DB   'Press Enter to continue SELECT and no printers';AN028;
+	DB   'will be defined, or Press F3 to exit SELECT.  ';AN028;
+PANEL63_L	EQU	($-PANEL63)/PANEL63_W		     ;AN028;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R5>	The width of the entry must not exceed the RULER provided.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	      |---------1---------2---------3---------4---------5-|
+
+PANEL64 LABEL BYTE					     ;AN000;
+	DB   'Printer profile information invalid           ';AN000;
+PANEL64_W	EQU	($-PANEL64)			     ;AN000;
+	DB   '                                              ';AN000;
+	DB   'Press Enter to return to the Printer Selection';AN000;
+	DB   'screen and choose another printer, or Press F3';AN000;
+	DB   'to exit SELECT.                               ';AN000;
+PANEL64_L	EQU	($-PANEL64)/PANEL64_W		     ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL65 LABEL BYTE				   ;AN000;
+	DB   'Formatting disk . . .'               ;AN000;
+PANEL65_W	EQU	($-PANEL65)		   ;AN000;
+PANEL65_L	EQU	($-PANEL65)/PANEL65_W	   ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL66 LABEL BYTE				   ;AN000;
+	DB   'Formatting diskette in drive B . . .';AC000;JW
+PANEL66_W	EQU	($-PANEL66)		   ;AN000;
+PANEL66_L	EQU	($-PANEL66)/PANEL66_W	   ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R9>	DO NOT TRANSLATE OR CHANGE!!!!
+;	<R5>	The width of the entry must not exceed the RULER provided.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	      |---------1---------2---------3---------4---------5-|
+
+PANEL67 LABEL BYTE				;AN000;
+	DB   '���������������������������������������������������Ŀ';AN000;
+PANEL67_W	EQU	($-PANEL67)		;AN000;
+	DB   '�                                                   �';AN000;
+	DB   '�                                                   �';AN000;
+	DB   '�                                                   �';AN000;
+	DB   '�                                                   �';AN000;
+	DB   '�                                                   �';AN000;
+	DB   '���������������������������������������������������Ĵ';AN000;
+	DB   '�                                                   �';AN000;
+	DB   '�����������������������������������������������������';AN000;
+PANEL67_L	EQU	($-PANEL67)/PANEL67_W	;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R5>	The width of the entry must not exceed the RULER provided.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	      |---------1---------2---------3---------4---------5-|
+
+PANEL68 LABEL BYTE					     ;AN000;
+	DB   'Incorrect diskette                            ';AC030;
+PANEL68_W	EQU	($-PANEL68)			     ;AN000;
+	DB   '                                              ';AN030;
+	DB   'Press Enter and follow instructions on screen,';AN030;
+	DB   'or press F3 to exit SELECT.                   ';AN030;
+PANEL68_L	EQU	($-PANEL68)/PANEL68_W		     ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R5>	The width of the entry must not exceed the RULER provided.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	      |---------1---------2---------3---------4---------5-|
+
+PANEL69 LABEL BYTE						;AN000;
+	DB   'An unrecoverable error occurred while installing ';AN000;
+PANEL69_W	EQU	($-PANEL69)				;AN000;
+	DB   'DOS.  Press Enter to retry, or F3 to exit SELECT.';AN000;
+PANEL69_L	EQU	($-PANEL69)/PANEL69_W			;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL70 LABEL BYTE						  ;AN000;
+	DB   'Before proceeding, SELECT needs to make a copy of  ';AN000;
+PANEL70_W	EQU	($-PANEL70)				  ;AN000;
+	DB   'the INSTALL diskette.                              ';AN000;
+	DB   '                                                   ';AN000;
+	DB   'During installation to a fixed disk, SELECT records';AN000;
+	DB   'information to a diskette for later use in the     ';AN000;
+	DB   'installation process.  Have your blank diskette,   ';AN000;
+	DB   'labeled "SELECT COPY", ready for this purpose.     ';AC075;SEH
+	DB   '                                                   ';AN000;
+	DB   'For now, leave the INSTALL diskette in drive A and ';AC000;JW
+	DB   'press ENTER to continue.                           ';AN000;
+PANEL70_L	EQU	($-PANEL70)/PANEL70_W			  ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL71 LABEL BYTE						   ;AN000;
+	DB   'Remove the INSTALL diskette from drive A  '          ;AN000;
+PANEL71_W	EQU	($-PANEL71)				   ;AN000;
+	DB   '                                          '          ;AN000;
+	DB   'Insert the SELECT COPY diskette in drive A'          ;AC075;SEH
+PANEL71_L	EQU	($-PANEL71)/PANEL71_W			   ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL72 LABEL BYTE					    ;AN000;
+	DB   'Remove the SELECT COPY diskette from drive A' ;AC075;SEH ;AC000;JW
+PANEL72_W	EQU	($-PANEL72)			    ;AN000;
+	DB   '                                            ' ;AC000;JW
+	DB   'Insert the INSTALL diskette in drive A      ' ;AC000;JW
+PANEL72_L	EQU	($-PANEL72)/PANEL72_W		    ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL73 LABEL BYTE					     ;AN000;
+	DB   'Copying diskette . . .'                        ;AN000;
+PANEL73_W	EQU	($-PANEL73)			     ;AN000;
+PANEL73_L	EQU	($-PANEL73)/PANEL73_W		     ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+PANEL74  LABEL	 BYTE					      ;AN010;
+	DB 'Installation of MS-DOS 4.0 is complete.        ';AN010;
+PANEL74_W	EQU	($-PANEL74)			      ;AN010;
+	DB '                                               ';AN010;
+	DB 'The files AUTOEXEC.400 and CONFIG.400 have been';AN010;
+	DB 'copied to your fixed disk.  These files reflect';AN010;
+	DB 'the options selected for DOS 4.0.              ';AN010;
+	DB '                                               ';AN010;
+	DB 'To get the options selected for DOS 4.0:       ';AN010;
+	DB '  1. Update your AUTOEXEC.BAT and CONFIG.SYS   ';AN010;
+	DB '     files                                     ';AN010;
+	DB '  2. Copy DOS 4.0 system files to drive C      ';AN010;
+	DB '                                               ';AN010;
+	DB 'REFER TO THE "MS-DOS 4.0 USERS GUIDE" BOOK FOR ';AC076;SEH ;AC049;SEH ;AN010;
+	DB 'INFORMATION ON UPDATING THESE FILES AND ON     ';AC076;SEH ;AN010;
+	DB 'USING THE DOS SHELL.                           ';AC076;SEH ;AN028;
+PANEL74_L	EQU	($-PANEL74)/PANEL74_W		      ;AN010;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+PANEL75  LABEL	 BYTE					     ;AN000;
+	DB 'Formatting SHELL diskette . . .'                 ;AN000;
+PANEL75_W	EQU	($-PANEL75)			     ;AN000;
+PANEL75_L	EQU	($-PANEL75)/PANEL75_W		     ;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+PANEL76  LABEL	 BYTE					     ;AN000;
+	DB 'Formatting STARTUP diskette . . .'               ;AN000;
+PANEL76_W	EQU	($-PANEL76)			     ;AN000;
+PANEL76_L	EQU	($-PANEL76)/PANEL76_W		     ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL77  LABEL	 BYTE				   ;AN000;
+	DB   'Insert SELECT diskette in drive A'   ;AC000;JW
+PANEL77_W	EQU	($-PANEL77)		   ;AN000;
+PANEL77_L	EQU	($-PANEL77)/PANEL77_W	   ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL78  LABEL	 BYTE				       ;AN000;
+	DB   'Insert OPERATING 1 diskette in drive A'  ;AC000;JW
+PANEL78_W	EQU	($-PANEL78)		       ;AN000;
+PANEL78_L	EQU	($-PANEL78)/PANEL78_W	       ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL79  LABEL	 BYTE				       ;AN000;
+	DB   'Insert OPERATING 3 diskette in drive A'  ;AC000;JW
+PANEL79_W	EQU	($-PANEL79)		       ;AN000;
+PANEL79_L	EQU	($-PANEL79)/PANEL79_W	       ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL80  LABEL	 BYTE				       ;AN000;
+	DB   'Copying files . . .'                     ;AN000;
+PANEL80_W	EQU	($-PANEL80)		       ;AN000;
+PANEL80_L	EQU	($-PANEL80)/PANEL80_W	       ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL81  LABEL	 BYTE				    ;AN000;
+	DB   'Insert WORKING 1 diskette in drive B' ;AC000;JW
+PANEL81_W	EQU	($-PANEL81)		    ;AN000;
+PANEL81_L	EQU	($-PANEL81)/PANEL81_W	    ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL82  LABEL	 BYTE				       ;AN000;
+	DB   'Insert OPERATING 1 diskette in drive A'  ;AC000;JW
+PANEL82_W	EQU	($-PANEL82)		       ;AN000;
+	DB   '                                      '  ;AC000;JW
+	DB   'Insert WORKING 2 diskette in drive B  '  ;AC000;JW
+PANEL82_L	EQU	($-PANEL82)/PANEL82_W	       ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL83  LABEL	 BYTE				      ;AN000;
+	DB   'Insert OPERATING 2 diskette in drive A' ;AC000;JW
+PANEL83_W	EQU	($-PANEL83)		      ;AN000;
+	DB   '                                      ' ;AC000;JW
+	DB   'Insert WORKING 3 diskette in drive B  ' ;AC000;JW
+PANEL83_L	EQU	($-PANEL83)/PANEL83_W	      ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL84  LABEL	 BYTE				       ;AN000;
+	DB   'Insert OPERATING 3 diskette in drive A'  ;AC000;JW
+PANEL84_W	EQU	($-PANEL84)		       ;AN000;
+	DB   '                                      '  ;AC000;JW
+	DB   'Insert STARTUP diskette in drive B    '  ;AC000;JW
+PANEL84_L	EQU	($-PANEL84)/PANEL84_W	       ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL85  LABEL	 BYTE				 ;AN000;
+	DB   'Insert SELECT diskette in drive A' ;AC000;JW
+PANEL85_W	EQU	($-PANEL85)		 ;AN000;
+	DB   '                                 ' ;AC000;JW
+	DB   'Leave STARTUP diskette in drive B' ;AC000;JW
+PANEL85_L	EQU	($-PANEL85)/PANEL85_W	 ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL86 LABEL  BYTE				   ;AN000;
+	DB   'Insert WORKING 1 diskette in drive A';AC000;JW
+PANEL86_W      EQU     ($-PANEL86)		   ;AN000;
+PANEL86_L      EQU     ($-PANEL86)/PANEL86_W	   ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL87 LABEL  BYTE				     ;AN000;
+	DB   'Insert WORKING 2 diskette in drive A'  ;AC000;JW
+PANEL87_W      EQU     ($-PANEL87)		     ;AN000;
+PANEL87_L      EQU     ($-PANEL87)/PANEL87_W	     ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL88 LABEL  BYTE				 ;AN000;
+	DB   'Insert SHELL diskette in drive A'  ;AC000;JW
+PANEL88_W      EQU     ($-PANEL88)		 ;AN000;
+PANEL88_L      EQU     ($-PANEL88)/PANEL88_W	 ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL89 LABEL  BYTE				  ;AN000;
+	DB   'Insert STARTUP diskette in drive A' ;AC000;JW
+PANEL89_W      EQU     ($-PANEL89)		  ;AN000;
+PANEL89_L      EQU     ($-PANEL89)/PANEL89_W	  ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL90 LABEL  BYTE					  ;AN000;
+	DB   'SELECT will create the following diskettes:';AN000;
+PANEL90_W      EQU     ($-PANEL90)			  ;AN000;
+	DB   '  (You will need 5 blank 360KB diskettes)  ';AN000;
+	DB   '                                           ';AN000;
+	DB   '    STARTUP       Starting DOS             ';AN000;
+	DB   '    WORKING 1     DOS Utilities            ';AC000;JW
+	DB   '    WORKING 2     More DOS Utilities       ';AC000;JW
+	DB   '    WORKING 3     Other DOS Utilities      '
+	DB   '    SHELL         Starting SHELL (Optional)';AN000;
+	DB   '                                           ';AN000;
+	DB   'Label the blank diskettes as shown, and    ';AN000;
+	DB   'then follow the display prompts.           ';AN000;
+PANEL90_L      EQU     ($-PANEL90)/PANEL90_W		  ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL91  LABEL	 BYTE					      ;AN000;
+	DB 'Installation of MS-DOS 4.0 is complete.          ';AN000;
+PANEL91_W	EQU	($-PANEL91)			      ;AN000;
+	DB '                                                 ';AN000;
+	DB '                                                 ';AN000;
+	DB 'Place the STARTUP diskette in drive A and press  ';AC064;SEH;AC000;JW
+	DB 'Ctrl+Alt+Del to start DOS.                       ';AC064;SEH;AC000;JW
+	DB '                                                 ';AN064;SEH
+	DB 'If you want to use the DOS Shell, place the SHELL';AC064;SEH;AC028;
+	DB 'diskette in drive A and type DOSSHELL to start   ';AC064;SEH;AC028;
+	DB 'the Shell.                                       ';AC064;SEH;AN000;
+	DB '                                                 ';AN064;SEH
+	DB 'FOR INFORMATION ON USING THE DOS SHELL, REFER TO ';AC076;SEH;AC064;SEH;AN028;
+	DB 'THE "MS-DOS 4.0 USERS GUIDE" BOOK.               ';AC076;SEH;AC064;SEH;AC049;SEH ;AN028;
+PANEL91_L	EQU	($-PANEL91)/PANEL91_W		      ;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL92  LABEL	 BYTE				      ;AN000;
+	DB   'Insert SELECT COPY diskette in drive A' ;AC075;SEH ;AC000;JW
+PANEL92_W	EQU	($-PANEL92)		      ;AN000;
+PANEL92_L	EQU	($-PANEL92)/PANEL92_W	      ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL93 LABEL	BYTE				      ;AN000;
+	DB   'Insert OPERATING 2 diskette in drive A' ;AC000;JW
+PANEL93_W	EQU	($-PANEL93)		      ;AN000;
+PANEL93_L	EQU	($-PANEL93)/PANEL93_W	      ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+; PAN_EXP_MEMORY2 EQU	  108	  ;AN000;JW
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+PANEL94 LABEL	BYTE						   ;AN000;
+	DB   '                    Expanded Memory Parameters      ';AN000;
+PANEL94_W	EQU	($-PANEL94)				   ;AN000;
+	DB   '                                                    ';AN000;
+	DB   '                                                    ';AN000;
+	DB   'SELECT has set these values for you (if any).  Press';AC000;JW
+	DB   'Enter to accept these values or type in new values. ';AC000;JW
+	DB   '                                                    ';AN000;
+	DB   '                                                    ';AN000;
+	DB   '                                                    ';AN000;
+	DB   '                                                    ';AN000;
+	DB   '                                                    ';AN000;
+	DB   'XMA2EMS parameters . . .                            ';AN000;
+PANEL94_L	EQU	($-PANEL94)/PANEL94_W			   ;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL95 LABEL  BYTE						     ;AN000;
+	DB   'SELECT will create the following diskettes:'           ;AN000;
+PANEL95_W      EQU     ($-PANEL95)				     ;AN000;
+	DB   '   (You will need 3 blank 1MB diskettes)   '           ;AN000;
+	DB   '                                           '           ;AN000;
+	DB   '      STARTUP       Starting DOS,          '           ;AN000;
+	DB   '                    DOS Utilities          '           ;AN000;
+	DB   '                                           '           ;AN000;
+	DB   '      WORKING       Other DOS Utilities    '
+	DB   '                                           '           ;AN000;
+	DB   '      SHELL         Starting SHELL,        '           ;AN000;
+	DB   '                    More DOS Utilities     '           ;AN000;
+	DB   '                    (Optional)             '           ;AN000;
+	DB   '                                           '           ;AN000;
+	DB   'Label the blank diskettes as shown, and    '           ;AN000;
+	DB   'then follow the display prompts.           '           ;AN000;
+PANEL95_L      EQU     ($-PANEL95)/PANEL95_W			     ;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL96 LABEL  BYTE					  ;AN000;
+	DB   'SELECT will create the following diskette:' ;AN000;
+PANEL96_W      EQU     ($-PANEL96)			  ;AN000;
+	DB   '   (You will need 1 blank 2MB diskette)   ' ;AC052;SEH ;AN000;
+	DB   '                                          ' ;AN000;
+	DB   '  STARTUP    Starting DOS and SHELL,      ' ;AC000;JW
+	DB   '             DOS Utilities                ' ;AN000;
+	DB   '                                          ' ;AN000;
+	DB   'Label the blank diskette as shown, and    ' ;AN000;
+	DB   'then follow the display prompts.          ' ;AN000;
+PANEL96_L      EQU     ($-PANEL96)/PANEL96_W		  ;AN000;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;	<R5>	The width of the entry must not exceed the RULER provided.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	      |---------1---------2---------3---------4---------5-|
+
+PANEL97 LABEL BYTE					     ;AN060;
+	DB   'Incorrect diskette                            ';AC060;
+PANEL97_W	EQU	($-PANEL97)			     ;AN060;
+	DB   '                                              ';AN060;
+	DB   'Insert the INSTALL diskette in drive A.  Press';AN060;
+	DB   'Enter to continue or F3 to exit SELECT.       ';AN060;
+PANEL97_L	EQU	($-PANEL97)/PANEL97_W		     ;AN060;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL98  LABEL	 BYTE						  
+	DB   '                      MS-DOS Shell Option           '
+PANEL98_W	EQU	($-PANEL98)				  
+	DB   '                                                    '
+	DB   '                                                    '
+	DB   'SELECT can install the MS-DOS Shell on the system   ' 
+	DB   'being set up.  Indicate whether you want to do this.'
+	DB   '                                                    '
+	DB   '                                                    '
+	DB   'Choose an option:                                   '
+PANEL98_L	EQU	($-PANEL98)/PANEL98_W			  
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL99  LABEL	 BYTE				    ;AN000;
+	DB   'Insert WORKING diskette in drive A'   ;AC000;JW
+PANEL99_W	EQU	($-PANEL99)		    ;AN000;
+PANEL99_L	EQU	($-PANEL99)/PANEL99_W	    ;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL100  LABEL	 BYTE				    	;AN000;
+	DB   'Insert MS-DOS SHELL diskette in drive A'	;AC000;JW
+PANEL100_W	EQU	($-PANEL100)		    	;AN000;
+PANEL100_L	EQU	($-PANEL100)/PANEL100_W	    	;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL101  LABEL	 BYTE				      
+	DB   'Insert MS-DOS SHELL diskette in drive A'
+PANEL101_W	EQU	($-PANEL101)		      
+	DB   '                                       '
+	DB   'Insert SHELL diskette in drive B       '
+PANEL101_L	EQU	($-PANEL101)/PANEL101_W	      
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL102  LABEL	 BYTE				       ;AN000;
+	DB   'Insert OPERATING diskette in drive A'  ;AC000;JW
+PANEL102_W	EQU	($-PANEL102)		       ;AN000;
+	DB   '                                      '  ;AC000;JW
+	DB   'Insert WORKING diskette in drive B  '  ;AC000;JW
+PANEL102_L	EQU	($-PANEL102)/PANEL102_W	       ;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;
+;	<R1>	The quotation marks have to left-right justified
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;     |---------1---------2---------3---------4---------5---------6---------7---------8
+
+PANEL103  LABEL	 BYTE				    ;AN000;
+	DB   'Insert WORKING 3 diskette in drive A' ;AC000;JW
+PANEL103_W	EQU	($-PANEL103)		    ;AN000;
+PANEL103_L	EQU	($-PANEL103)/PANEL103_W	    ;AN000;
+
+
+
+ENDIF
+

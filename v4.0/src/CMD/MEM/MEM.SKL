@@ -1,0 +1,53 @@
+
+:util MEM
+
+:class 1
+
+:class A
+:use COMMON1						;Incorrect DOS version
+:def 10 CR,LF
+:def 11 "  Address     Name          Size       Type ",CR,LF
+:def 12 "  컴컴컴�     컴컴컴컴     컴컴컴     컴컴컴",CR,LF
+:def 13 "  Handle      EMS Name      Size   ",CR,LF
+:def 14 "  컴컴컴�     컴컴컴컴     컴컴컴  ",CR,LF
+:def 15 "  %1      %2     %3     %4",CR,LF
+:def 16 "                %1   %2      %3 ",CR,LF
+:def 17 "                  %1              %2 ",CR,LF       ;fix in usa
+:def 18 "%1 bytes total memory",CR,LF
+:def 19 "%1 bytes available",CR,LF
+:def 20 "%1 largest executable program size",CR,LF
+:def 21 "%1 bytes total EMS memory",CR,LF
+:def 22 "%1 bytes free EMS memory",CR,LF
+:def 23 "%1 bytes total extended memory",CR,LF
+:def 24 "Interrupt Vector",0
+:def 25 "ROM Communication Area",0
+:def 26 "DOS Communication Area",0
+:def 27 "IBMBIO",0
+:def 28 "IBMDOS",0
+:def 29 "System Data",0
+:def 30 "System Program",0
+:def 31 "System Device Driver",0
+:def 32 "Installed Device Driver",0
+:def 33 "%1:",0
+:def 34 "%1: - %2:",0
+:def 35 "BUFFERS=",0
+:def 36 "FILES=",0
+:def 37 "FCBS=",0
+:def 38 "STACKS=",0
+:def 39 "DEVICE=",0
+:def 40 "IFS=",0
+:def 45 "INSTALL=",0
+
+:class B
+:def 41 "LASTDRIVE=",0
+:def 42 "----------",0
+:def 43 " ",0
+:def 44 "     %1      %2     %3",CR,LF
+:def 46 "%1 bytes available extended memory",CR,LF
+:def 47 "System Stacks",0
+:def 48 "-- Free --",0
+:def 49 "Program",0
+:def 50 "Environment",0
+:def 51 "Data",0
+
+:end

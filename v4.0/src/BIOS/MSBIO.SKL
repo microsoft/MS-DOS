@@ -1,0 +1,139 @@
+;==============================================================================
+;REVISION HISTORY:
+;AN000 - New for DOS Version 4.0 - J.K.
+;AC000 - Changed for DOS Version 4.0 - J.K.
+;AN00x - PTM number for DOS Version 4.0 - J.K.
+;==============================================================================
+;==============================================================================
+;AN001 D246, P976 Show "Bad command or parameters - ..." msg        9/22/87 J.K.
+;AN002 D274 Take "file" out from "Incorrect order..." msg          10/07/87 J.K.
+;AN003 D486 Share installation for large media			   02/24/88 J.K.
+;==============================================================================
+;===================
+:class 1
+;===================
+; MESSAGES FOR THE IBM BOOT SECTOR. NUL Terminated.
+; This is used by IBMBOOT and IBMLOAD program and it stays in IBMBOOT directory.
+
+;For IBMLOAD program
+;SYSMSG  DB	 13,10,"Non-System disk or disk error",13,10
+;	 DB	 "Replace and strike any key when ready",13,10,0
+:use 001 BOOT SYSMSG
+
+;===================
+:class 2
+;===================
+;	SCCSID = @(#)biomes.asm 1.2 85/07/25
+; SINGLE DRIVE MESSAGE FOR IBMBIO.COM. NUL TERMINATED.
+;IFNDEF  PATHSTART
+;PATHSTART MACRO INDEX,ABBR
+;	 IFDEF	 PATHGEN
+;	     PUBLIC  ABBR&INDEX&S,ABBR&INDEX&E
+;	     ABBR&INDEX&S LABEL   BYTE
+;	 ENDIF
+;	 ENDM
+;ENDIF
+;
+;IFNDEF  PATHEND
+;PATHEND MACRO	 INDEX,ABBR
+;	 IFDEF	 PATHGEN
+;	     ABBR&INDEX&E LABEL   BYTE
+;	 ENDIF
+;	 ENDM
+;ENDIF
+;	 PATHSTART 001,BIOMS
+
+
+:def 20 SNGMSG	DB	13,10,"Insert diskette for drive "
+:def 21 DRVLET	DB	"A: and strike",13,10,"any key when ready",13,10,10,0
+
+;	 PATHEND 001,BIOMS
+
+;==================
+:class 3
+;==================
+
+; PRINTED when there is a bad command in CONFIG.SYS. '$' TERMINATED, note
+;   that this message includes crlfm!
+;PATHSTART	 001,SYSMES
+
+:def 03 BADOPM	DB	13,10,"Unrecognized command in CONFIG.SYS"
+
+;BADSIZ_POST LABEL   BYTE
+;BADLD_POST  LABEL   BYTE
+
+:def 04 CRLFM	DB	13,10,'$'
+
+:def 22 BadParm db	13,10,"Bad command or parameters - $"           ;AN001;
+
+;PRINTED when installed device specifies too large a sector size.'$' terminated.
+; FORM: 	<BADSIZ_PRE>device name<BADSIZ_POST>
+:def 05 BADSIZ_PRE  DB	    13,10,"Sector size too large in file $"
+
+;PRINTED when installed device cannot be found. '$' terminated.
+; FORM: 	<BADLD_PRE>device name<BADLD_POST>
+:def 06 BADLD_PRE   DB	    13,10,"Bad or missing $"
+
+;PRINTED when command interpreter is not found. NUL terminated.
+; FORM: 	<BADLD_PRE><BADCOM><BADLD_POST>
+:def 07 BADCOM	DB	"Command Interpreter",0
+
+;PRINTED when country code, code page combination was not found in country.sys file. '$' terminated.
+; FORM: 	<BADCOUNTRY>
+:def 08 BADCOUNTRY DB	13,10,"Invalid country code or code page",13,10,"$"
+
+;PRINTED when code page id is missing or wrong syntax. - J.K.
+; FORM: 	<BADCOUNTRYCOM>
+:def 09 BADCOUNTRYCOM DB 13,10,"Error in COUNTRY command",13,10,"$"
+
+;PRINTED when the memory left is not sufficient to handle COUTRY.SYS file
+; FORM: 	<INSUFMEMORY>
+:def 10 INSUFMEMORY DB 13,10, "Insufficient memory for COUNTRY.SYS file",13,10,"$"
+
+; PRINTED when there is insufficient memory. '$' TERMINATED, note
+;   that this message includes crlfm!
+:def 11 BADMEM	DB	13,10,"Configuration too large for memory",13,10,"$"
+
+; PRINTED when the attempt is made to install a block device which would
+;   have a drive letter > 'Z'
+:def 12 BADBLOCK DB	13,10,"Too many Block Devices",13,10,"$"
+
+; PRINTED when the attempt is made to install a stack with invalid
+;   combinations of # of stacks, stack size.	- J.K. 5/23/86
+:def 13 BADSTACK DB	13,10,"Invalid STACK parameters",13,10,"$"
+
+;AN000; - PRINTED when encountering a command that is not "install=" after
+;   we had a "Install=" command. - J.K.I1.
+; Translation::: Please leave the last blank space at the end of the line
+;		 as it is.
+:def 14 BADORDER DB	13,10,"Incorrect order in CONFIG.SYS line ","$"
+
+;AN000; - PRINTED when the command failed.
+; Translation::: Please leave the last blank space at the end of the line
+;		 as it is.
+:def 15 ERRORCMD DB	"Error in CONFIG.SYS line ","$"
+
+;AN003; - PRINTED when SHARE.EXE is not loaded and has a large media > 32 MB.
+:def 23 SHAREWARNMSG db "WARNING! SHARE should be loaded for large media",13,10,"$"
+
+;==================
+:class 4
+;==================
+;IBMBIO SYSINIT
+;Message for SYSINIT_BASE program.
+:def 16 Mem_alloc_err	db 13,10,"Memory allocation error","$"
+
+
+;==================
+:class 5
+;==================
+;	 %OUT STKMES.INC...
+;	SCCSID = @(#)stkmes.inc 1.0 86/10/21
+
+;	 PUBLIC FATAL_MSG
+:def 17 FATAL_MSG	DB	0DH,0AH,7,0DH,0AH
+			DB	"Internal stack overflow",0DH,0AH
+			DB	"System halted",0DH,0AH,"$"
+;
+:END
+

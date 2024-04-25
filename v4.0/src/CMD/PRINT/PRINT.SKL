@@ -1,0 +1,70 @@
+;================================================
+; PRINT Message Skeleton File
+;================================================
+
+:util   PRINT
+
+:class  1
+
+:use   EXTEND19
+:use   EXTEND20
+:use   EXTEND21
+:use   EXTEND22
+:use   EXTEND23
+:use   EXTEND24
+:use   EXTEND25
+:use   EXTEND26
+:use   EXTEND27
+:use   EXTEND28
+:use   EXTEND29
+:use   EXTEND30
+:use   EXTEND31
+
+:class  2
+                                         ;1 - Too many operands
+                                         ;2 - Required operand missing
+:use   PARSE3                            ;3 - Not in switch list provided
+                                         ;4 - Not in keyword list provided
+:use   PARSE6                            ;6 - Out of range specified
+                                         ;7 - Not in value list provided
+                                         ;8 - Not in string list provided
+:use   PARSE9                            ;9 - Invalid Parameter
+
+:class  A
+
+:def 6  " error reading file",CR,LF,"$"
+:def 7  "File not found",CR,LF,"$"
+:def 8  CR,LF,LF,"File $"
+:def 9  " canceled by operator$"
+:def 10 CR,LF,LF,"All files canceled by operator$"
+:def 11 "File allocation table bad drive "
+:def 12 "A.",CR,LF,"$"
+:def 13 "List output is not assigned to a device",CR,LF
+:def 14 "Resident part of PRINT installed",CR,LF
+
+:class  B
+
+:use 1  COMMON1
+:def 2  CR,LF
+:def 15 "Cannot use PRINT - Use NET PRINT",CR,LF
+:def 17 "PRINT queue is full",CR,LF
+:def 18 "PRINT queue is empty",CR,LF
+:def 19 "Access denied",CR,LF
+:def 20 "Invalid drive specification",CR,LF
+:def 21 "Errors on list device indicate that it",CR,LF
+        "may be off-line. Please check it.",CR,LF
+
+:class  C
+
+:def 22 CR,LF,LF,"  %1 is currently being printed",CR,LF
+:def 23 "  %1 is in queue",CR,LF
+:use 24 EXTEND2
+:def 25 "Pathname too long",CR,LF
+:def 26 "File not in PRINT queue",CR,LF
+
+:class  D
+
+:def 27 "Name of list device [PRN]: "
+
+:end
+

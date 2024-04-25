@@ -1,0 +1,12 @@
+:util   SORT                              ;AN000;
+:class 1                                  ;AN000;
+
+:class 2                                ;Parser errors   ;AN003;
+
+:class  A                                 ;AN000;
+:use 1 COMMON1                            ;AN000; ;"Incorrect DOS version",CR,LF
+:use 2 EXTEND8                            ;AN000; ;"Insufficient memory",CR,LF
+:use 4 COMMON20                           ;AN003;
+:def 5 "SORT: "                           ;AN003;
+
+:end                                      ;AN000;

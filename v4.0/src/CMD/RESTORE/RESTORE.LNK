@@ -1,0 +1,17 @@
+/STACK:50000 +
+restore    +
+restpars   +
+rtt1	   +
+rtt3	   +
+rtdo	   +
+rtdo1	   +
+rtold	   +
+rtold1	   +
+rtnew	   +
+rtnew1	   +
+rtfile	   +
+rtfile1    +
+_parse	   +
+_msgret
+restore.exe,,..\..\mapper\mapper + ..\..\inc\comsubs;
+

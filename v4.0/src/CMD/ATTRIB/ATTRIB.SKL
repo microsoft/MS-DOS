@@ -1,0 +1,30 @@
+:util ATTRIB               ;utility name                               ;AN000;
+
+:class 1                                                               ;AN000;
+
+:class 2                                                               ;AN000;
+
+:class A                   ;system messages                            ;AN000;
+:use 1 COMMON1             ;"Incorrect DOS version"                    ;AN000;
+:use 2 EXTEND8             ;"Insufficient memory"                      ;AN000;
+
+:class B                                                               ;AN000;
+:def 8 "  %1"                                                          ;AN000;
+:def 9 "%1    %2",CR,LF                                                ;AN000;
+:def 10 "%1",CR,LF,"%2",CR,LF                                          ;AN000;
+:def 11 "Code page mismatch - %1",CR,LF,"Are you sure (Y/N)?"          ;AN000;
+:def 12 "%1",CR,LF                                                     ;AN000;
+:def 14 CR,LF                                                          ;AN000;
+:def 15 "Invalid file type value",CR,LF                                ;AN000;
+
+;;; Change these extended attribute error msgs back when adding ext. attr.
+;;; function in DOS.
+;;;:def 199  "Extended attribute error",CR,LF                             ;AN000;
+;;;:def 201  "Extended attribute name not found",CR,LF                    ;AN000;
+;;;:use 202  EXTEND8           ;"Insufficient memory"                     ;AN000;
+;;;:def 204  "Extended attribute name can't be set",CR,LF                 ;AN000;
+;;;:def 205  "Extended attribute name known to this filesystem but not supported",CR,LF  ;AN000;
+;;;:def 206  "Extended attribute type mismatch",CR,LF                     ;AN000;
+;;;:def 208  "Extended attribute value not supported",CR,LF               ;AN000;
+
+:end                                                                   ;AN000;

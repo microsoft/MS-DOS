@@ -1,0 +1,502 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;
+;
+;	DATA.MAC
+;
+;
+; Define data segment
+;
+;  The following variables are defined in the data segment and are used as
+;  parameter block structures for specific CAS routine calls.  The
+;  initialization of these variables will eventually occur by the dialog.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+								;
+	PUBLIC	QM_OPT1,QM_ID					;AN000;
+	PUBLIC	WR_DRETLEN,WR_DRETOFF,WR_DATA2LEN		;AN000;
+	PUBLIC	WR_MAXMEMPAR,WR_DATA2SEG,WR_DATA2OFF		;AN000;
+	PUBLIC	WR_LVBMEM,WR_LVBSEG,WR_LVBOFF,WR_LVBLEN 	;AN000;
+	PUBLIC	WR_ERROR,PM_BASECHAR,PM_BASEATTR,QM_ACTIVEPAN	;AN000;
+	PUBLIC	WR_DRETSEG,QM_OPT2				;AN000;
+	PUBLIC	CRD_CCBVECOFF,CRD_CCBVECSEG,INC_KS		;AN000;
+	PUBLIC	IN_ICBID,WR_REFBUF				;AN000;
+	PUBLIC	WR_HLPOPT,WR_HLPROW,WR_HCBCONT,WR_SCBID 	;AN000;
+	PUBLIC	IN_CCBVECOFF,IN_CCBVECSEG			;AN000;
+	PUBLIC WR_REFNUM,WR_REFOFF,WR_REFSEG,WR_REFCNT		;AN000;
+	PUBLIC WR_REFIELDCNT,WR_REFID				;AN000;
+	PUBLIC WR_MAXREFID					;AN000;
+	PUBLIC WR_MAXHELPSZ					;AN000;
+	PUBLIC HRD_BUFSEG					;AN000;
+	PUBLIC HRD_BUFOFF					;AN000;
+	PUBLIC HRD_BUFLEN					;AN000;
+	PUBLIC IN_CURNOR		;AN000;JW
+					;
+DATA	SEGMENT BYTE PUBLIC 'DATA'      ;AN000;
+					;
+	EXTRN	WR_ICBVEC:WORD		;AN000;
+	EXTRN	KD_BACKSPACE:BYTE	;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; PCGVIDO Parameter Block
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+GV_STAT1       DW   0			;AN000;low bit flag indicating status
+GV_STAT2       DW   0			;AN000;high bit flag indicating status
+GV_SCRWIDTH    DW   0			;AN000;# of attr and char in one line
+GV_SCRLEN      DW   0			;AN000;# of bytes per video buffer page
+GV_CURPAGENUM  DB   0			;AN000;current active page
+GV_VIDMODE     DB   0			;AN000;current video state/mode
+GV_BASE_6845   DW   0			;AN000;base port address of 6845
+GV_STAT_6845   DW   0			;AN000;status port address of 6845
+GV_PHYOFF      DW   0			;AN000;phy video buffer offset
+GV_PHYOFFPAGE  DW   0			;AN000;phys vid buf off adj for page
+GV_PHYSEG      DW   0			;AN000;phy video buffer segment
+GV_OSLOGOFF    DW   0			;AN000;operating sys log vid buff os
+GV_OSLOGSEG    DW   0			;AN000;operating sys log vid buff seg
+GV_APLOGOFF    DW   0			;AN000;application log vid buf offset
+GV_APLOGSEG    DW   0			;AN000;application log vid buf segment
+GV_CSH	       DW   0			;AN000;character height in scan lines
+GV_CSW	       DW   0			;AN000;character width in scan lines
+GV_NUMLINES    DW   0			;AN000;number of rows in text screen
+GV_CURPOS0     DW   0			;AN000;cursor position for page 0  R/C
+GV_CURPOS1     DW   0			;AN000;cursor position for page 1
+GV_CURPOS2     DW   0			;AN000;cursor position for page 2
+GV_CURPOS3     DW   0			;AN000;cursor position for page 3
+GV_CURPOS4     DW   0			;AN000;cursor position for page 4
+GV_CURPOS5     DW   0			;AN000;cursor position for page 5
+GV_CURPOS6     DW   0			;AN000;cursor position for page 6
+GV_CURPOS7     DW   0			;AN000;cursor position for page 7
+GV_CURMOD0     DW   0			;AN000;cursor mode for page 0
+GV_CURMOD1     DW   0			;AN000;cursor mode for page 1
+GV_CURMOD2     DW   0			;AN000;cursor mode for page 2
+GV_CURMOD3     DW   0			;AN000;cursor mode for page 3
+GV_CURMOD4     DW   0			;AN000;cursor mode for page 4
+GV_CURMOD5     DW   0			;AN000;cursor mode for page 5
+GV_CURMOD6     DW   0			;AN000;cursor mode for page 6
+GV_CURMOD7     DW   0			;AN000;cursor mode for page 7
+GV_CURROW      DW   0			;AN000;cursor row location
+GV_CURCOL      DW   0			;AN000;cursor column location
+GV_CURSTART    DW   0			;AN000;cursor size (starline)
+GV_CUREND      DW   0			;AN000;cursor size (endline)
+GV_CURWIDTH    DW   0			;AN000;cursor width
+GV_CURATTR     DW   0			;AN000;cursor attribute
+GV_COLORBITS   DB   0			;AN000;color bits (graphics mode)
+GV_ERRCODE     DW   0			;AN000;error code
+GV_RESERVED    DB   40 DUP(0)		;AN000;reserved locations
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; PCINSTR parameter block
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+INS_OPT        DW   0			;AN000;option word
+INS_KS	       DW   0			;AN000;keystroke
+INS_FLEN       DW   0			;AN000;length of find string
+INS_FOFF       DW   0			;AN000;offset of find string
+INS_FSEG       DW   0			;AN000;segment of find string
+INS_SLEN       DW   0			;AN000;length of string to search
+INS_SOFF       DW   0			;AN000;offset of string to search
+INS_SSEG       DW   0			;AN000;segment of string to search
+INS_SPOFF      DW   0			;AN000;position to start seach
+INS_RSLT       DW   0			;AN000;result
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; PCHLPRD parameter block
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+HRD_OPT1       DW   0			;AN000;option word
+HRD_BUFLEN     DW   0			;AN000;length of avail buffer
+HRD_BUFOFF     DW   0			;AN000;offset of buffer
+HRD_BUFSEG     DW   0			;AN000;segment of buffer
+HRD_ID	       DW   0			;AN000;ID of help text
+HRD_FILSPOFF   DW   WR_HLPBUF		;AN000;offset of filespec
+HRD_FILSPSEG   DW   DATA		;AN000;segment of filespec
+HRD_TOPICNUM   DW   0			;AN000;max num of helps
+HRD_TOPICLEN   DW   0			;AN000;Length of longest topic
+HRD_TOPICOFF   DW   0			;AN000;offset to table of offsets
+HRD_TOPICSEG   DW   0			;AN000;segment to table of offsets
+HRD_TEXTLEN    DW   0			;AN000;Length of help text
+HRD_TEXTOFF    DW   0			;AN000;offset to help text
+HRD_TEXTSEG    DW   0			;AN000;Segment to help text
+HRD_ERROR      DW   0			;AN000;errors
+HRD_DOSERROR   DW   0			;AN000;DOS error conditions
+HRD_RESERVED   DB   48	DUP(0)		;AN000;reserved for internal use
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; PCSCRRD parameter block
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+SRD_OPT1       DW   0			;AN000;option word
+SRD_BUFLEN     DW   0			;AN000;length of avail buffer
+SRD_BUFOFF     DW   0			;AN000;offset of buffer
+SRD_BUFSEG     DW   0			;AN000;segment of buffer
+SRD_ID	       DW   0			;AN000;ID number to read
+SRD_FILSPEOFF  DW   WR_SCRBUF		;AN000;offset of filespec
+SRD_FILSPESEG  DW   DATA		;AN000;segment of filespec
+SRD_SCBVECNUM  DW   0			;AN000;num SCBs in vector
+SRD_SCBVECOFF  DW   0			;AN000;offset of SCB vector
+SRD_SCBVECSEG  DW   0			;AN000;segment of SCB vector
+SRD_MAXNUMSCB  DW   0			;AN000;max # flds poss in memry at once
+SRD_ERROR      DW   0			;AN000;errors
+SRD_DOSERROR   DW   0			;AN000;DOS error conditions
+SRD_RESERVED   DB   50 DUP(0)		;AN000;reserved for internal use
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; PCINCHA parameter block
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+INC_OPT        DW   0			     ;AN000;option word
+INC_STAT       DW   0			     ;AN000;status word
+INC_KS	       DW   0			     ;AN000;keystroke found
+INC_TRANLEN    DW   0			     ;AN000;length of translation table
+INC_TRANOFF    DW   0			     ;AN000;offset of translation table
+INC_TRANSEG    DW   0			     ;AN000;segment of translation table
+INC_DBCSLEN    DW   0			     ;AN000;length of DBCS table
+INC_DBCSOFF    DW   0			     ;AN000;offset of DBCS table
+INC_DBCSSEG    DW   0			     ;AN000;segment of DBCS table
+INC_MONOOFF    DW   0			     ;AN000;offset of monocasing table
+INC_MONOSEG    DW   0			     ;AN000;segment of monocasing table
+INC_RESERVED   DB   12 DUP(0)		     ;AN000;reserved for internal use
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; PCCLRRD parameter block
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+CRD_OPT1       DW   0			;AN000;option word
+CRD_BUFLEN     DW   0			;AN000;length of avail buffer
+CRD_BUFOFF     DW   0			;AN000;offset of buffer
+CRD_BUFSEG     DW   0			;AN000;segment of buffer
+CRD_ID	       DW   0			;AN000;color index ID number to read
+CRD_FILSPEOFF  DW   WR_CLRBUF		;AN000;offset of filespec
+CRD_FILSPESEG  DW   DATA		;AN000;segment of filespec
+CRD_CCBVECLEN  DW   0			;AN000;length of index in bytes
+CRD_CCBVECOFF  DW   0			;AN000;offset of color index
+CRD_CCBVECSEG  DW   0			;AN000;segment of color index
+CRD_ERROR      DW   0			;AN000;errors
+CRD_DOSERROR   DW   0			;AN000;DOS error conditions
+CRD_RESERVED   DB   34 DUP(0)		;AN000;reserved for internal use
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; PCPANRD parameter block
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+PRD_OPT1       DW   0			;AN000;option word
+PRD_BUFLEN     DW   0			;AN000;length of avail buffer
+PRD_BUFOFF     DW   0			;AN000;offset of buffer
+PRD_BUFSEG     DW   0			;AN000;segment of buffer
+PRD_ID	       DW   0			;AN000;PCB number to read
+PRD_FILSPELEN  DW   WR_PANLEN		;AN000;length of filespec
+PRD_FILSPEOFF  DW   WR_PANBUF		;AN000;offset of filespec
+PRD_FILSPESEG  DW   DATA		;AN000;segment of filespec
+PRD_PCBVECNUM  DW   0			;AN000;num PCBs in vector
+PRD_PCBVECOFF  DW   0			;AN000;offset of PCB vector
+PRD_PCBVECSEG  DW   0			;AN000;segment of PCB vector
+PRD_MAXNUMPAN  DW   0			;AN000;max # pans poss in memry at once
+PRD_ERROR      DW   0			;AN000;errors
+PRD_DOSERROR   DW   0			;AN000;DOS error conditions
+PRD_RESERVED   DB   48 DUP(0)		;AN000;reserved for internal use
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; PCDISPQ Parameter Block
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+QM_OPT1        DW   0			;AN000;option word one
+QM_OPT2        DW   0			;AN000;option word two
+QM_ID	       DW   0			;AN000;parent/child PCB number
+QM_ACTIVEPAN   DW   0			;AN000;current active parent panel
+QM_COLOROVER   DW   0			;AN000;parent/child override color indx
+QM_ROWOVER     DW   0			;AN000;parent/child override row
+QM_COLUMOVER   DW   0			;AN000;parent/child override column
+QM_MAXCHDQUE   DW   0			;AN000;max # of child queues to save
+QM_MAXPANQUE   DW   0			;AN000;max # of panel queues to save
+QM_MAXNUMCHD   DW   0			;AN000;max # of parent panels queued
+QM_MAXNUMPAN   DW   0			;AN000;max # of child panels queued
+QM_PCBVECNUM   DW   0			;AN000;number of PCB elements in vector
+QM_PCBVECOFF   DW   0			;AN000;offset of PCB vector
+QM_PCBVECSEG   DW   0			;AN000;segment of PCB vector
+QM_BUFLEN      DW   0			;AN000;length of avail buffer
+QM_BUFOFF      DW   0			;AN000;offset of buffer
+QM_BUFSEG      DW   0			;AN000;segment of buffer
+QM_PANQUENUM   DW   0			;AN000;returns number in parent PDQ
+QM_PANQUEOFF   DW   0			;AN000;returns parent PDQ offset
+QM_PANQUESEG   DW   0			;AN000;returns parent PDQ segment
+QM_CHDQUENUM   DW   0			;AN000;returns number in child PDQ
+QM_CHDQUEOFF   DW   0			;AN000;returns child PDQ offset
+QM_CHDQUESEG   DW   0			;AN000;returns child PDQ segment
+QM_RETKEYSLEN  DW   0			;AN000;active child keys buffer length
+QM_RETKEYSOFF  DW   0			;AN000;active child keys buffer offset
+QM_RETKEYSSEG  DW   0			;AN000;active child keys buffer segmente
+QM_ERROR       DW   0			;AN000;returns error status
+QM_RESERVED    DB   66 DUP(0)		;AN000;reserved for internal use
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; PCPANEL Parameter Control Block
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+PM_OPT1        DW   0			;AN000;option word
+PM_PANPDQNUM   DW   0			;AN000;beg/ending parent PDQ number
+PM_PANBRKOFF   DW   0			;AN000;panel off in lvb of break panel
+PM_PANBRKID    DW   0			;AN000;ID number of break panel
+PM_ACTIVEPAN   DW   0			;AN000;current active parent panel PCB
+PM_BASECHAR    DB   0			;AN000;text background character
+PM_BASEATTR    DB   0			;AN000;color attribute of back char
+PM_PANQUENUM   DW   0			;AN000;number of panels in parent queue
+PM_PANQUEOFF   DW   0			;AN000;offset address of parent queue
+PM_PANQUESEG   DW   0			;AN000;segment address of parent queue
+PM_CHDQUENUM   DW   0			;AN000;number panels in child queue
+PM_CHDQUEOFF   DW   0			;AN000;offset of child queue
+PM_CHDQUESEG   DW   0			;AN000;segment of child queue
+PM_PCBVECNUM   DW   0			;AN000;number of index elements
+PM_PCBVECOFF   DW   0			;AN000;off addr of vect pointing to pan
+PM_PCBVECSEG   DW   0			;AN000;seg addr of vect pointing to pan
+PM_CCBVECNUM   DW   0			;AN000;number color index table entries
+PM_CCBVECOFF   DW   0			;AN000;offset addr of color index table
+PM_CCBVECSEG   DW   0			;AN000;segment addr of color index tabl
+PM_LVBLEN      DW   0			;AN000;number bytes in logical vid buf
+PM_LVBOFF      DW   0			;AN000;offset of logical video buffer
+PM_LVBSEG      DW   0			;AN000;segment of logical video buffer
+PM_LVBWIDTH    DW   0			;AN000;width of log vid buf in bytes
+PM_TRANS_C     DB   0			;AN000;character indicating trans field
+PM_TRANS_A     DB   0			;AN000;attribute indicating trans field
+PM_REFVECNUM   DW   0			;AN000;number refresh table entries
+PM_REFVECOFF   DW   0			;AN000;offset of refresh table
+PM_REFVECSEG   DW   0			;AN000;segment of refresh table
+PM_ERROR       DW   0			;AN000;error conditions
+PM_RESERVED    DB   417 DUP (0) 	;AN000;reserved for internal use
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; PCINPUT parameter block
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+IN_OPT	       DW   IN_AMONO		     ;AN000;option word one
+IN_ICBID       DW   1			     ;AN000;current input field to process
+IN_ICBOFF      DW   0			     ;AN000;returned offset of current ICB
+IN_ICBSEG      DW   0			     ;AN000;returned segment of current ICB
+IN_ICBVECNUM   DW   31			     ;AN000;number of ICB entires in vector
+IN_ICBVECOFF   DW   WR_ICBVEC		     ;AN000;offset of ICB vector
+IN_ICBVECSEG   DW   DATA		     ;AN000;segment of ICB vector
+IN_CCBVECOFF   DW   0			     ;AN000;offset of color index table
+IN_CCBVECSEG   DW   0			     ;AN000;segment of color index table
+IN_CURNOR      DW   0607H		     ;AN000;normal cursor size
+IN_CURINS      DW   0207H		     ;AN000;cursor size in insert mode
+IN_TRANLEN     DW   0			     ;AN000;length of key translation table
+IN_TRANOFF     DW   0			     ;AN000;offset of key translation table
+IN_TRANSEG     DW   0			     ;AN000;segment of key translation table
+IN_MONOOFF     DW   0			     ;AN000;offset of monocasing table
+IN_MONOSEG     DW   0			     ;AN000;segment of monocasing table
+IN_DBCSLEN     DW   0			     ;AN000;length double byte range table
+IN_DBCSOFF     DW   0			     ;AN000;offset double byte range table
+IN_DBCSSEG     DW   0			     ;AN000;segment double byte range table
+IN_KEYSOFF     DW   KD_BACKSPACE	     ;AN000;offset of keystroke definitions
+IN_KEYSSEG     DW   DATA		     ;AN000;segment of keystroke definitions
+IN_CAPROW      DW   0			     ;AN000;row of caps lock flag
+IN_CAPCOL      DW   0			     ;AN000;col of caps lock flag
+IN_CAPLEN      DW   0			     ;AN000;length of caps lock flag text
+IN_CAPOFF      DW   0			     ;AN000;offset of caps lock flag text
+IN_CAPSEG      DW   0			     ;AN000;segment of caps lock flag text
+IN_INSROW      DW   0			     ;AN000;row of insert flag
+IN_INSCOL      DW   0			     ;AN000;col of insert flag
+IN_INSLEN      DW   0			     ;AN000;length of insert flag text
+IN_INSOFF      DW   0			     ;AN000;offset of insert flag text
+IN_INSSEG      DW   0			     ;AN000;segment of insert flag text
+IN_NUMROW      DW   0			     ;AN000;row of num lock flag
+IN_NUMCOL      DW   0			     ;AN000;col of num lock flag
+IN_NUMLEN      DW   0			     ;AN000;length of num lock flag text
+IN_NUMOFF      DW   0			     ;AN000;offset of num lock flag text
+IN_NUMSEG      DW   0			     ;AN000;segment of num lock flag text
+IN_SCRROW      DW   0			     ;AN000;row of scroll lock flag
+IN_SCRCOL      DW   0			     ;AN000;col of scroll lock flag
+IN_SCRLEN      DW   0			     ;AN000;length of scroll lock flag text
+IN_SCROFF      DW   0			     ;AN000;offset of scroll lock flag text
+IN_SCRSEG      DW   0			     ;AN000;segment of scroll lock flag text
+IN_THOUSEP     DB   0,0 		     ;AN000;thousands separator
+IN_THOUPOS     DW   0			     ;AN000;space between thousnd separators
+IN_DECSEP      DB   0,0 		     ;AN000;decimal separator
+IN_DELIMITEN   DB   '[]'                     ;AN000;left & right bracket char - on
+IN_DELIMITEX   DB   '  '                     ;AN000;left & right bracket char - off
+IN_DELIMITDIR  DB   '<>'                     ;AN000;direction delimitors (horz wind)
+IN_BORDEREN    DB   '�Ŀ�����'               ;AN000;8 border char (�Ŀ�����) entry
+IN_BORDEREX    DB   '12345678'               ;AN000;8 border char (�Ŀ�����) exit
+IN_LVBOFF      DW   0			     ;AN000;log vid buf offset override
+IN_LVBSEG      DW   0			     ;AN000;log vid buf segment override
+IN_CURINSOFF   DW   0			     ;AN000;offset insert cursor bit map   (W)
+IN_CURINSSEG   DW   0			     ;AN000;segment insert cursor bit map  (W)
+IN_CURRPLOFF   DW   0			     ;AN000;offset replace cursor bit map  (W)
+IN_CURRPLSEG   DW   0			     ;AN000;segment replace cursor bit map (W)
+IN_DELOFF      DW   0			     ;AN000;offset delimiter bit maps		      =W
+IN_DELSEG      DW   0			     ;AN000;segment delimiter bit maps		      =W
+IN_ERROR       DW   0			     ;AN000;error word
+IN_RESERVED    DB   450  DUP(0) 	     ;AN000;reserved for internal use
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; PCWWRAP parameter block
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+WWP_OPT1       DW   0			     ;AN000;option word
+WWP_SRCTXTLEN  DW   0			     ;AN000;the length of actual text
+WWP_SRCTXTOFF  DW   0			     ;AN000;the offset to actual text
+WWP_SRCTXTSEG  DW   0			     ;AN000;the segment to actual text
+WWP_SRCBUFLEN  DW   0			     ;AN000;lenght of the entire buffer
+WWP_DESBUFLEN  DW   0			     ;AN000;the length of dest buffer
+WWP_DESBUFOFF  DW   0			     ;AN000;the offset to dest buffer
+WWP_DESBUFSEG  DW   0			     ;AN000;the segment to dest buffer
+WWP_WIDTH      DW   53			     ;AN000;width of the # of char on a line
+WWP_NUMLINES   DW   0			     ;AN000;Number of actual line process
+WWP_FORMAT     DB   '@'                      ;AN000;Used to indicate the begin formt
+WWP_NOFORMAT   DB   '@'                      ;AN000;Used to indicate the format off
+WWP_SRCHYSMB   DB   '#'                      ;AN000;Symbol that is used as hyphen
+WWP_HYSYMBOL   DB   '-'                      ;AN000;Actual hyphen symbol
+WWP_SPACESYM   DB   '&'                      ;AN000;symbol for padding spaces at EOL
+WWP_ERROR      DW   0			     ;AN000;Internal error conditions
+WWP_RESERVED   DB   5 DUP(0)		     ;AN000;reserved for internal use
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; PCMBEEP parameter block
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+MB_FREQUENCY   DW   SND_FREQ		;AN000;beep frequency
+MB_DURATION    DW   SND_DURA		;AN000;beep duration
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;   Input field management internal variables:
+;
+; Miscellaneous internal variables
+;
+WR_ICBID       DW   0			;AN000;general ICB ID number
+WR_ICBVECOFF   DW   WR_ICBVEC		;AN000;ICB vector address
+WR_ICBVECSEG   DW   DATA		;AN000;ICB vector address
+;
+;   Return key string internal variables:
+; Dynamic return key string variables to add to complete return string
+;
+WR_DRETLEN     DW   0			     ;AN000;dynamic return string length
+WR_DRETOFF     DW   0			     ;AN000;dynamic return string offset
+WR_DRETSEG     DW   0			     ;AN000;dynamic return string segment
+;
+; Complete return key string buffer variables
+;
+WR_CRETLEN     DW   0			     ;AN000;current length of complete ret sg
+WR_CRETOFF     DW   0			     ;AN000;current offset of complete ret sg
+WR_CRETSEG     DW   0			     ;AN000;current segment of complete ret s
+;
+;   Help management internal variables:
+;
+; Help options, status, filespec, and override variables
+;
+WR_HLPOPT      DW   0			     ;AN000;help options
+WR_HLPPAN      DW   0			     ;AN000;help child panels that are active
+WR_HLPDIS      DW   0			     ;AN000;help status
+WR_HLPROW      DW   0			     ;AN000;help row override
+WR_HLPCOL      DW   0			     ;AN000;help column override
+;
+; Help text ID variables
+;
+WR_HCBCONT     DW   0			     ;AN000;current contextual help ID
+WR_HCBHELP     DW   HCB_HELP		     ;AN000;help-on-help ID
+WR_HCBKEYS     DW   HCB_KEYS		     ;AN000;help on keys ID
+;
+; Help scroll ID variable
+;
+WR_SCBCONT     DW   SCR_CONTEXT_HLP	     ;AN000;scroll contextual help ID
+WR_SCBINDX     DW   SCR_CONTEXT_HLP	     ;AN000;scroll indexed help ID
+;
+; Help panel ID variables
+;
+WR_PCBHELP     DW   CHILD_F1HELP	       ;AN000;F1=Help
+WR_PCBSWIT     DW   0			       ;AN000;F2=Switch
+WR_PCBINDX     DW   0			       ;AN000;F5=Index
+WR_PCBKEYS     DW   CHILD_F9KEYS	       ;AN000;F9=Keys
+WR_PCBHPAN     DW   PAN_HPAN		       ;AN000;contextual help panel
+WR_PCBQUIT     DW   CHILD_QUIT		       ;AN000;Esc=Quit
+WR_PCBENTR     DW   CHILD_ENTER 	       ;AN000;Enter
+WR_PCBERROR    DW   ERR_BORDER		       ;AN000;Error panel
+;
+; Help keystroke variables
+;
+WR_KEYHELP     DW   KEY_HELP		     ;AN000;F1=Help
+WR_KEYSWIT     DW   KEY_SWIT		     ;AN000;F2=Switch
+WR_KEYINDX     DW   KEY_INDX		     ;AN000;F5=Index
+WR_KEYKEYS     DW   KEY_KEYS		     ;AN000;F9=Keys
+WR_KEYSELT     DW   KEY_SELT		     ;AN000;Enter
+WR_KEYQUIT     DW   KEY_QUIT		     ;AN000;Esc=Quit
+
+WR_RETHLPBUF   DB   ESCAPE		     ;AN000;help dynamic return keys
+WR_RETHLPLEN   EQU  ($-WR_RETHLPBUF)	     ;AN000;
+;-----------------------
+;
+;  Management internal variables:
+;
+WR_PANBUF      LABEL BYTE		     ;AN000;
+WR_SCRBUF      LABEL BYTE		     ;AN000;
+WR_CLRBUF      DB   'SELECT.DAT',0           ;AN000;filespec
+WR_CLRLEN      EQU  ($-WR_CLRBUF)	     ;AN000;
+WR_SCRLEN      EQU  ($-WR_SCRBUF)	     ;AN000;
+WR_PANLEN      EQU  ($-WR_PANBUF)	     ;AN000;
+;-----------------------
+WR_HLPBUF      DB   'SELECT.HLP',0           ;AN000;filespec
+WR_HLPLEN      EQU  ($-WR_HLPBUF)	     ;AN000;
+;
+; Panel Field Refresh Relationship Table
+;
+;	  Format = DW  Panel control block number
+;		   DW  Total number of fields in this record
+;		   DW  Object type ID
+;		   DW  Field ID
+;
+;		   DW  Object type ID
+;		   DW  Field ID
+;
+; Panel Field Refresh Table Location
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+WR_REFNUM      DW   1		;AN000;number of PCB entries
+WR_REFOFF      DW   WR_REFBUF	;AN000;offset of table
+WR_REFSEG      DW   DATA	;AN000;segment of table
+WR_REFCNT      DW   0		;AN000;refresh counter
+
+WR_REFBUF      DW   0		;AN000; PCB number
+WR_REFIELDCNT  DW   0		;AN000; #fields with this PCB
+WR_REFID       DW   0,0 	;AN000; Object ID 1, Field ID 1
+	       DW   0,0 	;AN000; Object ID 2, Field ID 2
+	       DW   0,0 	;AN000; Object ID 3, Field ID 3
+	       DW   0,0 	;AN000; Object ID 4, Field ID 4
+	       DW   0,0 	;AN000; Object ID 5, Field ID 5
+	       DW   0,0 	;AN000; Object ID 6, Field ID 6
+	       DW   0,0 	;AN000; Object ID 7, Field ID 7
+	       DW   0,0 	;AN000; Object ID 8, Field ID 8
+	       DW   0,0 	;AN000; Object ID 9, Field ID 9
+	       DW   0,0 	;AN000; Object ID10, Field ID10
+WR_MAXREFID    EQU  ($-WR_REFID)/2;AN000;
+
+WR_SCBID       DW   0			     ;AN000;current PCSLCTP ID number
+WR_ERROR       DW   0			     ;AN000;0= no error, 1= error condition
+;
+; Memory allocation variables - needs to support multiple segment table
+;
+WR_DATA2SEG    DW   0			     ;AN000;segment of allocated buffer
+WR_DATA2OFF    DW   0			     ;AN000;offset of allocated buffer
+WR_DATA2LEN    DW   0			     ;AN000;length of allocated buffer
+;
+WR_LVBSEG      DW   0			     ;AN000;segment of LVB (logical video buffer)
+WR_LVBOFF      DW   0			     ;AN000;offset of LVB
+WR_LVBLEN      DW   0			     ;AN000;length of LVB
+;
+; Maximum limits for data
+;
+WR_LVBMEM      DW   MAX_MEMLVB		     ;AN000;size of LVB in 16 byte paraghp
+WR_MAXMEMPAR   DW   MAX_MEMPAR		     ;AN000;size of memory in 16 byte paraghp
+WR_MAXRETKSZ   DW   MAX_RETKSZ		     ;AN000;max size of return key buffer
+WR_MAXHELPSZ   DW   MAX_HELPSZ		     ;AN000;max size of help text buffer
+WR_MAXPANNUM   DW   MAX_PANNUM		     ;AN000;max # of panels possible in memry
+WR_MAXSCRNUM   DW   MAX_SCRNUM		     ;AN000;max # of scroll possible in memry
+WR_MAXCHDQUE   DW   MAX_CHDQUE		     ;AN000;max # of child queues to save
+WR_MAXPANQUE   DW   MAX_PANQUE		     ;AN000;max # of panel queues to save
+WR_MAXNUMCHD   DW   MAX_NUMCHD		     ;AN000;max # of parent panels queued
+WR_MAXNUMPAN   DW   MAX_NUMPAN		     ;AN000;max # of child panels queued
+WR_MAXCLRECD   DW   MAX_CLRECD		     ;AN000;num # bytes per color record
+
+LVB_INITED     DB   0			     ;AN000;flag for LVB allocated
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+DATA	       ENDS			     ;AN000;
+PAGE					     ;AN000;
+

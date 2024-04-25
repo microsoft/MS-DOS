@@ -1,0 +1,125 @@
+;======================= START OF SPECIFICATIONS =========================
+;
+; MODULE NAME: DEBMES.FIL
+;
+; DESCRIPTIVE NAME: MESSAGES USED BY DEBUG
+;
+; FUNCTION: PROVIDES FASTBLD.EXE THE MESSAGES THAT ARE TO BE USED BY DEBUG.
+;
+; ENTRY POINT: NA
+;
+; INPUT: NA
+;
+; EXIT NORMAL: NA
+;
+; EXIT ERROR: NA
+;
+; INTERNAL REFERENCES: NA
+;
+; EXTERNAL REFERENCES: NA
+;
+; NOTES: THIS MODULE IS TO BE PREPPED BY FASTBLD.EXE.
+;
+;	 FASTBLD.EXE CREATES: DEBUG.CLA
+;			      DEBUG.CLB
+;			      DEBUG.CLC
+;			      DEBUG.CLD
+;			      DEBUG.CL1
+;			      DEBUG.CL2
+;
+; REVISION HISTORY: NA
+;
+;
+; COPYRIGHT: "THE IBM PERSONAL COMPUTER EDLIN UTILITY"
+;	     "VERSION 3.40 (C) COPYRIGHT IBM CORP 1987"
+;	     "LICENSED MATERIAL - PROGRAM PROPERTY OF IBM"
+;
+; PROGRAM AUTHOR: DS
+;
+;======================= END OF SPECIFICATIONS ===========================
+
+;=========================================================================
+;debug utility message file
+;=========================================================================
+
+:util DEBUG						;utility name
+
+:class 1					;extended errors
+
+:class A						;system messages
+:use 1 COMMON1					;"Incorrect DOS version"
+:use 2 COMMON2					;"Insufficient memory"
+:use 3 COMMON3					;"Error loading messages"
+:def 4 "Allocation failed or specified buffer too small",CR,LF
+				  ;:def 5 "Bad or missing Msg info",CR,LF
+
+:class B					;utility messages
+:def 6	"Bad device name"                       ;baddev_ptr
+:def 7	"Couldn't open list device PRN",CR,LF
+"Enter name of list device? "                   ;badlstmes_ptr
+:def 8	CR,LF					;crlf_ptr
+:def 9	CR,LF,"Program terminated normally",CR,LF ;endmes_ptr
+:def 10 "Invalid drive specification",CR,LF     ;nambad_ptr
+:def 12 "File creation error",CR,LF             ;noroom_ptr
+:def 13 "Insufficient space on disk",CR,LF      ;nospace_ptr
+:def 14 "Disk error reading drive %1",CR,LF     ;dr1_ptr
+:def 15 "Disk error writing drive %1",CR,LF     ;dr2_ptr
+:def 16 "Write protect error reading drive %1",CR,LF  ;dr3_ptr
+:def 17 "Write protect error writing drive %1",CR,LF  ;dr4_ptr
+:def 19 "%1^ Error"                             ;synerr
+:def 20 "Error in EXE or HEX file",CR,LF        ;exebad_ptr/hexerr_ptr
+
+:class C
+:def 21 "EXE and HEX files cannot be written",CR,LF   ;exewrt_ptr/hexwrt_ptr
+:def 22 "EXEC failure"                          ;execemes_ptr
+:def 23 "(W)rite error, no destination defined",CR,LF ;nonamespec_ptr
+:def 24 "Access denied",CR,LF                   ;accmes_ptr
+:def 25 "Parity error or nonexistant memory error detected" ;paritymes_ptr
+:def 26 "-"                                     ;prompt_ptr
+:def 27 "%1 -"                                  ;change_flag_ptr
+:def 32 "%1%2"                                  ;unassem_ln_ptr
+:def 33 "%1:%2 %3"                              ;hex_ptr
+:def 34 "%1  %2"                                ;add_ptr
+:def 35 "%1 %2",CR,LF,":"                       ;single_reg_ptr
+:def 36 "%1=%2  "                               ;register_ptr
+:def 37 "%1 Error"                              ;errmes_ptr
+:def 38 "Writing %1 bytes"                      ;wrtmes_ptr
+:def 39 "%1:%2="                                ;loc_ptr
+:def 40 "%1"                                    ;little_ptr
+
+:class D
+:def 41 "%1"                                    ;big_ptr
+:def 42 "%1:%2  %3  %4  %5:%6"                  ;comp_ptr
+:def 44 32,8					;bacmes_ptr
+			; :def 45 "Unable to allocate message handler",CR,LF
+						;fatal_error
+:def 46 "%1"                                    ;arg_buf_ptr
+:def 47 "%1"                                    ;one_char_buf_ptr
+
+:def 50 "%1 of a total %2 EMS pages have been allocated",cr,lf
+:def 51 "%1 of a total %2 EMS handles have been allocated",cr,lf
+:def 55 "Handle created = %1 ",cr,lf
+:def 56 "Logical page %1 mapped to physical page %2 ",cr,lf
+:def 57 "EMS hardward/software failure",cr,lf
+:def 58 "Handle not found",cr,lf
+:def 59 "Invalid function code",cr,lf
+:def 60 "No free handles",cr,lf
+:def 61 "Save/Restore error",cr,lf
+:def 62 "Total pages exceeded",cr,lf
+:def 63 "Free pages exceeded",cr,lf
+:def 64 "Parameter error",cr,lf
+:def 65 "Logical Page out of range",cr,lf
+:def 66 "Physical Page out of range",cr,lf
+:def 67 "Save area already in use",cr,lf
+:def 68 "Save area not in use",cr,lf
+:def 70 "General EMS error",cr,lf
+:def 71 "Missing or invalid EMS parameter",cr,lf
+:def 72 "Handle %1 has %2 pages allocated",cr,lf
+:def 75 "Physical page %1 = Frame segment %2",cr,lf
+:def 76 "Handle %1 deallocated",cr,lf
+:def 78 "EMS not installed",cr,lf
+
+:end
+
+;=========================================================================
+;=========================================================================

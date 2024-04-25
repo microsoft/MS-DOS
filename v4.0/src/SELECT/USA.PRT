@@ -1,0 +1,88 @@
+25
+P   IBM 3852 Ink Jet Printer
+
+P   IBM 4201 Proprinter
+CDP  4201,437
+CPP  4201.CPI
+GP   GRAPHICS
+
+P   IBM 4201 Proprinter II
+CDP  4201,437
+CPP  4201.CPI
+GP   GRAPHICS
+
+P   IBM 4202 Proprinter XL
+CDP  4201,437
+CPP  4201.CPI
+GP   GRAPHICS
+
+P   IBM 4207 Proprinter X24
+CDP  4208,437
+CPP  4208.CPI
+GP   GRAPHICS
+
+P   IBM 4208 Proprinter XL24
+CDP  4208,437
+CPP  4208.CPI
+GP   GRAPHICS
+
+P   IBM 5152 Graphics Printer Model 2
+GP   GRAPHICS
+
+P   IBM 5182 Color Printer
+GP   COLOR1
+
+P   IBM 5201 Quietwriter Printer
+
+P   IBM 5201 Quietwriter Printer Model 2
+GP   GRAPHICS
+
+P   IBM 5202 Quietwriter III Printer
+CDP  5202,437
+CPP  5202.CPI
+GP   GRAPHICS
+
+P   IBM 5204 Quickwriter Printer
+CDP  5202,437
+CPP  5202.CPI
+GP   GRAPHICS
+
+P   IBM 5216 Wheelprinter
+
+P   IBM 5223 Wheelprinter E
+
+P   Other IBM Parallel Printer
+
+P   Other Parallel Printer
+
+S   IBM 3812 Pageprinter
+SP   BAUD=96 PARITY=E DATA=8 STOP=1 RETRY=P
+GP   GRAPHICS
+
+S   IBM 4201 Proprinter (Serial)
+SP   BAUD=96 PARITY=E DATA=8 STOP=1
+GP   GRAPHICS
+
+S   IBM 4201 Proprinter II (Serial)
+SP   BAUD=96 PARITY=E DATA=8 STOP=1
+GP   GRAPHICS
+
+S   IBM 4202 Proprinter XL (Serial)
+SP   BAUD=96 PARITY=E DATA=8 STOP=1
+GP   GRAPHICS
+
+S   IBM 4207 Proprinter X24 (Serial)
+SP   BAUD=96 PARITY=E DATA=8 STOP=1
+GP   GRAPHICS
+
+S   IBM 4208 Proprinter XL24 (Serial)
+SP   BAUD=96 PARITY=E DATA=8 STOP=1
+GP   GRAPHICS
+
+S   IBM 5204 Quickwriter Printer (Serial)
+SP   BAUD=96 PARITY=E DATA=8 STOP=1
+GP   GRAPHICS
+
+S   Other IBM Serial Printer
+
+S   Other Serial Printer

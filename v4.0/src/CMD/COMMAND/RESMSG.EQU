@@ -1,0 +1,43 @@
+;	SCCSID = @(#)resmsg.equ 	4.1 85/09/10
+;	SCCSID = @(#)resmsg.equ 	4.1 85/09/10
+
+;****************************
+;* RESIDENT MESSAGE EQUATES *
+;****************************
+
+REQ_ABORT	EQU	210			;AC000; "Abort"
+REQ_RETRY	EQU	211			;AC000; ", Retry"
+REQ_IGNORE	EQU	212			;AC000; ", Ignore"
+REQ_FAIL	EQU	213			;AC000; ", Fail"
+REQ_END 	EQU	214			;AC000; "? "
+MREAD		EQU	215			;AC000; "reading"
+MWRITE		EQU	216			;AC000; "writing"
+DRVNUM		EQU	217			;AC000; "%1 drive %2"
+DEVEMES 	EQU	218			;AC000; "%1 device %2"
+Err15Mes	EQU	219			;AC000; "Please insert volume %1 serial %2"
+BADFAT		EQU	220			;AC000; "File allocation table bad, drive %1"
+COMBAD		EQU	221			;AC000; 13,10,"Invalid COMMAND.COM",13,10"
+comprmt1	EQU	222			;AC000; "Insert disk with %1 in drive %1"
+PROMPT		EQU	223			;AC000; "Press any key to continue"
+ENDBATMES	EQU	224			;AC000; 13,10,"Terminate batch job (Y/N)? "
+EXECEMES	EQU	225			;AC000; "Cannot execute %1",13,10
+EXEBAD		EQU	226			;AC000; "Error in EXE file",13,10
+TOOBIG		EQU	227			;AC000; "Program too big to fit in memory",13,10
+NOHANDMES	EQU	228			;AC000; 13,10,"No free file handles"
+RBADNAM 	EQU	229			;AC000; "Bad Command or file name",13,10
+AccDen		EQU	230			;AC000; Extended error - "Access denied",13,10
+BMEMMES 	EQU	231			;AC000; 13,10,"Memory allocation error "
+HALTMES 	EQU	232			;AC000; 13,10,"Cannot load COMMAND, system halted"
+FRETMES 	EQU	233			;AC000; 13,10,"Cannot start COMMAND, exiting",13,10
+Patricide	EQU	234			;AC000; 13,10,"Top level process aborted, cannot continue."
+NEWLIN		EQU	235			;AC000; 13,10
+
+;************************
+;* INIT MESSAGE EQUATES *
+;************************
+
+BADVER		 EQU	461	;AC000;  "Incorrect DOS version",13,10,"$"
+OUTENVERR_PTR	 EQU	463	;AC000; "Out of environment space",13,10,0
+HEADER_PTR	 EQU	464	;AC000; Long Copyright Notice
+BADCOMLKMES_PTR  EQU	465	;AC000;"Specified COMMAND search directory bad",13,10,0
+BADCOMACCMES_PTR EQU	466	;AC000; "Specified COMMAND search directory bad access denied",13,10,0

@@ -1,0 +1,59 @@
+..\inc\nibdos.obj    +
+..\inc\const2.obj   +
+..\inc\msdata.obj  +
+..\inc\mstable.obj +
+ msdisp.obj          +
+ mscode.obj          +
+..\inc\msdosme.obj +
+ time.obj             +
+ getset.obj           +
+ parse.obj            +
+ misc.obj             +
+ misc2.obj            +
+ crit.obj             +
+ cpmio.obj            +
+ cpmio2.obj           +
+ fcbio.obj            +
+ fcbio2.obj           +
+ search.obj           +
+ path.obj             +
+ ioctl.obj            +
+ delete.obj           +
+ rename.obj           +
+ finfo.obj            +
+ dup.obj              +
+ create.obj           +
+ open.obj             +
+ dinfo.obj            +
+ isearch.obj          +
+ abort.obj            +
+ close.obj            +
+ dircall.obj          +
+ disk.obj             +
+ disk2.obj            +
+ disk3.obj            +
+ dir.obj              +
+ dir2.obj             +
+ dev.obj              +
+ mknode.obj           +
+ rom.obj              +
+ fcb.obj              +
+ msctrlc.obj         +
+ fat.obj              +
+ buf.obj              +
+ proc.obj             +
+ alloc.obj            +
+ srvcall.obj          +
+ util.obj             +
+ handle.obj           +
+ macro.obj            +
+ macro2.obj           +
+ file.obj             +
+ lock.obj             +
+ share.obj            +
+ extattr.obj          +
+ ifs.obj
+MSDOS.EXE
+MSDOS.MAP /M
+;
+

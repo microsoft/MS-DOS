@@ -1,0 +1,82 @@
+:util	CHKDSK									;an000;bgb
+										;an000;bgb
+:class	A									;an000;bgb
+:use	COMMON1 				;Incorrect DOS version		;an000;bgb
+:use COMMON2						;stackmes		;an000;bgb
+:def 3	"Convert lost chains to files (Y/N)?"           ;freemes                ;an000;bgb
+:def 4	"Unrecoverable error in directory"              ;ptrandir               ;an000;bgb
+:def 5	"Convert directory to file (Y/N)?"              ;ptrandir2              ;an000;bgb
+:def 7	"%1 bytes total disk space"                     ;dskspc                 ;an000;bgb
+:def 8	"%1 bytes in bad sectors"                       ;badspc                 ;an000;bgb
+:def 9	"%1 bytes in %2 hidden files"                   ;hidmes                 ;an000;bgb
+:def 10 "%1 bytes in %2 directories"                    ;dirmes                 ;an000;bgb
+:def 11 "%1 bytes in %2 user files"                     ;filemes                ;an000;bgb
+:def 12 "%1 bytes in %2 recovered files"                ;orphmes2               ;an000;bgb
+:def 13 "%1 bytes would be in %2 recovered files"       ;orphmes3               ;an000;bgb
+:def 14 "%1 bytes available on disk"                    ;frespc                 ;an000;bgb
+:def 15 "%1 total bytes memory"                         ;totmem                 ;an000;bgb
+:def 16 "%1 bytes free"                                 ;fremem                 ;an000;bgb
+:def 17 "Cannot CHKDSK a network drive"                 ;no_net_arg             ;an000;bgb
+:def 18 "Cannot CHKDSK a SUBSTed or ASSIGNed drive"     ;SubStErr               ;an000;bgb
+:def 19 "Probable non-DOS disk",CR,LF,"Continue (Y/N)?" ;badidbyt ;an018;bgb    ;an000;bgb
+:def 20 "Disk error reading FAT %1",CR,LF               ;badr                   ;an000;bgb
+										;an000;bgb
+:class	B									;an000;bgb
+:def 21 "Directory %1"                                  ;direc_arg              ;an000;bgb
+:def 22 "%1 Contains %2 non-contiguous blocks"          ;extent_arg             ;an000;bgb
+:def 23 "All specified file(s) are contiguous"          ;noext_arg              ;an000;bgb
+:def 24 "Errors found, F parameter not specified",CR,LF,"Corrections will not be written to disk"  ;fixmes_arg;an000;bgb
+:def 25 "   Processing cannot continue %1%2"               ;fatal_arg           ;an000;bgb
+:def 26 "   File allocation table bad, drive %1"           ;badrdmes            ;an000;bgb
+:use COMMON2						;stackmes		;an000;bgb
+:def 29 "   CHDIR .. failed, trying alternate method"      ;cdddmes             ;an000;bgb
+:def 30 "   Has invalid cluster, file truncated"           ;badchain            ;an000;bgb
+:def 31 "   Invalid sub-directory entry"                   ;badsubdir           ;an000;bgb
+:def 32 "   Does not exist"                                ;ndotmes             ;an000;bgb
+:def 33 "   First cluster number is invalid, entry truncated"      ;nulnz       ;an000;bgb
+:def 34 "   Allocation error, size adjusted"               ;badclus             ;an000;bgb
+:def 35 "   Cannot recover .. entry, processing continued" ;norecdot            ;an000;bgb
+:def 36 "   Directory is totally empty, no . or .."        ;nuldmes             ;an000;bgb
+:def 37 "   Directory is joined"                           ;joinmes             ;an000;bgb
+:def 38 "   Cannot recover .. entry"                       ;norecddot           ;an000;bgb
+:def 39 "   Entry has a bad link"                          ;norecddot1          ;an000;bgb
+:def 40 "   Entry has a bad attribute"                     ;norecddot2          ;an000;bgb
+										;an000;bgb
+:class	C									;an000;bgb
+:def 41 "   Entry has a bad size"                          ;norecddot3          ;an000;bgb
+:def 42 "   Is cross linked on cluster %1"              ;cross_arg              ;an000;bgb
+:def 43 "   Cannot CHDIR to %1,",CR,LF,"tree past this point not processed" ;badtarg_ptr;an000;bgb
+:def 44 "   tree past this point not processed"            ;badtarg2            ;an000;bgb
+:def 45 "%1 bytes disk space freed"                     ;freebymes1             ;an000;bgb
+:def 46 "%1 bytes disk space would be freed"            ;freebymes2             ;an000;bgb
+:def 47 "Volume %1 created %2 %3",CR,LF                 ;idmes_arg              ;an000;bgb
+:def 48 "%1 total allocation units on disk"         ;idmes1                     ;an000;bgb
+:def 49 "%1 bytes in each allocation unit"              ;idmes2                 ;an000;bgb
+;:def 50 "CHKDSK not available on drive %1"              ;msgExecFailure         ;an000;bgb
+:def 51 "   Extended Attributes has invalid clusters, attributes truncated" ;Inv_XA_Msg;an000;bgb
+:def 52 "   Extended Attributes allocation error , attributes truncated" ;Alloc_XA_Msg;an000;bgb
+:def 53 "Invalid parameter"                             ;badsw_arg              ;an000;bgb
+:use 54 extend15					;baddrv_arg "invalid drive spec" ;an017;bgb
+:use 55 extend3 					;invpath_arg "path not found"    ;an017;bgb
+:use 56 extend2 					;opnerr_arg "file not found"     ;an017;bgb
+:def 58 "   %1 lost clusters found in %2 chains."          ;orph_arg            ;an000;bgb
+:def 59 CR,LF						;crlf_arg		;an000;bgb
+:def 60 "   Cannot CHDIR to root",CR,LF                    ;badcd_arg           ;an000;bgb
+										;an000;bgb
+:class	D									;an000;bgb
+:def 61 "   Disk error writing FAT %1"                     ;badw_arg            ;an000;bgb
+:def 62 "        %1"                                    ;noisy_arg              ;an000;bgb
+:def 63 "Invalid current directory"                     ;baddpbdir              ;an000;bgb
+:def 64 "%1",CR,LF                                      ;file_arg               ;an000;bgb
+:def 65 "   Insufficient room in root directory",CR,LF,"   Move files from root directory and repeat CHKDSK"  ;creatmes;an000;bgb
+:def 66 "%1 %2 %3"                                      ;eup_arg                ;an000;bgb
+:def 67 "%1 %2, %3"                                     ;usp_arg                ;an000;bgb
+:def 68 "%1%2%3%4%5"                                    ;oth_arg                ;an000;bgb
+:def 69 "%1%2%3%4"                                      ;time_arg               ;an000;bgb
+:def 70 "%1 available allocation units on disk"         ;idmes2                 ;an017;bgb
+:use 71 COMMON36			;Volume Serial Number is %1-%2		;an024;bgb
+:use 72 extend8 			;insufficent memory			;an030;bgb
+:use 73 extend26			;invalid media type			;an033;bgb
+:use 74 extend29			;write fault error			;an033;bgb
+
+:end

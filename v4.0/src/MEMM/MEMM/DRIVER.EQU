@@ -1,0 +1,105 @@
+
+
+;******************************************************************************
+;
+;   (C) Copyright MICROSOFT Corp. 1986
+;
+;   Title:    MEMM - MICROSOFT Expanded Memory Manager 386
+;
+;   Module:   DRIVER.EQU - MS-DOS device driver equates
+;
+;   Version:  0.02
+;
+;   Date:     June 25, 1986
+;
+;   Author:
+;
+;******************************************************************************
+;
+;   Change log:
+;
+;     DATE    REVISION			DESCRIPTION
+;   --------  --------	-------------------------------------------------------
+;   06/25/86  Original
+;   06/28/86  0.02	Name change from MEMM386 to MEMM
+;
+;******************************************************************************
+ifndef INC_LIST
+.xlist
+endif
+;
+;    Device driver attribute equates
+;
+CHAR_DEV		EQU		8000H
+IOCTL_SUP		EQU		4000H
+NON_IBM 		EQU		2000H
+CLK_DEV 		EQU		0008H
+NUL_DEV 		EQU		0004H
+OUT_DEV 		EQU		0002H
+INP_DEV 		EQU		0001H
+;
+;  Device driver command code equates
+;
+INIT			EQU		 0
+MEDIA			EQU		 1
+BUILD_BPB		EQU		 2
+IOCTL_INP		EQU		 3
+INPUT_READ		EQU		 4
+NON_INPUT		EQU		 5
+INP_STATUS		EQU		 6
+INP_FLUSH		EQU		 7
+OUTPUT_WRITE		EQU		 8
+OUTPUT_VER		EQU		 9
+OUT_STATUS		EQU		10
+OUT_FLUSH		EQU		11
+IOCTL_OUT		EQU		12
+;
+;   Device driver status word equates
+;
+ERROR			EQU		8000H
+BUSY			EQU		0200H
+DONE			EQU		0100H
+ERR			EQU		80H
+BUS			EQU		02H
+DON			EQU		01H
+;
+;    Device driver i/o control status word equates
+;
+ISDEV			EQU		0080H
+EOF			EQU		0040H
+RAW			EQU		0020H
+ISCLK			EQU		0008H
+ISNUL			EQU		0004H
+ISCOT			EQU		0002H
+ISCIN			EQU		0001H
+;
+;   Device driver error code equates
+;
+WRT_PROT_VIO		EQU		00H
+UNK_UNIT		EQU		01H
+DEV_NOT_RDY		EQU		02H
+UNK_COMMAND		EQU		03H
+CRC_ERROR		EQU		04H
+BAD_DRIVE		EQU		05H
+SEEK_ERROR		EQU		06H
+UNK_MEDIA		EQU		07H
+SEC_NOT_FND		EQU		08H
+OUT_OF_PAPER		EQU		09H
+WRITE_FAULT		EQU		0AH
+READ_FAULT		EQU		0BH
+GENERAL_FAIL		EQU		0CH
+;
+;   Device driver function call equates
+;
+NUMBER_UNITS		EQU		BYTE PTR 0DH
+ENDING_ADDR		EQU		DWORD PTR 0EH
+BPB_ARRAY		EQU		DWORD PTR 12H
+DESC_BYTE		EQU		BYTE PTR 0DH
+RETURN_INFO		EQU		BYTE PTR 0EH
+BUFFER_ADDR		EQU		DWORD PTR 0EH
+BPB_PTR 		EQU		DWORD PTR 12H
+TRANS_COUNT		EQU		WORD PTR 12H
+TRANS_ADDR		EQU		WORD PTR 14H
+BYTE_READ		EQU		BYTE PTR 0DH
+
+.list	; end of DRIVER.EQU

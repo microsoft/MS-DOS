@@ -1,0 +1,164 @@
+;======================= START OF SPECIFICATIONS =========================
+;
+; MODULE NAME: DEBEQU.SAL
+;
+; DESCRIPTIVE NAME: EQUATES NEEDED BY DEBUG
+;
+; FUNCTION: PROVIDES EQUATES NEEDED BY DEBUG
+;
+; ENTRY POINT: NA
+;
+; INPUT: NA
+;
+; EXIT NORMAL: NA
+;
+; EXIT ERROR: NA
+;
+; INTERNAL REFERENCES: NA
+;
+; EXTERNAL REFERENCES: NA
+;
+; NOTES: THIS MODULE IS TO BE PREPPED BY SALUT WITH THE "PR" OPTIONS.
+;	 LINK DEBUG+DEBCOM1+DEBCOM2+DEBCOM3+DEBASM+DEBUASM+DEBERR+
+;	      DEBCONST+DEBDATA+DEBMES
+;
+; REVISION HISTORY:
+;
+;	AN000	VERSION 4.00 - REVISIONS MADE RELATE TO THE FOLLOWING:
+;
+;				- IMPLEMENT DBCS HANDLING	DMS:6/17/87
+;				- IMPLEMENT MESSAGE RETRIEVER	DMS:6/17/87
+;				- > 32 MB SUPPORT		DMS:6/17/87
+;
+; COPYRIGHT: "MS DOS DEBUG UTILITY"
+;	     "VERSION 4.00 (C) COPYRIGHT 1988 Microsoft"
+;	     "LICENSED MATERIAL - PROPERTY OF Microsoft  "
+;
+;======================= END OF SPECIFICATIONS ===========================
+
+	IF1
+	    %OUT    Including DEBEQU.ASM...
+	ENDIF
+
+;IBMVER EQU	TRUE		    ; These switches get set in version.inc
+;MSVER	EQU	FALSE		    ; NOT HERE !!!
+
+	INCLUDE SYSVER.INC
+
+IBMJAPAN EQU	FALSE
+
+SETCNTC EQU	TRUE			; If this is FALSE, DEBUG will not set
+					; the Control C int vector
+
+PROMPT	EQU	"-"
+FCB	EQU	5CH
+EXEFCB	EQU	FCB
+BUFLEN	EQU	80			; Maximum length of line input buffer
+BPMAX	EQU	10			; Maximum number of breakpoints
+BPLEN	EQU	5*BPMAX 		; Length of breakpoint table
+REGTABLEN EQU	14			; Number of registers
+SEGDIF	EQU	0
+BUFSIZ	EQU	512
+
+BXREG	EQU	"B"+5800H		; "BX"
+BPREG	EQU	"B"+5000H		; "BP"
+SIREG	EQU	"S"+4900H		; "SI"
+DIREG	EQU	"D"+4900H		; "DI"
+COMMA	EQU	2C00H
+OPBUFLEN EQU	35
+
+	IF	IBMVER
+MASK_PORT   EQU     21H 		; 8259 interrupt control register
+INT_MASK    EQU     11111111B		; Disable ALL interrupts
+	ENDIF
+
+CR	EQU	13			;CARRIAGE RETURN
+LF	EQU	10			;LINE FEED
+CHAR_TAB EQU	9			;TAB
+CHAR_BACKSPACE EQU 8			;BACKSPACE CHARACTER
+CHAR_EOF EQU	1AH			;END OF FILE CHARACTER
+CHAR_RUBOUT EQU 7FH			;RUBOUT CHARACTER
+
+CHAR_EQUAL EQU	"="			;CHARACTER EQUAL
+CHAR_MINUS EQU	"-"			;MINUS CHARACTER
+CHAR_BLANK EQU	" "			;BLANK CHARACTER
+DOUBLE_QUOTE EQU '"'			;DOUBLE QUOTE CHARACTER
+SINGLE_QUOTE EQU "'"			;SINGLE QUOTE CHARACTER
+CHAR_COMMA EQU	","			;CHARACTER COMMA
+CHAR_PERIOD EQU "."			;CHARACTER PERIOD
+CHAR_COLON EQU	":"			;CHARACTER COLON
+CHAR_SEMICOLON EQU ";"			;CHARACTER SEMICOLON
+CHAR_LEFT_BRACKET EQU "["		;CHARACTER LEFT BRACKET
+CHAR_AT_SIGN EQU "@"			;CHARACTER "AT" SIGN
+CHAR_ZERO EQU	"0"			;CHARACTER ZERO
+
+LOWER_A EQU	"a"			;LOWER CASE CHARACTER "a"
+LOWER_Z EQU	"z"			;LOWER CASE CHARACTER "z"
+
+UPPER_A EQU	"A"			;UPPER CASE CHARACTER "A"
+UPPER_C EQU	"C"			;UPPER CASE CHARACTER "C"
+UPPER_E EQU	"E"			;UPPER CASE CHARACTER "E"
+UPPER_F EQU	"F"			;UPPER CASE CHARACTER "F"
+UPPER_L EQU	"L"			;UPPER CASE CHARACTER "L"
+UPPER_M EQU	"M"			;UPPER CASE CHARACTER "M"
+UPPER_N EQU	"N"			;UPPER CASE CHARACTER "N"
+UPPER_P EQU	"P"			;UPPER CASE CHARACTER "P"
+UPPER_S EQU	"S"			;UPPER CASE CHARACTER "S"
+UPPER_X EQU	"X"			;UPPER CASE CHARACTER "X"
+UPPER_Z EQU	"Z"			;UPPER CASE CHARACTER "Z"
+
+VEC_SING_STEP EQU 1			;ID OF THE SINGLE STEP VECTOR
+VEC_BREAKPOINT EQU 3			;ID OF THE BREAKPOINT VECTOR
+VEC_TERM_ADDR EQU 22H			;ID OF THE TERMINATE ADDRESS VECTOR
+VEC_CTRL_BREAK EQU 23H			;ID OF THE CTRL BREAK EXIT ADDRESS VECTOR
+VEC_CRIT_ERR EQU 24H			;ID OF THE CRITICAL ERROR HANDLER VECTOR
+VEC_PRIMITIVE_DISK_READ EQU 25H 	;ID OF THE PRIMITAVE DISK READ VECTOR
+VEC_PRIMITIVE_DISK_WRITE EQU 26H	;ID OF THE PRIMITAVE DISK WRITE VECTOR
+GENERIC_IOCTL EQU 440DH 		;an000;Generic IOCtl function
+READ_WRITE EQU	08H			;an000;read/write relative sectors
+READ_SECTOR EQU 00H			;an000;currently unknown value
+WRITE_SECTOR EQU 00H			;an000;currently unknown value
+
+SET_DRIVEID_OPTION EQU 1		;AL VALUE FOR "PARSE FILENAME" FUNCTION
+LSEEK_FROM_START EQU 0			;AL VALUE FOR "LSEEK" FUNCTION
+LSEEK_EOF_OPTION EQU 2			;AL VALUE FOR "LSEEK" FUNCTION
+
+;======================= EMS Equates Begin ===============================
+
+EMS_GET_MAN_STAT equ 40h		;an000;function 40h, int 67h
+EMS_UNALL_PG_CNT equ 42h		;an000;funciton 42h, int 67h
+EMS_HAN_ALLOC equ 43h			;an000;function 43h, int 67h
+EMS_MAP_MEMORY equ 44h			;an000;function 44h, int 67h
+EMS_PAGE_DEALL equ 45h			;an000;function 45h, int 67h
+EMS_VERSION equ 46h			;an000;function 46h, int 67h
+EMS_SAVE_PAGE_MAP equ 47h		;an000;function 47h, int 67h
+EMS_REST_PAGE_MAP equ 48h		;an000;function 48h, int 67h
+EMS_HANDLE_CNT equ 4bh			;an000;function 4bh, int 67h
+EMS_HANDLE_PAGES equ 4dh		;an000;function 4dh, int 67h
+EMS_GET_SET_PG_MP equ 4eh		;an000;function 4eh, int 67h
+EMS_GET_PAGE_MAP equ 00h		;an000;sub function 00h of
+EMS_PG_FRAME equ 5800h			;an000;function 58h, int 67h
+					;      function 4eh, int 67h
+EMS_SET_PAGE_MAP equ 01h		;an000;sub function 01h of
+					;      function 4eh, int 67h
+EMS_HANDLE_TOTAL equ 0ffh		;an000;total possible handles
+
+EMS_LIM_40 equ	040h			;an000;LIM 4.0 I.D.
+
+XM_ERR80 equ	80h			;an000;error message type
+XM_ERR83 equ	83h			;an000;error message type
+XM_ERR84 equ	84h			;an000;error message type
+XM_ERR85 equ	85h			;an000;error message type
+XM_ERR86 equ	86h			;an000;error message type
+XM_ERR87 equ	87h			;an000;error message type
+XM_ERR88 equ	88h			;an000;error message type
+XM_ERR89 equ	89h			;an000;error message type
+XM_ERR8A equ	8Ah			;an000;error message type
+XM_ERR8B equ	8Bh			;an000;error message type
+XM_ERR8D equ	8Dh			;an000;error message type
+XM_ERR8E equ	8Eh			;an000;error message type
+XM_ERR8F equ	8Fh			;an000;error message type
+XM_NOT_INST equ 0ffh			;an000;EMS not inst
+
+;======================= EMS Equates End =================================
+

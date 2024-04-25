@@ -1,0 +1,24 @@
+This file lists the changes to USA.INF which need to be included
+in the translated versions.
+
+SCROLL TEXT #	CHANGE
+컴컴컴컴컴컴�	컴컴컴
+27		Changed text
+
+PANEL # 	CHANGE
+컴컴컴� 	컴컴컴
+38		Changed text
+59		Changed text
+105		Changed text
+21		Changed text
+22		Changed text
+24		Changed text
+25		Changed text
+26		Changed text
+27		Changed text
+28		Changed text
+108		Changed text
+
+
+ID should also be consulted for any changes to the help text (USAHELP.TXT).
+
