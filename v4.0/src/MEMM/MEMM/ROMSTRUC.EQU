@@ -1,0 +1,37 @@
+
+
+;******************************************************************************
+;
+;   (C) Copyright MICROSOFT Corp. 1986
+;
+;   Title:    MEMM - MICROSOFT Expanded Memory Manager 386
+;
+;   Module:   ROMSTRUC.EQU - structure of the option ROM headers.
+;
+;   Version:  0.02
+;
+;   Date:     June 25,1986
+;
+;   Author:
+;
+;******************************************************************************
+;
+;   Change log:
+;
+;     DATE    REVISION			DESCRIPTION
+;   --------  --------	-------------------------------------------------------
+;   06/25/86  Original
+;   06/28/86  0.02	Name change from MEMM386 to MEMM
+;
+;******************************************************************************
+ifndef INC_LIST
+.xlist
+endif
+
+OPTION_ROM	STRUC
+ROM_RECOGNITION	DW	?		; HOLDS 0AA55 WORD IF REAL OPTION ROM
+ROM_LEN		DB	?		; BYTE HOLDING ROM SIZE / 512
+ROM_ENTRY	DB	?		; WHERE CODE STARTS IN OPTION ROM
+OPTION_ROM	ENDS
+
+.list 	; end of ROMSTRUC.EQU

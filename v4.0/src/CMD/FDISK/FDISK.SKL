@@ -1,0 +1,18 @@
+:util FDISK                ;utility name
+:class A                   ;system messages
+;
+:use 1 COMMON1             ;"Incorrect DOS version"
+:use 2 COMMON2             ;"Insufficient Memory"
+:use 3 COMMON3             ;"Internal error loading messages"
+:use 8 EXTEND87            ;"Invalid parameter"
+:def 9  "Y",0              ;"Y"
+:def 10 "N",0              ;"N"
+;
+:class B
+:def 4 "Cannot FDISK with network loaded",CR,LF
+:def 5 "No fixed disks present",CR,LF
+:def 6 "Error reading fixed disk",CR,LF
+:def 7 "Error writing fixed disk",CR,LF
+;
+;
+:end

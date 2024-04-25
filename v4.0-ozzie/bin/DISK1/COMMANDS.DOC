@@ -1,0 +1,199 @@
+
+
+
+
+
+
+                                Multi-Tasking MS-DOS
+                               Beta Test Release 1.00
+
+                                   Command Guide
+
+
+            ARENA.EXE - Prints out arena assignments
+
+                 arena
+
+                      The system's  memory arena  is printed  out.   The
+                      number listed  under the owner field is the PID of
+                      the process which owns the memory.
+
+
+            BBSET.EXE - Set and report on behavior bits
+
+                 bbset [-o] [ {+|-}bitname ... ] fname ...
+
+                      BBSET sets or clears behavior bits in an .EXE file
+                      header.   Multi-Tasking MS-DOS  uses the  behavior
+                      bits   to   determine   the   level   of   special
+                      compatibility   support    needed   to   run   the
+                      application.
+
+                      BBSET will  set  (if  +bitname)  or  clear  (if  -
+                      bitname)  the   named  behavior  bit(s)  from  the
+                      specified files.   If  the -o switch is specified,
+                      BBSET writes  a report  on the  current setting of
+                      all the  defined behavior  bits  to  stdout  after
+                      making the requested changes.
+
+                      For a  list of  behavior  bits  that  BBSET  knows
+                      about, type BBSET without any arguments.
+
+
+            COUNTDOW.EXE - Count down a CPU loop
+
+                 countdown number
+
+                      Its argument  is a  number; it  counts the  number
+                      down to 0, at about a 1hz rate.     It  prints out
+                      the countdown.   Another  CPU  loop  program  like
+                      TEXT, but  this  one  terminates  when  the  count
+                      reaches 0
+
+
+            DETACH.EXE - Detaches a child process
+
+                 detach command [argument ...]
+
+                      The command  given is run as a background process.
+                      Detach prints  out the  Command Subgroup ID (CSID)
+                      which may  be used  as  an  argument  to  KILL  to
+                      terminate the process.
+
+
+
+
+
+
+
+
+
+     Multi-Tasking MS-DOS Command Guide - Page: 2
+
+            HE_DAEM.EXE - Hard error catcher
+
+                 detach he_daem
+
+                      Intercepts hard  errors, reports them and requests
+                      user action.   This  should always  be run  in the
+                      background for now.  Put the above command line in
+                      your AUTOEXEC.BAT  file if you're not going to use
+                      the Session Manager (SM).
+
+
+            KILL.EXE - send a signal to a process
+
+                 kill [-nn] [sig=nn] [disp=mm] pid ...
+
+                      Sends signal  nn with  disposition mm to processes
+                      mentioned in pid.  Defaults to SIGTERM and process
+                      tree disposition.
+
+
+            POUND.EXE - Exercise disk I/O system
+
+                 pound [t]count filea fileb
+
+                      Pound reads  sequencially through filea and fileb,
+                      reading 512  bytes at  a time  alternating between
+                      the files  on each  read.  When the end of file is
+                      read the  following read  for that  file begins at
+                      the  beginning  of  the  file.    If  a  count  is
+                      specified without  the preceeding  "t" then  pound
+                      reads 512  bytes, count  number of times from each
+                      file  before  the  program  terminates.    If  "t"
+                      preceeds the  count value  then the files are read
+                      for count  number of  seconds before  the  program
+                      terminates.
+
+
+            SLEEP.EXE - Sleep for a while
+
+                 sleep sec[.millisec]
+
+                      Sleep will  execute a  sleep system  call for  the
+                      number  of  seconds  and  milliseconds  specified.
+                      This might  be useful  in batch files to pause for
+                      an interval  as opposed  to  waiting  for  a  user
+                      response.
+
+
+            SM.EXE - Session manager
+
+                 sm
+
+                      Manages multiple  processes running  on  different
+                      screens.   Uses initialization  file SM.INI.  This
+
+
+
+
+
+
+
+
+
+
+     Multi-Tasking MS-DOS Command Guide - Page: 3
+
+                      program includes  the hard error catcher, so don't
+                      run HE_DAEM  if you're going to use this.  See the
+                      file SM.DOC for more information.
+
+
+            TEXT.EXE - Loop and print text
+
+                 text argument
+
+                      CPU loops  and prints  its argument  every  2  CPU
+                      seconds or so
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

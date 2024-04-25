@@ -1,0 +1,213 @@
+
+;*************************
+;* MESSAGE SKELETON FILE *
+;*************************
+
+:util COMMAND			;AC000;
+
+:class	1			;AC000; Transient extended errors
+
+:use EXTEND2			;AC000; "File not found"
+:use EXTEND3			;AC000; "Path not found"
+:use EXTEND8			;AC000; "Insufficient memory"
+
+:class	2			;AC000; Transient parse errors
+
+:class	3			;AC000; Resident extended errors
+:use -1 EXTEND999		;AN000; "Extended error #"
+
+:class	4			;AC000; Resident parse errors
+:use -1 PARSE999		;AN000; "Parse error #"
+
+:class	A			;AC000; resident messages
+
+:use 220 COMMON17		;AC000; "File allocation table bad, drive %1"
+:use 223 COMMON28		;AC000; "Press any key to continue"
+:def 201 "A"                    ;AC000;
+:def 202 "R"                    ;AC000;
+:def 203 "I"                    ;AC000;
+:def 204 "F"                    ;AC000;
+:def 205 "Y"                    ;AC000;
+:def 206 "N"                    ;AC000;
+:def 210 "Abort"                ;AC000;
+:def 211 ", Retry"              ;AC000;
+:def 212 ", Ignore"             ;AC000;
+:def 213 ", Fail"               ;AC000;
+:def 214 "?"                    ;AC000;
+:def 215 "reading",0            ;AC000;
+:def 216 "writing",0            ;AC000;
+:def 217 " %1 drive %2",CR,LF    ;AC000;
+:def 218 " %1 device %2",CR,LF   ;AC000;
+:def 219 "Please insert volume %1 serial %2-%3",CR,LF   ;AC009;
+:def 221 "Invalid COMMAND.COM",CR,LF                    ;AC000;
+:def 222 "Insert disk with %1 in drive %2",CR,LF        ;AC000;
+:def 224 CR,LF,"Terminate batch job (Y/N)?"             ;AC000;
+:def 225 "Cannot execute %1",CR,LF                      ;AC000;
+:def 226 "Error in EXE file",CR,LF                      ;AC000;
+:def 227 "Program too big to fit in memory",CR,LF       ;AC000;
+:def 228 CR,LF,"No free file handles"                   ;AC000;
+:def 229 "Bad Command or file name",CR,LF               ;AC000;
+:use 230 EXTEND5					;AC000;
+:def 231 CR,LF,"Memory allocation error"                ;AC000;
+:def 232 CR,LF,"Cannot load COMMAND, system halted",CR,LF;AC000;
+:def 233 CR,LF,"Cannot start COMMAND, exiting",CR,LF    ;AC000;
+:def 234 CR,LF,"Top level process aborted, cannot continue",CR,LF;AC000;
+:def 235 CR,LF						;AC000;
+
+
+:class B			;AC000; Initialization messages
+
+:use 461 COMMON1		;AC000; "Incorrect DOS version"
+:def 463 "Out of environment space",CR,LF               ;AC000;
+:def 464 CR,LF,CR,LF,"MS DOS                       ",CR,LF
+	 "Version 4.00 (C)Copyright International Business Machines Corp 1981,1988",CR,LF
+	 "             (C)Copyright Microsoft Corp 1981, 1988",CR,LF ;AC000;
+:def 465 "Specified COMMAND search directory bad",CR,LF ;AC025;
+:def 466 "Specified COMMAND search directory bad access denied",CR,LF ;AC025;
+
+:class C			;AC000; Parse messages
+
+:use PARSE1			;AC000; "Too many parameters"
+:use PARSE2			;AC000; "Required parameter missing"
+:use PARSE3			;AC000; "Invalid switch"
+:use PARSE4			;AC000; "Invalid keyword"
+:use PARSE6			;AC000; "Parameter value not in allowed range"
+:use PARSE7			;AC000; "Parameter value not allowed"
+:use PARSE8			;AC000; "Parameter value not allowed"
+:use PARSE9			;AC000; "Parameter format not correct"
+:use PARSE10			;AC000; "Invalid parameter"
+:use PARSE11			;AC000; "Invalid parameter combination"
+
+:class D			;AC000; Extended errors - critical
+
+:use EXTEND19			;AC000;  "Write protect"
+:use EXTEND20			;AC000;  "Invalid unit"
+:use EXTEND21			;AC000;  "Drive not ready"
+:use EXTEND22			;AC000;  "Invalid device request"
+:use EXTEND23			;AC000;  "Data error"
+:use EXTEND24			;AC000;  "Invalid device request parameters"
+:use EXTEND25			;AC000;  "Seek error"
+:use EXTEND26			;AC000;  "Invalid media type"
+:use EXTEND27			;AC000;  "Sector not found"
+:use EXTEND28			;AC000;  "Printer out of paper"
+:use EXTEND29			;AC000;  "Write fault error"
+:use EXTEND30			;AC000;  "Read fault error"
+:use EXTEND31			;AC000;  "General Failure"
+:use EXTEND32			;AC000;  "Sharing Violation"
+:use EXTEND33			;AC000;  "Lock Violation"
+:use EXTEND34			;AC000;  "Invalid Disk Change"
+:use EXTEND35			;AC000;  "FCB unavailable"
+:use EXTEND36			;AC000;  "System resource exhausted"
+:use EXTEND37			;AC000;  "Code page mismatch"
+:use EXTEND38			;AC026;  "Out of input"
+:use EXTEND39			;AC026;  "Insufficient disk space"
+
+:class E			;AC000;  extended errors
+
+:use EXTEND1			;AC000;  "Invalid Function"
+:use EXTEND2			;AC000;  "File not found"
+:use EXTEND3			;AC000;  "Path not found"
+:use EXTEND4			;AC000;  "Too many open files"
+:use EXTEND5			;AC000;  "Access denied"
+:use EXTEND6			;AC000;  "Invalid handle"
+:use EXTEND7			;AC000;  "Memory control blocks destroyed"
+:use EXTEND8			;AC000;  "Insufficient memory"
+:use EXTEND9			;AC000;  "Invalid memory block address"
+:use EXTEND10			;AC000;  "Invalid Environment"
+:use EXTEND11			;AC000;  "Invalid format"
+:use EXTEND12			;AC000;  "Invalid function parameter"
+:use EXTEND13			;AC000;  "Invalid data"
+:use EXTEND15			;AC000;  "Invalid drive specification"
+:use EXTEND16			;AC000;  "Attempt to remove current directory"
+:use EXTEND17			;AC000;  "Not same device"
+:use EXTEND18			;AC000;  "No more files"
+:use EXTEND80			;AC000;  "File already exists"
+:use EXTEND82			;AC000;  "Can not make directory entry"
+:use EXTEND83			;AC000;  "Fail requested to Critical Error"
+:use EXTEND84			;AC000;  "Too many attaches"
+:use EXTEND85			;AC000;  "Device or file already attached"
+:use EXTEND86			;AC000;  "Invalid password"
+:use EXTEND87			;AC000;  "Invalid parameter"
+:use EXTEND88			;AC000;  "File system data fault"
+:use EXTEND89			;AC000;  "Function not supported by file system"
+:use EXTEND90			;AC000;
+
+
+:class F			;AC000; Transient messages
+
+:use 1020 COMMON4		;AC000; "%1 bytes free",CR,LF
+:use 1015 COMMON18		;AC000; "File cannot be copied onto itself",CR,LF
+:use 1004 COMMON20		;AC000; "Insufficient disk space",CR,LF
+:use 1026 COMMON22		;AC000; "Invalid code page",CR,LF
+:use 1031 COMMON23		;AC000; "Invalid date"
+:use 1035 COMMON24		;AC000; "Invalid time"
+:use 1062 COMMON25		;AC000; "Invalid path"
+:use 1028 COMMON28		;AC000; "Press any key to continue"
+:use 1045 COMMON32		;AC000; "Unable to create directory",CR,LF
+:use 1041 COMMON33		;AC000; "Volume in drive %1 has no label"
+:use 1042 COMMON34		;AC000; "Volume in drive %1 is %2"
+:use 1043 COMMON36		;AC000; "Volume Serial Number is %1"
+:def 1002 "Duplicate file name or file not found",CR,LF ;AC000;
+:def 1003 "Invalid path or file name",CR,LF             ;AC000;
+:def 1007 "Out of environment space",CR,LF              ;AC000;
+:def 1008 "File creation error",CR,LF                   ;AC000;
+:def 1009 "Batch file missing",CR,LF                    ;AC000;
+:def 1010 CR,LF,"Insert disk with batch file",CR,LF     ;AC000;
+:def 1011 "Bad command or file name",CR,LF              ;AC000;
+:use 1014 EXTEND5					;AC000;
+:def 1016 "Content of destination lost before copy",CR,LF ;AC000;
+:def 1017 "Invalid filename or file not found",CR,LF    ;AC000;
+:def 1018 "%1 File(s) copied",CR,LF                     ;AC000;
+:def 1019 "%1 File(s) "                                 ;AC000;
+:use 1021 EXTEND15					;AC000;
+:def 1022 "Code page %1 not prepared for system",CR,LF  ;AC000;
+:def 1023 "Code page %1 not prepared for all devices",CR,LF ;AC000;
+:def 1024 "Active code page: %1",CR,LF                  ;AC000;
+:def 1025 "NLSFUNC not installed",CR,LF                 ;AC000;
+:def 1027 "Current drive is no longer valid"            ;AC000;
+:def 1029 "Label not found",CR,LF                       ;AC000;
+:def 1030 "Syntax error",CR,LF                          ;AC000;
+:def 1032 "Current date is %1 %2",CR,LF                 ;AC000;
+:def 1033 "SunMonTueWedThuFriSat"                       ;AC000;
+:def 1034 "Enter new date (%1): "                       ;AC031;
+:def 1036 "Current time is %1",CR,LF                    ;AC000;
+:def 1037 "Enter new time: "                            ;AC031;
+:def 1038 ",    Delete (Y/N)?"                          ;AC000;
+:def 1039 "All files in directory will be deleted!",CR,LF
+	  "Are you sure (Y/N)?"                         ;AC000;
+:def 1040 "Microsoft DOS             Version %1.%2",CR,LF ;AC000;
+:def 1044 "Invalid directory",CR,LF                     ;AC000;
+:def 1046 "Invalid path, not directory,",CR,LF,"or directory not empty",CR,LF ;AC000;
+:def 1047 "Must specify ON or OFF",CR,LF                ;AC000;
+:def 1048 "Directory of  %1",CR,LF                      ;AC000;
+:def 1049 "No Path",CR,LF                               ;AC000;
+:def 1050 "Invalid drive in search path",CR,LF          ;AC000;
+:def 1051 "Invalid device",CR,LF                        ;AC000;
+:def 1052 "FOR cannot be nested",CR,LF                  ;AC000;
+:def 1053 "Intermediate file error during pipe",CR,LF   ;AC000;
+:def 1054 "Cannot do binary reads from a device",CR,LF  ;AC000;
+:def 1055 "BREAK is %1",CR,LF                   ;AC000;
+:def 1056 "VERIFY is %1",CR,LF                  ;AC000;
+:def 1057 "ECHO is %1",CR,LF                    ;AC000;
+:def 1059 "off",0                               ;AC000;
+:def 1060 "on",0                                ;AC000;
+:def 1061 "Error writing to device",CR,LF       ;AC000;
+:def 1063 "%1"                                  ;AC000;
+:def 1064 "%1"                                  ;AC000;
+:def 1065 "%1"                                  ;AC000;
+:def 1066 "%1"                                  ;AC000;
+:def 1067 9					;AC000;
+:def 1068 " <DIR>    "                          ;AC000;
+:def 1069 8," ",8                               ;AC000;
+:def 1070 CR,LF 				;AC000;
+:def 1071 "%1"                                  ;AC000;
+:def 1072 "mm-dd-yy"                            ;AC000;
+:def 1073 "dd-mm-yy"                            ;AC000;
+:def 1074 "yy-mm-dd"                            ;AC000;
+:def 1075 "%1 %2"                               ;AC000;
+:def 1076 "%1"                                  ;AC000;
+:def 1077 " %1  %2"                             ;AC053;
+:def 1078 "Directory already exists",CR,LF      ;AC000;
+
+:end				;AC000;
+

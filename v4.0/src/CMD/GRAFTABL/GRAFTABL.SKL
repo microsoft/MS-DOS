@@ -1,0 +1,28 @@
+:util GRAFTABL		   ;AN000;utility name
+:class A		   ;AN000;system messages
+:use 1 COMMON1		   ;AN000;MSG 1 is always "Incorrect DOS version"
+
+;In these next 2 messages, %1 will be replaced with one from list, 4-5, 	;AN000;
+; or with one entry of the list at "CPID". (see GRTABMS.INC)                    ;AN000;
+
+:def 2 "Active Code Page: %1",CR,LF                                             ;AN000;
+:def 3 "Previous Code Page: %1",CR,LF                                           ;AN000;
+
+:def 4 "None",NULL                                                              ;AN000;
+:def 5 "Non-standard",NULL                                                      ;AN000;
+
+:def 6 CR,LF,"DOS command line parameters supported",COLON,CR,LF,LF ;AC007;
+
+:def 7 "    /STA - Request Status only",CR,LF                       ;AC007;
+"    ?    - Display this summary of parameters",CR,LF,CR,LF         ;AC007;
+
+:def 8 "    Code Pages available",COLON,CR,LF                       ;AC007;
+"    437  - USA Graphic Character Set",CR,LF                        ;AC007;
+
+:def 9 "    850  - Multi-lingual Graphic Character Set",CR,LF       ;AC007;
+"    860  - Portuguese Graphic Character Set",CR,LF                 ;AC007;
+
+:def 10 "    863  - Canadian French Graphic Character Set",CR,LF    ;AC007;
+"    865  - Nordic Graphic Character Set",CR,LF                     ;AC007;
+:end										;AN000;
+

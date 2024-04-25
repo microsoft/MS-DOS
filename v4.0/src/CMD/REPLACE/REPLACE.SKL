@@ -1,0 +1,38 @@
+;REPLACE Utility                                                                ;AN000;
+;Message Service Routine                                                        ;AN000;
+
+:util  REPLACE                                         ;BEGIN UTIL              ;AN000;
+
+:class 1                                               ;EXTENDED ERRORS         ;AN000;
+;-------                                                ---------------         ;AN000;
+;:use  EXTEND2                          ;File not Found                         ;AN000;
+;:use  EXTEND3                          ;Path not Found                         ;AN000;
+;:use  EXTEND5                          ;Access denied                          ;AN000;
+;:use  EXTEND8                          ;Insufficient memory                    ;AN000;
+;:use  EXTEND15                         ;Invalid drive specification            ;AN000;
+
+:class 2                                               ;PARSE ERRORS            ;AN000;
+;-------                                                ------------            ;AN000;
+;:use  PARSE1                           ;Too many parameters
+;:use  PARSE3                           ;Invalid switch
+;:use  PARSE10                          ;Invalid parameter                      ;AN000;
+;:use  PARSE11                          ;Invalid parameter combination          ;AN000;
+
+:class A                                               ;COMMON & DEFINED MSGS   ;AN000;
+;-------                                                ------------            ;AN000;
+:use  1 COMMON1                         ;Incorrect DOS version                  ;AN000;
+:use  2 COMMON29                        ;Source path required                   ;AN000;
+:def  3 CR,LF,"No files replaced",CR,LF                                         ;AN000;
+:def  4 CR,LF,"No files added",CR,LF                                            ;AN000;
+:use 11 COMMON18                        ;File cannot be copied onto itself      ;AN000;
+:use 12 COMMON20                        ;Insufficient disk space                ;AN000;
+:def 13 CR,LF,"Replacing %1",CR,LF                                              ;AN000;
+:def 14 CR,LF,"Adding %1",CR,LF                                                 ;AN000;
+:def 15 CR,LF,"%1 file(s) replaced",CR,LF                                       ;AN000;
+:def 16 CR,LF,"%1 file(s) added",CR,LF                                          ;AN000;
+:def 17 CR,LF,"No files found - %1",CR,LF                                         ;AN000;
+:use 21 COMMON28                        ;Press any key to continue . . .        ;AN000;
+:def 22 CR,LF,"Replace %1? (Y/N)"                                               ;AN000;
+:def 23 CR,LF,"Add %1? (Y/N)"                                                   ;AN000;
+
+:end                                                   ;END UTIL                ;AN000;

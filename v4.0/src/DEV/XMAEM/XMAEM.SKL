@@ -1,0 +1,16 @@
+:class 1
+
+:use	1	xmaem	Welcome
+:use	2	xmaem	GoodLoad
+:use	3	xmaem	No_80386
+:use	4	xmaem	Was_Inst
+:use	5	xmaem	Small_Parm
+:use	6	xmaem	No_Mem
+
+:end
+
+
+
+
+
+

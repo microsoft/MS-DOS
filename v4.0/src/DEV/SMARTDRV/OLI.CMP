@@ -1,0 +1,464 @@
+CMP V2.13  Copyright (C) 1984, 1985 by White Heron Corporation
+           All rights reserved
+
+  old:  smartdrv.asm    (on the left)     Note:  < marks old lines.
+  new:  a:smartdrv.asm  (on the right)           > marks new lines.
+
+===============================================================================
+
+6<; Will use IBM extended memory on PC-AT or
+7<;      use Above Board on PC, XT, or AT
+8<;
+9<;
+10<;	device = SMARTDRV.sys [bbbb] [/a]
+
+  ----> changed to the following:
+
+6>;; Will use IBM extended memory on PC-AT or
+7>;;      use Above Board on PC, XT, or AT, and
+8>;;	    use extended, expanded, or upper extended memory on AT&T 6300 PLUS
+9>;
+10>;
+11>;;	device = SMARTDRV.sys [bbbb] [/a] [/u]
+
+===============================================================================
+
+40<;
+
+  ----> changed to the following:
+
+41>;;		/u	Specifies that upper extended memory will be used
+42>;;			on the AT&T 6300 PLUS.  Upper extended memory
+43>;;			is the memory beginning at FA0000.  It is used
+44>;;			to hold the UNIX kernel when the machine is running
+45>;;			Simul-Task.  However, when operating as a pure 
+46>;;			MS-DOS machine, this 384K of memory is available
+47>;;			for SMARTDRIVE.
+48>;;			Note that it is an error to specify this switch
+49>;;			if the machine is not a 6300 PLUS.
+
+===============================================================================
+
+102>;;	?.??	7/24/87 WSH Added 6300 PLUS support.  This code is marked by
+103>;;			    the use of double semi-colons to make it easy to
+104>;;			    find.
+
+  ----> inserted before the following old file line:
+
+93<
+
+===============================================================================
+
+125>
+126>;; In order to address memory above 1 MB on the AT&T 6300 PLUS, it is
+127>;; necessary to use the special OS-MERGE hardware to activate lines
+128>;; A20 to A23.  However, these lines can be disabled only by resetting
+129>;; the processor.  The return address offset and segment can be found 
+130>;; at 40:a2, noted here as RealLoc1.
+131>;;
+132>BiosSeg	segment at 40h		;; Used to locate 6300 PLUS reset address
+133>	org	00a2h
+134>RealLoc1 dd	0
+135>BiosSeg	ends
+
+  ----> inserted before the following old file line:
+
+113<
+
+===============================================================================
+
+147>;;		The /U configuration using upper extended memory on the 
+148>;;		6300 PLUS is a special case of the type 1 configuration.
+
+  ----> inserted before the following old file line:
+
+124<;
+
+===============================================================================
+
+327>;; The internal name of the device driver has been changed from SMARTDRV
+328>;; to SMARTAAR to avoid DOS name conflicts with files named SMARTDRV.*
+329>;;
+
+  ----> inserted before the following old file line:
+
+302<INT13DEV  LABEL   WORD
+
+===============================================================================
+
+307<	DB	"SMARTDRV"			;Name of device
+
+  ----> changed to the following:
+
+335>	DB	"SMARTAAR"			;Name of device
+
+===============================================================================
+
+387>;;	Data peculiar to AT&T 6300 PLUS.
+388>
+389>S5_FLAG		DB	0	;; If set, computer is a 6300 PLUS
+
+  ----> inserted before the following old file line:
+
+359<
+
+===============================================================================
+
+3074>;; NOTE: The value at BASE_ADDR is patched during initialization when
+3075>;;	 loading a RAMDrive into upper extended memory on a PLUS
+3076>;;
+
+  ----> inserted before the following old file line:
+
+3043<BASE_ADDR	LABEL	DWORD	; 24 bit address of start of this RAMDRV
+
+===============================================================================
+
+3190<	MOV	AH,0DFH
+
+  ----> changed to the following:
+
+3224>
+3225>;;
+3226>;; Enable address line 20 on the PC AT or activate A20-A23 on the 6300 PLUS.
+3227>;; The former can be done by placing 0dfh in AH and activating the keyboard
+3228>;; processor.  On the PLUS, 90h goes in AL and the port at 03f20h is written.
+3229>;; So the combined value of 0df90h can be used for both machines with
+3230>;; appropriate coding of the called routine A20.
+3231>;;
+3232>
+3233>;;	MOV	AH,0DFH
+3234>	mov	ax,0df90h		;; set up for PLUS or AT
+
+===============================================================================
+
+3248<	MOV	AH,0DDH
+3249<	CALL	A20			; Disable address line 20
+
+  ----> changed to the following:
+
+3292>
+3293>;;
+3294>;; Reset of line A20 on the PC AT requires writing 0ddh to the keyboard
+3295>;; processor.  On the PLUS, the appropriate value is 00.
+3296>;;
+3297>
+3298>;;	MOV	AH,0DDH
+3299>	mov	ax,0DD00h	;; setup for PLUS or AT. ah for IBM, al for PLUS
+3300>	CALL	A20		; Disable address line 20
+
+===============================================================================
+
+3331>;; CS override needed on S5_FLAG to avoid phase errors on
+3332>;; forward declaration of this variable.
+3333>	cmp	cs:[S5_FLAG],0		;; test for 6300 PLUS
+3334>	jnz	A20S5			;; yes, do this code
+
+  ----> inserted before the following old file line:
+
+3280<	CLI
+
+===============================================================================
+
+3376>
+3377>;;*	A20S5 - Address enable/disable routine for the 6300 PLUS.
+3378>;;
+3379>;;	This routine enables lines A20-A23 on the PLUS by writing
+3380>;;	to port 03f20h.  Bit 7 turns the lines on, and bit 4 sets
+3381>;;	the power-up bit.  To disable the lines, the processor
+3382>;;	must be reset.  This is done by saving the world and 
+3383>;;	jumping to the ROM 80286 reset code.  Since the power-up bit
+3384>;;	is set, the data segment is set to the BiosSeg at 40h
+3385>;;	and a jump is then made to the address at RealLoc1.  
+3386>;;	At RealLoc1, one can find the CS:IP where the code
+3387>;;	is to continue.
+3388>;;	 
+3389>;;	Uses ax, flags.
+3390>;;	Returns with zero flag set.
+3391>;;
+3392>A20S5:					
+3393>	cli
+3394>	or	al,al			;; if zero, then resetting processor
+3395>	jnz	A20S5Next
+3396>	call	RSet			;; must return with entry value of ax
+3397>A20S5Next:
+3398>	push	dx			;; set/reset port
+3399>	mov	dx,3f20h
+3400>	out	dx,al
+3401>	pop	dx
+3402>	xor	al,al
+3403>        STI
+3404>        RET
+3405>
+3406>;;* a20S5BOOT -	This code bypasses the processor reset on a reboot
+3407>;;		of the 6300 PLUS.  Otherwise the machine hangs.
+3408>a20s5BOOT:				;; use this code before reboot
+3409>	cli
+3410>	jmp short a20s5next
+3411>
+3412>OldStackSeg	dw	0		;; used during PLUS processor reset
+3413>					;; to save the stack segment
+3414>
+3415>;;* Rset -	Reset the 80286 in order to turn off the address lines
+3416>;;		on the 6300 PLUS.  Only way to do this on the
+3417>;;		current hardware.  The processor itself can be
+3418>;;		reset by reading or writing prot 03f00h
+3419>;;
+3420>;;  Uses flags.
+3421>;;
+3422>RSet:
+3423>	pusha				;; save world
+3424>	push	ds			;; save segments
+3425>	push	es
+3426>	mov	ax,BiosSeg		;; point to the bios segment
+3427>	mov	ds,ax			;; ds -> 40h
+3428>assume	ds:BiosSeg
+3429>	push	word ptr [RealLoc1]	;; save what might have been here
+3430>	push	word ptr [RealLoc1+2]
+3431>	mov	word ptr [RealLoc1],cs:[offset ReturnBack] ;; load our return address
+3432>	mov	word ptr [RealLoc1+2],cs
+3433>assume ds:nothing
+3434>	mov	[OldStackSeg],ss	;; save the stack segment, too
+3435>	mov	dx,03f00h		;; reset the processor
+3436>	in	ax,dx
+3437>	nop				
+3438>	nop
+3439>	nop
+3440>	cli
+3441>	hlt				;; should never get here
+3442>ReturnBack:
+3443>	mov	ss,[OldStackSeg]	;; start the recovery
+3444>assume ds:BiosSeg
+3445>	pop	word ptr [RealLoc1+2]
+3446>	pop	word ptr [RealLoc1]
+3447>	pop	es
+3448>	pop	ds
+3449>	popa
+3450>	ret		
+
+  ----> inserted before the following old file line:
+
+3321<
+
+===============================================================================
+
+3530<;	out any dirty tracks take a LONG time, so long that we loose
+
+  ----> changed to the following:
+
+3660>;	out any dirty tracks take a LONG time, so long that we lose
+
+===============================================================================
+
+3652<    ; Reset INT 1C vector to trun cache off
+
+  ----> changed to the following:
+
+3782>    ; Reset INT 1C vector to turn cache off
+
+===============================================================================
+
+3732<	MOV	AH,0DFH
+
+  ----> changed to the following:
+
+3862>;;	MOV	AH,0DFH
+3863>	mov	ax,0df90h		;; set up for PLUS or AT
+
+===============================================================================
+
+3775<	MOV	AH,0DDH 	; Disable adress line 20
+3776<	CALL	A20
+
+  ----> changed to the following:
+
+3906>;;	MOV	AH,0DDH 	; Disable adress line 20
+3907>	mov	ax,0DD00h	;; setup for PLUS or AT. ah for IBM, al for PLUS
+3908>	cmp	[S5_FLAG],0
+3909>	jz	OFF20A
+3910>	call	a20s5boot	;; Don't reset the processor on PLUS, this time
+3911>	jmp short off20b
+3912>off20a:
+3913>        CALL    A20
+3914>off20b:
+
+===============================================================================
+
+4078>
+4079>U_SWITCH	db	0	;; upper extended memory requested on 6300 PLUS
+
+  ----> inserted before the following old file line:
+
+3940<
+
+===============================================================================
+
+4274>
+4275>;;
+4276>;; 2.5 Check here for 6300 PLUS machine.  First look for Olivetti copyright,
+4277>;;     and if found, check id byte at f000:fffd.
+4278>;;
+4279>
+4280>	push	es				;; Olivetti Machine?
+4281>	mov	ax,0fc00h			;; Look for 'OL' at fc00:50
+4282>	mov	es,ax
+4283>	cmp	es:[0050h],'LO'
+4284>	jnz	notS5				;; not found
+4285>	mov	ax,0f000h
+4286>	mov	es,ax
+4287>	cmp	word ptr es:[0fffdh],0fc00h	;; look for 6300 plus
+4288>	jnz	notS5
+4289>	dec	[S5_FLAG]			;; yep, set flag
+4290>notS5:
+4291>	pop	es
+4292>
+
+  ----> inserted before the following old file line:
+
+4134<;
+
+===============================================================================
+
+4411>;; Added for /u switch
+4412>	cmp	al,'u'			;; Look for U switch for PLUS
+4413>	jnz	A_TEST
+4414>	cmp	[S5_FLAG],0		;; No good unless PLUS
+4415>	jz	bad_parm
+4416>	TEST	[GOTSWITCH],SWITCH_A	;; Already have switch A ?
+4417>	JNZ	BAD_PARM
+4418>	cmp	[U_SWITCH],0
+4419>	jne	bad_parm
+4420>	dec	[U_SWITCH]
+4421>	jmp	scan_loop
+4422>A_TEST:
+4423>;;
+
+  ----> inserted before the following old file line:
+
+4252<	CMP	AL,"a"
+
+===============================================================================
+
+4435>;; added for /u switch
+4436>	cmp	[U_SWITCH],0
+4437>	jne	bad_parm
+4438>;;
+
+  ----> inserted before the following old file line:
+
+4263<	OR	[GOTSWITCH],SWITCH_A
+
+===============================================================================
+
+4847>;; Note:  When using upper extended memory on the PLUS, the value 
+4848>;;	  at BASE_RESET + 2 is patched to FA during initialization.
+4849>;;
+
+  ----> inserted before the following old file line:
+
+4671<BASE_RESET	LABEL	DWORD		; RESMEM driver must patch this value
+
+===============================================================================
+
+5312>	cmp	U_SWITCH,0		;; don't do this for at&t 6300 plus
+5313>	jnz	ret005
+
+  ----> inserted before the following old file line:
+
+5133<	PUSH	AX
+
+===============================================================================
+
+5394>
+5395>;; If upper extended memory is used on the PLUS, it is necessary to
+5396>;; patch the values of base_reset and base_addr to get the addressing right.
+5397>;;
+5398>	cmp	[U_SWITCH],0		;; patch the code for /U option
+5399>	jz	AT001A
+5400>	mov	ax,00fah
+5401>	mov	word ptr [base_reset+2],ax	;; patching upper address
+5402>	mov	word ptr [base_addr+2],ax	;;   to FA from 10
+5403>AT001A:
+5404>
+
+  ----> inserted before the following old file line:
+
+5213<	MOV	AX,8800H
+
+===============================================================================
+
+5214<	INT	15H		; Get extended memory size
+
+  ----> changed to the following:
+
+5406>	INT	15H			; Get extended memory size
+
+===============================================================================
+
+5410>
+5411>;; If running on a 6300 PLUS, it is necessary to subtract any upper extended
+5412>;; memory from the value obtained by int 15 to determine the correct memory
+5413>;; available for a type /E RAMDrive.  If loading a /U RAMDrive, it is necessary
+5414>;; to find out if there IS any upper extended memory.
+5415>
+5416>	cmp	[U_SWITCH],0		;; did we ask for upper extended memory
+5417>	jz	olstuff			;; no
+5418>	call	UpperMemCheck		;; yes, see if anything there
+5419>	jc	ERR_RET			;; no, quit
+5420>	mov	ax,384			;; yes, but max allowed is 384K
+5421>	jmp short at001b
+5422>olstuff:
+5423>	cmp	[S5_FLAG],0		;; if not 6300 PLUS, go on
+5424>	jz	at001b
+5425>	call	UpperMemCheck		;; yes, see if 384K is there
+5426>	jc	at001b			;; no, so int 15h is right
+5427>	sub	ax,384			;; yes, subtract 384K
+5428>AT001B:
+5429>
+
+  ----> inserted before the following old file line:
+
+5218<	MOV	DX,OFFSET ERRMSG2
+
+===============================================================================
+
+5466>
+5467>;;* UpperMemCheck - Called by 6300 PLUS to verify existence of
+5468>;;		    upper extended memory of 384K at FA0000h
+5469>;;
+5470>;;	Returns carry set if no upper extended memory.
+5471>;;
+5472>;;	This routine is called only by a 6300 PLUS, and
+5473>;;	it reads the hardware switch DSW2 to do the job.
+5474>;;
+5475>UpperMemCheck:
+5476>	push	ax
+5477>	in	al,66h
+5478>	and	al,00001111b
+5479>	cmp	al,00001011b
+5480>	pop	ax
+5481>	jnz	nomem
+5482>	clc
+5483>	ret
+5484>nomem:
+5485>	stc
+5486>	ret
+
+  ----> inserted before the following old file line:
+
+5254<
+
+===============================================================================
+
+6301>s5flagmsg db	" = S5 flag",13,10,"$"
+6302>U_msg	  db	" = U Switch", 13,10,'$'
+
+  ----> inserted before the following old file line:
+
+6068<ENDIF
+
+===============================================================================
+
+28 discrepancies.
+	File smartdrv.asm has 6075 lines.
+	File a:smartdrv.asm has 6310 lines.

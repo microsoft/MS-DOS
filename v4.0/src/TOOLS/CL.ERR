@@ -1,0 +1,52 @@
+				/* fatal messages */
+
+1001	"could not execute '%s'"
+1002	"too many open files, cannot redirect '%s'"
+1000	"UNKNOWN COMMAND LINE FATAL ERROR\n\t\tContact Microsoft Technical Support"
+
+				/* error messages */
+
+2001	"too many symbols predefined with -D"
+2002	"a previously defined model specification has been overridden"
+2003	"missing source file name"
+2007	"bad %s flag, would overwrite '%s' with '%s'"
+2008	"too many %s flags, '%s'"
+2009	"unknown option '%c' in '%s'"
+2010	"unknown floating point option"
+2011	"only one floating point model allowed"
+2012	"too many linker flags on command line"
+2013	"incomplete model specification"
+/* 2014	"-ND not allowed with -Ad" */
+2015	"assembly files are not handled"
+2016	"-Gw and -ND %s are incompatible"
+2017	"-Gw and -Au flags are incompatible"
+2018	"cannot open linker cmd file"
+2019	"cannot overwrite the source file, '%s'"
+2020	"-Gc option requires extended keywords to be enabled (-Ze)"
+2021	"invalid numerical argument '%s'"
+2022	"cannot open help file, '%s'"
+2023	"invalid model specification - small model only"
+2024	"-Gm and -ND %s are incompatible"
+2025	"missing argument"
+2000	"UNKNOWN COMMAND LINE ERROR\n\t\tContact Microsoft Technical Support"
+
+				/* warning messages */
+
+4001	"listing has precedence over assembly output"
+4002	"ignoring unknown flag '%s'"
+4003	"80186/286 selected over 8086 for code generation"
+4004	"optimizing for time over space"
+4005	"could not execute '%s';\nPlease enter new file name (full path) or Ctrl-C to quit: "
+4006	"only one of -P/-E/-EP allowed, -P selected"
+4007	"-C ignored (must also specify -P or -E or -EP)"
+4008	"non-standard model -- defaulting to large model libraries"
+4009	"threshold only for far/huge data, ignored"
+4010	"-Gp not implemented, ignored"
+4011	"preprocessing overrides source listing"
+4012	"function declarations override source listing"
+4013	"combined listing has precedence over object listing"
+4014	"invalid value %d for '%s'. Default %d is used"
+4015	"different default models - defaulting to %s model"
+4017	"conflicting stack checking options - stack checking disabled"
+4019	"string too long. Truncated to %d characters"
+4000	"UNKNOWN COMMAND LINE WARNING\n\t\tContact Microsoft Technical Support"

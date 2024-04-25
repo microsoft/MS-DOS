@@ -1,0 +1,440 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; PANEL.MAC
+;
+;	This file contains the MACROS defined for the
+;	screen management and a number of other macros
+;	identified with CAS services.
+;
+;	This file is included with the control flow files
+;	for the creation of SELECT.EXE!
+;
+; DATE:   July 3, 1987
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+					;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; MACRO:  PREPARE_CHILDREN
+;
+;	This routine takes the Child panels associated with the
+;	QM_ACTIVEPAN and adds them to the display queue - pushed
+;	on as Children.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+PREPARE_CHILDREN MACRO			;;AN000;
+	CALL	HANDLE_CHILDREN 	;;AN000;
+	ENDM				;;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; MACRO:  INIT_PQUEUE
+;
+;	This flushes both the Parent/Child queues, clears the
+;	refresh field table, initializes the refresh field to
+;	the new Parent panel (with 0 entries), and sets the break
+;	ON for the parent panel.  Also it pushes the parent onto
+;	the display queue.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+INIT_PQUEUE	MACRO	panel		;;AN000;
+	MOV	AX,panel		;;AN000;
+	CALL	INIT_PQUEUE_CALL	;;AN000;
+	ENDM				;;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; MACRO:  PREPARE_PANEL
+;
+;	This will put the specified panel into the Parent queue
+;	for display.  The QM_OPT2 is already set to break OFF.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+PREPARE_PANEL	MACRO	panel		;;AN000;
+	MOV	AX,panel		;;AN000;
+	CALL	PREPARE_PANEL_CALL	;;AN000;
+	ENDM				;;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; MACRO:  DISPLAY_PANEL
+;
+;	Display panel causes the Parent/Children on the display
+;	queues to be displayed on the screen.  If there are any
+;	entries in the entry field table, then the break ON is set
+;	to automatically display these panels.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+DISPLAY_PANEL	MACRO			;;AN000;
+	CALL	DISPLAY_PANEL_CALL	;;AN000;
+	ENDM				;;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; MACRO:  DEALLOCATE_MEMORY
+;
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+DEALLOCATE_MEMORY  MACRO		;;AN000;
+	CALL	DEALLOCATE_MEMORY_CALL	;;AN000;
+	ENDM				;;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; MACRO:  ALLOCATE_MEMORY
+;
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+ALLOCATE_MEMORY MACRO			;;AN000;
+	CALL	ALLOCATE_MEMORY_CALL	;;AN000;allocate segment
+	ENDM				;;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; MACRO:  GET_SCROLL
+;
+;	The scroll field becomes the active field assuming a default
+;	colour index, and the cursor keys become active.  The only
+;	keys valid for return are specified in the 'fkeys' list.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+GET_SCROLL   MACRO input,index,f_keys	;;AN000;
+	MOV	AX,input		;;AN000;
+	MOV	BX,index		;;AN000;
+	MOV	CX,f_keys&_LEN		;;AN000;
+	LEA	DX,f_keys		;;AN000;
+	CALL	EXEC_SCROLL_CALL	;;AN000;
+	ENDM				;;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; MACRO:  INIT_SCROLL
+;
+;	Sets up the scroll field with the specified index onto the
+;	refresh field table.  The colour index table is set to a
+;	different colour to indicate that it is not the active field.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+INIT_SCROLL  MACRO input,index		;;AN000;
+	MOV	AX,input		;;AN000;
+	MOV	BX,index		;;AN000;
+	CALL	INIT_SCROLL_CALL	;;AN000;
+	ENDM				;;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; MACRO:  INIT_SCROLL_W_LIST
+;
+;	Sets up the scroll field with the specified index onto the
+;	refresh field table.  The colour index table is set to a
+;	different colour to indicate that it is not the active field.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+INIT_SCROLL_W_LIST  MACRO input,list_seg,list_off,num_ele,max_width,max_title,index ;;AN000;
+	MOV	AX,input		;;AN000;
+	MOV	BX,max_title		;;AN000;
+	MOV	CX,num_ele		;;AN000;
+	MOV	DX,max_width		;;AN000;
+	MOV	SI,list_seg		;;AN000;
+	MOV	DI,list_off		;;AN000;
+	CALL	INIT_SCROLL_W_LIST_CALL ;;AN000;
+	MOV	AX,input		;;AN000;
+	MOV	BX,index		;;AN000;
+	CALL	INIT_SCROLL_CALL	;;AN000;
+	ENDM				;;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; MACRO:  INIT_SCROLL_W_NUM
+;
+;	Sets up the scroll field with the specified index onto the
+;	refresh field table.  The colour index table is set to a
+;	different colour to indicate that it is not the active field.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+INIT_SCROLL_W_NUM   MACRO input,num_ele,index ;;AN000;
+	MOV	AX,input		;;AN000;
+	MOV	CX,num_ele		;;AN000;
+	CALL	INIT_SCROLL_W_NUM_CALL	;;AN000;
+	MOV	AX,input		;;AN000;
+	MOV	BX,index		;;AN000;
+	CALL	INIT_SCROLL_CALL	;;AN000;
+	ENDM				;;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; MACRO:  INIT_SCROLL_COLOUR
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+INIT_SCROLL_COLOUR  MACRO input,colour	;;AN000;
+	MOV	BX,input		;;AN000;get PCSLCTP field
+	MOV	AX,colour		;;AN000;
+	CALL	SET_SCROLL_COLOUR	;;AN000;
+	ENDM				;;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; MACRO:  SET_SCROLL
+;
+;	The SET_SCROLL will set a scroll field specified to the required
+;	index in a different colour index to indicate it is NOT the
+;	active field.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+SET_SCROLL   MACRO input,index		;;AN000;
+	MOV	AX,input		;;AN000;
+	MOV	BX,index		;;AN000;
+	CALL	SET_SCROLL_CALL 	;;AN000;
+	ENDM				;;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; MACRO:  GET_FUNCTION
+;
+;	This routine is used to process screens with NO scroll fields
+;	or input fields.  The valid keys are specified in the 'fkeys'
+;	list.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+GET_FUNCTION	MACRO	fkeys		;;AN000;
+	MOV	CX,fkeys&_LEN		;;AN000;
+	LEA	DX,fkeys		;;AN000;
+	CALL	GET_FUNCTION_CALL	;;AN000;
+	ENDM				;;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; MACRO:  INIT_STRING
+;
+;	INIT_STRING is used to add the input entry field onto the
+;	refresh field table.  Unlike the scroll fields, the colour
+;	index is maintained for the input field.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+INIT_STRING  MACRO   input,string,max_string ;;AN000;
+	MOV	AX,input		;;AN000;
+	LEA	BX,string		;;AN000;
+	MOV	SI,max_string		;;AN000;
+	CALL	INIT_STRING_CALL	;;AN000;
+	ENDM				;;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; MACRO:  SET_STRING
+;
+;	This set an input field (already contained in the refresh
+;	field table) on the logical buffer to the defined string.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+SET_STRING   MACRO   input,string,max_string ;;AN000;
+	MOV	AX,input		;;AN000;
+	LEA	BX,string		;;AN000;
+	MOV	SI,max_string		;;AN000;
+	CALL	SET_STRING_CALL 	;;AN000;
+	ENDM				;;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; MACRO:  GET_STRING
+;
+;	Causes the input field specified to become the active input
+;	field.	The keys that will exit this input field are defined
+;	in the 'fkeys' list.  The other characters valid for this
+;	input field are contained in the ICB.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+GET_STRING  MACRO   input,string,max_string,fkeys ;;AN000;
+	MOV	AX,input		;;AN000;
+	LEA	BX,string		;;AN000;
+	MOV	CX,fkeys&_LEN		;;AN000;
+	LEA	DX,fkeys		;;AN000;
+	MOV	SI,max_string		;;AN000;
+	CALL	GET_STRING_CALL 	;;AN000;
+	ENDM				;;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; MACRO:  GET_NUMERIC
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+GET_NUMERIC MACRO   input,value,minimum,maximum,fkeys,string ;;AN000;
+	LOCAL	GN_0			;;AN000;
+	LOCAL	GN_1			;;AN000;
+	MOV	AX,maximum		;;AN000;
+	LEA	BX,P_USER_STRING	;;AN000;
+	CALL	CONVERT_ASCII		;;AN000;
+	MOV	SI,AX			;;AN000;
+					;;
+	MOV	AX,value		;;AN000;
+GN_0:	LEA	BX,string+2		;;AN000;
+	CALL	CONVERT_ASCII		;;AN000;
+	MOV	string,AX		;;AN000;
+					;;
+	LEA	BX,string		;;AN000;
+	MOV	AX,input		;;AN000;
+	MOV	CX,fkeys&_LEN		;;AN000;
+	LEA	DX,fkeys		;;AN000;
+	CALL	GET_STRING_CALL 	;;AN000;
+					;;
+	LEA	BX,P_USER_STRING	;;AN000;
+	MOV	CX,S_USER_STRING	;;AN000;
+	CALL	CONVERT_NUMERIC 	;;AN000;
+					;;
+	CMP	N_USER_FUNC,ESCAPE	;;AN000;
+	JE	GN_1			;;AN000;
+					;;
+	MOV	BX,minimum		;;AN000;
+	MOV	CX,maximum		;;AN000;
+	CALL	CHECK_MIN_MAX		;;AN000;
+	JC	GN_0			;;AN000;
+					;;
+GN_1:	MOV	N_USER_NUMERIC,AX	;;AN000;
+	ENDM				;;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; MACRO:  INIT_NUMERIC
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+INIT_NUMERIC MACRO   input,value,maximum,string ;;AN000;
+	MOV	AX,maximum		;;AN000;
+	LEA	BX,P_USER_STRING	;;AN000;
+	CALL	CONVERT_ASCII		;;AN000;
+	MOV	SI,AX			;;AN000;
+					;;
+	MOV	AX,value		;;AN000;
+	LEA	BX,string+2		;;AN000;
+	CALL	CONVERT_ASCII		;;AN000;
+	MOV	string,AX		;;AN000;
+					;;
+	LEA	BX,string		;;AN000;
+	MOV	AX,input		;;AN000;
+	CALL	INIT_STRING_CALL	;;AN000;
+	ENDM				;;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; MACRO:  SET_NUMERIC
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+SET_NUMERIC  MACRO   input,value,maximum,string ;;AN000;
+	MOV	AX,maximum		;;AN000;
+	LEA	BX,P_USER_STRING	;;AN000;
+	CALL	CONVERT_ASCII		;;AN000;
+	MOV	SI,AX			;;AN000;
+					;;
+	MOV	AX,value		;;AN000;
+	LEA	BX,string		;;AN000;
+	CALL	CONVERT_ASCII		;;AN000;
+	MOV	string,AX		;;AN000;
+					;;
+	LEA	BX,string		;;AN000;
+	MOV	AX,input		;;AN000;
+	CALL	SET_STRING_CALL 	;;AN000;
+	ENDM				;;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; MACRO:  GET_SUPPORT
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+INIT_SCROLL_STATUS MACRO input,status_id ;;AN000;
+	MOV	AX,input		;;AN000;
+	LEA	SI,status_id		;;AN000;
+	CALL	INIT_SCROLL_STATUS_CALL ;;AN000;
+	ENDM				;;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; MACRO:  INIT_SUPPORT
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+INIT_SUPPORT	MACRO table,index,status ;;AN000;
+	PUSH	SI			;;AN000;
+	LEA	SI,table		;;AN000;
+	MOV	BX,index		;;AN000;
+	DEC	BX			;;AN000;
+	SHL	BX,1			;;AN000;
+	MOV	AX,status		;;AN000;
+	MOV	[SI+BX],AX		;;AN000;
+	POP	SI			;;AN000;
+	ENDM				;;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; MACRO:  RET_SUPPORT
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+RET_SUPPORT	MACRO table,index,status ;;AN000;
+	PUSH	SI			;;AN000;
+	LEA	SI,table		;;AN000;
+	MOV	BX,index		;;AN000;
+	DEC	BX			;;AN000;
+	SHL	BX,1			;;AN000;
+	MOV	AX,[SI+BX]		;;AN000;
+	MOV	status,AX		;;AN000;
+	POP	SI			;;AN000;
+	ENDM				;;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; MACRO:  TOGGLE_SUPPORT
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+TOGGLE_SUPPORT	MACRO table,index	;;AN000;
+	MOV	BX,index		;;AN000;
+	LEA	DX,table		;;AN000;
+	CALL	TOGGLE_SUPPORT_CALL	;;AN000;
+	ENDM				;;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; MACROS:  INITIALIZE_BCHAR
+;
+;	One needs to initialize the background panel colour index
+;	to match the colour attributes of the Parent panels.  The
+;	index is based on panel #1 (which is assumed to be a good
+;	sample of the remaining panel colours.
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+INITIALIZE_BCHAR MACRO	character	;;AN000;
+	MOV	AL,character		;;AN000;Background character
+	MOV	PM_BASECHAR,AL		;;AN000;
+	PUSH	DI			;;AN000;
+	PUSH	DX			;;AN000;
+	PUSH	ES			;;AN000;
+	MOV	BX,1			;;AN000;get ES:DI pointer to panel #1
+	CALL	GET_PCB 		;;AN000;
+	PUSH	ES:[DI]+PCB_CCBID	;;AN000;get panel's color index
+	POP	AX			;;AN000;
+	DEC	AX			;;AN000;normalize index
+	POP	ES			;;AN000;
+	PUSH	ES			;;AN000;
+	MOV	DI,CRD_CCBVECOFF	;;AN000;
+	PUSH	CRD_CCBVECSEG		;;AN000;
+	POP	ES			;;AN000;
+	MOV	DX,12			;;AN000;12 entries per colour index
+	MUL	DX			;;AN000;
+	ADD	DI,AX			;;AN000;
+	MOV	AL,ES:[DI]		;;AN000;
+	POP	ES			;;AN000;
+	POP	DX			;;AN000;
+	POP	DI			;;AN000;
+	MOV	PM_BASEATTR,AL		;;AN000;set color attribute of background characters
+	ENDM				;;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; MACRO:  RETURN_STRING
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+RETURN_STRING  MACRO   input,string,maximum ;;AN000;
+	MOV	AX,input		;;AN000;
+	MOV	DX,maximum		;;AN000;
+	LEA	SI,string		;;AN000;
+	CALL	RETURN_STRING_CALL	;;AN000;
+	ENDM				;;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; MACRO:  HANDLE_ERROR
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+HANDLE_ERROR   MACRO   input,action	;;AN000;
+	LOCAL	CONTINUE		;;AN000;
+	MOV	BX,input		;;AN000;
+	MOV	CX,action		;;AN000;
+	CALL	HANDLE_ERROR_CALL	;;AN000;
+	JNC	CONTINUE		;;AN000;
+	CLEAR_SCREEN2			;;AC027;SEH ;AN000;
+	JMP	EXIT_SELECT		;;AN000;
+CONTINUE:				;;AN000;
+	ENDM				;;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; MACRO: INIT_CHAR	      ;;AN000;JW
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+INIT_CHAR    MACRO character,row,column,panid ;;AN000;JW
+	MOV  AX,row			;;AN000;JW
+	MOV  CX,column			;;AN000;JW
+	MOV  DL,character		;;AN000;JW
+	MOV  BX,panid			;;AN000;JW
+	CALL INIT_CHAR_CALL		;;AN000;JW
+	ENDM				;;AN000;JW
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

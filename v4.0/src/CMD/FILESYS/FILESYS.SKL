@@ -1,0 +1,15 @@
+
+:util FILESYS
+
+:class 1
+
+:class A
+:use COMMON1                            ;"Incorrect DOS version",cr,lf
+:def 10 "  PAUSED  %1   %2   %3",CR,LF
+:def 11 "          %1   %2   %3",CR,LF
+:def 12 "          Local   IFS",CR,LF                                           ;an001;bgb
+:def 13 "  Status  Device  Name        Parameters",CR,LF                        ;an001;bgb
+:def 14 "  ______  ______  _________   ___________________",CR,LF,CR,LF
+:def 15 "No entries found",CR,LF
+:def 16 "  ERROR   %1   %2   %3",CR,LF
+:end

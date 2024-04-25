@@ -1,0 +1,4 @@
+fc.obj error.obj fgetl.obj getl.obj itoupper.obj ..\..\inc\kstring.obj +
+maxmin.obj move.obj ntoi.obj string.obj update.obj xtab.obj messages.obj
+fc.exe
+

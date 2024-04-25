@@ -1,0 +1,23 @@
+;Structure, Equtes for DEVMARK for MEM command.
+
+DEVMARK struc
+DEVMARK_ID	  db	  0
+DEVMARK_SEG	  dw	  0
+DEVMARK_SIZE	  dw	  0
+DEVMARK_DUM	  db	  3 dup (?)
+DEVMARK_FILENAME  db	  8 dup (' ')
+DEVMARK ends
+
+DEVMARK_STK	equ	'S'
+DEVMARK_DEVICE	equ	'D'
+DEVMARK_IFS	equ	'I'
+DEVMARK_BUF	equ	'B'
+DEVMARK_CDS	equ	'L' ;lastdrive
+DEVMARK_FILES	equ	'F'
+DEVMARK_FCBS	equ	'X'
+DEVMARK_INST	equ	'T' ;used for SYSINIT BASE for INSTALL= command.
+DEVMARK_EMS_STUB equ	'E'
+
+SETBRKDONE	equ	00000001b
+FOR_DEVMARK	equ	00000010b
+NOT_FOR_DEVMARK equ	11111101b

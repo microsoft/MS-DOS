@@ -1,0 +1,46 @@
+;==========================================================
+
+:util	RESTORE 					;AN000;
+
+;---------
+:class	A
+;---------							;AN000;
+:use 1	 COMMON1						;AN000; ;For "Incorrect DOS version
+:def 2	 CR,LF,"Source and target drives are the same",CR,LF    ;AN000;
+:def 3	 CR,LF,"Invalid number of parameters",CR,LF             ;AN000;
+
+:use 5	 COMMON25						;AN000;  ;For  "Invalid path
+:def 6	 CR,LF,"Invalid drive specification",CR,LF              ;AN000;
+:def 7	 CR,LF,"Warning! No files were found to restore",CR,LF  ;AN000;
+:def 8	 CR,LF,"Insert backup diskette %1 in drive %2:",CR,LF   ;AN000;
+:def 9	 CR,LF,"Insert restore target in drive %1:",CR,LF       ;AN000;
+:use 10  COMMON28						;AN000;  ;For "Press any key to continue . . .",CR,LF
+:def 11  CR,LF,"Warning! Diskette is out of sequence",CR,LF     ;AN000;
+	 "Replace diskette or continue if okay",CR,LF           ;AN000;
+
+:def 12  CR,LF,"The last file was not restored",CR,LF           ;AN000;
+:def 13  CR,LF,"*** Files were backed up %1 ***",CR,LF          ;AN000;
+:def 14  CR,LF,"Source does not contain backup files",CR,LF     ;AN000;
+:def 15  CR,LF,"Insufficient memory",CR,LF                      ;AN000;
+:def 16  CR,LF,"Warning! File %1",CR,LF                         ;AN000;
+	 "is a read-only file",CR,LF                            ;AN000;
+	 "Replace the file (Y/N)?"                              ;AN000;
+
+:def 17  CR,LF,"Restore file sequence error",CR,LF              ;AN000;
+:def 18  CR,LF,"File creation error",CR,LF                      ;AN000;
+:def 19  CR,LF,"Insufficient disk space",CR,LF                  ;AN000;
+:def 20  CR,LF,"*** Not able to restore file ***",CR,LF         ;AN000;
+:def 21  CR,LF,"*** Restoring files from drive %1: ***",CR,LF   ;AN000;
+:def 22  CR,LF,"Warning! File %1",CR,LF                         ;AN000;
+	 "was changed after it was backed up",CR,LF             ;AN000;
+	 "Replace the file (Y/N)?",CR,LF                        ;AN000;
+
+:def 23  "Diskette: %1",CR,LF                                   ;AN000;
+
+:use 27  COMMON23						;AN000; ;For  "Invalid date
+:use 28  COMMON24						;AN000; ;For  "Invalid time
+:use 29  COMMON26						;AN000; ;For  "No source drive specified
+:use 30  COMMON27						;AN000; ;For  "No target drive specified
+:def 31  CR,LF							;AN000;
+:end								;AN000;
+;==========================================================

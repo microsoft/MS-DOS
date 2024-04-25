@@ -1,0 +1,28 @@
+;==========================================================
+;	FASTOPEN MESSAGE SKELETON FILE
+;==========================================================
+
+:util	FASTOPEN										   ;AN000;
+:class	A			;System message class						   ;AN000;
+:use 1	COMMON1 		;MSG 1 is always "Incorrect DOS Version"                           ;AN000;
+:use 6	PARSE10 		;Invalid parameter message			     ;AN000;
+:use 3	PARSE3			;Invalid Switch
+
+:def 4	CR,LF,"FASTOPEN installed",CR,LF                                                           ;AN000;
+:def 5	CR,LF,"FASTOPEN already installed",CR,LF                                                   ;AN000;
+:def 7	CR,LF,"Too many drive entries",CR,LF                                                      ;AN000;
+:def 8	CR,LF,"Same drive specified more than once",CR,LF                                          ;AN000;
+:def 9	CR,LF,"Invalid parameter",CR,LF                                                            ;AN000;
+:def 11 CR,LF,"Invalid extent entry",CR,LF                                                         ;AN000;
+:def 12 CR,LF,"Invalid number of file/directory entries",CR,LF                                     ;AN000;;AN000;
+:def 13 CR,LF,"Cannot setup expanded memory",CR,LF                                                 ;AN000;;AN000;
+:def 14 CR,LF,"Expanded memory not available",CR,LF                                                ;AN000;;AN000;
+:def 15 CR,LF,"Invalid drive specification %1",CR,LF                                               ;AN000;;AN000;
+:def 16 CR,LF,"Not enough space in EMS. Low memory is used",CR,LF                                  ;AN000;
+:def 17 CR,LF,"Cannot use FASTOPEN for drive %1",CR,LF
+:def 18 CR,LF,"Too many extent entries",CR,LF                                                      ;AN000;
+:def 19 CR,LF,"Too many file/directory entries",CR,LF                                                      ;AN000;
+
+:end
+
+;==========================================================

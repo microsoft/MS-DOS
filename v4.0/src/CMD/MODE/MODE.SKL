@@ -1,0 +1,193 @@
+;ษออออออออออออออออออออออออออออออออ  P R O L O G  อออออออออออออออออออออออออออออออออออออออออป
+;บ											  บ
+
+;  AN001 - P3976: Need to have all pieces of messages in MODE.SKL so have to
+;		  implement the SYSGETMSG method of getting addressability to
+;		  the pieces.  This means that the code does a SYSGETMSG call
+;		  which returns a pointer (DS:SI) to the message piece.  The
+;		  address is then put in the sublist block for the message
+;		  being issued.
+
+;บ											  บ
+;ศออออออออออออออออออออออออออออออออ  P R O L O G  อออออออออออออออออออออออออออออออออออออออออผ
+
+
+:util MODE												      ;AN000;
+													      ;AN000;
+:class	1												      ;AN000;
+													      ;AN000;
+;:use extend3												       ;AN000;
+;:use extend15												       ;AN000;
+													      ;AN000;
+:class	2												      ;AN000;
+													      ;AN000;
+;:use parse1												       ;AN000;
+;:use parse3	     ;Invalid switch
+;:use parse7												       ;AN000;
+;:use parse8												       ;AN000;
+													      ;AN000;
+													      ;AN000;
+:class A	  ;Transient messages, all MODE's messages are transient                                      ;AN000;
+													      ;AN000;
+:use  1  COMMON1	   ;"Incorrect DOS Version"                                                           ;AN000;
+:use  2  extend1											      ;AN000;
+:def  3  CR,LF,"Must specify COM1, COM2, COM3 or COM4",CR,LF                                                  ;AN000;
+:def  4  CR,LF,"Resident portion of MODE loaded",CR,LF                                                        ;AN000;
+:def  5  CR,LF,"Illegal device name",CR,LF                                                                    ;AN000;
+:def  6  CR,LF,"Printer error",CR,LF                                                                          ;AN000;
+:def  7  CR,LF,"LPT%1: set for 80",CR,LF                                                                      ;AN000;
+:def  8  CR,LF,"LPT%1: set for 132",CR,LF                                                                     ;AN000;
+:def  9  CR,LF,"Printer lines per inch set",CR,LF                                                             ;AN000;
+:def  10 CR,LF,"Invalid baud rate specified",CR,LF                                                            ;AN000;
+:def  11 CR,LF,"COM%1: %2,%3,%4,%5,%6",CR,LF                                                                  ;AN000;
+;		DEVICE - 1, 2, 3 or 4									      ;AN000;
+;		BAUD   - 110, 150, 300, 600, 1200, 2400, 4800, 9600 etc.				      ;AN000;
+;		PARITY - n, o, e etc									      ;AN000;
+;		DATA   - 5, 6, 7, or 8									      ;AN000;
+;		STOP   - 1, 1.5 or 2									      ;AN000;
+;		P      - old retry indication								      ;AN000;
+:def  12 "0123456789"                                                                                         ;AN000;
+:def  13 CR,LF,"Do you see the %1? (YES/NO)",CR,LF                                                            ;AN000;
+			   ;"rightmost 9?"   ;goes at the end of "Do you see the"                             ;AN000;
+			   ;"leftmost 0?"    ;goes at the end of "Do you see the"                             ;AN000;
+; Fourteen used to be "Invalid parameters", now use message 54 for those cases.
+:def  15 "LPT%1: rerouted to COM%2:",CR,LF                                                                    ;AN000;
+:def  16 "LPT%1: not rerouted",CR,LF                                                                          ;AN000;
+:def  17 CR,LF,"%1 retry on parallel printer time-out",CR,LF                                                  ;AN000;
+;	    ONE OF THE FOLLOWING TWO WORDS IS INSERTED: 						      ;AN000;
+			   ;"No"          ;goes before "retry on parallel printer time-out"                   ;AN000;
+			   ;"Infinite"    ;goes before "retry on parallel printer time-out"                   ;AN000;
+:def  18 CR,LF,"      Unable to shift screen %1",CR,LF                                                        ;AN000;
+			   ;"left"        ;goes at the end of "Unable to shift screen"                        ;AN000;
+			   ;"right"      ;goes at the end of "Unable to shift screen"                         ;AN000;
+;			   ;The offending_parameter is determined by parsing logic			      ;AN000;
+:use  19 PARSE10	   ;"Invalid parameter - %1",CR,LF                                                    ;AN000;
+:def  20 CR,LF,"Invalid number of parameters",CR,LF                                                           ;AN000;
+:def  21 CR,LF,"NET 042: Unable to do requested command",CR,LF                                                ;AN000;
+:def  22 CR,LF,"Infinite retry not supported on Network printer",cr,lf                                        ;AN000;
+:def  23 CR,LF,"Failure to access code page Font File",CR,LF                                                   ;AN000;
+			      ;%1 FILLED IN WITH PTR TO DEVICE NAME					      ;AN000;
+:def  24 CR,LF,"Failure to access device: %1",CR,LF                                                           ;AN000;
+:def  25 CR,LF,"Device or code page missing from font file",CR,LF                                              ;AN000;
+:def  26 CR,LF,"Font file contents invalid",CR,LF                                                             ;AN000;
+:def  27 CR,LF,"Previously prepared code page replaced",CR,LF                                                  ;AN000;
+:def  28 CR,LF,"Active code page for device %1 is %2",CR,LF                                                    ;AN000;
+			       ;%1 FILLED IN BY "QUERY" ROUTINE WITH PTR TO DEVICE NAME                       ;AN000;
+			       ;%2 FILLED IN BY "QUERY" ROUTINE WITH CODEPAGE ID                              ;AN000;
+:def  29 CR,LF,"Device %1 not prepared",CR,LF                                                                 ;AN000;
+			       ;FILLED IN BY "QUERY" ROUTINE WITH PTR TO DEVICE NAME                          ;AN000;
+			       ;"hardware"       ;used before "codepages:"                                    ;AN000;
+			       ;"prepared"                                                                    ;AN000;
+													      ;AN000;
+:class B		      ;nothing special, just too many messages for one class			      ;AN000;
+													      ;AN000;
+:def  30 "%1 code pages:",CR,LF                                                                                ;AN000;
+:def  31 "  code page %1",CR,LF       ;FILLED IN BY "QUERY" ROUTINE WITH CODEPAGE ID                           ;AN000;
+:def  32 CR,LF,"MODE %1 code page function completed",CR,LF                                                    ;AN000;
+	       ;FILLED IN with one of:									      ;AN000;
+				      ; "Status"                                                              ;AN000;
+				      ; "Prepare"                                                             ;AN000;
+				      ; "Select"                                                              ;AN000;
+				      ; "Refresh"                                                             ;AN000;
+													      ;AN000;
+:def  33 CR,LF,"Current code page settings:",CR,LF  ;table header                                              ;AN000;
+													      ;AN000;
+:def  34 "   %1 - %2 code page",CR,LF                                                                          ;AN000;
+			       ;%1 FILLED IN WITH CODEPAGE ID						      ;AN000;
+			       ;%2 FILLED IN TO POINT TO "Selected" or "System".                              ;AN000;
+													      ;AN000;
+:def  35 "  Code page not prepared",CR,LF                                                                      ;AN000;
+:def  36 "Code page operation not supported on this device",CR,LF                                              ;AN000;
+													      ;AN000;
+:def  37 "No code page has been SELECTED",CR,LF                                                                ;AN000;
+													      ;AN000;
+:def  38 "Device error during %1",CR,LF                                                                       ;AN000;
+			      ;FILLED IN TO POINT TO:							      ;AN000;
+;					     "Status"                                                         ;AN000;
+;					     "Prepare"                                                        ;AN000;
+;					     "Select"                                                         ;AN000;
+;					     "Refresh"                                                        ;AN000;
+;					     "write of font file to device"                                   ;AN000;
+													      ;AN000;
+:def 39 "code page not prepared",CR,LF                                                                         ;AN000;
+													      ;AN000;
+:def 40 CR,LF,"Current keyboard does not support this code page",CR,LF                                         ;AN000;
+													      ;AN000;
+:def 41 CR,LF,"Error during read of font file",CR,LF                                                          ;AN000;
+													      ;AN000;
+:def 42 CR,LF,"Unable to perform REFRESH operation",CR,LF                                                     ;AN000;
+													      ;AN000;
+:use 43 COMMON38	;used for formatting common messages for consistent spacing			      ;AN000;
+													      ;AN000;
+:def  44 CR,LF,"Status for device %1:",CR,LF        ;header for status reports                                ;AN000;
+													      ;AN000;
+:def  45 "------------------"                     ;first part of underline under "Status for device %1:"      ;AN000;
+													      ;AN000;
+:def  46 "----",CR,LF                               ;four_char_underline                                      ;AN000;
+													      ;AN000;
+:def  47 "-----",CR,LF                              ;five_char_underline                                      ;AN000;
+													      ;AN000;
+:def  48 "LINES=%1",CR,LF                                                                                     ;AN000;
+													      ;AN000;
+:def  49 "COLUMNS=%1",CR,LF                                                                                   ;AN000;
+													      ;AN000;
+:def  50 CR,LF,"RATE and DELAY must be specified together",CR,LF                                              ;AN000;
+													      ;AN000;
+:def  51 "RATE=%1",CR,LF                                                                                      ;AN000;
+													      ;AN000;
+:def  52 "DELAY=%1",CR,LF                                                                                     ;AN000;
+													      ;AN000;
+:def  53 CR,LF,"Function not supported on this computer - %1",CR,LF                                           ;AN000;
+													      ;AN000;
+:def  54 CR,LF,"Required font not loaded",CR,LF                                                               ;AN000;
+													      ;AN000;
+:def  55 CR,LF,"ANSI.SYS must be installed to perform requested function",CR,LF                               ;AN000;
+													      ;AN000;
+:def  56 CR,LF,"Baud rate required",CR,LF                                                                     ;AN000;
+													      ;AN000;
+:def  57 "RETRY=%1",CR,LF                                                                                     ;AN000;
+													      ;AN000;
+:use  58 PARSE9 	      ;"Syntax error - ???????",CR,LF                                                 ;AN000;
+
+
+;Following are the definitions of pieces of messages.
+
+													      ;AN000;
+;SHIFT_MSG - CR,LF,"Do you see the %s? (",YES,"/",NO,")",CR,LF,EOM
+
+:def  59 "rightmost 9",0                ;AN001;RIGHTMOST       DB
+:def  60 "leftmost 0",0                 ;AN001;LEFTMOST        DB
+
+;RETPARTO - CR,LF,"%s retry on parallel printer time-out",CR,LF,EOM
+
+:def  61 "No",0                         ;AN001;NORETRY         DB
+:def  62 "Infinite",0                   ;AN001;INFINITE        DB
+
+;CANT_SHIFT - CR,LF,"      Unable to shift screen %s",CR,LF,BEEP,EOM
+
+:def  63 "left",0                              ;AN001;LEFT            DB
+:def  64 "right",0                             ;AN001;RIGHT           DB
+
+;CPMSG8 	DB    "%S code pages:",CR,LF,EOM
+
+:def  65 "Hardware",0           ;AN001;CPMSG8_HW      DB
+:def  66 "Prepared",0           ;AN001;CPMSG8_PR      DB
+
+;CPMSG10	 DB    "MODE %S code page function completed",CR,LF,EOM
+;CPMSG17	 DB	"Device error during %S",BEEP,CR,LF,EOM
+
+:def  67 "status",0        ;AN001;CPMSG17_QUERY   CPMSG10_QUERY
+:def  68 "prepare",0       ;AN001;CPMSG17_PREP    CPMSG10_DES
+:def  69 "select",0        ;AN001;CPMSG17_ACT     CPMSG10_SELECT
+:def  70 "refresh",0       ;AN001;CPMSG17_REFRESH CPMSG10_REFRESH
+
+;CPMSG17	 DB	"Device error during %S",BEEP,CR,LF,EOM
+
+:def  71 "write of font file to device",0     ;AN001;CPMSG17_WRIT
+
+;CPMSG13	 DB    "   %D - %S code page",CR,LF,EOM
+
+:def  72 "selected",0      ;AN001;CPMSG13_ACT
+:def  73 "system",0        ;AN001;CPMSG13_SYS
+
+:end													      ;AN000;

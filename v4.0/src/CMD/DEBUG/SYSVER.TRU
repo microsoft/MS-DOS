@@ -1,0 +1,10 @@
+
+
+		   IF1
+		       %OUT Including ..SYSVER.TRU..
+		   ENDIF
+
+SYSVER		   EQU	TRUE		; if true, i/o direct to bios
+					; so DOS can be debugged
+
+

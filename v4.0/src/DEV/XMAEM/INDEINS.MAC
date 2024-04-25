@@ -1,0 +1,923 @@
+COMMENT #
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+*                                                                             *
+* MODULE NAME     : INDEINS                                                   *
+*                                                                             *
+*                    5669-196 (C) COPYRIGHT 1988 Microsoft Corp.              *
+*                                                                             *
+* DESCRIPTIVE NAME: Instructions for the 80386                                *
+*                                                                             *
+* STATUS (LEVEL)  : Version (0) Level (1.0)                                   *
+*                                                                             *
+* FUNCTION        : These macros define instructions that are recognized by   *
+*                   the 80386 but that are not recognized by MASM 3.0.  We    *
+*                   have to create these instructions ourselves because the   *
+*                   Macro Assembler won't.                                    *
+*                                                                             *
+* MODULE TYPE     : MAC                                                       *
+*                                                                             *
+* REGISTER USAGE  : 80286 Standard                                            *
+*                                                                             *
+* CHANGE ACTIVITY :                                                           *
+*                                                                             *
+* $MAC(INDEINS) COMP(LOAD) PROD(3270PC) :                                     *
+*                                                                             *
+* $D0=D0004700 410 870604 D : NEW FOR RELEASE 1.1                             *
+* $P1=P0000311 410 870804 D : RENAME MODULE'S LIBRARY FILE TYPE TO "MAC"      *
+*                                                                             *
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+#
+
+; Some information about creating instructions
+
+; MODIFIER BYTE VALUES
+
+;       MOD    REG/OPX    R/M
+;       ---    -------    ---
+;        11      111      111
+
+; EAX  AX  AL    000             DISP0   00
+; ECX  CX  CL    001             DISPB   01
+; EDX  DX  DL    010             DISPW   10
+; EBX  BX  BL    011             DISPR   11
+; ESP  SP  AH    100
+; EBP  BP  CH    101
+; ESI  SI  DH    110
+; EDI  DI  BH    111
+
+; ES:0
+; CS:1
+; SS:2
+; DS:3
+; FS:4
+; GS:5
+
+
+; OPX FIELD VALUES
+
+;  00F-000 OPCODE VALUES                00F-001 OPCODE VALUES
+;  ---------------------                ---------------------
+
+;    SLDT    000                          SGDT    000
+;    STR     001                          SIDT    001
+;    LLDT    010                          LIDT    010
+;    LTR     011                          LGDT    011
+;    VERR    100                          SMSW    100
+;    VERW    101                          ?       101
+;    ?       110                          LMSW    110
+;    ?       111                          ?       111
+
+
+PAGE
+
+; Macros to move to and from the 80386 system registers and to and from the
+; new segment registers FS and GS.
+
+
+;  CMOV - Move to and From Control Registers
+;
+;  Examples:
+;
+;       CMOV    CRx,EREG
+;       CMOV    EREG,CRx
+;
+
+CMOV    MACRO   REG1,REG2
+
+        _CREGFD = 0
+        _CRCNT = 0
+        IRP     TREG,<CR3,CR2,CR1,CR0>
+         IFIDN  <&REG1>,<&TREG>
+          _CREGFD = 1
+          _CRCNT = 0
+         ELSE
+          _CRCNT = _CRCNT + 1
+         ENDIF
+        ENDM
+        IFE _CREGFD-1
+         F_DREG <&REG2>
+         IF _DREGNUM LT 8
+           DB    0FH
+           DB    22H
+           DB    0C0H + _CRCNT*8 + _DREGNUM
+         ELSE
+          SYNTAX ERROR - EXTENDED REGISTER EXPECTED
+         ENDIF
+        ELSE
+         _CREGFD = 0
+         _CRCNT = 0
+         IRP     TREG,<CR3,CR2,CR1,CR0>
+          IFIDN  <&REG2>,<&TREG>
+           _CREGFD = 1
+           _CRCNT = 0
+          ELSE
+           _CRCNT = _CRCNT + 1
+          ENDIF
+         ENDM
+         IFE _CREGFD-1
+          F_DREG <&REG1>
+          IF _DREGNUM LT 8
+           DB    0FH
+           DB    20H
+           DB    0C0H + _CRCNT*8 + _DREGNUM
+          ELSE
+           SYNTAX ERROR - EXTENDED REGISTER EXPECTED
+          ENDIF
+         ELSE
+          SYNTAX ERROR - CONTROL REGISTER EXPECTED
+         ENDIF
+        ENDIF
+        ENDM
+
+
+;  DMOV - Move to and From Debug Registers
+;
+;  Examples:
+;
+;       DMOV    DRx,EREG
+;       DMOV    EREG,DRx
+;
+
+DMOV    MACRO   REG1,REG2
+
+        _DREGFD = 0
+        _DRCNT = 0
+        IRP     TREG,<DR7,DR6,DRX,DRX,DR3,DR2,DR1,DR0>
+         IFIDN  <&REG1>,<&TREG>
+          _DREGFD = 1
+          _DRCNT = 0
+         ELSE
+          _DRCNT = _DRCNT + 1
+         ENDIF
+        ENDM
+        IFE _DREGFD-1
+         F_DREG <&REG2>
+         IF _DREGNUM LT 8
+          DB    0FH
+          DB    23H
+          DB    0C0H + _DRCNT*8 + _DREGNUM
+         ELSE
+          SYNTAX ERROR - EXTENDED REGISTER EXPECTED
+         ENDIF
+        ELSE
+         _DREGFD = 0
+         _DRCNT = 0
+         IRP     TREG,<DR7,DR6,DRX,DRX,DR3,DR2,DR1,DR0>
+          IFIDN  <&REG2>,<&TREG>
+           _DREGFD = 1
+           _DRCNT = 0
+          ELSE
+           _DRCNT = _DRCNT + 1
+          ENDIF
+         ENDM
+         IFE _DREGFD-1
+          F_DREG <&REG1>
+          IF _DREGNUM LT 8
+           DB    0FH
+           DB    21H
+           DB    0C0H + _DRCNT*8 + _DREGNUM
+          ELSE
+           SYNTAX ERROR - EXTENDED REGISTER EXPECTED
+          ENDIF
+         ELSE
+          SYNTAX ERROR - DEBUG REGISTER EXPECTED
+         ENDIF
+        ENDIF
+        ENDM
+
+;  TMOV - Move to and From Test Registers
+;
+;  Examples:
+;
+;       TMOV    TRx,EREG
+;       TMOV    EREG,TRx
+;
+
+TMOV    MACRO   REG1,REG2
+
+        _TREGFD = 0
+        _TRCNT = 0
+        IRP     TREG,<TR7,TR6>
+         IFIDN  <&REG1>,<&TREG>
+          _TREGFD = 1
+          _TRCNT = 0
+         ELSE
+          _TRCNT = _TRCNT + 1
+         ENDIF
+        ENDM
+        _TRCNT = _TRCNT + 6
+        IFE _TREGFD-1
+         F_DREG <&REG2>
+         IF _DREGNUM LT 8
+          DB    0FH
+          DB    26H
+          DB    0C0H + _TRCNT*8 + _DREGNUM
+         ELSE
+          SYNTAX ERROR - EXTENDED REGISTER EXPECTED
+         ENDIF
+        ELSE
+         _TREGFD = 0
+         _TRCNT = 0
+         IRP     TREG,<TR7,TR6>
+          IFIDN  <&REG2>,<&TREG>
+           _TREGFD = 1
+           _TRCNT = 0
+          ELSE
+           _TRCNT = _TRCNT + 1
+          ENDIF
+         ENDM
+         _TRCNT = _TRCNT + 6
+         IFE _TREGFD-1
+          F_DREG <&REG1>
+          IF _DREGNUM LT 8
+           DB    0FH
+           DB    24H
+           DB    0C0H + _TRCNT*8 + _DREGNUM
+          ELSE
+           SYNTAX ERROR - EXTENDED REGISTER EXPECTED
+          ENDIF
+         ELSE
+          SYNTAX ERROR - TEST REGISTER EXPECTED
+         ENDIF
+        ENDIF
+        ENDM
+
+;  SMOV - Move to/from FS/GS segment registers from/to general registers
+;
+;  Examples:
+;
+;       SMOV    SReg, REG16
+;       SMOV    REG16, SReg
+;
+
+SMOV    MACRO   REG1,REG2
+        _SREGNUM = 8
+        _SREG1 = 1
+        IFIDN <&REG1>,<FS>
+         _SREGNUM = 4
+        ELSE
+         IFIDN  <&REG1>,<FS>
+          _SREGNUM = 4
+         ENDIF
+        ENDIF
+        IF _SREGNUM GT 7
+         IFIDN <&REG1>,<GS>
+          _SREGNUM = 5
+         ELSE
+          IFIDN  <&REG1>,<GS>
+           _SREGNUM = 5
+          ENDIF
+         ENDIF
+        ENDIF
+        IF _SREGNUM GT 7
+         _SREG1 = 0
+         IFIDN <&REG2>,<FS>
+          _SREGNUM = 4
+         ELSE
+          IFIDN  <&REG2>,<FS>
+           _SREGNUM = 4
+          ENDIF
+         ENDIF
+         IF _SREGNUM GT 7
+          IFIDN <&REG2>,<GS>
+           _SREGNUM = 5
+          ELSE
+           IFIDN  <&REG2>,<GS>
+            _SREGNUM = 5
+           ENDIF
+          ENDIF
+         ENDIF
+        ENDIF
+        IF _SREGNUM GT 7
+         SYNTAX ERROR - FS OR GS SEGMENT REGISTER EXPECTED
+        ELSE
+         IF _SREG1 EQ 1
+          DB    8EH
+          F_WREG <&REG2>
+         ELSE
+          DB    8CH
+          F_WREG <&REG1>
+         ENDIF
+         IF _WREGNUM GT 7
+          SYNTAX ERROR -  WORD REGISTER EXPECTED
+         ELSE
+          DB    0C0H + _SREGNUM*8 + _WREGNUM
+         ENDIF
+        ENDIF
+        ENDM
+
+F_MOD   MACRO   TYPE,DISP1,DISP2
+        _DISP = 2
+;;                         1      0
+        IRP     _TEST_,<DISP32, DISP8>
+         IFIDN  <&TYPE>,<&_TEST_>
+          _DISP = 0
+         ELSE
+          _DISP = _DISP + 1
+         ENDIF
+        ENDM
+        IFE (_DISP LT 2)
+;;                          1      0
+         IRP     _TEST_,<DISP32, DISP8>
+          IFIDN  <&TYPE>,<&_TEST_>
+           _DISP = 0
+          ELSE
+           _DISP = _DISP + 1
+          ENDIF
+         ENDM
+        ENDIF
+        IF _DISP LT 2
+         IFB    <&DISP1>
+          SYNTAX ERROR - IMMEDIATE OPERAND EXPECTED
+         ELSE
+          IFE _DISP-1
+           _MOD = 2
+          ELSE
+           _MOD = 1
+          ENDIF
+         ENDIF
+        ELSE
+         _MOD = 0
+        ENDIF
+        ENDM
+
+MK_DISP MACRO   P3,P4
+        IFE _DISP
+            DB     &P3
+        ELSE
+            DW     &P3
+         IFNB  <&P4>
+          IFDIF <&P4>,<IMMD>
+            DW     &P4
+          ENDIF
+         ELSE
+            DW     0H
+         ENDIF
+        ENDIF
+        ENDM
+
+MK_IMMD MACRO   P2,P3,P4,P5
+        _IMMDCNT = 3
+        IRP     _PARM,<&P2,&P3,&P4,&P5>
+         IFE _IMMDCNT
+          IF _SIZE EQ 1
+            DB     &_PARM
+          ELSE
+            DW     &_PARM
+          ENDIF
+         ELSE
+          IFE _IMMDCNT-1
+           IF _SIZE EQ 4
+            IFNB <&_PARM>
+            DW     &_PARM
+            ELSE
+            DW     0H
+            ENDIF
+           ENDIF
+          ENDIF
+         ENDIF
+         _IMMDCNT = _IMMDCNT + 1
+         IFIDN  <&_PARM>,<IMMD>
+         _IMMDCNT = 0
+         ENDIF
+        ENDM
+        ENDM
+
+F_BREG  MACRO   TBREG
+        _BREGNUM = 0
+         IRP     TREG,<BH,DH,CH,AH,BL,DL,CL,AL>
+          IFIDN   <&TBREG>,<&TREG>
+            _BREGNUM = 0
+          ELSE
+            _BREGNUM = _BREGNUM + 1
+          ENDIF
+         ENDM
+         IFE (_BREGNUM LT 8)
+          IRP     TREG,<BH,DH,CH,AH,BL,DL,CL,AL>
+           IFIDN   <&TDREG>,<&TREG>
+             _BREGNUM = 0
+           ELSE
+             _BREGNUM = _BREGNUM + 1
+           ENDIF
+          ENDM
+         ENDIF
+        ENDM
+
+F_WREG  MACRO   TWREG
+        _WREGNUM = 0
+         IRP     TREG,<DI,SI,BP,SP,BX,DX,CX,AX>
+          IFIDN   <&TWREG>,<&TREG>
+            _WREGNUM = 0
+          ELSE
+            _WREGNUM = _WREGNUM + 1
+          ENDIF
+         ENDM
+         IFE (_WREGNUM LT 8)
+          IRP     TREG,<DI,SI,BP,SP,BX,DX,CX,AX>
+           IFIDN   <&TWREG>,<&TREG>
+             _WREGNUM = 0
+           ELSE
+             _WREGNUM = _WREGNUM + 1
+           ENDIF
+          ENDM
+         ENDIF
+        ENDM
+
+F_DREG  MACRO   TDREG
+        _DREGNUM = 0
+         IRP     TREG,<EDI,ESI,EBP,ESP,EBX,EDX,ECX,EAX>
+          IFIDN   <&TDREG>,<&TREG>
+            _DREGNUM = 0
+          ELSE
+            _DREGNUM = _DREGNUM + 1
+          ENDIF
+         ENDM
+         IFE (_DREGNUM LT 8)
+          IRP     TREG,<EDI,ESI,EBP,ESP,EBX,EDX,ECX,EAX>
+           IFIDN   <&TDREG>,<&TREG>
+             _DREGNUM = 0
+           ELSE
+             _DREGNUM = _DREGNUM + 1
+           ENDIF
+          ENDM
+         ENDIF
+        ENDM
+
+F_BASE  MACRO   TBASE
+        _BASE = 0
+;;                      7     6     5     4     3     2     1     0
+        IRP     TREG,<[EDI],[ESI],[EBP],[ESP],[EBX],[EDX],[ECX],[EAX]>
+         IFIDN  <&TBASE>,<&TREG>
+          _BASE = 0
+         ELSE
+          _BASE = _BASE + 1
+         ENDIF
+        ENDM
+        IFE (_BASE LT 8)
+;;                      7     6     5     4     3     2     1     0
+         IRP     TREG,<[EDI],[ESI],[EBP],[ESP],[EBX],[EDX],[ECX],[EAX]>
+          IFIDN  <&TBASE>,<&TREG>
+           _BASE = 0
+          ELSE
+           _BASE = _BASE + 1
+          ENDIF
+         ENDM
+        ENDIF
+        ENDM
+
+F_INDEX MACRO   INDX
+        _INDEX = 0
+;;                      7    6    5    4    3    2    1    0
+        IRP     TREG,<[EDI,[ESI,[EBP,_XX_,[EBX,[EDX,[ECX,[EAX>
+         IFIDN  <&INDX>,<&TREG>
+          _INDEX = 0
+         ELSE
+          _INDEX = _INDEX + 1
+         ENDIF
+        ENDM
+        IFE (_INDEX LT 8)
+;;                       7    6    5    4    3    2    1    0
+         IRP     TREG,<[EDI,[ESI,[EBP,_XX_,[EBX,[EDX,[ECX,[EAX>
+          IFIDN  <&INDX>,<&TREG>
+           _INDEX = 0
+          ELSE
+           _INDEX = _INDEX + 1
+          ENDIF
+         ENDM
+        ENDIF
+        ENDM
+
+F_SCALE MACRO   TSCALE
+        _SCALE = 0
+;;                     3    2    1    0
+        IRP     TREG,<*8], *4], *2], *1]>
+         IFIDN  <&TSCALE>,<&TREG>
+          _SCALE = 0
+         ELSE
+          _SCALE = _SCALE + 1
+         ENDIF
+        ENDM
+        ENDM
+
+PAGE
+
+; Macros to PUSH and POP the new segment registers FS and GS
+
+
+; PUSH_FS - PUSH FS segment register
+
+PUSH_FS MACRO
+          DB    00FH
+          DB    0A0H
+        ENDM
+
+
+; PUSH_GS - PUSH GS segment register
+
+PUSH_GS MACRO
+          DB    00FH
+          DB    0A8H
+        ENDM
+
+
+; POP_FS - POP FS segment register
+
+POP_FS  MACRO
+          DB    00FH
+          DB    0A1H
+        ENDM
+
+
+; POP_GS - POP GS segment register
+
+POP_GS  MACRO
+          DB    00FH
+          DB    0A9H
+        ENDM
+
+PAGE
+
+; Macros for multiplication instructions
+
+; RIMUL - Uncharacterized Signed Multiply (16-bit)
+; Syntax: RIMUL   REG,REG/MEM
+
+RIMUL   MACRO   REG,OPND
+        LOCAL   L1,L2
+        _2BYTEOP = 1
+        DB      0FH
+        .XLIST
+L1       LABEL   BYTE
+        .LIST
+        CMP    &REG,&OPND
+        .XLIST
+L2      LABEL  BYTE
+        ORG    OFFSET CS:L1
+        .LIST
+        DB     0AFH
+        .XLIST
+        ORG    OFFSET CS:L2
+        .LIST
+        ENDM
+
+; ERIMUL - 32 bit Uncharacterized Signed Multiply
+; Systax: ERIMUL  REG,REG/MEM
+
+ERIMUL  MACRO   REG,OPND
+        DB      66H
+        RIMUL   &REG,<&OPND>
+        ENDM
+
+PAGE
+
+; Macros to load pointers with the segment in FS, GS or SS.  That is, these are
+; just like the instructions LDS and LES but for the FS, GS and SS registers.
+
+NEWLS   MACRO   OP,REG,OPND
+        LOCAL   L1,L2
+         DB      0FH
+        .XLIST
+L1      LABEL   BYTE
+        .LIST
+         LDS     &REG,DWORD PTR &OPND
+        .XLIST
+L2      LABEL   BYTE
+        ORG     OFFSET CS:L1
+        .LIST
+         DB      &OP
+        .XLIST
+        ORG     OFFSET CS:L2
+        .LIST
+        ENDM
+
+;       LFS     REG,OPND
+
+LFS     MACRO   REG,OPND
+        NEWLS   0B4H,&REG,<&OPND>
+        ENDM
+
+;       LGS     REG,OPND
+
+LGS     MACRO   REG,OPND
+        NEWLS   0B5H,&REG,<&OPND>
+        ENDM
+
+;       LSS     REG,OPND
+
+LSS     MACRO   REG,OPND
+        NEWLS   0B2H,&REG,<&OPND>
+        ENDM
+
+; Now we do 32 bit versions of the above
+
+;       ELFS    REG,OPND
+
+ELFS    MACRO   REG,OPND
+         DB      66H
+        NEWLS   0B4H,&REG,<&OPND>
+        ENDM
+
+;       ELGS    REG,OPND
+
+ELGS    MACRO   REG,OPND
+         DB      66H
+        NEWLS   0B5H,&REG,<&OPND>
+        ENDM
+
+;       ELSS    REG,OPND
+
+ELSS    MACRO   REG,OPND
+         DB      66H
+        NEWLS   0B2H,&REG,<&OPND>
+        ENDM
+
+PAGE
+
+; Macros for some shift instructions
+
+; Shift Left Double     R/M, Reg [CL = COUNT] [16-bit Operand]
+;       SHLD    OPND,REG      (Double left shift) [CL = COUNT]
+
+SHLD    MACRO   OPND,REG
+        SHDOP   0A5H,<&OPND>,&REG
+        ENDM
+
+
+; Shift Right Double    R/M, Reg [CL = COUNT] [16-bit Operand]
+;       SHRD    OPND,REG      (Double right shift) [CL = COUNT]
+
+SHRD    MACRO   OPND,REG
+        SHDOP   0ADH,<&OPND>,&REG
+        ENDM
+
+
+; Shift Left Double     R/M, Reg, Immd (8-bit) [16-bit Operand]
+;       SHLDI   OPND,REG,IMMD-8
+
+SHLDI   MACRO   OPND,REG,IMMD
+        SHDOP   0A4H,<&OPND>,&REG
+        DB      &IMMD
+        ENDM
+
+
+; Shift Right Double    R/M, Reg, Immd (8-bit) [16-bit Operand]
+;       SHRDI   OPND,REG,IMMD-8
+
+SHRDI   MACRO   OPND,REG,IMMD
+        SHDOP   0ACH,<&OPND>,&REG
+        DB      &IMMD
+        ENDM
+
+; Now 32 bit versions of the above
+
+; Shift Left Double     R/M, Reg [CL = COUNT]  [32-bit Operand]
+;       ESHLD   OPND,REG        (Double left shift) [CL = COUNT]
+
+ESHLD   MACRO   OPND,REG
+         DB      66H
+        SHDOP   0A5H,<&OPND>,&REG
+        ENDM
+
+
+; Shift Right Double    R/M, Reg [CL = COUNT]  [32-bit Operand]
+;       ESHRD   OPND,REG        (Double right shift) [CL = COUNT]
+
+ESHRD   MACRO   OPND,REG
+         DB      66H
+        SHDOP   0ADH,<&OPND>,&REG
+        ENDM
+
+
+; Shift Left Double     R/M, Reg, Immd (8-bit) [32-bit Operand]
+;       ESHLDI  OPND,REG,IMMD-8 (Double left shift)
+
+ESHLDI  MACRO   OPND,REG,IMMD
+         DB      66H
+        SHDOP   0A4H,<&OPND>,&REG
+         DB      &IMMD
+        ENDM
+
+
+; Shift Right Double    R/M, Reg, Immd (8-bit) [32-bit Operand]
+;      ESHRDI  OPND,REG,IMMD-8 (Double right shift)
+
+ESHRDI  MACRO   OPND,REG,IMMD
+         DB      66H
+        SHDOP   0ACH,<&OPND>,&REG
+         DB      &IMMD
+        ENDM
+
+
+SHDOP   MACRO   OP,OPND,REG
+        LOCAL   L1,L2
+        _2BYTEOP = 1
+         DB      0FH
+        .XLIST
+L1      LABEL   BYTE
+        .LIST
+         OR      &REG,&OPND
+        .XLIST
+L2      LABEL   BYTE
+        ORG     OFFSET CS:L1
+        .LIST
+         DB      &OP
+        .XLIST
+        ORG     OFFSET CS:L2
+        .LIST
+        ENDM
+
+PAGE
+
+;       The following two instructions, CALLFAR and JUMPFAR, work in the
+;       MS Macro Assembler, but not for intersegment direct.  The assembler
+;       generates segments based on 8088 values, and we need them based
+;       on protect-mode selector values.  The assembler works just ducky for
+;       jump and call far indirect, since you go pick up the offset and
+;       segment at execution time.
+
+CALLFAR MACRO   DISP,SEGMENT
+
+        DB      09AH                    ; Call far direct
+        DW      (OFFSET &DISP)          ;   to this offset
+        DW      &SEGMENT                ;     in this segment
+
+        ENDM
+
+
+JUMPFAR MACRO   DISP,SEGMENT
+
+        DB      0EAH                    ; Jump far direct
+        DW      (OFFSET &DISP)          ;   to this offset
+        DW      &SEGMENT                ;     in this segment
+
+        ENDM
+
+PAGE
+
+; Macros for extended jump instructions
+
+LJCOND  MACRO   OP,DISPL
+        _2BYTEOP = 1
+TEMP    =       $ + 4
+         DB      0FH
+         DB      &OP
+         DW      (OFFSET &DISPL)-(&TEMP)
+        ENDM
+
+;       LJO     DISPL  (Long Jump on Overflow)
+LJO     MACRO   DISPL
+        LJCOND  80H,<&DISPL>
+        ENDM
+
+
+;       LJNO    DISPL  (Long Jump on NO Overflow)
+LJNO    MACRO   DISPL
+        LJCOND  81H,<&DISPL>
+        ENDM
+
+;       LJB     DISPL  (Long Jump on Below)
+LJB     MACRO   DISPL
+        LJCOND  82H,<&DISPL>
+        ENDM
+
+;       LJC     DISPL  (Long Jump on Carry)
+LJC     MACRO   DISPL
+        LJCOND  82H,<&DISPL>
+        ENDM
+
+;       LNAE    DISPL  (Long Jump on Not Above or Equal)
+LNAE    MACRO   DISPL
+        LJCOND  82H,<&DISPL>
+        ENDM
+
+;       LJNB    DISPL  (Long Jump on Not Below)
+LJNB    MACRO   DISPL
+        LJCOND  83H,<&DISPL>
+        ENDM
+
+;       LJNC    DISPL  (Long Jump on No Carry)
+LJNC    MACRO   DISPL
+        LJCOND  83H,<&DISPL>
+        ENDM
+
+;       LJAE    DISPL  (Long Jump on Above or Equal)
+LJAE    MACRO   DISPL
+        LJCOND  83H,<&DISPL>
+        ENDM
+
+;       LJE     DISPL  (Long Jump on Equal)
+LJE     MACRO   DISPL
+        LJCOND  84H,<&DISPL>
+        ENDM
+
+;       LJZ     DISPL  (Long Jump on Zero)
+LJZ     MACRO   DISPL
+        LJCOND  84H,<&DISPL>
+        ENDM
+
+;       LJNE    DISPL  (Long Jump on Not Equal)
+LJNE    MACRO   DISPL
+        LJCOND  85H,<&DISPL>
+        ENDM
+
+;       LJNZ    DISPL  (Long Jump on Not Zero)
+LJNZ    MACRO   DISPL
+        LJCOND  85H,<&DISPL>
+        ENDM
+
+;       LJBE    DISPL  (Long Jump on Below or Equal)
+LJBE    MACRO   DISPL
+        LJCOND  86H,<&DISPL>
+        ENDM
+
+;       LJNA    DISPL  (Long Jump on Not Above)
+LJNA    MACRO   DISPL
+        LJCOND  86H,<&DISPL>
+        ENDM
+
+;       LJNBE   DISPL  (Long Jump on Not Below or Equal)
+LJNBE   MACRO   DISPL
+        LJCOND  87H,<&DISPL>
+        ENDM
+
+;       LJA     DISPL  (Long Jump on Above)
+LJA     MACRO   DISPL
+        LJCOND  87H,<&DISPL>
+        ENDM
+
+;       LJS     DISPL  (Long Jump on Sign)
+LJS     MACRO   DISPL
+        LJCOND  88H,<&DISPL>
+        ENDM
+
+;       LJNS    DISPL  (Long Jump on No Sign)
+LJNS    MACRO   DISPL
+        LJCOND  89H,<&DISPL>
+        ENDM
+
+;       LJP     DISPL  (Long Jump on Parity)
+LJP     MACRO   DISPL
+        LJCOND  8AH,<&DISPL>
+        ENDM
+
+;       LJPE    DISPL  (Long Jump on Parity Even)
+LJPE    MACRO   DISPL
+        LJCOND  8AH,<&DISPL>
+        ENDM
+
+;       LJNP    DISPL  (Long Jump on No Parity)
+LJNP    MACRO   DISPL
+        LJCOND  8BH,<&DISPL>
+        ENDM
+
+;       LJPO    DISPL  (Long Jump on Parity Odd)
+LJPO    MACRO   DISPL
+        LJCOND  8BH,<&DISPL>
+        ENDM
+
+;       LJL     DISPL  (Long Jump on Less)
+LJL     MACRO   DISPL
+        LJCOND  8CH,<&DISPL>
+        ENDM
+
+;       LJNGE   DISPL  (Long Jump on Not Greater or Equal)
+LJNGE   MACRO   DISPL
+        LJCOND  8CH,<&DISPL>
+        ENDM
+
+;       LJNL    DISPL  (Long Jump on Not Less)
+LJNL    MACRO   DISPL
+        LJCOND  8DH,<&DISPL>
+        ENDM
+
+;       LJGE    DISPL  (Long Jump on Greater than or Equal)
+LJGE    MACRO   DISPL
+        LJCOND  8DH,<&DISPL>
+        ENDM
+
+;       LJLE    DISPL  (Long Jump on Less than or Equal)
+LJLE    MACRO   DISPL
+        LJCOND  8EH,<&DISPL>
+        ENDM
+
+;       LJNG    DISPL  (Long Jump on Not Greater than)
+LJNG    MACRO   DISPL
+        LJCOND  8EH,<&DISPL>
+        ENDM
+
+;       LJNLE   DISPL  (Long Jump on Not Less than or Equal)
+LJNLE   MACRO   DISPL
+        LJCOND  8FH,<&DISPL>
+        ENDM
+
+;       LJG     DISPL  (Long Jump on Greater than)
+LJG     MACRO   DISPL
+        LJCOND  8FH,<&DISPL>
+        ENDM
+
+;       JECXZ   DISPL  (Jump short on ECX Zero)
+JECEXZ  MACRO   DISPL
+         DB      66H
+         JCXZ    &DISPL
+        ENDM
+

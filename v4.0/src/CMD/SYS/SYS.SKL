@@ -1,0 +1,48 @@
+;================================================
+; Message Skeleton File
+;================================================
+
+:util   SYS
+
+:class  1
+
+:use EXTEND15                           ; INVALID DRIVE
+
+:class  2
+
+:use PARSE1                             ;1 - Too many operands
+:use PARSE2                             ;2 - Required operand missing
+                                        ;3 - Not in switch list provided
+                                        ;4 - Not in keyword list provided
+                                        ;5 - (reserved)
+                                        ;6 - Out of range specified
+                                        ;7 - Not in value list provided
+                                        ;8 - Not in string list provided
+:use PARSE9                             ;9 - Invalid Parameter
+
+:class  A
+
+:use 1  COMMON1
+
+:class  B
+
+:def 7  "No room for system on destination disk",CR,LF         ; Old
+:def 8  "Incompatible system size",CR,LF                       ; Old
+:use 9  COMMON30                 ; System transferred            Old
+:def 10 "No system on default drive",CR,LF                     ; Old
+:def 11 "Can not specify default drive",CR,LF                  ; New
+:def 12 "Write failure, diskette unusable",CR,LF               ; New
+
+:class  C
+
+:use 13 COMMON12                 ; Cannot %1 to a Network drive  Old
+:def 14 "Insert system disk in drive %1",CR,LF                 ; Old
+:use 15 COMMON19                 ; Insert destination disk in drive %1 - Old
+:def 16 "Not able to SYS to %1 file system",CR,LF              ; New
+:use 18 COMMON14                 ; Cannot %1 a SUBSTed or ASSIGNed drive - NEW
+
+:class  D
+
+:use 17 COMMON28                  ; Press any key to continue. .; Old
+
+:end

@@ -1,0 +1,14 @@
+msbio1+
+msCON+
+msAUX+
+msLPT+
+msCLOCK+
+msDISK+
+msBIO2+
+mshard+
+msinit+
+sysinit1+
+sysconf+
+sysinit2+
+sysimes,msbio,msBIO/M;
+

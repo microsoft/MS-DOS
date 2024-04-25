@@ -1,0 +1,67 @@
+
+
+
+
+
+
+                                Multi-Taking MS-DOS
+                               Beta Test Release 1.00
+
+                                   Release Notes
+
+
+                 Enclosed you  will find  Microsoft's first beta release
+            of Multi-tasking  MS-DOS.  This version is based upon MS-DOS
+            Version 2  sources, we  will be  reimplementing  the  multi-
+            tasking enhancements on top of Version 3 sources shortly.
+
+                 Although we  have distributed  a bootable  disk for the
+            IBM PC,  this package  can be adapted to any MS-DOS machine.
+            Those manufacturers  who are  designing IBM compatible ROMs,
+            would be  wise to keep multi-tasking in mind.  Specifically,
+            this IBM  PC implementation  has had  to hook out the entire
+            disk (both  floppy and  hard disk) ROM code because after he
+            IBM code  set's up  the DMA  transfer it simply loops in ROM
+            waiting for the interrupt to occur (routine WAIT_INT).
+
+            Problems you may wish to avoid within future ROMs are:
+                 1)   loading ES  with the  physical video  RAM location
+                      (label M3)
+                 2)   Looping in ROM on Cntrl-NumLock (label K40)
+                 3)   No  way  to  add  special  detecting  special  key
+                      strokes which  a jump  out into  RAM after reading
+                      the keystroke at KB_INT would avoid
+                 4)   Not being  able to hook the loading of DS to point
+                      to DATA (EQU 40H) in numerous routines.
+            Other than  these deficiencies the ROM code developed should
+            be very usable.
+
+                 By implementing the above suggestions, the size of your
+            BIOS can  be reduced  since it  will  not  be  necessary  to
+            duplicate functionality in RAM.
+
+                 More  detailed  specifications  of  the  device  driver
+            formats will  be forth  coming.  For the time being you will
+            have to  make use  of the sample source code for the IBM PC.
+            If you  have further  questions please contact Microsoft OEM
+            customer support through Technical Assist Requests (TAR).
+
+
+               * * *  WARNING  * * *  WARNING  * * *  WARNING  * * *
+
+                 Each copy  of this  software distribution has been
+                 individually serialized  to facilitate  tracing of
+                 unauthorized duplication.
+
+               * * *  WARNING  * * *  WARNING  * * *  WARNING  * * *
+
+
+
+
+
+
+
+
+
+
+

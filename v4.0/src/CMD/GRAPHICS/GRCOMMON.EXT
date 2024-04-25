@@ -1,0 +1,32 @@
+.XLIST										;AN000;
+PAGE	,132									;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
+;; DOS - GRAPHICS Command
+;; (C) Copyright 1988 Microsoft
+;;										;AN000;
+;; File Name:  GRCOMMON.EXT							;AN000;
+;; ----------									;AN000;
+;;										;AN000;
+;; Description: 								;AN000;
+;; ------------ 								;AN000;
+;;	 Include file containing external declarations for			;AN000;
+;;	 the code and data defined in GRCOMMON.ASM				;AN000;
+;;										;AN000;
+;; Change History:								;AN000;
+;; ---------------								;AN000;
+;;										;AN000;
+;;										;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
+				       ;;					;AN000;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
+.LIST										;AN000;
+EXTRN	READ_DOT:NEAR								;AN000;
+EXTRN	LOC_MODE_PRT_INFO:NEAR							;AN000;
+EXTRN	STORE_BOX:NEAR								;AN000;
+EXTRN	PRINT_BUFFER:NEAR							;AN000;
+EXTRN	GET_SCREEN_INFO:NEAR							;AN000;
+EXTRN	SETUP_PRT:NEAR								;AN000;
+EXTRN	RESTORE_PRT:NEAR							;AN000;
+EXTRN	NEW_PRT_LINE:NEAR							;AN000;
+EXTRN	PRINT_BYTE:NEAR 							;AN000;
+EXTRN	DET_CUR_SCAN_LNE_LENGTH:NEAR						;AN000;

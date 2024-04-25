@@ -1,0 +1,75 @@
+;======================= START OF SPECIFICATIONS =========================
+;
+; MODULE NAME: EDLMES.FIL
+;
+; DESCRIPTIVE NAME: EDLIN MESSAGES
+;
+; FUNCTION: PROVIDES A SET OF MESSAGES FOR EDLIN.
+;
+; ENTRY POINT: NA
+;
+; INPUT: NA
+;
+; EXIT NORMAL: NA
+;
+; EXIT ERROR: NA
+;
+; INTERNAL REFERENCES: NA
+;
+; EXTERNAL REFERENCES: NA
+;
+;
+; NOTES: THIS MODULE IS TO BE PREPPED BY FASTBLD.EXE.
+;
+; REVISION HISTORY:
+;
+;	VERSION 4.00 - CREATED FOR DOS 4.00
+;
+;======================= END OF SPECIFICATIONS ===========================
+
+;=========================================================================
+; edlin utility message file
+;=========================================================================
+
+:util EDLIN				;utility name
+:class 1
+
+:class A				;system messages
+:use 1 COMMON1				;"Incorrect DOS version",CR,LF
+:use 2 COMMON2				;"Insufficient memory",CR,LF
+:use 3 COMMON3				;"Error loading messages",CR,LF
+
+:class B				;utility messages
+:def 6 "*"                              ;prompt_ptr
+:def 7 "Invalid drive or file name",CR,LF       ;baddrv_ptr
+:def 8 "File name must be specified",CR,LF      ;ndname_ptr
+:def 10 "File is READ-ONLY",CR,LF               ;ro_err_ptr
+:def 11 "File Creation Error",CR,LF             ;bcreat_ptr
+:def 12 "Too many files open",CR,LF             ;too_many_ptr
+:def 13 "Read error in:",CR,LF,"%1",CR,LF       ;read_err_ptr
+:def 14 "Cannot edit .BAK file--rename file",CR,LF      ;nobak_ptr
+:def 15 "No room in directory for file",CR,LF   ;nodir_ptr
+:def 16 "Disk full. Edits lost.",CR,LF          ;dskful_ptr
+:def 18 "Entry error",CR,LF                     ;badcom_ptr
+:def 19 "New file",CR,LF                        ;newfil_ptr
+:def 20 "Not found",CR,LF                       ;nosuch_ptr
+
+:class C					;utility messages
+:def 21 "O.K.? "                                ;ask_ptr
+:def 22 "Line too long",CR,LF                   ;toolng_ptr
+:def 23 "End of input file",CR,LF               ;eof_ptr
+:def 24 "Abort edit (Y/N)? "                    ;qmes_ptr
+:def 25 "Must specify destination line number",CR,LF    ;dest_ptr
+:def 26 "Not enough room to merge the entire file",CR,LF ;mrgerr_ptr
+:def 27 CR,LF					;crlf_ptr
+:def 28 LF					;lf_ptr
+:def 29 "Continue (Y/N)?"                       ;cont_ptr
+:def 30 "Unable to print message",CR,LF         ;fatal_error
+:def 31 "%1"                                    ;arg_buf_ptr
+:def 32 "%1:%2"                                 ;line_num_buf_ptr
+:def 33 "Cannot merge - Code page mismatch",CR,LF ;cp_err_ptr
+
+:end
+
+;=========================================================================
+;=========================================================================

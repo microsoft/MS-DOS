@@ -1,0 +1,1155 @@
+;
+PAGE
+;-----------------------------------------------------------------------------+
+;									      :
+; Name: 	SHELLRD.EQU						      :
+;									      :
+; Description:	Common internal shell equates				      :
+;									      :
+; Revised:	05-05-88						      :
+;									      :
+;-----------------------------------------------------------------------------+
+;
+; Pull down selection to dither (1 bit = 1 selection line)
+;
+DIT_L1	       EQU  0000000000000001B	     ;Pull down selection 1		   ;DITHER
+DIT_L2	       EQU  0000000000000010B	     ;Pull down selection 2		   ;DITHER
+DIT_L3	       EQU  0000000000000100B	     ;Pull down selection 3		   ;DITHER
+DIT_L4	       EQU  0000000000001000B	     ;Pull down selection 4		   ;DITHER
+DIT_L5	       EQU  0000000000010000B	     ;Pull down selection 5		   ;DITHER
+DIT_L6	       EQU  0000000000100000B	     ;Pull down selection 6		   ;DITHER
+DIT_L7	       EQU  0000000001000000B	     ;Pull down selection 7		   ;DITHER
+DIT_L8	       EQU  0000000010000000B	     ;Pull down selection 8		   ;DITHER
+DIT_L9	       EQU  0000000100000000B	     ;Pull down selection 9		   ;DITHER
+DIT_L10        EQU  0000001000000000B	     ;Pull down selection 10		   ;DITHER
+DIT_L11        EQU  0000010000000000B	     ;Pull down selection 11		   ;DITHER
+DIT_L12        EQU  0000100000000000B	     ;Pull down selection 12		   ;DITHER
+DIT_L13        EQU  0001000000000000B	     ;Pull down selection 13		   ;DITHER
+DIT_L14        EQU  0010000000000000B	     ;Pull down selection 14		   ;DITHER
+DIT_L15        EQU  0100000000000000B	     ;Pull down selection 15		   ;DITHER
+DIT_L16        EQU  1000000000000000B	     ;Pull down selection 16		   ;DITHER
+;
+; Input field control block equates
+;
+INP_FILEMASK1  EQU  1			     ;file mask input field 1 mul only
+INP_FILEMASK2  EQU  2			     ;file mask input field 2 mul only
+INP_AADDT      EQU  3			     ;add menu item title
+INP_JOHN       EQU  4			     ;dyanmic input field
+INP_DOSCMDEST  EQU  5			     ;move/copy destination line
+INP_DOSRFNAM   EQU  6			     ;rename file field
+INP_DOSRDNAM   EQU  7			     ;rename directory field
+INP_DOSEXOPT   EQU  8			     ;start a program
+INP_DOSMDNAM   EQU  9			     ;make DOS directory field
+INP_CMDLINE    EQU  10			     ;command line input field
+INP_PASSWORD   EQU  11			     ;app menu password
+INP_APPMFILE   EQU  12			     ;app menu filename
+INP_EDITPH     EQU  13			     ;app menu edit or help/psc
+INP_FILEMASK   EQU  14			     ;file mask input field
+INP_DOSASSOC   EQU  15			     ;associate file input field
+INP_HELP       EQU  16			     ;app help edit field
+INP_DOSCMFROM  EQU  17			     ;dos services from: input field
+INP_DOMASK     EQU  18			     ;display options pulldown filemask
+INP_DOSDELDIS  EQU  19			     ;dos display delete list
+;
+; Scroll ID equates
+;
+SCB_CHELP      EQU  1			     ;contextual helps
+SCB_IHELP      EQU  2			     ;indexed helps
+;
+; Help equates for panel position
+;
+HLP_UPPANROW   EQU  5			     ;upper help panel row
+HLP_UPPANCOL   EQU  18			     ;upper help panel column
+HLP_LWPANROW   EQU  14			     ;lower help panel row
+HLP_LWPANCOL   EQU  16			     ;lower help panel column
+HLP_PANLINES   EQU  10			     ;number of lines in help panel
+HLPTLINS       EQU  12			     ;user defined help text lines
+HLPWID	       EQU  40			     ;user defined help text width
+;
+; Application menu location equates
+;
+APP_ROW        EQU  7			     ;jpw application menu start row
+APP_COLUMN     EQU  1			     ;jpw application menu start col
+APP_MAXLINES   EQU  16
+;
+; Error ID equates
+;
+ERR_PSP        EQU  1			     ;invalid invocation parameters
+ERR_FILMERR    EQU  2			     ;file not found
+ERR_PATHERR    EQU  3			     ;path not found
+ERR_NODA       EQU  4			     ;dos/app both not active
+ERR_ACCEERR    EQU  5			     ;access denied
+ERR_APIF       EQU  6			     ;missing or invalid main menu file
+ERR_INVDEST    EQU  7			     ;invalid destination path
+ERR_INSM       EQU  8			     ;insufficent memory available
+ERR_CLRF       EQU  9			     ;missing or invalid color file
+ERR_BADD       EQU  10			     ;bad disk or drive door open
+ERR_HELF       EQU  11			     ;missing or bad help file
+ERR_COMS       EQU  12			     ;missing COMSPEC in Environment
+ERR_DEAL       EQU  13			     ;DOS unable to de-allocate memory
+ERR_256K       EQU  14			     ;inadequate graphics memory avail
+ERR_MODE       EQU  15			     ;graph mode request not successful
+ERR_MOUS       EQU  16			     ;missing or bad mouse driver
+ERR_EMPTERR    EQU  17			     ;empty menu
+ERR_MAXFERR    EQU  18			     ;maximum number of files/dirs exce
+ERR_WRIPERR    EQU  19			     ;disk write protected
+ERR_DISKERR    EQU  20			     ;disk full
+ERR_DRVNERR    EQU  21			     ;drive not ready
+ERR_NOMARK     EQU  22			     ;no files marked
+ERR_GENERAL1   EQU  23			     ;general error has occurred
+ERR_EMPTY      EQU  24			     ;file is empty
+ERR_NOPARM     EQU  25			     ;used of uninitialized psc parm
+ERR_NOQUOTE    EQU  26			     ;missing quote in PSC syntax
+ERR_BADNUM     EQU  27			     ;invalid number inside " "
+ERR_PARAOUT    EQU  28			     ;PSC parameter out of range
+ERR_NOEOL      EQU  29			     ;missing PSC eol marker
+ERR_BUFOUT     EQU  30			     ;output buffer exceeded
+ERR_GENERAL    EQU  31			     ;general error has occurred
+ERR_NORBRAC    EQU  32			     ;no closing ] in psc
+ERR_BIGTITL    EQU  33			     ;psc title too big
+ERR_BIGINST    EQU  34			     ;psc instruction too big
+ERR_BIGPRPT    EQU  35			     ;psc prompt too big
+ERR_BIGDEF     EQU  36			     ;psc default input too big
+ERR_BADMOD     EQU  37			     ;invalid modifier chars in psc
+ERR_NOCOPY     EQU  38			     ;file cannot be copied on itself
+ERR_NOROOM     EQU  39			     ;no room on menu
+ERR_LOST       EQU  40			     ;menu items may be lost
+ERR_BLANK      EQU  41			     ;blank string to clear G3 messages
+ERR_ROOT       EQU  42			     ;delete or rename root error messg
+ERR_PDFILE     EQU  43			     ;shelli.dat file is invalid
+ERR_PDFULL     EQU  44			     ;menu is full, no room for predefs
+ERR_ASSOC      EQU  45			     ;associate file limit reached
+ERR_FILEXT     EQU  46			     ;invalid file ext for association
+ERR_PGMEXT     EQU  47			     ;invalid prgm ext for association
+ERR_PASSWD     EQU  48			     ;invalid password
+ERR_INVPARM    EQU  49			     ;invalid number of parameters
+ERR_DEEP       EQU  50			     ;too many menu levels deep >5
+ERR_MAXDERR    EQU  51			     ;max number directories exceeded
+ERR_ASRF       EQU  52			     ;bad or missing associate filename
+ERR_SGDRCOPY   EQU  53			     ;single drive copy not supported
+ERR_ONEMARK    EQU  54			     ;function limited to one file
+ERR_PRTINST    EQU  55			     ;print not installed
+ERR_PRTQFULL   EQU  56			     ;print queue full
+ERR_PRTNOSUB   EQU  57			     ;print cannot be submitted
+ERR_NOHIGHLT   EQU  58			     ;no files/directories highlighted
+ERR_BADCMD     EQU  59			     ;pcr 2/26/88
+ERR_BIGFILE    EQU  60			     ;filespec in psc > 76 chars
+;
+; Color ID equates
+;
+CLR_3	       EQU  1			     ;shipped text mode color index
+CLR_7	       EQU  2			     ;shipped monochrome color index
+CLR_10	       EQU  3			     ;shipped graphics mode 10H/12H
+CLR_11	       EQU  4			     ;shipped graphics mode 11H index
+;
+; Panel color index record equates
+;
+CLR_LOGO       EQU  1			     ;Logo Scr
+CLR_BASE       EQU  2			     ;Base Scr
+CLR_ERROR      EQU  3			     ;Error
+CLR_HELP       EQU  4			     ;Help
+CLR_AAB        EQU  5			     ;action bar
+CLR_FILE1      EQU  7			     ;graphics file 1
+CLR_FILE2      EQU  6			     ;graphics file 2
+CLR_DIR1       EQU  7			     ;graphics directory 1
+CLR_DIR2       EQU  6			     ;graphics directory 2
+CLR_DRIVE1     EQU  7			     ;graphics drive 1
+CLR_DRIVE2     EQU  6			     ;graphics drive 2
+CLR_BARTITLE   EQU  8			     ;title bar title
+CLR_INSTRUCT1  EQU  10			     ;second instruction
+CLR_CMD        EQU  11			     ;command line
+CLR_STATUS     EQU  12			     ;graphics status
+CLR_TITLE      EQU  13			     ;title
+CLR_INSTRUCT   EQU  14			     ;Instructions
+CLR_POPUP1     EQU  15			     ;Popup 1
+CLR_POPUP2     EQU  16			     ;Popup 2
+CLR_INDEX      EQU  17			     ;Reserved
+;
+; Shell panel ID equates
+;
+PAN_DTITLE     EQU  1			     ;DOS services title text
+PAN_ATITLE     EQU  2			     ;App menu title text
+PAN_DABFILE    EQU  3			     ;DOS AAB file command text
+PAN_DABDISP    EQU  4			     ;DOS AAB display command text
+PAN_DABSHEL    EQU  5			     ;DOS AAB shell command text
+PAN_DABEXIT    EQU  6			     ;DOS AAB exit command text
+PAN_AABMAIN    EQU  7			     ;App AAB maintain command text
+PAN_AABSHEL    EQU  8			     ;App AAB shell command text
+PAN_AABEXIT    EQU  9			     ;App AAB exit command text
+PAN_ENTER      EQU  10			     ;Common action  Enter
+PAN_ESC        EQU  11			     ;Common actions Esc=Cancel
+PAN_F1	       EQU  12			     ;Common actions F1=Help
+PAN_F5	       EQU  13			     ;Common actions F5=Index
+PAN_F9	       EQU  14			     ;Common actions F7=Keys
+PAN_APDMAINP   EQU  15			     ;App maintain pull down panel
+PAN_APDMAINC   EQU  16			     ;App maintain pull down panel text
+PAN_APDSHELP   EQU  17			     ;App shell pull down panel
+PAN_APDSHELC   EQU  18			     ;App shell pull down panel text
+PAN_APDEXITP   EQU  19			     ;App exit pull down panel
+PAN_APDEXITC   EQU  20			     ;App exit pull down panel text
+PAN_DPDFILEP   EQU  21			     ;DOS file pull down panel
+PAN_DPDFILEC   EQU  22			     ;DOS file pull down panel text
+PAN_DPDEXITP   EQU  23			     ;DOS exit pull down panel
+PAN_DPDEXITC   EQU  24			     ;DOS exit pull down panel text
+PAN_DPDDISPP   EQU  25			     ;DOS display pull down panel
+PAN_DPDDISPC   EQU  26			     ;DOS display pull down panel text
+PAN_DPDSHELP   EQU  27			     ;DOS shell pull down panel
+PAN_DPDSHELC   EQU  28			     ;DOS shell pull down panel text
+PAN_DSFMT2     EQU  29			     ;DOS top single drive/file panel
+PAN_DSFMT3     EQU  30			     ;DOS extended directory panel
+PAN_DSFMT4     EQU  31			     ;DOS status panel
+PAN_DSFMT6     EQU  32			     ;DOS global file search
+PAN_FILEVIEW   EQU  33			     ;DOS file view panel top template
+PAN_FILEVIEWT  EQU  34			     ;fileview panel text
+PAN_FVHEX      EQU  35			     ;DOS hex file view panel bottom
+PAN_FVASCII    EQU  36			     ;DOS hex file view panel bottom
+PAN_FKEY       EQU  37			     ;function key panel
+PAN_APPINST2   EQU  38			     ;App copy menu item dest instr
+PAN_APPINST5   EQU  39			     ;App menu reorder second instr
+PAN_APPINST6   EQU  40			     ;App menu operational instr
+PAN_MCP        EQU  41			     ;Maintain color panel text
+PAN_MCSS       EQU  42			     ;Maintain color sample panel
+PAN_DSREAD     EQU  43			     ;DOS reading drive panel text
+PAN_G1	       EQU  44			     ;general panel 1
+PAN_G1PASSWM   EQU  45			     ;Enter menu item password panel
+PAN_G1OPT      EQU  46			     ;DOS file options text
+PAN_G3SORTC    EQU  47			     ;DOS sort panel text
+PAN_G2	       EQU  48			     ;General panel 2
+PAN_G2DELM     EQU  49			     ;delete menu item confirmation
+PAN_G3	       EQU  50			     ;General panel 3
+PAN_G3COPYT    EQU  51			     ;DOS file copy panel title
+PAN_G3COPY     EQU  52			     ;DOS file copy panel in progress
+PAN_G3MOVET    EQU  53			     ;DOS file move panel title
+PAN_G3MOVE     EQU  54			     ;DOS file move panel in progress
+PAN_G3DEST     EQU  55			     ;DOS file copy/move destination
+PAN_G3REPL     EQU  56			     ;DOS file copy/move replace existg
+PAN_G3ERROR    EQU  57			     ;DOS file copy/move error
+PAN_G3FILEDL   EQU  58			     ;DOS file delete in progress txt
+PAN_G3FILEDB   EQU  59			     ;DOS file delete confirm panel txt
+PAN_G3FILERN   EQU  60			     ;DOS file rename panel text
+PAN_G3FILEA    EQU  61			     ;DOS attr change in progress text
+PAN_G3FILEAB   EQU  62			     ;DOS attr change panel text
+PAN_G3DIRD     EQU  63			     ;DOS dir delete in progress text
+PAN_G3DIRDB    EQU  64			     ;DOS dir delete confirm panel text
+PAN_G3DIRM     EQU  65			     ;DOS dir make panel text
+PAN_G3DIRERN   EQU  66			     ;directory rename text
+PAN_G3PRED     EQU  67			     ;APP predefined menu panel text
+PAN_HELP       EQU  68			     ;Help panel text
+PAN_G5	       EQU  69			     ;General panel 5
+PAN_G5TEXT     EQU  70			     ;add program text
+PAN_G5ADDG     EQU  71			     ;add group text
+PAN_G6	       EQU  72			     ;General panel 6
+PAN_G6START    EQU  73			     ;Enter parameters start a program
+PAN_GSTATUS    EQU  74			     ;graphics status panel
+PAN_ERR        EQU  75			     ;small error text panel
+PAN_G7	       EQU  76			     ;small error text panel
+PAN_G7ERROR    EQU  77			     ;small error text panel
+PAN_JOHN       EQU  78			     ;PSC dialog panel
+PAN_CLS        EQU  79			     ;clear screen
+PAN_BTITLE     EQU  80			     ;app and dos background title
+PAN_BAAB       EQU  81			     ;app and dos aab background
+PAN_GDIRECTE   EQU  82			     ;graphics dir extended panel
+PAN_GFILEE     EQU  83			     ;graphics dir extended panel
+PAN_GFILEG     EQU  84			     ;graphics global file panel
+PAN_GDIRECTD1  EQU  85			     ;graphics multiple directory 1
+PAN_GDIRECTD2  EQU  86			     ;graphics multiple directory 2
+PAN_GFILED1    EQU  87			     ;graphics multiple file 1
+PAN_GFILED2    EQU  88			     ;graphics multiple file 2
+PAN_G7ERROR2   EQU  89			     ;reading tree and file error
+PAN_G2ASCO     EQU  90			     ;association options
+PAN_G3ASCE     EQU  91			     ;association panel
+PAN_GSTATUSP   EQU  92			     ;graphics status
+PAN_G7ERROR3   EQU  93			     ;app menu error panel/exit to dos
+PAN_G7ERROR4   EQU  94			     ;dir and/or file limit reached
+PAN_G3FILEPRT  EQU  95			     ;DOS file print in progress txt
+PAN_F10        EQU  96			     ;Common actions F10=Actions
+PAN_ALTG       EQU  97			     ;Common actions Alt+G=Mark all
+PAN_ALTU       EQU  98			     ;Common actions Alt+U=Unmark all
+PAN_F8	       EQU  99			     ;Common actions F8=Hex/ASCII
+PAN_DOSTOP     EQU  100 		     ;DOS top panel
+PAN_F2	       EQU  101 		     ;F2=Save
+PAN_BLANK      EQU  102 		     ;panel to blank app instructions
+PAN_CMDL       EQU  103 		     ;Shift+F9=Command Line
+PAN_G2FILA     EQU  104 		     ;DOS file attr confirm panel text
+PAN_G2FILD     EQU  105 		     ;DOS display delete list
+PAN_CMDLA      EQU  106 		     ;app menu Shift+F9=Command Line
+PAN_F10A       EQU  107 		     ;app menu f10 key panel text
+PAN_FVESC      EQU  108 		     ;file view escape key panel text
+PAN_DSFMT7     EQU  109 		     ;single drive panel titles
+PAN_DSFMT8     EQU  110 		     ;system file list panel titles
+PAN_TOTALNUM   EQU  110 		     ;total number panels *PCR
+;
+; Internal Shell equates for string vector
+;
+STR_AAPEXT     EQU  1			     ;main application menu extension
+STR_CLREXT     EQU  2			     ;color profile extension
+STR_APPMFILE   EQU  3			     ;default app menu filename
+STR_CLRFILE    EQU  4			     ;default color filename
+STR_HLPFILE    EQU  5			     ;default help text filename
+STR_MS1FILE    EQU  6			     ;microsoft serial mouse driver
+STR_MS2FILE    EQU  7			     ;IBM mouse driver
+STR_COMSPEC    EQU  8			     ;string to search for in Environ
+STR_EXIT       EQU  9			     ;command line termination string
+STR_MOSEXT     EQU  10			     ;mouse extension length
+STR_LBRACKET   EQU  11			     ;left bracket in PSC
+STR_RBRACKET   EQU  12			     ;right bracket in PSC
+STR_PERCENT    EQU  13			     ;percent sign in PSC
+STR_TITLEESC   EQU  14			     ;title escape in PSC
+STR_INSTRESC   EQU  15			     ;instruction escape in PSC
+STR_PRMTESC    EQU  16			     ;prompt escape in PSC
+STR_DEFLTESC   EQU  17			     ;default escape in PSC source
+STR_LENGESC    EQU  18			     ;length escape in PSC source
+STR_MODESC     EQU  19			     ;modifier escape in PSC source
+STR_CLEARESC   EQU  20			     ;clear escape in PSC source
+STR_QUOTE      EQU  21			     ;quote in PSC source
+STR_PSCEND     EQU  22			     ;end of a PSC line
+STR_WALLOW     EQU  23			     ;allow string
+STR_WVALID     EQU  24			     ;valid allow string
+STR_REMOVE     EQU  25			     ;remove default option in PSC's
+STR_WRESEND    EQU  26			     ;ending psc for resident mode
+STR_WTRANEND   EQU  27			     ;ending psc for transient mode
+STR_WTITLDEF   EQU  28			     ;default user prompt tittle text
+STR_WINSTDEF   EQU  29			     ;default user prompt instr. text
+STR_WPRMTPDEF  EQU  30			     ;default user prompt prompt text
+STR_DRIVE      EQU  31			     ;drive escape in PSC source
+STR_PATH       EQU  32			     ;path escape in PSC source
+STR_LCTITLEESC EQU  33			     ;title escape in PSC
+STR_LCINSTRESC EQU  34			     ;instruction escape in PSC
+STR_LCPRMTESC  EQU  35			     ;prompt escape in PSC
+STR_LCDEFLTESC EQU  36			     ;default escape in PSC source
+STR_LCLENGESC  EQU  37			     ;length escape in PSC source
+STR_LCMODESC   EQU  38			     ;modifier escape in PSC source
+STR_LCCLEARESC EQU  39			     ;clear escape in PSC source
+STR_LCREMOVE   EQU  40			     ;remove default option in PSC's
+STR_DOSEXIT    EQU  41			     ;ending batch command for dos exit
+STR_CDIR       EQU  42			     ;change directory command for psc
+STR_TOPTITLE   EQU  43			     ;title for indexed help panel
+STR_MNAAAB     EQU  44			     ;Program menu AAB mnemonics
+STR_MNMAIN     EQU  45			     ;Prog maint pull down mnemonics
+STR_MNASWI     EQU  46			     ;Prog switch pull down mnemonics
+STR_MNAEXI     EQU  47			     ;Prog exit pull down mnmemonics
+STR_MNDAAB     EQU  48			     ;DOS Services AAB mnemonics
+STR_MNFILE     EQU  49			     ;DOS Services File mnemonics
+STR_MNDSWI     EQU  50			     ;DOS Services switch mnemonics
+STR_MNDISP     EQU  51			     ;DOS Services display mnemonics
+STR_MNDEXI     EQU  52			     ;DOS Services exit mnemonics
+STR_APPMENU    EQU  53			     ;app menu configured
+STR_DOSSERV    EQU  54			     ;DOS services configured
+STR_REFBUF     EQU  55			     ;refresh DOS buffer configured
+STR_TRANS      EQU  56			     ;transient shell configured
+STR_MODE10H    EQU  57			     ;graphics mode 10H
+STR_MODE11H    EQU  58			     ;graphics mode 11H
+STR_MODE12H    EQU  59			     ;graphics mode 12H
+STR_CLFILE     EQU  60			     ;color filename
+STR_MULTIPE    EQU  61			     ;multiple drive display
+STR_CLRACT     EQU  62			     ;maintain color active
+STR_MENUACT    EQU  63			     ;menu maintainance active
+STR_EXITDOS    EQU  64			     ;exit to DOS active
+STR_CMDLINE    EQU  65			     ;command line active
+STR_PREDACT    EQU  66			     ;predefined menu active
+STR_MOUSACT    EQU  67			     ;mouse active
+STR_LEFTACT    EQU  68			     ;left hand mouse
+STR_SOUDACT    EQU  69			     ;sound active
+STR_APMFILE    EQU  70			     ;app main menu filename
+STR_TOTAL      EQU  71			     ;total structute list
+STR_FILL1      EQU  72			     ;fill pattern 1
+STR_ASCEXT     EQU  73			     ;default association filename
+STR_CHECKM     EQU  74			     ;check mark
+STR_RETEXEC    EQU  75			     ;press enter to exit from start
+STR_NOCMD      EQU  76			     ;no command for EXEC error
+STR_BUTTON     EQU  77			     ;button mouse fld text for psc pan
+STR_TEXTS      EQU  78			     ;invocation text mode option
+STR_NLS        EQU  79			     ;NLS translation invoke option
+STR_NOFILD     EQU  80			     ;No files in marked directory'
+STR_NOFILM     EQU  81			     ;No files match file specifier'
+STR_NOFIL      EQU  82			     ;'No file'
+STR_ROOTN      EQU  83			     ;'ROOT'
+STR_DTITLE     EQU  84			     ;DOS Services AAB mnemonics string
+STR_ATITLE     EQU  85			     ;App Menu AAB mnemonics string
+STR_DABFILE    EQU  86			     ;File P. down AAB mnemonics string
+STR_DABDISP    EQU  87			     ;Disp P. down AAB mnemonics string
+STR_DABSHEL    EQU  88			     ;Prog P. down AAB mnemonics string
+STR_DABEXIT    EQU  89			     ;Exit P. down AAB mnemonics string
+STR_AABMAIN    EQU  90			     ;Mait P. down AAB mnemonics string
+STR_AABSHEL    EQU  91			     ;Prog P. down AAB mnemonics string
+STR_AABEXIT    EQU  92			     ;Exit P. down AAB mnemonics string
+STR_MORE       EQU  93			     ;text mode more string
+STR_DIRT       EQU  94			     ;Directory title
+STR_FILET      EQU  95			     ;File title
+STR_DFSAVE     EQU  96			     ;dir/file buffer disk swap option
+STR_BUFO       EQU  97			     ;dir/file buffer size override
+STR_ASOFILE    EQU  98			     ;associate file name option
+STR_ASOEXT     EQU  99			     ;associate file name extension
+STR_DBCS       EQU  100 		     ;DBCS invocation string
+STR_NOCMDM     EQU  101 		     ;insufficient command line memory
+STR_DATE       EQU  102 		     ;date invocation string
+STR_FSTATT     EQU  103 		     ;file status title  ;pcr 2/2/88
+STR_COM2       EQU  104 		     ;COM2 invocation string	  D491
+STR_ENH        EQU  105 		     ;invocation enhancements
+STR_SCOPYF     EQU  106 		     ;copy file title
+STR_SMOVEF     EQU  107 		     ;move file title
+STR_SDELEF     EQU  108 		     ;delete file title
+STR_SPRINF     EQU  109 		     ;Print file title
+STR_SASSOF     EQU  110 		     ;Associate file title
+STR_SRENMF     EQU  111 		     ;rename file title
+STR_SSTARF     EQU  112 		     ;start a program title
+STR_SATTRF     EQU  113 		     ;change attribute file title
+STR_SREMOD     EQU  114 		     ;Remove directory title
+STR_SMAKED     EQU  115 		     ;Make directory title
+STR_SRENMD     EQU  116 		     ;Rename directory title
+STR_SADDP      EQU  117 		     ;Add program title
+STR_SADDG      EQU  118 		     ;Add group title
+STR_SCHANP     EQU  119 		     ;Change Program title
+STR_SCHANG     EQU  120 		     ;Change Group title
+STR_SDELMI     EQU  121 		     ;Delete menu item title
+STR_SWARN      EQU  122 		     ;Warning title
+STR_SHELP      EQU  123 		     ;Help panel title
+STR_SPWVER     EQU  124 		     ;password verification title
+STR_SDISO      EQU  125 		     ;display options title
+STR_SFILO      EQU  126 		     ;file options title
+STR_RETCMD     EQU  127 		     ;DOS command return prompt
+STR_UTITLE     EQU  128 		     ;User defined PSC title
+STR_PROFACT    EQU  129 		     ;profile switch
+STR_PROEXT     EQU  130 		     ;profile extension
+STR_CDON       EQU  131 		     ;
+STR_CDOFF      EQU  132 		     ;
+STR_CRON       EQU  133 		     ;
+STR_CROFF      EQU  134 		     ;
+STR_ASON       EQU  135 		     ;
+STR_ASOFF      EQU  136 		     ;
+STR_SBNAME     EQU  137 		     ;
+STR_SBEXT      EQU  138 		     ;
+STR_SBSIZE     EQU  139 		     ;
+STR_SBDATE     EQU  140 		     ;
+STR_SBDISK     EQU  141 		     ;
+STR_FILECHK    EQU  142 		     ;PSC /F parameter
+STR_LCFILECHK  EQU  143 		     ;PSC /f parameter
+STR_SN	       EQU  144 		     ;>>SN
+;
+; Active button bit maps		     ;sos 2/2/88
+;
+BUT_ESC        EQU  0000000000000001B	     ;Esc
+BUT_F1	       EQU  0000000000000010B	     ;F1
+BUT_F5	       EQU  0000000000000100B	     ;F5
+BUT_F9	       EQU  0000000000001000B	     ;F9
+BUT_F10        EQU  0000000000010000B	     ;F10
+BUT_ALTG       EQU  0000000000100000B	     ;Alt+G
+BUT_LFARROW    EQU  0000000001000000B	     ;Left arrow
+BUT_RTARROW    EQU  0000000010000000B	     ;Right arrow
+BUT_ENTER      EQU  0000000100000000B	     ;Enter
+BUT_ALTU       EQU  0000001000000000B	     ;Alt+U
+BUT_PGUP       EQU  0000010000000000B	     ;PgUp
+BUT_PGDN       EQU  0000100000000000B	     ;PgDn
+BUT_STOP       EQU  0001000000000000B	     ;Stop button
+BUT_F8	       EQU  0010000000000000B	     ;F8
+BUT_F2	       EQU  0100000000000000B	     ;F2=Save
+;
+; Internal button bit map vector equates
+;
+BCB_BACK       EQU  1			     ;key	  backgrd
+BCB_LFARROW    EQU  2			     ;Left arrow  foregrd
+BCB_RTARROW    EQU  3			     ;Right arrow foregrd
+BCB_PGUP       EQU  4			     ;PgUp	  foregrd
+BCB_PGDN       EQU  5			     ;PgDn	  foregrd
+BCB_BACK2      EQU  6			     ;PgUp/Dn	  backgrd
+;
+; 16 byte paragraph size of allocated buffers
+;
+MAX_COLRBUF    EQU  106 		     ;Color buffer		(1.7 K)
+MAX_HELPBUF    EQU  625 		     ;help buffer	       (10.0 K)
+MAX_TEXTBUF    EQU  250 		     ;logical video text only	(4.0 K)
+MAX_APPMBUF    EQU  1000		     ;application menu buffer  (16.0 K)
+MAX_DISQBUF    EQU  125 		     ;display queue text only	 (2.0K)
+;
+MAX_DIR1BUF    EQU  500 		     ;directory buffer 1      ( 8.0 KB)
+MAX_DIR2BUF    EQU  500 		     ;directory buffer 2      ( 8.0 KB)
+MAX_DOSWBUF    EQU  640 		     ;DOS working buffer      (10.0 KB)
+MIN_FILEBUF    EQU  64			     ;minimum DOS file buffer  (1.0 KB)
+SM_FILEBUF     EQU  640 		     ;small file buffer       (10.0 KB)
+MIN_DIR1BUF    EQU  250 		     ;min directory buffer 1  ( 4.0 KB)
+MIN_DOSWBUF    EQU  500 		     ;min DOS working buffer  ( 8.0 KB)
+;
+MAX_EXECBUF    EQU  4070		     ;app menu/prompt min memy(64.0 KB)
+MAX_WORKBUF    EQU  1000		     ;working DOS buffer      (10.0 KB)
+MAX_DOSPBUF    EQU  12250		     ;dos serv min memory    (196.0 KB)
+MAX_APPPBUF    EQU  4070		     ;app menu min memory     (64.0 KB)
+;
+; Miscellaneous sizes
+;
+MAX_CCSET      EQU  4			     ;number of user color selections ;pcr 3/4/88
+MAX_CLRECD     EQU  12			     ;num of bytes per PCPANEL color rc
+MAX_SCRROWS    EQU  30			     ;mode 11H and 12H require 30 rows
+MAX_REVERSE    EQU  0			     ;size of mouse reverse high buffer
+MAX_WPARMLEN   EQU  127 		     ;max psc prompt input length
+MAX_WPSCOUT    EQU  512 		     ;max psc size
+;
+; Machine IDs
+;
+MODEL_80       EQU  0F8H		     ;model 80 hardware  VGA
+SUBMD_80       EQU  000H
+MODEL_60       EQU  0FCH		     ;model 60 hardware  VGA
+SUBMD_60       EQU  005H
+MODEL_50       EQU  0FCH		     ;model 50 hardware  VGA
+SUBMD_50       EQU  004H
+MODEL_30       EQU  0FAH		     ;model 30 hardware  MCGA
+SUBMD_30       EQU  000H
+MODEL_25       EQU  0FAH		     ;model 25 hardware  MCGA
+SUBMD_25       EQU  001H
+MODEL_PC       EQU  0FFH		     ;PC Planar board
+SUBMD_PC       EQU  000H
+MODEL_XT       EQU  0FEH		     ;XT Planar board
+SUBMD_XT       EQU  000H
+MODEL_JR       EQU  0FDH		     ;JR Planar board
+SUBMD_JR       EQU  000H
+MODEL_AT       EQU  0FCH		     ;AT Planar board
+SUBMD_AT       EQU  000H
+SUBMD_AS       EQU  001H		     ;AT Planar board for skyrocket
+MODEL_CV       EQU  0F9H		     ;convertible
+SUBMD_CV       EQU  000H
+;
+; Keystroke equates
+;
+DCLICK	       EQU  255 		     ;double click key
+INABOVE        EQU  115 		     ;insert above  ctrl+left arrow
+INBELOW        EQU  116 		     ;insert below  ctrl+right arrow
+DELETE	       EQU  89			     ;delete  shift+F6
+DELALL	       EQU  118 		     ;delete cursor to end  ctrl+pgdn
+CR	       EQU  0DH 		     ;ASCII carriage return
+LF	       EQU  0AH 		     ;ASCII line feed
+UPARROW        EQU  72			     ;up arrow
+DNARROW        EQU  80			     ;down arrow
+LFARROW        EQU  75			     ;left arrow
+RTARROW        EQU  77			     ;right arrow
+PGUP	       EQU  73
+PGDN	       EQU  81
+ESCK	       EQU  27
+ENTER	       EQU  13
+SPACE	       EQU  32
+F1	       EQU  59
+F2	       EQU  60
+F3	       EQU  61
+F4	       EQU  62
+F5	       EQU  63
+F6	       EQU  64
+F7	       EQU  65
+F8	       EQU  66
+F9	       EQU  67
+F10	       EQU  68
+F11	       EQU  85h 		     ;*PCR
+ALTC	       EQU  46
+ALTM	       EQU  50
+ALTD	       EQU  32
+ALTR	       EQU  19
+ALTG	       EQU  34
+ALTU	       EQU  22
+SAVE	       EQU  60			     ;F2 save help/psc
+EOLMARK        EQU  62			     ;F4 separate psc lines
+TAB	       EQU  09			     ;tab
+BKTAB	       EQU  0FH 		     ;back tab
+BKSPC	       EQU  08			     ;backspace
+SHIFTF9        EQU  92			     ;Shift+F9
+;
+; Internal SHELLRD PSP invocation option equates (COM_STATE)
+;
+COM_APPM       EQU  0000000000000001B	     ;application menu configured
+COM_DOSS       EQU  0000000000000010B	     ;DOS Services configured
+COM_REFD       EQU  0000000000000100B	     ;refresh directory
+COM_RESS       EQU  0000000000001000B	     ;resident shell
+COM_AUTI       EQU  0000000000010000B	     ;predefined menu installation
+COM_DRV2       EQU  0000000000100000B	     ;multiple drive display active
+COM_FLCL       EQU  0000000001000000B	     ;command line access is active
+COM_FLMI       EQU  0000000010000000B	     ;maintain menu item active
+COM_FLCS       EQU  0000000100000000B	     ;maintain color selections active
+COM_FLED       EQU  0000001000000000B	     ;exit to DOS is active
+COM_MOUS       EQU  0000010000000000B	     ;mouse is active.
+COM_LFMS       EQU  0000100000000000B	     ;left hand mouse.
+COM_M10H       EQU  0001000000000000B	     ;Graphics EGA mode 10H requested
+COM_M11H       EQU  0010000000000000B	     ;Graphics VGA mode 11H requested
+COM_M12H       EQU  0100000000000000B	     ;Graphics VGA mode 12H requested
+COM_TEXT       EQU  1000000000000000B	     ;text mode 3 or 7 is active
+;
+; Internal SHELLRD PSP invocation option equates (COM_STATE2)
+;
+COM_SOUD       EQU  0000000000000001B	     ;sound active
+COM_NLS        EQU  0000000000000010B	     ;NLS help index translation active
+COM_DFSAVE     EQU  0000000000000100B	     ;dir/file buffer swap option
+COM_BUFO       EQU  0000000000001000B	     ;dir/file buffer size override
+COM_DBCS       EQU  0000000000010000B	     ;DBCS support is active
+COM_DATE       EQU  0000000000100000B	     ;Date is active
+COM_COM2       EQU  0000000001000000B	     ;COM2 is active		  D491
+COM_ENHA       EQU  0000000010000000B	     ;Enhancements active
+COM_SNA        EQU  0000000100000000B	     ;>>SN
+;
+; Internal SHELLRD dialog equates (COM_CDIALOG)
+;
+COM_GDRIVE1    EQU  0			     ;DOS drive 1 dialog
+COM_GNAME1     EQU  1			     ;DOS filemask 1 dialog
+COM_GDIR1      EQU  2			     ;DOS directory 1 dialog
+COM_GFILE1     EQU  3			     ;DOS file 1 dialog
+COM_GDRIVE2    EQU  4			     ;DOS drive 2 dialog
+COM_GNAME2     EQU  5			     ;DOS filemask 2 dialog
+COM_GDIR2      EQU  6			     ;DOS directory 2 dialog
+COM_GFILE2     EQU  7			     ;DOS file 2 dialog
+COM_APPMENU    EQU  8			     ;app menu screen
+COM_EXITDOS    EQU  9			     ;exit to DOS
+COM_PEC        EQU  10			     ;exit to execute PEC
+COM_PAAB       EQU  11			     ;app menu action bar dialog
+COM_DAAB       EQU  12			     ;DOS services action bar dialog
+COM_DCLR       EQU  13			     ;change color dialog
+COM_FIRST      EQU  14			     ;first time dialog
+;
+; Internal SHELLRD base screen equates (COM_BASESCR)
+;
+COM_DOSSCR1    EQU  1			     ;not used
+COM_DOSSCR4    EQU  2			     ;multiple display
+COM_DOSSCR2    EQU  3			     ;extended directory display
+COM_DOSSCR3    EQU  4			     ;global file list
+COM_APPSCR     EQU  5			     ;application menu
+COM_PRESCR     EQU  6			     ;predefined menu
+COM_CLRSCR     EQU  7			     ;color menu
+COM_AFVIEW     EQU  8			     ;ascii file view
+COM_HFVIEW     EQU  9			     ;hex file view
+;
+; Internal Shell vector length equates
+;
+COM_ERRVECLEN  EQU  3			     ;# bytes in each error vector
+COM_STRVECLEN  EQU  3			     ;# bytes in each string vector
+COM_INVVECLEN  EQU  6			     ;# bytes in each invoke vector
+COM_KEYVECLEN  EQU  6			     ;# bytes in each keys vector
+COM_GCBVECLEN  EQU  6			     ;# bytes in each graphics vector
+COM_PCBVECLEN  EQU  4			     ;# bytes in each panel vector
+COM_ICBVECLEN  EQU  4			     ;# bytes in each input vector
+COM_SCBVECLEN  EQU  4			     ;# bytes in each scroll vector
+COM_BCBVECLEN  EQU  2			     ;# bytes in each button vector
+COM_MCBVECLEN  EQU  2			     ;# bytes in each mouse vector
+COM_MGPVECLEN  EQU  3			     ;# bytes in each group vector
+COM_FLDVECLEN  EQU  4			     ;# bytes in each fld vector
+COM_CALTABLEN  EQU  6			     ;# bytes in each fld table entry
+COM_SWITABLEN  EQU  3			     ;# bytes in each fld table entry
+COM_SWIVECLEN  EQU  3			     ;# bytes in each fld table entry
+;
+; Field call table ID equates
+;
+;CAL_PREDEF	EQU  1			      ;predefined app menu
+CAL_APPM       EQU  1			     ;application menu call table ID
+CAL_CLRSCR     EQU  2			     ;color screen
+CAL_DOSSCR2    EQU  3			     ;dos services screen 2
+CAL_DOSSCR3    EQU  4			     ;dos services screen 3
+CAL_DOSSCR4    EQU  5			     ;dos services screen 4
+CAL_AFVIEW     EQU  6			     ;ascii file view
+;
+; Mouse field group equates
+;
+MGG_AABDOS     EQU  1			     ;AAB for DOS
+MGG_AABFILE    EQU  2			     ;AAB file pull down group
+MGG_AABDISP    EQU  3			     ;AAB display pull down group
+MGG_AABSHEL    EQU  4			     ;AAB file pull down group
+MGG_AABEXIT    EQU  5			     ;AAB exit pull down group
+MGG_DOSG2      EQU  6			     ;DOS G2 popup panel fields
+MGG_DOSVIEW    EQU  7			     ;DOS file view fields
+MGG_DOSG3      EQU  8			     ;DOS G3 esc and help
+MGG_G3FLDS     EQU  9			     ;DOS G3 pan copy/move file dest
+MGG_G3ATTR     EQU  10			     ;DOS G3 pan file attribute sele
+MGG_DOSG6      EQU  11			     ;DOS G6 pan esc and f1 key fiel
+MGG_AABAPPM    EQU  12			     ;APP menu actual group
+MGG_AABAOPT    EQU  13			     ;AAB options pull down group
+MGG_AABAPRG    EQU  14			     ;AAB program pull down group
+MGG_AABAEXT    EQU  15			     ;AAB exit pull down group
+MGG_AADDT      EQU  16			     ;app menu item add title group
+MGG_APPMITM    EQU  17			     ;App menu item fields (actual appl
+MGG_APPPASS    EQU  18			     ;App menu add/edit/delete password
+MGG_APPFILN    EQU  19			     ;App menu add/edit filename field
+MGG_APPCONF    EQU  20			     ;App menu item delete confirm fiel
+MGG_JOHN       EQU  21			     ;App menu dynamic user dialog flds
+MGG_ERRFLDS    EQU  22			     ;DOS small error panel fields
+MGG_G7FLDS     EQU  23			     ;DOS big error panel
+MGG_G3ERRFLDS  EQU  24			     ;DOS g3 error fields
+MGG_DOSMULT    EQU  25			     ;DOS multiple group
+MGG_DOSEXTN    EQU  26			     ;DOS extended group
+MGG_DOSGLOB    EQU  27			     ;DOS global group
+MGG_CLR        EQU  28			     ;App color group
+MGG_LIHELP     EQU  29			     ;lower help group
+MGG_STATUSR    EQU  30			     ;status popup panel (right side)
+MGG_STATUSL    EQU  31			     ;status popup panel (left side)
+MGG_SORTC      EQU  32			     ;display options panel
+MGG_FILEOPT    EQU  33			     ;file options panel
+MGG_DOSG2DEL   EQU  34			     ;delete list panel
+MGG_DOSG3EX    EQU  35			     ;program parameters
+MGG_DOSG3AS    EQU  36			     ;associate file extensions
+;
+; Mouse data field ID equates
+;
+MFF_AABFILE    EQU    1 		     ;AAB file
+MFF_AABDISP    EQU    2 		     ;AAB options
+MFF_AABSHEL    EQU    3 		     ;AAB special
+MFF_AABEXIT    EQU    4 		     ;AAB exit
+MFF_AABHELP    EQU    5 		     ;AAB help
+;
+MFF_PDFSTART   EQU    6 		     ;Open
+MFF_PDFPRINT   EQU    7 		     ;print
+MFF_PDFASSOC   EQU    8 		     ;assoc
+MFF_PDFMOVE    EQU    9 		     ;move
+MFF_PDFCOPY    EQU   10 		     ;copy
+MFF_PDFDELETE  EQU   11 		     ;delete
+MFF_PDFRENAME  EQU   12 		     ;rename
+MFF_PDFATTR    EQU   13 		     ;attribute
+MFF_PDFVIEW    EQU   14 		     ;view
+MFF_PDFCREATE  EQU   15
+MFF_PDFSELECT  EQU   16 		     ;select all
+MFF_PDFDSELECT EQU   17 		     ;Deselect all
+MFF_PDFESC     EQU   18 		     ;esc
+;
+MFF_PDSSORT    EQU   19 		     ;display options (sort)
+MFF_PDSFILEOPT EQU   20
+MFF_PDSEXTEND  EQU   21 		     ;show info
+MFF_PDSESC     EQU   22 		     ;esc;
+MFF_PDPSINGLE  EQU   23 		     ;single
+MFF_PDPMULT    EQU   24 		     ;multiple
+MFF_PDPGLOBAL  EQU   25 		     ;system
+MFF_PDPESC     EQU   26 		     ;esc
+;
+MFF_PDEDOSX    EQU   27 		     ;exit to start a program
+MFF_PDERESUME  EQU   28 		     ;resume file system
+MFF_PDEESC     EQU   29 		     ;esc
+;
+MFF_DOSG2FLD1  EQU   30 		     ;selection field 1
+MFF_DOSG2FLD2  EQU   31 		     ;selection field 2
+MFF_DOSG2ENTER EQU   32 		     ;enter
+MFF_DOSG2ESC   EQU   33 		     ;esc
+MFF_DOSG2HLP   EQU   34 		     ;f1
+;
+MFF_DOSVFPGUP  EQU   35 		     ;PgUp
+MFF_DOSVFPGDN  EQU   36 		     ;PgDn
+MFF_DOSVFESC   EQU   37 		     ;Esc	    (25 rows)
+;
+MFF_DOSG3FLD1  EQU   38 		     ;selection field 1
+MFF_DOSG3FLD2  EQU   39 		     ;selection field 2
+MFF_DOSG3CH    EQU   40 		     ;hidden attribute selection
+MFF_DOSG3CO    EQU   41 		     ;read only attr selection
+MFF_DOSG3CA    EQU   42 		     ;archive attribute selection
+MFF_DOSG3ENTER EQU   43 		     ;enter
+MFF_DOSG3ESC   EQU   44 		     ;esc
+MFF_DOSG3HLP   EQU   45 		     ;help
+;
+MFF_DOSG6ENTER EQU   46 		     ;enter
+MFF_DOSG6ESC   EQU   47 		     ;Esc
+MFF_DOSG6HLP   EQU   48 		     ;F1
+;
+MFF_GDRIVE1    EQU   49 		     ;DOS A-Z drive display field
+MFF_GFILEM     EQU   50 		     ;Single Drive filename input fld;
+MFF_AABAOPT    EQU   51 		     ;AAB programs
+MFF_AABAPROG   EQU   52 		     ;AAB groups
+MFF_AABAEXIT   EQU   53 		     ;AAB exit
+;
+MFF_PDASTART   EQU   54 		     ;start program menu
+MFF_PDAADDPSC  EQU   55 		     ;add
+MFF_PDACHANGE  EQU   56 		     ;change
+MFF_PDADELETE  EQU   57 		     ;delete
+MFF_PDACOPY    EQU   58 		     ;copy
+MFF_PDAOESC    EQU   59 		     ;esc field
+;
+MFF_PDADOS     EQU   60 		     ;add group
+MFF_PDACMD     EQU   61 		     ;delete group
+MFF_PDAREM     EQU   62 		     ;remane group
+MFF_PDAREARRG  EQU   63 		     ;rearrange
+MFF_PDAPESC    EQU   64 		     ;esc
+;
+MFF_PDADOSX    EQU   65 		     ;exit to DOS
+MFF_PDARESUME  EQU   66 		     ;resume start a program
+MFF_PDAXESC    EQU   67 		     ;esc
+;
+MFF_AADDTF2    EQU   68 		     ;app menu add title enter
+MFF_AADDTESC   EQU   69 		     ;app menu add title esc
+MFF_AADDTHLP   EQU   70 		     ;app menu add title help
+;
+MFF_APPMITEM   EQU   71 		     ;app menu item selection field
+MFF_APPMITEMSB EQU   72 		     ;app menu item scroll bar
+;
+MFF_APPOESC    EQU   73 		     ;app other menu Esc key
+MFF_APPOHLP    EQU   74 		     ;app menu help key
+MFF_APPOCMDL   EQU   75 		     ;app menu Shift+F9=command line
+;
+MFF_APPADPENTR EQU   76 		     ;app enter
+MFF_APPADPESC  EQU   77 		     ;app add/edit/delete password
+MFF_APPADPHLP  EQU   78 		     ;app add/edit/delete password
+;
+MFF_F8	       EQU   79 		     ;F8=Hex/ASCII
+;
+MFF_APPADKENTR EQU   80 		     ;app add/edit type enter
+MFF_APPADKESC  EQU   81 		     ;app add/edit type Esc key
+MFF_APPADKHLP  EQU   82 		     ;app add/edit type F1 key
+;
+MFF_APPADFENTR EQU   83 		     ;app add/edit filename enter
+MFF_APPADFESC  EQU   84 		     ;app add/edit filename Esc
+MFF_APPADFHLP  EQU   85 		     ;app add/edit filename F1
+;
+MFF_APPDECOY   EQU   86 		     ;app delete confirmation yes
+MFF_APPDECON   EQU   87 		     ;app delete confirmation no
+MFF_APPDECOEN  EQU   88 		     ;app delete confirmation enter
+MFF_APPDECOESC EQU   89 		     ;app delete confirmation Esc
+MFF_APPDECOHLP EQU   90 		     ;app delete confirmation F1
+;
+MFF_JOHNENTER  EQU   91 		     ;Enter
+MFF_JOHNESC    EQU   92 		     ;Esc key
+MFF_JOHNHLP    EQU   93 		     ;F1 key
+;
+MFF_ERRESC     EQU   94 		     ;Esc key
+MFF_ERRHLP     EQU   95 		     ;F1 key
+;
+MFF_G7FLD1     EQU   96 		     ;selection field 1
+MFF_G7FLD2     EQU   97 		     ;selection field 2
+MFF_G7ENTER    EQU   98 		     ;enter
+MFF_G7ESC      EQU   99 		     ;Esc key
+MFF_G7HLP      EQU  100 		     ;F1 key
+;
+MFF_G3EFLD1    EQU  101 		     ;selection field 1
+MFF_G3EFLD2    EQU  102 		     ;selection field 2
+;
+MFF_GDRIVE2    EQU  103 		     ;DOS A-Z drive display field2
+MFF_GFILEM1    EQU  104 		     ;Mult Drive filename input fld
+MFF_GFILEM2    EQU  105 		     ;Mult Drive filename input fld
+MFF_GDIRECTD1  EQU  106 		     ;Mult dir tree field 1
+MFF_GDIRECTDB1 EQU  107 		     ;Mult dir tree scroll bar 1
+MFF_GDIRECTD2  EQU  108 		     ;Mult dir tree field 2
+MFF_GDIRECTDB2 EQU  109 		     ;Mult dir tree scroll bar 2
+MFF_GFILED1    EQU  110 		     ;Mult file field 1
+MFF_GFILED1B   EQU  111 		     ;Mult file scroll bar 1
+MFF_GFILED2    EQU  112 		     ;Mult file field 2
+MFF_GFILED2B   EQU  113 		     ;Mult file scroll bar 2
+;
+MFF_GFILEG     EQU  114 		     ;Global file field
+MFF_GFILEGB    EQU  115 		     ;Global file scroll bar
+;
+MFF_GDIRECTE   EQU  116 		     ;Ext dir tree field
+MFF_GDIRECTEB  EQU  117 		     ;Ext dir tree scroll bar
+MFF_GFILEE     EQU  118 		     ;Ext file field 1
+MFF_GFILEEB    EQU  119 		     ;Ext file scroll bar
+;
+MFF_CRARROW    EQU  120 		     ;Color palette right
+MFF_CLARROW    EQU  121 		     ;Color palette left
+;
+MFF_LF1        EQU  122 		     ;lower help panel F1 field
+MFF_LF5        EQU  123 		     ;lower help panel F5 field
+MFF_LF9        EQU  124 		     ;lower help panel F9 field
+MFF_LESC       EQU  125 		     ;lower help panel Esc field
+MFF_LHELP      EQU  126 		     ;lower help panel selection
+MFF_LSB        EQU  127 		     ;lower help panel scroll bar
+;
+MFF_STATRESC   EQU  128 		     ;status esc key
+MFF_STATRHLP   EQU  129 		     ;status F1 key
+MFF_STATLESC   EQU  130 		     ;status esc key
+MFF_STATLHLP   EQU  131 		     ;status F1 key
+;
+MFF_AAB        EQU  132 		     ;background AAB field
+MFF_DOSVFENTER EQU  133 		     ;enter key for fkey line
+MFF_F10A       EQU  134 		     ;*PCR (AND MFF RENUM)
+MFF_F10        EQU  135 		     ;F10=Actions
+MFF_ALTG       EQU  136 		     ;Alt+G=Mark all
+MFF_ALTU       EQU  137 		     ;Alt+U=Unmark all
+MFF_CMDL       EQU  138 		     ;Shift+F9=Command Line
+;
+MFF_APPPROG    EQU  139 		     ;add/change title field
+MFF_APPPSC     EQU  140 		     ;add/change psc field
+MFF_APPHELP    EQU  141 		     ;add/change help field
+MFF_APPPASS    EQU  142 		     ;add/change password field
+MFF_APPFILE    EQU  143 		     ;add/change filename field
+;
+MFF_DOSG3FROM  EQU  144 		     ;G3 panel from field
+MFF_DOSG3TO    EQU  145 		     ;G3 panel to field
+;
+MFF_FILEMASK   EQU  146 		     ;filemask input field
+MFF_BYNAME     EQU  147 		     ;sort by name
+MFF_BYEXT      EQU  148 		     ;sort by extension
+MFF_BYDATE     EQU  149 		     ;sort by date
+MFF_BYSIZE     EQU  150 		     ;sort by size
+MFF_BYDISK     EQU  151 		     ;sort by disk order
+MFF_BYNAMEB    EQU  152 		     ;sort by name
+MFF_BYEXTB     EQU  153 		     ;sort by extension
+MFF_BYDATEB    EQU  154 		     ;sort by date
+MFF_BYSIZEB    EQU  155 		     ;sort by size
+MFF_BYDISKB    EQU  156 		     ;sort by disk order
+;
+MFF_DELCONF    EQU  157 		     ;file options delete field
+MFF_REPCONF    EQU  158 		     ;file options replace field
+MFF_MULCONF    EQU  159 		     ;file options across dirs field
+;
+MFF_DELCONFB   EQU  160 		     ;file options delete field
+MFF_REPCONFB   EQU  161 		     ;file options replace field
+MFF_MULCONFB   EQU  162 		     ;file options across dirs field
+;
+MFF_DOSG2DELL  EQU  163 		     ;dos G2 delete list field
+MFF_DOSG2DELLL EQU  164 		     ;dos G2 delete list field
+MFF_DOSG2DELLR EQU  165 		     ;dos G2 delete list field
+;
+MFF_GDIRECTD1U EQU  166
+MFF_GDIRECTD1D EQU  167
+MFF_GDIRECTD2U EQU  168
+MFF_GDIRECTD2D EQU  169
+MFF_GFILED1U   EQU  170
+MFF_GFILED1D   EQU  171
+MFF_GFILED2U   EQU  172
+MFF_GFILED2D   EQU  173
+MFF_GDIRECTEU  EQU  174
+MFF_GDIRECTED  EQU  175
+MFF_GFILEEU    EQU  176
+MFF_GFILEED    EQU  177
+MFF_GFILEGU    EQU  178
+MFF_GFILEGD    EQU  179
+;
+MFF_DOSG3EXP   EQU  180
+MFF_DOSG3EXPL  EQU  181
+MFF_DOSG3EXPR  EQU  182
+;
+MFF_DOSG3ASE   EQU  183
+MFF_DOSG3ASEL  EQU  184
+MFF_DOSG3ASER  EQU  185
+;
+MFF_DOSG3FROML EQU  186
+MFF_DOSG3FROMR EQU  187
+MFF_DOSG3TOL   EQU  188
+MFF_DOSG3TOR   EQU  189
+;
+MFF_PDBACK     EQU  190 		     ;pull down panel esc w/click outsi
+MFF_APPPROGLA  EQU  191 		     ;title field left arrow
+MFF_APPPROGRA  EQU  192 		     ;title field right arrow
+MFF_APPPSCLA   EQU  193 		     ;program field left arrow
+MFF_APPPSCRA   EQU  194 		     ;program field right arrow
+MFF_APPHELPLA  EQU  195 		     ;help field left arrow
+MFF_APPHELPRA  EQU  196 		     ;help field right arrow
+;
+MFF_LHELPUA    EQU  197 		     ;lower help panel up arrow
+MFF_LHELPDA    EQU  198 		     ;lower help panel down arrow
+;
+; help on keys, help on help
+;
+HLP_KEYASSIGN  EQU  1			     ;help on keys
+HLP_HELPONHELP EQU  2			     ;help on help
+;
+; general shell helps
+;
+HLP_PROMEUINST EQU  3			     ;instruction for progrm menu
+HLP_DOSSERINST EQU  4			     ;explain what is dos services
+HLP_MOUSEUSAGE EQU  5			     ;explain how to use mouse
+HLP_KEYBDUSAGE EQU  6			     ;explain using the keyboard
+;
+; start a program action bar helps
+;
+HLP_AABPROGRAM EQU  7			     ;AAB PROGRAM help
+HLP_AABGROUP   EQU  8			     ;AAB GROUP help
+HLP_AABEXIT    EQU  9			     ;AAB EXIT function help
+;
+; start a program PROGRAM pulldown helps
+;
+HLP_STARTPROG  EQU  10			     ;start program help
+HLP_ADDPROG    EQU  11			     ;add a program help
+HLP_GENCHANGE  EQU  12			     ;change program help
+HLP_DELMAFUNC  EQU  13			     ;delete program item
+HLP_COPYMAFUNC EQU  14			     ;copy program help
+;
+; start a program GROUP pulldown helps
+;
+HLP_ADDGROUP   EQU  15			     ;add group help
+HLP_CHNGEGROUP EQU  16			     ;change group help
+HLP_DELGROUP   EQU  17			     ;delete group help
+HLP_REARGROUP  EQU  18			     ;reorder item help
+;
+; start a program EXIT pulldown helps
+;
+HLP_DOSEXITP   EQU  19			     ;explain exit to dos
+HLP_RESPRGMENU EQU  20			     ;explain how to start a program
+;
+; file system action bar helps
+;
+HLP_GENFILFUNC EQU  21			     ;view,delete,copy,move,rename, etc
+HLP_GENOPTIONS EQU  22			     ;options help
+HLP_GENSPECIAL EQU  23			     ;special help
+HLP_GENEXIFUNC EQU  24			     ;EXIT function
+;
+; file system FILE pulldown helps
+;
+HLP_STRTPRGDOS EQU  25			     ;DOS service start program list
+HLP_PRINTFILE  EQU  26			     ;explain how to print file
+HLP_ASSCDOS    EQU  27			     ;Associate pull down panel
+HLP_MOVEFILE   EQU  28			     ;explain how to move file
+HLP_COPYFILE   EQU  29			     ;explain how to copy file
+HLP_DELFILFUNC EQU  30			     ;explain how to delete file
+HLP_RENMEFILE  EQU  31			     ;expalin how to rename file
+HLP_GENCHGATTR EQU  32			     ;hidden, readonly, and archive
+HLP_VIEWFILE   EQU  33			     ;explain how to view file
+HLP_MAKEDIR    EQU  34			     ;explain how to make a directory
+HLP_SELECTALL  EQU  35			     ;select all help
+HLP_DSELECTALL EQU  36			     ;Deselect all help
+;
+; file system OPTIONS pulldown helps
+;
+HLP_GENFILSRT  EQU  37			     ;display options, filemask / sort
+HLP_CONFIRM    EQU  38			     ;file options
+HLP_SINGLEDRV  EQU  39			     ;explain file status panel
+;
+; file system SPECIAL pulldown helps
+;
+HLP_EXTDIRDIS  EQU  40			     ;explain extend directory display
+HLP_MULTIDRV   EQU  41			     ;explain multiple drive display
+HLP_GLOFILELST EQU  42			     ;explain global file list display
+;
+; file system EXIT pulldown helps
+;
+HLP_PROGMENU   EQU  43			     ;defines what is program menu help
+HLP_RESDOSSERV EQU  44			     ;explain how to resume dos service
+;
+; start a program general add program/group help messages
+;
+HLP_ADDTITLE   EQU  45			     ;add title help
+HLP_ADDPASWRD  EQU  46			     ;add password help for program or
+HLP_ADDONLINE  EQU  47			     ;add online help information
+HLP_EXPPRGSTRT EQU  48			     ;describe program startup command
+HLP_ADDMFILNAM EQU  49			     ;explain steps to create a filenme
+;
+; start a program general change  program/group help messages
+;
+HLP_CHGMEUFILN EQU  50			     ;explain change menu item filename
+HLP_CHGMEUITIL EQU  51			     ;detail change menu item title
+HLP_CHGMEUIHLP EQU  52			     ;explain on changing menu item
+HLP_CHGMEUIPSW EQU  53			     ;detail change menu item password
+HLP_CHGMEUIPSC EQU  54			     ;detail change menu item startup
+;
+; general start a program help
+;
+HLP_PASWRDLIM  EQU  55			     ;explain password prompt
+HLP_CHNGECOLOR EQU  56			     ;change the color(s) for display
+HLP_DELMEUCONF EQU  57			     ;delete menu item confirmation
+HLP_NOTDELMEU  EQU  58			     ;do not delete menu item
+;
+; file system file options popup helps
+;
+HLP_DELCONF    EQU  59			     ;explain confirmation for deleting
+HLP_REPITMCONF EQU  60			     ;replace menu item confirmation
+HLP_DIRSELECT  EQU  61			     ;select across directory options
+;
+; file system display options popup helps
+;
+HLP_FILENAME   EQU  62			     ;explain display by filemask
+HLP_FILNAMESRT EQU  63			     ;explain sorting by file name
+HLP_FILEXTSRT  EQU  64			     ;expalin sorting by file extension
+HLP_FILDATESRT EQU  65			     ;explain sorting by file date
+HLP_FILSIZESRT EQU  66			     ;explain sorting by file size
+HLP_DISKORD    EQU  67			     ;files displayed by disk order
+;
+; file system change attribute popup helps
+;
+HLP_HIDFILATTR EQU  68			     ;explain hidden file attribute
+HLP_READONATTR EQU  69			     ;explain file read only attribute
+HLP_ARCHIVATTR EQU  70			     ;explain file archive attribute
+;
+; file system change attribute marked files popup helps
+;
+HLP_CHGONEFILE EQU  71			     ;explain how to change mark file
+HLP_CHGMULTFIL EQU  72			     ;explain how to change multi file
+;
+; file system remove directory confirmation helps
+;
+HLP_NOTREMDIR  EQU  73			     ;do not remove the directory
+HLP_REMOVEDIR  EQU  74			     ;remove the directory
+;
+; file system replace file error popup equates
+;
+HLP_REPLCESKIP EQU  75			     ;skip this file, do not replace
+HLP_REPLCEFILE EQU  76			     ;explain replacing a file
+;
+; file system delete file confirm popup equates
+;
+HLP_SKIPFILE1  EQU  77			     ;explain skip file help and cont
+HLP_DELFILE    EQU  78			     ;explain deleteing file
+;
+; file system associate file option popup equates
+;
+HLP_OPTPRMPT   EQU  79			     ;use the option prompt
+HLP_NOOPTPRMPT EQU  80			     ;do not use the option prompt
+;
+; general file system help
+;
+HLP_VIEWDRIVE  EQU  81			     ;explain viewing a dir for a drive
+HLP_NEWDIRNAME EQU  82			     ;explain renaming directory
+HLP_COPYDEST   EQU  83			     ;explain copy to destination
+HLP_MOVDEST    EQU  84			     ;explain moving to destination
+HLP_NEWFILENME EQU  85			     ;explain new file name
+HLP_STRTPRGOPT EQU  86			     ;explain starting prog OPTIONS
+HLP_NEWDIRFNME EQU  87			     ;explain specifying new dir name
+HLP_DIRSTRUCT  EQU  88			     ;explain the structure of dir
+HLP_FILELIST   EQU  89			     ;help for highlighting file list
+HLP_MARKFILE   EQU  90			     ;mark file help
+HLP_ASSEXT     EQU  91			     ;associate file extensions help
+HLP_GENVIEW    EQU  92			     ;general view file help
+HLP_LISTDEL    EQU  93			     ;explain list of delete files
+HLP_MOVFROM    EQU  94			     ;help for move file from: field
+HLP_COPYFROM   EQU  95			     ;help for copy file from: field
+;
+; no help available message
+;
+HLP_NOHLPMSG   EQU  96			     ;no help message assigned
+;
+; more help for error message for the shell
+;
+HLP_SHLMEMREQ  EQU  97			     ;shell memory requirements
+HLP_NODOSMEUF  EQU  98			     ;error msg for no menu file
+HLP_MISSHLCLRF EQU  99			     ;error msg for missing SHELL.CLR
+HLP_DRIVEFAIL  EQU  100 		     ;error msg for drive failure
+HLP_MRKACTBAR  EQU  101 		     ;error marking action bar
+HLP_EMPTYFILE  EQU  102 		     ;empty file, delete entry from lst
+HLP_DELFILLIMT EQU  103 		     ;error msg for file limit
+HLP_EMPTYMENU  EQU  104 		     ;error msg for empty menu
+HLP_MENULEVEL  EQU  105 		     ;error message for max menu level
+HLP_PSCQUOTE   EQU  106 		     ;error message for no psc quote
+HLP_PASSERR    EQU  107 		     ;error message for bad password
+HLP_PSCBADPARM EQU  108 		     ;error message for bad param num
+HLP_PSCBUFOUT  EQU  109 		     ;psc output buffer exceeded
+HLP_PSCNORBRAC EQU  110 		     ;missing psc bracket help
+HLP_PSCTITLE   EQU  111 		     ;psc title too large
+HLP_PSCINSTR   EQU  112 		     ;psc instruction too large
+HLP_PSCPROMPT  EQU  113 		     ;psc prompt too large
+HLP_PSCDEFAULT EQU  114 		     ;psc default too large
+HLP_PSCMOD     EQU  115 		     ;invalid modify option letters
+HLP_COPYONSELF EQU  116 		     ;no copy file on itself
+HLP_MENUFULL   EQU  117 		     ;menu is full error
+HLP_ROOTREDE   EQU  118 		     ;can not rename, delete root
+HLP_PSCBADNUM  EQU  119 		     ;bad number in psc commands
+HLP_PSCPARVAL  EQU  120 		     ;use of uninitialized psc param
+HLP_FILENOFOU  EQU  121 		     ;file not found help
+HLP_PATHNOFOU  EQU  122 		     ;path not found help
+HLP_ACCDENIED  EQU  123 		     ;access denied help
+HLP_DESTINCORR EQU  124 		     ;destination path incorrect
+HLP_NOFREEMEM  EQU  125 		     ;DOS unable to free memory
+HLP_WRITEPRO   EQU  126 		     ;disk write protected
+HLP_DISKFULL   EQU  127 		     ;disk full error
+HLP_ASSLIMIT   EQU  128 		     ;association file limit reached
+HLP_ASSBADEXT  EQU  129 		     ;bad extension for assocation file
+HLP_ASSBADPRO  EQU  130 		     ;bad program ext for association
+HLP_INVPARNUM  EQU  131 		     ;invalid number of parameter help
+HLP_GENERAL    EQU  132 		     ;general error help
+HLP_INTRO      EQU  133 		     ;shell introduction
+HLP_DISKFAIL   EQU  134 		     ;disk failure
+HLP_DIREXMAX   EQU  135 		     ;directories exceed maximum
+HLP_OPTNOTACT  EQU  136 		     ;option not active
+HLP_STATUS     EQU  137 		     ;status popup panel text
+HLP_SGDRCOPY   EQU  138 		     ;single drive copy not supported
+HLP_ONEMARK    EQU  139 		     ;function limited to one file
+HLP_PRTINST    EQU  140 		     ;print not installed
+HLP_PRTQFULL   EQU  141 		     ;print queue full
+HLP_PRTNOSUB   EQU  142 		     ;print cannot be submitted
+HLP_BIGFILE    EQU  143 		     ;filespec in psc > 76 chars
+;										  *PCR
+; APP_STATUS flag equates							  *PCR
+;										  *PCR
+APP_ERROR      EQU  0000000000000001B	     ;general error has occured 	  *PCR
+APP_PSC        EQU  0000000000000010B	     ;current item is psc		  *PCR
+APP_MENU       EQU  0000000000000100B	     ;current item is menu		  *PCR
+APP_COPYOP     EQU  0000000000001000B	     ;copy op in process		  *PCR
+APP_REORDERDC  EQU  0000000000010000B	     ;double click in reorder op	  *PCR
+APP_RETRY      EQU  0000000000100000B	     ;retry operation			  *PCR
+APP_NOCLRSC    EQU  0000000001000000B	     ;slctp clear screen		  *PCR
+APP_INIT       EQU  0000000010000000B	     ;memory initialization		  *PCR
+APP_BIGERR     EQU  0000000100000000B	     ;missing shell.meu error condition   *PCR
+APP_READ       EQU  0000001000000000B	     ;read of menu on disk required	  *PCR
+APP_COLRERR    EQU  0000010000000000B	     ;call of proc_error from color chg   *PCR
+APP_REORDEROP  EQU  0000100000000000B	     ;reorder operation in progress	  *PCR
+APP_LVMFLDS    EQU  0001000000000000B	     ;leave mflds active after pw check

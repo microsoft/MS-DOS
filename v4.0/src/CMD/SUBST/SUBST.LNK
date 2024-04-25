@@ -1,0 +1,12 @@
+SUBST.OBJ+
+..\..\inc\ERRTST.OBJ+
+..\..\inc\SYSVAR.OBJ+
+..\..\inc\CDS.OBJ+
+..\..\inc\DPB.OBJ+
+_MSGRET.OBJ+
+_PARSE.OBJ
+SUBST
+NUL
+..\..\inc\comsubs.lib+
+..\..\mapper\mapper.lib;
+

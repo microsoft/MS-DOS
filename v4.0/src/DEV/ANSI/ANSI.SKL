@@ -1,0 +1,16 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;  Message Skeleton file for ANSI.SYS
+;
+;   Author: WGR
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+:util ANSI                               ; utility name
+
+:class A
+:use 1 COMMON1                           ; 'Incorrect DOS version'
+:def 10 "Invalid parameter - %1",CR,LF   ; 'Invalid parameter'
+
+:end
+

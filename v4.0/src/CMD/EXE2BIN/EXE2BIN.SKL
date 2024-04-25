@@ -1,0 +1,71 @@
+
+:util EXE2BIN
+
+:class 1
+:use EXTEND2
+:use EXTEND3
+:use EXTEND4
+:use EXTEND5
+:use EXTEND6
+:use EXTEND15
+:use EXTEND18
+
+:class 2
+
+:class A
+;msgBadDosVersion
+;"Incorrect DOS version",CR,LF,"$"
+:use 1 COMMON1
+
+;msgOutOfMemory
+;"Insufficient memory",CR,LF
+:def 2 "Insufficient memory",CR,LF
+
+;msgLoadFailure
+;"Can't find messages"
+:def 3 "Can't find messages",CR,LF
+
+:CLASS B
+
+;msgNoAccess
+;"Access denied           ", CR, LF
+:def 4 "Access denied",CR,LF
+
+;msgNoConvert
+;"File cannot be converted", CR, LF
+:def 5 "File cannot be converted",CR,LF
+
+;msgNoFile
+;"File not found                ", CR, LF
+:def 6 "File not found",CR,LF
+
+;msgFileCreateError
+;"File creation error", CR, LF
+:def 7 "File creation error",CR,LF
+
+;msgFixUp
+;"Fix-ups needed - base segment (hex):"
+:def 8 "Fix-ups needed - base segment (hex):"
+
+;msgBadParameter
+;"Invalid parameter",CR,LF,0
+:use 9 EXTEND87
+
+;msgNoDiskSpace
+;"Insufficient disk space", CR, LF
+;def 10 "Insufficient disk space",CR,LF
+:use 10 COMMON20
+
+;msgNoFileName
+;"File name must be specified        ", CR, LF
+:def 12 "File name must be specified",CR,LF
+
+:end
+
+
+
+
+
+
+
+

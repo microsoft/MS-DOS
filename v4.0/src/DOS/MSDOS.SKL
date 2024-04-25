@@ -1,0 +1,17 @@
+
+:class 1
+; This was taken from DEVMES.INC IN G:USA\ ...
+;      DIVMES  DB      13,10,"Divide overflow",13,10
+
+:use 001 msdos DIVMES
+
+:class 3
+
+;This is for Yes No check
+:use 205 command NLS_YES
+:use 206 command NLS_NO
+:use 002 msdos  NLS_yes2
+:use 003 msdos  NLS_no2
+
+:end
+

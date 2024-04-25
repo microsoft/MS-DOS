@@ -1,0 +1,22 @@
+;JOIN Utility
+;Message Service Routine
+
+:util  JOIN                             ;BEGIN UTIL                     ;AN000;
+
+:class 1                                ;EXTENDED ERRORS                ;AN000;
+;-------                                 ---------------
+;:use  EXTEND8                          ;Insufficient memory
+
+:class 2                                ;PARSE ERRORS                   ;AN000;
+;-------                                 ------------
+;:use  PARSE1                           ;Too many parameters
+;:use  PARSE3                           ;Invalid switch
+;:use  PARSE10                          ;Invalid parameter
+
+:class A                                ;COMMON & DEFINED MSGS          ;AN000;
+;-------                                 ------------
+:use  1 COMMON1                         ;Incorrect DOS version          ;AN000;
+:def  2 "Directory not empty",CR,LF                                     ;AN000;
+:use 12 COMMON12                        ;Cannot %1 a network drive      ;AN000;
+
+:end                                    ;END UTIL                       ;AN000;

@@ -1,0 +1,199 @@
+
+
+
+
+
+
+                                Multi-Tasking MS-DOS
+                               Beta Test Release 1.00
+
+                                  Session Manager
+                                    User's Guide
+
+
+            Introduction
+
+                 The  Session  Manager(SM)    for  Multi-Tasking  MS-DOS
+            allows you  to run up to six programs at one time and switch
+            between them  with a  couple of  keystrokes.  Each program's
+            screen is  preserved so  that it  can be  restored when  you
+            switch back  to it.  SM also contains the system-wide, Int24
+            Handler.
+
+
+            Initialization
+
+                 The first  thing SM does when it is started is look for
+            any program  initialization information  you may  have.   SM
+            looks for  the initialization  information in  a file  named
+            SM.INI in  the current  directory.  Although recommended, no
+            initialization information is needed.
+
+            There are two types of initialization lines:
+                 1)   define <program key> <program name> [program args]
+                      <working directory>
+                 2)   start  <program key>
+
+                 "program key"  - a printable ascii character, a control
+                           character (^A thru ^^), or a function key (F1
+                           - F10).
+                 "working directory"  - a well formed path; i.e., begins
+                           with drive letter (d:\).
+
+                 Each define  line will  associate a key with a program.
+            If there  is more  than one  define line using the same key,
+            only the information in the last one is used.
+
+                 A start  line is  optional.  If one exists, the program
+            associated with  the key on the start line is run as soon as
+            SM finishes  initializing.   If more  than one start line is
+            given, the last one is used.
+
+            This is what a sample initialization file might look like:
+
+                      define f1 a:\command.com c:\bin\src
+                      define ^z z.exe foo.c a:\foo\bar
+                      start f1
+
+
+            Running the Session Manager
+
+                 To run  Session Manager,  just type  SM.   It does  not
+            require any  arguments.   If there  was a  start line in the
+
+
+
+
+
+
+
+
+     Session Manager User's Guide - Page: 2
+
+            initialization file,  the program  associated with the start
+            key will be run.  Otherwise, the SM screen will be displayed
+            and you will be prompted for input.
+
+                 The SM  screen contains  a chart  that  describes  each
+            defined  program's   key,  status,  arguments,  and  working
+            directory.  There are 3 types of program status:
+
+                      1)   New - the program has never been run.
+                      2)   Active - the program has been started.
+                      3)   Dead - the program has terminated.
+
+                 The input  choices at  this point  are to either type a
+            program key  or hit  the <ESC> button to enter command mode.
+            If you  hit a  program key,  the screen associated with that
+            program   will   be   displayed   and   the   program   will
+            start/continue executing.   If  this is  the first  time the
+            program has  been run,  a chdir  to  the  program's  working
+            directory is  made before it is started.  If SM cannot start
+            the program you desired, the SM screen will reappear.
+
+                 If the  program you  chose to  run has died, its screen
+            will still  be displayed  so that  you can check its output.
+            That is  all you  can do  while in  a dead  programs  screen
+            except switch back to SM.
+
+                 To  switch  back  to  SM,  hit  Alt-F10.    Alt-F10  is
+            currently the  program key  for SM and will be recognized no
+            matter what  other programs  are running.   This is the only
+            program key  that works  this way.   All  of the others will
+            only be  recognized if  SM is  running and  the SM screen is
+            being displayed.
+
+                 Whenever any  of SM's  children die,  their  status  is
+            changed to  dead.   You will  see the status change the next
+            time the  SM screen  is displayed.  If the program using the
+            current screen dies, you will go back into SM.
+
+
+            Command Mode
+
+            When you  enter SM's  command mode the prompt "SM command or
+            HELP>" is displayed.  The valid SM commands are:
+
+                 1)   INIT <program key>
+                      Initialize the program associated with key so that
+                      it can  be run  again.   The program's  status  is
+                      changed to  "New" and  its screen memory is freed.
+                      If the   program is active, it is killed before it
+                      is initialized.
+
+                 2)   DEFINE <program key> <program name> [program args]
+                      <working directory>
+                      Define and  run a  new program  using the supplied
+                      information.   If the  key was previously defined,
+                      redefine it.
+
+
+
+
+
+
+
+
+     Session Manager User's Guide - Page: 3
+
+                 3)   RUN <program key>
+                      Run the program associated with key.
+
+                 4)   RESTART <program key>
+                      Restart the  program associated  with key.    This
+                      like issuing an INIT and a RUN command.
+
+                 5)   KILL <program key>
+                      Kill the  program associated with key.  Its status
+                      is changed to dead.
+
+                 6) HELP
+                      Display a help screen.
+
+                 7)   EXIT
+                      Kill all of SM's children and exit SM.
+
+                 In all  of the  above commands,  "key" is the printable
+            ascii representation of a programs key.  If a command fails,
+            you will either be asked to enter a new command or placed in
+            SM's top level.
+
+
+            Session Manager's Int24 Handler
+
+                 Whenever an Int24 occurs, SM's Int24 handler is called.
+            No matter  what program  is using  the screen  and no matter
+            which program  caused the error, SM's Int24 screen is always
+            displayed.  This screen will contain information on the type
+            of Int24  that happened, and the name and pid of the program
+            that caused the error.  You will then be prompted for one of
+            the valid  actions for this type of error.  After the action
+            typed in  has been taken, you are returned to the screen you
+            were using before the Int24.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

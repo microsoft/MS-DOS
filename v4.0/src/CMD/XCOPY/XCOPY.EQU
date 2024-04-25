@@ -1,0 +1,144 @@
+;XCOPY EQUATES
+;*****************************************************************************
+; REVISION HISTORY: A000 Version 4.00: add PARSER, System Message Handler,
+;			 Remove the BELL char.,turn off APPEND during TREE
+;			 search,Extended Attribute processing, Uppercasing
+;			 and "Out Of Space" during write to standard out.
+;		    A004 PTM0700 9/02/87 Avoid duplicate switches and
+;			 display parm in error.
+;		    A005 DCR0201 9/11/87 Incorperate new format for EXTENDED
+;			 ATTRIBUTES.
+;*****************************************************************************
+;Equates used for flags
+;*** MY_FLAG ****
+	find_first_flag    equ	   01h	   ;set MY_FLAG by "OR"
+	findfile_flag	   equ	   02h
+	no_more_file	   equ	   04h
+	single_copy_flag   equ	   08h	   ;single copy instead of multi copy
+	visit_parent_flag  equ	   10h	   ;visit parent node
+	found_flag	   equ	   20h	   ;found flag - for find subdir
+	missing_link_flag  equ	   40h
+	is_source_flag	   equ	   80h	   ;if set, dealing with source
+	reset_find_first   equ	  0FEh	   ;reset by AND
+	reset_findfile	   equ	  0FDh
+	reset_no_more	   equ	  0FBh
+	reset_visit_parent equ	  0EFh
+	reset_found	   equ	  0DFh
+	reset_missing_link equ	  0BFh
+	reset_is_source    equ	  07Fh
+
+;*** FILE_FLAG ***
+	cont_flag equ  01h
+	eof_flag equ  02h
+	big_file_flag equ  04h
+	file_bigger_flag equ  08h
+	created_flag equ  10h
+	reset_cont equ	0FEh
+	reset_eof equ  0FDh
+	reset_big_file equ  0FBh
+	reset_file_bigger equ  0F7h
+	reset_created equ  0EFh
+	reset_readfile equ  0F0h	;reset FILE_FLAG for read a file
+
+;*** COPY_STATUS ***
+	open_error_flag    equ	   01h
+	read_error_flag    equ	   02h
+	create_error_flag  equ	   04h
+	write_error_flag   equ	   08h
+	mkdir_error_flag   equ	   10h
+	chdir_error_flag   equ	   20h
+	maybe_itself_flag  equ	   40h	;source, target starting drv, directory is same.
+	disk_full_flag	   equ	   80h
+	reset_open_error   equ	  0FEh
+	reset_read_error   equ	  0FDh
+	reset_create_error equ	  0FBh
+	reset_write_error  equ	  0F7h
+	reset_close_error  equ	  0EFh
+	reset_chdir_error  equ	  0DFh
+
+
+;*** ACTION_FLAG ***
+
+	reading_flag	   equ	  01h	;display "Reading source files..."
+	reset_reading	   equ	  0FEh	;do not display.
+
+;*** SYS_FLAG ***
+
+	one_disk_copy_flag   equ   01h
+	default_drv_set_flag equ   02h	;default drive has been changed by this program
+	default_s_dir_flag   equ   04h	;source current directory saved.
+	default_t_dir_flag   equ   08h	;target current directory saved.
+	removalble_drv_flag  equ   10h
+	sharing_source_flag  equ   20h	;source shared
+	sharing_target_flag  equ   40h
+	turn_verify_off_flag equ   80h	;turn the verify off when exit to dos.
+	reset_default_s_dir  equ  0FBh	;reset default_s_dir_flag
+
+;*** OPTION_FLAG ***
+
+	slash_a 	     equ   01h	 ;soft archieve ?
+	slash_d 	     equ   02h	 ;date?
+	slash_e 	     equ   04h	 ;create empty dir?
+	slash_m 	     equ   08h	 ;hard archieve ? (turn off source archieve bit)
+	slash_p 	     equ   10h	 ;prompt?
+	slash_s 	     equ   20h	 ;walk the tree?
+	slash_v 	     equ   40h	 ;verify on?
+	slash_w 	     equ   80h	 ;show "Press any key to begin copying" msg)
+	reset_slash_a	     equ  0FEh	 ;turn off soft archieve
+	reset_slash_m	     equ  0F7h	 ;turn off hard archieve
+
+;*** PARM_FLAG ***
+
+	first_parm_flag equ	01h	;first parm entered in input parm
+	second_parm_flag equ	 02h	;second parm entered.
+	end_of_parm_flag equ	 04h	;end of parm reached
+	copy_onto_itself_flag equ     08h ;copy onto itself flag
+	cyclic_flag equ     10h 	;cyclic copy flag
+	inv_time_flag equ     20h	;invalid time
+	inv_date_flag equ     40h	;invalid date
+	init_error_flag equ    80h	;critical initialization error. Should abort.
+
+;*** PARM1_FLAG ***
+
+	inv_s_path_flag equ	01h	;invalid source path (path not found)
+	inv_t_path_flag equ	02h	;invalid target path
+	s_file_flag equ     04h 	;source filename entered
+	t_file_flag equ     08h 	;target filename entered
+	INV_SW_flag equ     10h 	;AN004;DUPLICATE OR INVALID SW ENTERED
+
+;general equates
+
+COLON			EQU ":"         ;AN000;FOLLOWS DRV LTR IN FULL FILESPEC
+NUL			EQU 0		;AN000;DELIMITER FOR ASCIIZ STRINGS
+SPACE			EQU " "         ;AN000;TEST FOR DBCS IN 'F D ' MESSAGE
+PARAGRAPH		EQU 4		;AN005;TO CONVERT TO/FROM BYTES/PARA.
+PARA_BOUND		EQU 15		;AN005;BYTES TO ADD FOR PARA. CALCULAT
+FIXD_HD_SIZ		EQU 3		;AC015;PARA COUNT MINIMUM FOR FILE HDR
+SYSPRM_EX_MANY		EQU 1		;AN000;TOO MANY OPERANDS ERR FROM PARSE
+SYSPRM_MISSING_OP	EQU 2		;AN000;MISSING OPERANDS ERR FROM PARSE
+SYSPRM_DUP_SW		EQU 3		;AN004;INVALID SWITCH R-CODE FROM PARSE
+F_APPEND		EQU 8000H	;AN000; /X status bit in Append
+D_V_APPEND		EQU -1		;AN019;DOS VERSION OF APPEND
+PSPFCB1_DRV		EQU 5Ch
+PSPFCB2_DRV		EQU 6Ch
+PSPDTA_PARMLEN		EQU 80h
+PSPDTA_PARRSTR		EQU 81h
+BASE_OF_ALPHA_DRV	EQU 64		;1 => A, 2 => B for drive letter
+BASE_UPPER_CASE 	EQU 11011111B	;"AND"ed will make it to upper case chr
+ALPHA_A 		EQU	'A'
+;ALPHA_D		 EQU	 'D'    ;moved to XCPYINT.MSG file for translation.
+ALPHA_E 		EQU	'E'
+;ALPHA_F		 EQU	 'F'    ;moved to XCPYINT.MSG file for translation.
+ALPHA_M 		EQU	'M'
+ALPHA_S 		EQU	'S'
+ALPHA_P 		EQU	'P'
+ALPHA_T 		EQU	'T'
+ALPHA_V 		EQU	'V'
+ALPHA_W 		EQU	'W'
+ALPHA_Z 		EQU	'Z'
+A_dot			EQU	'.'
+path_delim		equ	'\'
+drv_delim		equ	':'
+;**********************************************************************
+;DOS_LEVEL		 EQU	 0314h	;VERSION 3.20
+;*************************END OF XCOPY.EQU ****************************

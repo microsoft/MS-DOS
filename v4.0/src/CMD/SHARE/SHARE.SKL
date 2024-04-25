@@ -1,0 +1,27 @@
+;================================================
+; SHARE Message Skeleton File
+;================================================
+
+:util   SHARE
+
+:class  1
+
+:use EXTEND8
+
+:class  2
+                                        ;1 - Too many operands
+                                        ;2 - Required operand missing
+:use PARSE3                             ;3 - Not in switch list provided
+                                        ;4 - Not in keyword list provided
+:use PARSE6                             ;6 - Out of range specified
+                                        ;7 - Not in value list provided
+                                        ;8 - Not in string list provided
+:use PARSE9                             ;9 - Invalid Parameter
+
+:class  A
+
+:use 1  COMMON1                         ; Incorrect DOS version
+:use 2  COMMON2                         ; "%1 already installed"
+
+:end
+

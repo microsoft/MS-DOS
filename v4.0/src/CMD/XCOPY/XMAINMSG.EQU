@@ -1,0 +1,46 @@
+;*****************************************************************************
+; Message equates
+;*****************************************************************************
+CR                equ     13
+LF                equ     10
+BELL              equ      7
+END_OF_MESSAGE    equ      0
+ALPHA_D           equ     'D'
+ALPHA_F           equ     'F'
+NO_SUBST          EQU     00H          ;AN000;MSG PARAMETER SUBSTITUTION = 0
+PARM_SUBST_ONE    EQU     01H          ;AN000;MSG PARAMETER SUBSTITUTION = 1
+PARM_SUBST_TWO    EQU     02H          ;AN000;MSG PARAMETER SUBSTITUTION = 2
+MSG_SER_CLASS     EQU     00H          ;AN000;MESSAGE SERVICE CLASS (RESERVED)
+EXT_ERR_CLASS     EQU     01H          ;AN000;DOS EXTENDED ERROR CLASS
+PARSE_ERR_CLASS   EQU     02H          ;AN000;PARSE ERROR CLASS
+UTILITY_MSG_CLASS EQU     0FFH         ;AN000;UTILITY MESSAGE CLASS
+NO_INPUT          EQU     00H          ;AN000;NO INPUT CHARACTERS
+DOS_KEYB_INP      EQU     01H          ;AN000;KEYBOARD INPUT EXPECTED
+;******************************************************************************
+;               XCOPY (MAIN) messages
+;*****************************************************************************
+; ERROR MESSAGES DEFINITION
+;
+MSG_INSUF_MEMORY        EQU     2       ;AN005;INSUFFICIENT MEMORY
+MSG_ACCESS_DENIED       EQU     13      ;AN000;
+MSG_TOO_MANY_OPEN       EQU     14      ;AN000;
+MSG_GENERAL_FAIL        EQU     15      ;AN000;
+MSG_SHARING_VIOL        EQU     16      ;AN000;
+MSG_LOCK_VIOL           EQU     17      ;AN000;
+MSG_PATH_NOT            EQU     18      ;AN000;
+MSG_DISK_FULL           EQU     19      ;AN000;
+MSG_COPY_ITSELF         EQU     20      ;AN000;
+MSG_UNABLE_CREATE       EQU     10      ;AN000;
+MSG_RES_T_NAME          EQU     22      ;AN000;
+MSG_FILE_NOT_ERR        EQU     23      ;AN000;
+MSG_FILE_CREATE_ERR     EQU     24      ;AN000;
+MSG_READING_SOURCE      EQU     25      ;AN000;
+MSG_CR_LF_STR           EQU     26      ;AN000;
+MSG_FILES_COPIED        EQU     27      ;AN000;
+S_PATH_FILE0            EQU     30      ;AN000;
+S_PATH_FILE1            EQU     31      ;AN000;
+DISPLAY_S_PATH          EQU     32      ;AN000;
+P_S_PATH_FILE0          EQU     33      ;AN000;
+P_S_PATH_FILE1          EQU     34      ;AN000;
+;******************** END OF XCPYMAIN.MSG **************************************
+

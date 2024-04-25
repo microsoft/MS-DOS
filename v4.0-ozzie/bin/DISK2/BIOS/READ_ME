@@ -1,0 +1,25 @@
+29 May 1984
+
+The object files given here are sufficient to create the BIOS
+for the IBM system.  Some sources are given as examples for
+OEM supplied device drivers.  These sources do not necessarily
+implement all the features described in the device driver
+documentation.  They have evolved in parallel with the
+documentation, so some features described in the documentation
+may not yet be present in the drivers.  Below is a summary of
+the files supplied:
+
+	read_me		This file.
+	ibmbio.asm	Main body of the BIOS.
+	ibmdsk.asm	Floppy and Hard disk drivers.
+	ibmmtcon.asm	Multi-screen console driver.
+	ansi.inc	ANSI X3.64 terminal emulation.
+	bugcode.inc	Module which implements debugging
+			prints.  The routine PUTC must be
+			modified for other devices.  See
+			also the file DEFDBUG.INC.
+	sys*.obj	The SYSINIT program.  No source supplied.
+	biosobj.mak	Contains instructions for building the
+			IBM BIOS.
+	bootpach.exe	Modifies a V2.0 boot sector (on A:) for
+			the IBM to accomodate the larger BIOS.

@@ -1,0 +1,24 @@
+
+;-------------------------------------------------------------------
+;       message retriever skeleton file for APPEND
+;-------------------------------------------------------------------
+:util   APPEND
+
+:class  a
+;:use    1      COMMON1
+:def    1       "Incorrect APPEND version",CR,LF
+:def    2       "Invalid path",CR,LF
+:def    3       "Invalid parameter",CR,LF
+:def    4       "Invalid combination of parameters",CR,LF
+:def    5       "No Append",CR,LF
+
+:class  b
+:def    6       "APPEND / ASSIGN Conflict",CR,LF
+:def    7       "APPEND / TopView Conflict",CR,LF
+:def    8       "Incorrect DOS Version",CR,LF
+:def    9       "APPEND already installed",CR,LF
+;:use    8       COMMON1                 ;"Incorrect DOS Version"
+;:use    9       COMMON1                 ;"APPEND already installed"
+
+:end
+

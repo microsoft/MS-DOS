@@ -1,0 +1,83 @@
+;==========================================================
+;       XCOPY MESSAGE SKELETON FILE
+;==========================================================
+
+:util   XCOPY                   ;AN000;
+
+
+:class  A                       ;AN000;System message class
+
+:use 1  COMMON1                 ;AN000;MSG 1 is always "Incorrect DOS Version"
+
+:use 2  EXTEND8                 ;AN000;MSG 2 is always "Insufficient Memory"
+
+:use 3  PARSE10                 ;AN000;PARSER MSG 10 "Invalid parameter"
+
+:def 4  "Does %1 specify a file name",CR,LF      ;AN000;
+        "or directory name on the target",CR,LF
+        "(F = file, D = directory)?"
+
+:def 5  "Press any key to begin copying file(s)" ;AN000;
+
+:def 6  "Path too long",CR,LF   ;AN000;
+
+:use 7  COMMON25                ;AN000;"Invalid path"
+
+:def 8  "Cannot perform a cyclic copy",CR,LF ;AN000;
+
+:use 9  COMMON23                ;AN000;"Invalid date"
+
+:use 10 COMMON32                ;AN000;"Unable to create directory"
+
+:use 11 EXTEND15                ;AN000;"Invalid drive specification"
+
+:def 12 "Cannot XCOPY from a reserved device",CR,LF ;AN000;
+
+:use 13 EXTEND5                 ;AN000;"Access denied"
+
+:use 14 EXTEND4                 ;AN000;"Too many open files"
+
+:use 15 EXTEND31                ;AN000;"General failure"
+
+:use 16 EXTEND32                ;AN000;"Sharing Violation"
+
+:use 17 EXTEND33                ;AN000;"Lock Violation"
+
+:use 18 EXTEND3                 ;AN000;"Path not found"
+
+:use 19 COMMON20                ;AN000;"Insufficient disk space"
+
+:use 20 COMMON18                ;AN000;"File cannot be copied onto itself"
+
+:def 21 "Invalid number of parameters",CR,LF ;AN000;
+
+:def 22 "Cannot XCOPY to a reserved device",CR,LF ;AN000;
+
+:use 23 EXTEND2                 ;AN000;"File not found"
+
+:def 24 "File creation error",CR,LF    ;AN000;
+
+:def 25 "Reading source file(s)...",CR,LF ;AN000;
+
+:def 26 CR,LF                   ;AN000;
+
+:def 27 "%1 File(s) copied",CR,LF  ;AN000;
+
+:def 29 "F D " ;AN000;'PLEASE TRANSLATE' ELIMINATE THE SPACE CHARACTERS
+                     ; FOR DBCS TRANSLATE. THIS TEXT IS USED TO COMPARE
+                     ; THE RESPONSE OF F = FILE, D = DIRECTORY (MSG 4)
+
+:def 30 "%1%2",CR,LF            ;AN000;S_PATH_FILE0
+
+:def 31 "%1\%2",CR,LF           ;AN000;S_PATH_FILE1
+
+:def 32 "%1",CR,LF              ;AN000;DISPLAY_S_PATH
+
+:def 33 "%1%2 (Y/N)?"           ;AN000;P_S_PATH_FILE0
+
+:def 34 "%1\%2 (Y/N)?"          ;AN000;P_S_PATH_FILE1
+
+:use 35 PARSE03                 ;AC023;DUP SW ERROR MSG, 'INVALID SWITCH'
+
+:end                            ;AN000;
+;==========================================================

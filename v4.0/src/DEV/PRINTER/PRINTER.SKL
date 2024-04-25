@@ -1,0 +1,17 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;  Message Skeleton file for PRINTER.SYS
+;
+;   Author: WGR
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+:util PRINTER                            ; utility name
+
+:class A
+:use 1  COMMON1
+:def 2  "%1 code page driver cannot be initialized",CR,LF,BELL
+:def 12 "Invalid syntax on PRINTER.SYS code page driver",CR,LF,BELL
+
+:end
+

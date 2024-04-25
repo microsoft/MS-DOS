@@ -1,0 +1,36 @@
+;common structures
+
+bogus	 EQU   88H	;totally invalid value
+
+codepage_parms STRUC
+   cp_device	  DW	?
+   des_pack_ptr   DW	?
+   font_filespec  DW	?
+   request_typ	  DW	?
+codepage_parms ENDS
+
+
+parm_list_entry   STRUC 		  ;used by parse_parameters and invoke
+
+parm_type	     DB       bogus
+item_tag	     DB       0FFH
+value1		     DW       bogus	  ;used only for filespecs and code page numbers
+value2		     DW       bogus	  ;used only for filespecs and code page numbers
+keyword_switch_ptr   DW    0
+
+parm_list_entry   ENDS
+
+
+sublist_def  STRUC	   ;used by initialize_sublists
+
+	     db  ?  ;Sublist Length, fixed
+	     db  ?  ;Reserved, not used yet		      ;AN000;
+sublist_off  dw  ?  ;offset
+sublist_seg  dw  ?  ;segment part of pointer to piece of message
+	     db  ?  ;ID, special end of message format ;AN000;
+	     db  ?  ;flags
+	     db  ?
+	     db  ?
+	     db  ?
+
+sublist_def  ENDS

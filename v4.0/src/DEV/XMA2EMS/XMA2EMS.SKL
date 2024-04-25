@@ -1,0 +1,39 @@
+:class	1
+
+:use	1	xma2ems CRLF
+:use	2	xma2ems Welcome_Msg
+:use	3	xma2ems DGS_Start_Msg
+:use	4	xma2ems DGS_End_Msg
+:use	5	xma2ems Page_Frame_Msg
+:use	6	xma2ems PF_Start
+:use	7	xma2ems Conv_Pages
+:use	8	xma2ems Reserve_Msg
+:use	9	xma2ems Res_Pages
+:use	10	xma2ems Avail_Msg
+
+:use	11	xma2ems EMS_Pages
+:use	12	xma2ems XMA1_Err_Msg
+:use	13	xma2ems Not_Found_Msg
+:use	14	xma2ems Parm_Err_Msg
+:use	15	xma2ems No_Emul_Msg
+:use	16	xma2ems Wrong_Emul_Msg
+:use	17	xma2ems Wrong_XMAA_Msg
+:use	18	xma2ems Req_EMS_Err_Msg
+:use	19	xma2ems Not_Instl_Msg
+:use	20	xma2ems Conflict_Msg
+
+:use	21	xma2ems Confl_Address
+:use	22	xma2ems Hole_Msg
+:use	23	xma2ems Hole_Address
+:use	24	xma2ems Frame_Msg
+:use	25	xma2ems Frame_Address
+:use	26	xma2ems No_Pages_Msg
+:use	27	xma2ems Size_Msg1
+:use	28	xma2ems Mem_OK
+:use	29	xma2ems Next_Line
+:use	28	common	Prompt_Msg
+:use	30	xma2ems XMA2EMS_Msg_Term
+:use	16	common	No_EMS_Memory
+:use	30	xma2ems XMA2EMS_Msg_Term1
+
+:end

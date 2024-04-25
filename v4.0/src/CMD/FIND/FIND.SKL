@@ -1,0 +1,12 @@
+:util   FIND
+
+:class 1                                ;Extended errors ;AN005;
+
+:class 2                                ;Parser errors   ;AN005;
+
+:class  A                               ;Utility specific errors  ;AN005;
+:use 1 COMMON1                            ;AN005; ;"Incorrect DOS version"
+:use 2 EXTEND8                            ;AN005; ;"Insufficient memory"
+:def 4  "FIND: "                          ;AN005;
+
+:end

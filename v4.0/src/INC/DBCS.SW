@@ -1,0 +1,2 @@
+DBCS = FALSE
+
